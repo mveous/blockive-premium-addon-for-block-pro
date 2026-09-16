@@ -1,0 +1,25 @@
+.bpafb-tb-breadcrumbs {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0;
+}
+
+.bpafb-tb-breadcrumbs .bpafb-tb-breadcrumb-item {
+	display: inline-flex;
+	align-items: center;
+}
+
+.bpafb-tb-breadcrumbs .bpafb-tb-breadcrumb-sep {
+	margin: 0 8px;
+	opacity: 0.6;
+}
+
+.bpafb-tb-breadcrumbs a {
+	color: inherit !important;
+	text-decoration: none !important;
+}
+
+.bpafb-tb-breadcrumbs .bpafb-tb-breadcrumb-current {
+	opacity: 0.75;
+}

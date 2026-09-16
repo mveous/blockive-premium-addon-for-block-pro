@@ -1,0 +1,13 @@
+.bpafb-tb-comments-count {
+	display: inline-block;
+}
+
+.bpafb-tb-comments-count a {
+	color: inherit !important;
+	text-decoration: none !important;
+}
+
+.bpafb-tb-comments-count a.bpafb-tb-comments-count-nolink {
+	cursor: default;
+	pointer-events: none;
+}

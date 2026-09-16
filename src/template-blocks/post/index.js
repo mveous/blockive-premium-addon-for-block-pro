@@ -1,0 +1,16 @@
+import './post-title';
+import './featured-image';
+import './post-meta';
+import './post-content';
+import './author';
+import './author-avatar';
+import './publish-date';
+import './modified-date';
+import './categories';
+import './tags';
+import './comments-count';
+import './breadcrumbs';
+import './reading-time';
+import './featured-video';
+import './related-posts';
+import './previous-next-navigation';

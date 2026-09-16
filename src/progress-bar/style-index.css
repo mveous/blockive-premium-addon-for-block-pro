@@ -1,0 +1,104 @@
+/* Progress Bar Base */
+.wp-block-blockive-premium-addon-for-block-progress-bar {
+	width: 100%;
+	display: block;
+	font-weight: 600;
+}
+
+.bpafb-progress-bar-wrapper {
+	width: 100%;
+	position: relative;
+	margin-bottom: 20px;
+	display: block;
+}
+
+/* Header (Standard Layout) */
+.bpafb-pb-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.bpafb-pb-title {
+	font-weight: inherit;
+	font-size: 1em;
+	color: var(--bpafb-pb-title-color, #1e293b);
+	letter-spacing: -0.3px;
+}
+
+.bpafb-pb-percentage {
+	font-weight: inherit;
+	font-size: 0.95em;
+	color: var(--bpafb-pb-percent-color, #1e293b);
+}
+
+/* Track Base */
+.bpafb-pb-track {
+	width: 100%;
+	background-color: var(--bpafb-pb-track-bg, #f1f5f9);
+	height: var(--bpafb-pb-height, 18px);
+	border-radius: var(--bpafb-pb-radius, 50px);
+	overflow: hidden;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+	position: relative;
+}
+
+/* Fill Bar */
+.bpafb-pb-fill {
+	height: 100%;
+	border-radius: var(--bpafb-pb-radius, 50px);
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	position: relative;
+	background-color: #4f46e5;
+	transition: width 0.1s ease-out;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Inside Layout Style */
+.bpafb-pb-style-inside .bpafb-pb-fill {
+	justify-content: space-between;
+	padding: 0 15px;
+}
+
+.bpafb-pb-inner-content {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	color: var(--bpafb-pb-inner-text, #ffffff);
+	font-size: 0.85em;
+	font-weight: inherit;
+	line-height: var(--bpafb-pb-height, 18px);
+	white-space: nowrap;
+	opacity: 1;
+	/* Keep visible in editor, animated in frontend */
+}
+
+/* Stripes Styling */
+.bpafb-pb-striped {
+	background-image: linear-gradient(45deg,
+			rgba(255, 255, 255, 0.15) 25%,
+			transparent 25%,
+			transparent 50%,
+			rgba(255, 255, 255, 0.15) 50%,
+			rgba(255, 255, 255, 0.15) 75%,
+			transparent 75%,
+			transparent) !important;
+	background-size: 1rem 1rem !important;
+}
+
+.bpafb-pb-striped-animated {
+	animation: blockive-progress-stripes 1s linear infinite;
+}
+
+@keyframes blockive-progress-stripes {
+	from {
+		background-position: 1rem 0;
+	}
+
+	to {
+		background-position: 0 0;
+	}
+}

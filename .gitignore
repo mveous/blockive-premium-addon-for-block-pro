@@ -1,0 +1,48 @@
+# Build output
+build/
+
+# Dependency directories
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage directory
+coverage/
+
+# Caches
+.npm/
+.eslintcache
+.stylelintcache
+
+# Archives & packages
+*.tgz
+*.zip
+*.tar.gz
+
+# Environment variables
+.env
+.env.*
+
+# Lock files
+package-lock.json
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.claude/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini

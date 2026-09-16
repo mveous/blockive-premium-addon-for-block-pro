@@ -1,0 +1,429 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "blockive-premium-addon-for-block/faq",
+	"version": "0.1.0",
+	"title": "FAQ",
+	"category": "bpafb-widgets",
+	"icon": "editor-help",
+	"description": "FAQ block with rich schema.org markup for SEO, based on accordion behavior.",
+	"attributes": {
+		"items": {
+			"type": "array",
+			"default": [
+				{
+					"id": "1",
+					"title": "Frequently Asked Question 1",
+					"content": "Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"id": "2",
+					"title": "Frequently Asked Question 2",
+					"content": "Click edit button to change this text. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
+				}
+			]
+		},
+		"icon": {
+			"type": "string",
+			"default": "plus-minus"
+		},
+		"iconAlign": {
+			"type": "string",
+			"default": "right"
+		},
+		"titleColor": {
+			"type": "string",
+			"default": "#0f172a"
+		},
+		"titleActiveColor": {
+			"type": "string",
+			"default": "#4f46e5"
+		},
+		"titleBgColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"contentColor": {
+			"type": "string",
+			"default": "#334155"
+		},
+		"contentBgColor": {
+			"type": "string",
+			"default": "#f8fafc"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#e2e8f0"
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"borderType": {
+			"type": "string",
+			"default": "none"
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 0
+		},
+		"titleColorHover": {
+			"type": "string",
+			"default": ""
+		},
+		"titleBgColorHover": {
+			"type": "string",
+			"default": ""
+		},
+		"questionFontFamily": {
+			"type": "string",
+			"default": ""
+		},
+		"questionFontSize": {
+			"type": "number",
+			"default": null
+		},
+		"questionFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"questionLineHeight": {
+			"type": "number",
+			"default": null
+		},
+		"questionLetterSpacing": {
+			"type": "number",
+			"default": null
+		},
+		"questionTextTransform": {
+			"type": "string",
+			"default": ""
+		},
+		"questionTextDecoration": {
+			"type": "string",
+			"default": ""
+		},
+		"boxShadow": {
+			"type": "boolean",
+			"default": false
+		},
+		"shadowColor": {
+			"type": "string",
+			"default": "rgba(0,0,0,0.15)"
+		},
+		"shadowBlur": {
+			"type": "number",
+			"default": 15
+		},
+		"shadowSpread": {
+			"type": "number",
+			"default": 0
+		},
+		"hoverBoxShadow": {
+			"type": "boolean",
+			"default": false
+		},
+		"hoverShadowColor": {
+			"type": "string",
+			"default": "rgba(0,0,0,0.15)"
+		},
+		"hoverShadowBlur": {
+			"type": "number",
+			"default": 15
+		},
+		"hoverShadowSpread": {
+			"type": "number",
+			"default": 0
+		},
+		"animationType": {
+			"type": "string",
+			"default": "none"
+		},
+		"animationDuration": {
+			"type": "string",
+			"default": "1s"
+		},
+		"animationDelay": {
+			"type": "string",
+			"default": "0s"
+		},
+		"titleTag": {
+			"type": "string",
+			"default": "span"
+		},
+		"headingText": {
+			"type": "string",
+			"default": "Ask you question"
+		},
+		"headingTag": {
+			"type": "string",
+			"default": "h2"
+		},
+		"headingAlign": {
+			"type": "string",
+			"default": "center"
+		},
+		"headingColor": {
+			"type": "string",
+			"default": "#0f172a"
+		},
+		"bpafbUid": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbDisplay": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbOverflow": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbPosition": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerWidth": {
+			"type": "number"
+		},
+		"bpafbContainerWidthUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"bpafbContainerMinHeight": {
+			"type": "number"
+		},
+		"bpafbContainerMaxHeight": {
+			"type": "number"
+		},
+		"bpafbContainerBgType": {
+			"type": "string",
+			"default": "color"
+		},
+		"bpafbContainerBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBgGradient": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBgImageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBgImageId": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbContainerBgImageSize": {
+			"type": "string",
+			"default": "cover"
+		},
+		"bpafbContainerOverlayColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBorderStyle": {
+			"type": "string",
+			"default": "none"
+		},
+		"bpafbContainerBorderWidth": {
+			"type": "number"
+		},
+		"bpafbContainerBorderRadius": {
+			"type": "number"
+		},
+		"bpafbContainerBorderColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBoxShadow": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbContainerShadowColor": {
+			"type": "string",
+			"default": "rgba(0,0,0,0.15)"
+		},
+		"bpafbContainerShadowBlur": {
+			"type": "number",
+			"default": 15
+		},
+		"bpafbContainerShadowSpread": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbContainerHoverBoxShadow": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbContainerHoverShadowColor": {
+			"type": "string",
+			"default": "rgba(0,0,0,0.15)"
+		},
+		"bpafbContainerHoverShadowBlur": {
+			"type": "number",
+			"default": 15
+		},
+		"bpafbContainerHoverShadowSpread": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbHideDesktop": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbHideTablet": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbHideMobile": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbAnimationType": {
+			"type": "string",
+			"default": "none"
+		},
+		"bpafbAnimationDuration": {
+			"type": "number",
+			"default": 800
+		},
+		"bpafbAnimationDelay": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbAnimationEasing": {
+			"type": "string",
+			"default": "ease"
+		},
+		"bpafbTransformRotate": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbTransformScale": {
+			"type": "number",
+			"default": 100
+		},
+		"bpafbTransformTranslateX": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbTransformTranslateY": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbHoverAnimation": {
+			"type": "string",
+			"default": "none"
+		},
+		"bpafbFloatingEffect": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbZIndex": {
+			"type": "number"
+		},
+		"bpafbHtmlId": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbHtmlClasses": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbCustomCss": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerAlign": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerPaddingTop": {
+			"type": "number"
+		},
+		"bpafbContainerMarginTop": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingRight": {
+			"type": "number"
+		},
+		"bpafbContainerMarginRight": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingBottom": {
+			"type": "number"
+		},
+		"bpafbContainerMarginBottom": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingLeft": {
+			"type": "number"
+		},
+		"bpafbContainerMarginLeft": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingTopTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginTopTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingRightTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginRightTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingBottomTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginBottomTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingLeftTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginLeftTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingTopMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginTopMobile": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingRightMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginRightMobile": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingBottomMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginBottomMobile": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingLeftMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginLeftMobile": {
+			"type": "number"
+		}
+	},
+	"supports": {
+		"align": [
+			"wide",
+			"full"
+		],
+		"html": false,
+		"anchor": true
+	},
+	"textdomain": "blockive-premium-addon-for-block",
+	"editorScript": "file:./index.js",
+	"style": "file:./index.css",
+	"viewScript": "file:./view.js"
+}

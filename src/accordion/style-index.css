@@ -1,0 +1,260 @@
+/* Blockive Accordion Block Styles */
+
+.bpafb-accordion-wrapper {
+	background: transparent;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.bpafb-accordion-item {
+	position: relative;
+	z-index: 1;
+	border-style: var(--bpafb-accordion-border-style, solid);
+	border-width: var(--bpafb-accordion-border-width, 1px);
+	border-color: var(--bpafb-accordion-border-color, #e2e8f0);
+	border-radius: var(--bpafb-accordion-border-radius, 12px);
+	overflow: hidden;
+	background: var(--bpafb-accordion-content-bg, #ffffff);
+	box-shadow: var(--bpafb-accordion-shadow, 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02));
+	transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: transform, box-shadow;
+}
+
+.bpafb-accordion-item:hover {
+	z-index: 2;
+	border-color: #cbd5e1;
+	box-shadow: var(--bpafb-accordion-shadow-hover, 0 12px 20px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01));
+	transform: translateY(-2px);
+}
+
+.bpafb-accordion-item.active {
+	z-index: 3;
+	border-color: var(--bpafb-accordion-title-active-color, #4f46e5);
+	box-shadow: 0 12px 20px -5px rgba(79, 70, 229, 0.1), 0 8px 10px -6px rgba(79, 70, 229, 0.05);
+	background-color: var(--bpafb-accordion-title-bg, #ffffff);
+}
+
+.bpafb-accordion-header {
+	display: flex;
+	align-items: center;
+	padding: 20px 24px;
+	cursor: pointer;
+	background-color: var(--bpafb-accordion-title-bg, #ffffff);
+	color: var(--bpafb-accordion-title-color, #0f172a);
+	transition: all 0.4s ease;
+	position: relative;
+	user-select: none;
+}
+
+.bpafb-accordion-item.active .bpafb-accordion-header {
+	color: var(--bpafb-accordion-title-active-color, #4f46e5);
+	padding-bottom: 12px;
+	/* Smoother transition to content */
+}
+
+/* Icon Container - Pure CSS approach replacing inline span */
+.bpafb-accordion-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	flex-shrink: 0;
+	border-radius: 8px;
+	background: #f1f5f9;
+	color: #64748b;
+	transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	font-family: Courier, monospace;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.bpafb-accordion-item:hover .bpafb-accordion-icon {
+	background: #e2e8f0;
+	color: #334155;
+}
+
+.bpafb-accordion-item.active .bpafb-accordion-icon {
+	background: var(--bpafb-accordion-title-active-color, #4f46e5);
+	color: #ffffff;
+	box-shadow: 0 4px 10px 0 rgba(79, 70, 229, 0.25);
+}
+
+/* CSS-only Icon Toggling to override view.js inline styles */
+.bpafb-accordion-wrapper .bpafb-icon-close {
+	display: none !important;
+}
+
+.bpafb-accordion-wrapper .bpafb-accordion-item.active .bpafb-icon-open {
+	display: none !important;
+}
+
+.bpafb-accordion-wrapper .bpafb-accordion-item.active .bpafb-icon-close {
+	display: inline-flex !important;
+}
+
+.bpafb-accordion-wrapper .bpafb-icon-open {
+	display: inline-flex !important;
+}
+
+/* Margins for flex aligned layout */
+.bpafb-accordion-header.flex-align-left .bpafb-accordion-icon {
+	margin-right: 16px;
+}
+
+.bpafb-accordion-header.flex-align-right .bpafb-accordion-icon {
+	margin-left: 16px;
+}
+
+.bpafb-accordion-title {
+	flex: 1;
+	margin: 0;
+	font-family: var(--bpafb-accordion-title-font-family, inherit);
+	font-weight: var(--bpafb-accordion-title-font-weight, 600);
+	font-size: var(--bpafb-accordion-title-font-size, 1.15em);
+	letter-spacing: var(--bpafb-accordion-title-letter-spacing, -0.015em);
+	text-transform: var(--bpafb-accordion-title-text-transform, none);
+	text-decoration: var(--bpafb-accordion-title-text-decoration, none);
+	line-height: var(--bpafb-accordion-title-line-height, inherit);
+}
+
+/* Content Area */
+.bpafb-accordion-content {
+	padding: 0 24px 24px;
+	background-color: var(--bpafb-accordion-content-bg, #ffffff);
+	color: var(--bpafb-accordion-content-color, #334155);
+	font-family: inherit;
+	line-height: inherit;
+	font-size: 1em;
+	display: none;
+	border-top: none;
+}
+
+.bpafb-accordion-content p {
+	margin-top: 0;
+	margin-bottom: 1.2em;
+}
+
+.bpafb-accordion-content p:last-child {
+	margin-bottom: 0;
+}
+
+.bpafb-accordion-item.active .bpafb-accordion-content {
+	display: block !important;
+	/* override inline style if necessary */
+	animation: blockiveAccordionPremiumFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes blockiveAccordionPremiumFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-8px) scale(0.98);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+/* Animations */
+@keyframes blockiveFadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes blockiveFadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes blockiveFadeInDown {
+	from {
+		opacity: 0;
+		transform: translateY(-30px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes blockiveZoomIn {
+	from {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes blockiveSlideInLeft {
+	from {
+		opacity: 0;
+		transform: translateX(-50px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes blockiveSlideInRight {
+	from {
+		opacity: 0;
+		transform: translateX(50px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.bpafb-animate-fadeIn {
+	animation-name: blockiveFadeIn;
+	animation-fill-mode: both;
+}
+
+.bpafb-animate-fadeInUp {
+	animation-name: blockiveFadeInUp;
+	animation-fill-mode: both;
+}
+
+.bpafb-animate-fadeInDown {
+	animation-name: blockiveFadeInDown;
+	animation-fill-mode: both;
+}
+
+.bpafb-animate-zoomIn {
+	animation-name: blockiveZoomIn;
+	animation-fill-mode: both;
+}
+
+.bpafb-animate-slideInLeft {
+	animation-name: blockiveSlideInLeft;
+	animation-fill-mode: both;
+}
+
+.bpafb-animate-slideInRight {
+	animation-name: blockiveSlideInRight;
+	animation-fill-mode: both;
+}

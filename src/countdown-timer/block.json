@@ -1,0 +1,362 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "blockive-premium-addon-for-block/countdown-timer",
+	"version": "0.1.0",
+	"title": "Countdown Timer",
+	"category": "bpafb-widgets",
+	"icon": "clock",
+	"description": "A customizable countdown timer block with rich styling settings.",
+	"attributes": {
+		"targetDate": {
+			"type": "string",
+			"default": ""
+		},
+		"showDays": {
+			"type": "boolean",
+			"default": true
+		},
+		"showHours": {
+			"type": "boolean",
+			"default": true
+		},
+		"showMinutes": {
+			"type": "boolean",
+			"default": true
+		},
+		"showSeconds": {
+			"type": "boolean",
+			"default": true
+		},
+		"labelDays": {
+			"type": "string",
+			"default": "Days"
+		},
+		"labelHours": {
+			"type": "string",
+			"default": "Hours"
+		},
+		"labelMinutes": {
+			"type": "string",
+			"default": "Minutes"
+		},
+		"labelSeconds": {
+			"type": "string",
+			"default": "Seconds"
+		},
+		"styleType": {
+			"type": "string",
+			"default": "block"
+		},
+		"boxBgColor": {
+			"type": "string",
+			"default": "#f1f5f9"
+		},
+		"boxBorderColor": {
+			"type": "string",
+			"default": "#e2e8f0"
+		},
+		"boxBorderWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"boxBorderRadius": {
+			"type": "number",
+			"default": 8
+		},
+		"numberColor": {
+			"type": "string",
+			"default": "#0f172a"
+		},
+		"labelColor": {
+			"type": "string",
+			"default": "#64748b"
+		},
+		"gap": {
+			"type": "number",
+			"default": 20
+		},
+		"alignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"animationType": {
+			"type": "string",
+			"default": "none"
+		},
+		"animationDuration": {
+			"type": "string",
+			"default": "1s"
+		},
+		"animationDelay": {
+			"type": "string",
+			"default": "0s"
+		},
+		"bpafbUid": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbDisplay": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbOverflow": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbPosition": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerWidth": {
+			"type": "number"
+		},
+		"bpafbContainerWidthUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"bpafbContainerMinHeight": {
+			"type": "number"
+		},
+		"bpafbContainerMaxHeight": {
+			"type": "number"
+		},
+		"bpafbContainerBgType": {
+			"type": "string",
+			"default": "color"
+		},
+		"bpafbContainerBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBgGradient": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBgImageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBgImageId": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbContainerBgImageSize": {
+			"type": "string",
+			"default": "cover"
+		},
+		"bpafbContainerOverlayColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBorderStyle": {
+			"type": "string",
+			"default": "none"
+		},
+		"bpafbContainerBorderWidth": {
+			"type": "number"
+		},
+		"bpafbContainerBorderRadius": {
+			"type": "number"
+		},
+		"bpafbContainerBorderColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBoxShadow": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbContainerShadowColor": {
+			"type": "string",
+			"default": "rgba(0,0,0,0.15)"
+		},
+		"bpafbContainerShadowBlur": {
+			"type": "number",
+			"default": 15
+		},
+		"bpafbContainerShadowSpread": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbContainerHoverBoxShadow": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbContainerHoverShadowColor": {
+			"type": "string",
+			"default": "rgba(0,0,0,0.15)"
+		},
+		"bpafbContainerHoverShadowBlur": {
+			"type": "number",
+			"default": 15
+		},
+		"bpafbContainerHoverShadowSpread": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbHideDesktop": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbHideTablet": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbHideMobile": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbAnimationType": {
+			"type": "string",
+			"default": "none"
+		},
+		"bpafbAnimationDuration": {
+			"type": "number",
+			"default": 800
+		},
+		"bpafbAnimationDelay": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbAnimationEasing": {
+			"type": "string",
+			"default": "ease"
+		},
+		"bpafbTransformRotate": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbTransformScale": {
+			"type": "number",
+			"default": 100
+		},
+		"bpafbTransformTranslateX": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbTransformTranslateY": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbHoverAnimation": {
+			"type": "string",
+			"default": "none"
+		},
+		"bpafbFloatingEffect": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbZIndex": {
+			"type": "number"
+		},
+		"bpafbHtmlId": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbHtmlClasses": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbCustomCss": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerAlign": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerPaddingTop": {
+			"type": "number"
+		},
+		"bpafbContainerMarginTop": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingRight": {
+			"type": "number"
+		},
+		"bpafbContainerMarginRight": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingBottom": {
+			"type": "number"
+		},
+		"bpafbContainerMarginBottom": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingLeft": {
+			"type": "number"
+		},
+		"bpafbContainerMarginLeft": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingTopTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginTopTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingRightTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginRightTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingBottomTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginBottomTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingLeftTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginLeftTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingTopMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginTopMobile": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingRightMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginRightMobile": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingBottomMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginBottomMobile": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingLeftMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginLeftMobile": {
+			"type": "number"
+		}
+	},
+	"supports": {
+		"align": [
+			"wide",
+			"full"
+		],
+		"html": false,
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
+		},
+		"anchor": true
+	},
+	"textdomain": "blockive-premium-addon-for-block",
+	"editorScript": "file:./index.js",
+	"style": "file:./index.css",
+	"viewScript": "file:./view.js"
+}
