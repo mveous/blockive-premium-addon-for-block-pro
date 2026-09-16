@@ -10,6 +10,13 @@ const extraEntry = {
 		__dirname,
 		'src/template-blocks/index.js'
 	),
+	// Pro-only additions, kept in a separate bundle from the two above
+	// (which are synced verbatim from the free plugin) so a future re-sync
+	// never touches this entry or its source.
+	'template-builder-pro/index': path.resolve(
+		__dirname,
+		'src/template-builder-pro/index.js'
+	),
 };
 
 // Mirrors the free plugin's webpack.config.js (kept in sync manually, since
