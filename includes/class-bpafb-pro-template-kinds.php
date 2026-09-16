@@ -240,6 +240,18 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
+	 * Per-request memoized result of get_matching_template_id(), keyed by
+	 * kind. Header and Footer are resolved once per page load each (from
+	 * wp_body_open / wp_footer), and an Archive/Search/404 swap resolves its
+	 * kind from both template_include and the wrapper template it points
+	 * at - without this, that's up to 2x the get_posts() calls this
+	 * function would otherwise need per request.
+	 *
+	 * @var array<string,int>
+	 */
+	private static $resolved = [];
+
+	/**
 	 * Finds the best-matching published Blockive Template for a given
 	 * non-"single" kind against the current request. More specific matched
 	 * rule wins across templates; ties broken by the lower
@@ -252,6 +264,10 @@ class Bpafb_Pro_Template_Kinds
 	{
 		if (!in_array($kind, self::KINDS, true)) {
 			return 0;
+		}
+
+		if (array_key_exists($kind, self::$resolved)) {
+			return self::$resolved[$kind];
 		}
 
 		$templates = get_posts([
@@ -268,7 +284,7 @@ class Bpafb_Pro_Template_Kinds
 		]);
 
 		if (empty($templates)) {
-			return 0;
+			return self::$resolved[$kind] = 0;
 		}
 
 		$best = null;
@@ -306,6 +322,6 @@ class Bpafb_Pro_Template_Kinds
 			}
 		}
 
-		return $best ? $best['id'] : 0;
+		return self::$resolved[$kind] = ($best ? $best['id'] : 0);
 	}
 }

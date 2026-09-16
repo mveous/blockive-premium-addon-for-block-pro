@@ -67,9 +67,11 @@ function bpafb_pro_bootstrap()
 	require_once BPAFB_PRO_PATH . 'includes/class-bpafb-template-display-conditions.php';
 	require_once BPAFB_PRO_PATH . 'includes/class-bpafb-template-frontend-render.php';
 	require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-template-kinds.php';
+	require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-theme-locations.php';
 
 	new Blockive_Premium_Addon_For_Block();
 	new Bpafb_Pro_Template_Kinds();
+	new Bpafb_Pro_Theme_Locations();
 
 	// Pro unlocks the two extension points the free plugin's Template
 	// Builder already exposes for exactly this purpose - see
