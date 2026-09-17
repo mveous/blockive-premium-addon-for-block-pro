@@ -78,6 +78,108 @@ class Bpafb_Pro_Template_Kinds
 	{
 		add_action('init', [$this, 'register_meta']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_assets']);
+
+		// The free plugin's own "Template Type" / "Display Condition"
+		// admin-list columns (Bpafb_Template_Post_Type::add_admin_columns())
+		// only ever show _bpafb_template_type / _bpafb_display_condition_scope
+		// - for a Header/Archive/Popup/etc. template those are just unused
+		// defaults, so every non-"single" row misleadingly shows something
+		// like "Post | All Posts" regardless of its real kind/conditions.
+		// Rather than fight those two columns (synced, and an action can't
+		// suppress another callback's output anyway), add a column with the
+		// real answer instead.
+		add_filter('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_columns', [$this, 'add_admin_column']);
+		add_action('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_custom_column', [$this, 'render_admin_column'], 10, 2);
+	}
+
+	/**
+	 * Human-readable labels matching the "Location (Pro)" panel's own
+	 * KIND_OPTIONS (src/template-builder-pro/template-kind-panel.js).
+	 *
+	 * @var array<string,string>
+	 */
+	const KIND_LABELS = [
+		'header'    => 'Header',
+		'footer'    => 'Footer',
+		'archive'   => 'Archive',
+		'search'    => 'Search Results',
+		'404'       => '404 Page',
+		'popup'     => 'Popup',
+		'loop-item' => 'Loop Item',
+	];
+
+	/**
+	 * Human-readable labels matching the "Location (Pro)" panel's own
+	 * ruleTypeOptions() (same file).
+	 *
+	 * @var array<string,string>
+	 */
+	const RULE_TYPE_LABELS = [
+		'entire_site'       => 'Entire Site',
+		'post_type_archive' => 'Post Type Archive',
+		'taxonomy_archive'  => 'Taxonomy Archive',
+		'author_archive'    => 'Author Archive',
+		'date_archive'      => 'Date Archive',
+		'search'            => 'Search Results',
+		'404'               => '404 Page',
+		'user_role'         => 'User Role',
+		'logged_in'         => 'Logged In',
+		'logged_out'        => 'Logged Out',
+	];
+
+	/**
+	 * Adds the "Location (Pro)" column, right after the free plugin's own
+	 * two columns.
+	 *
+	 * @param array $columns Existing column list.
+	 * @return array
+	 */
+	public function add_admin_column($columns)
+	{
+		$columns['bpafb_pro_location'] = __('Location (Pro)', 'blockive-premium-addon-for-block-pro');
+		return $columns;
+	}
+
+	/**
+	 * Renders the "Location (Pro)" column: blank for a "single" kind
+	 * template (the free plugin's own two columns already describe it
+	 * accurately), otherwise the kind plus a summary of its condition rules.
+	 *
+	 * @param string $column  Column key.
+	 * @param int    $post_id Post ID.
+	 */
+	public function render_admin_column($column, $post_id)
+	{
+		if ('bpafb_pro_location' !== $column) {
+			return;
+		}
+
+		$kind = self::get_kind($post_id);
+		if ('single' === $kind) {
+			echo '&#8212;';
+			return;
+		}
+
+		$kind_label = self::KIND_LABELS[$kind] ?? $kind;
+		$rules      = self::get_condition_rules($post_id);
+
+		if (empty($rules)) {
+			printf(
+				/* translators: %s: template kind, e.g. "Header". */
+				esc_html__('%s (no conditions - matches nowhere)', 'blockive-premium-addon-for-block-pro'),
+				esc_html($kind_label)
+			);
+			return;
+		}
+
+		$rule_summaries = array_map(function ($rule) {
+			$type  = isset($rule['type']) ? $rule['type'] : '';
+			$value = isset($rule['value']) ? $rule['value'] : '';
+			$label = self::RULE_TYPE_LABELS[$type] ?? $type;
+			return $value !== '' ? $label . ': ' . $value : $label;
+		}, $rules);
+
+		echo esc_html($kind_label . ' - ' . implode(', ', $rule_summaries));
 	}
 
 	/**
