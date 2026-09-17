@@ -17,6 +17,18 @@ const extraEntry = {
 		__dirname,
 		'src/template-builder-pro/index.js'
 	),
+	'template-blocks-woo/index': path.resolve(
+		__dirname,
+		'src/template-blocks-woo/index.js'
+	),
+	'template-blocks-events/index': path.resolve(
+		__dirname,
+		'src/template-blocks-events/index.js'
+	),
+	'post-grid-pro/index': path.resolve(
+		__dirname,
+		'src/post-grid-pro/index.js'
+	),
 };
 
 // Mirrors the free plugin's webpack.config.js (kept in sync manually, since
