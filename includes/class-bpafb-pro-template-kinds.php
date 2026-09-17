@@ -69,13 +69,10 @@ class Bpafb_Pro_Template_Kinds
 		'author_archive'    => 20,
 		'post_type_archive' => 20,
 		'taxonomy_archive'  => 30,
-		// Highest specificity: naming one exact post/page is the same
-		// "beats everything broader" precedence the free plugin's own
-		// singular-kind "specific posts" scope already has over its "all"
-		// scope (see Bpafb_Template_Display_Conditions::get_matching_template_id()) -
-		// a Popup/Header/etc. targeted at one specific page should win over
-		// an "Entire Site" one the same way, regardless of priority.
-		'singular'          => 100,
+		// 'singular' is intentionally absent here - matching Elementor's own
+		// Singular > [Post Type] > All/Specific nesting, its specificity
+		// depends on how narrowly the rule itself is scoped (see
+		// rule_specificity() below), not a single fixed value.
 	];
 
 	/**
@@ -132,7 +129,7 @@ class Bpafb_Pro_Template_Kinds
 		'user_role'         => 'User Role',
 		'logged_in'         => 'Logged In',
 		'logged_out'        => 'Logged Out',
-		'singular'          => 'Specific Post/Page',
+		'singular'          => 'Singular',
 	];
 
 	/**
@@ -183,13 +180,26 @@ class Bpafb_Pro_Template_Kinds
 		$rule_summaries = array_map(function ($rule) {
 			$type  = isset($rule['type']) ? $rule['type'] : '';
 			$value = isset($rule['value']) ? $rule['value'] : '';
-			$label = self::RULE_TYPE_LABELS[$type] ?? $type;
 
-			if ('singular' === $type && $value !== '') {
+			if ('singular' === $type) {
+				$post_type_slug   = isset($rule['postType']) ? (string) $rule['postType'] : '';
+				$post_type_object = $post_type_slug !== '' ? get_post_type_object($post_type_slug) : null;
+				$type_label       = $post_type_object
+					? $post_type_object->labels->name
+					: __('Singular', 'blockive-premium-addon-for-block-pro');
+
+				if ($value === '') {
+					return $post_type_slug !== ''
+						/* translators: %s: post type name, e.g. "Products". */
+						? sprintf(__('All %s', 'blockive-premium-addon-for-block-pro'), $type_label)
+						: __('All Singular', 'blockive-premium-addon-for-block-pro');
+				}
+
 				$title = get_the_title((int) $value);
-				return $label . ': ' . ($title !== '' ? $title : '#' . $value);
+				return $type_label . ': ' . ($title !== '' ? $title : '#' . $value);
 			}
 
+			$label = self::RULE_TYPE_LABELS[$type] ?? $type;
 			return $value !== '' ? $label . ': ' . $value : $label;
 		}, $rules);
 
@@ -259,8 +269,14 @@ class Bpafb_Pro_Template_Kinds
 					'items' => [
 						'type'       => 'object',
 						'properties' => [
-							'type'  => ['type' => 'string'],
-							'value' => ['type' => 'string'],
+							'type'     => ['type' => 'string'],
+							'value'    => ['type' => 'string'],
+							// Only meaningful for a 'singular' rule - which post
+							// type it's scoped to ('' = any). Declared explicitly
+							// so the REST API's schema sanitizer doesn't silently
+							// strip it back out on save (unknown object
+							// properties are dropped, not just ignored).
+							'postType' => ['type' => 'string'],
 						],
 					],
 				],
@@ -352,12 +368,19 @@ class Bpafb_Pro_Template_Kinds
 				return !is_user_logged_in();
 
 			case 'singular':
-				// Post IDs are globally unique regardless of post type, so
-				// there's no need to also store/compare a post type here -
-				// matching the exact object being viewed is enough.
-				return $value !== ''
-					&& is_singular()
-					&& (int) get_queried_object_id() === (int) $value;
+				// Mirrors Elementor's own Singular > [Post Type] > All/Specific
+				// nesting: an empty postType means "any post type" (Post IDs
+				// are globally unique regardless of type, so that alone is
+				// still an exact match), an empty value means "all of that
+				// post type" rather than one specific item.
+				if (!is_singular()) {
+					return false;
+				}
+				$post_type = isset($rule['postType']) ? (string) $rule['postType'] : '';
+				if ($post_type !== '' && get_post_type() !== $post_type) {
+					return false;
+				}
+				return $value === '' || (int) get_queried_object_id() === (int) $value;
 		}
 
 		return false;
@@ -374,6 +397,38 @@ class Bpafb_Pro_Template_Kinds
 	 * @var array<string,int>
 	 */
 	private static $resolved = [];
+
+	/**
+	 * Specificity score for one matched rule. Every type but 'singular' uses
+	 * the flat RULE_SPECIFICITY table; 'singular' varies by how narrowly the
+	 * rule itself is scoped, mirroring Elementor's Singular > [Post Type] >
+	 * All/Specific nesting: naming one exact post/page is always the most
+	 * specific thing any condition can say (same "beats everything broader"
+	 * precedence the free plugin's own singular-kind "specific posts" scope
+	 * already has - see Bpafb_Template_Display_Conditions::get_matching_template_id()),
+	 * restricting to one post type ("All Products") is more specific than
+	 * an unscoped "All Singular", which is in turn more specific than
+	 * "Entire Site" (it excludes archives, search, 404, etc.).
+	 *
+	 * @param array{type:string,value:string,postType?:string} $rule Condition rule.
+	 * @return int
+	 */
+	private static function rule_specificity($rule)
+	{
+		if ('singular' !== ($rule['type'] ?? '')) {
+			return self::RULE_SPECIFICITY[$rule['type'] ?? ''] ?? 0;
+		}
+
+		if (isset($rule['value']) && '' !== $rule['value']) {
+			return 100;
+		}
+
+		if (!empty($rule['postType'])) {
+			return 40;
+		}
+
+		return 5;
+	}
 
 	/**
 	 * Finds the best-matching published Blockive Template for a given
@@ -423,7 +478,7 @@ class Bpafb_Pro_Template_Kinds
 				if (!self::rule_matches($rule)) {
 					continue;
 				}
-				$score = self::RULE_SPECIFICITY[$rule['type'] ?? ''] ?? 0;
+				$score = self::rule_specificity($rule);
 				if (null === $matched_specificity || $score > $matched_specificity) {
 					$matched_specificity = $score;
 				}

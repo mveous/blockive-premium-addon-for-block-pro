@@ -11,6 +11,13 @@ import { usePostTypeOptions, isFreePostType } from '../template-builder/template
 
 const TEMPLATE_POST_TYPE = window.bpafbTemplateBuilder?.postType || 'blockive_template';
 
+// Localized from Bpafb_Template_Builder::get_post_type_singular_names() -
+// core's own `/wp/v2/types` REST response only has the plural `name`, not
+// `labels.singular_name`, so "All Products" / "Specific Product"-style
+// wording (matching Elementor's own Singular > [Post Type] > All/Specific
+// condition wording) needs this separately localized map.
+const POST_TYPE_SINGULAR_NAMES = window.bpafbTemplateBuilder?.postTypeSingularNames || {};
+
 const KIND_OPTIONS = [
 	{ label: __( 'Single Post/Page', 'blockive-premium-addon-for-block-pro' ), value: 'single' },
 	{ label: __( 'Header', 'blockive-premium-addon-for-block-pro' ), value: 'header' },
@@ -37,22 +44,16 @@ const ROLE_OPTIONS = [
 ];
 
 /**
- * A "Single Post/Page" template only ever has one legacy scope value (all of
- * its Post Type, or one specific post - see Bpafb_Template_Display_Conditions),
- * so its Display Conditions list is restricted to the two conditions that
- * actually map onto that model. Every other kind gets the full rule set.
+ * The general (non-"single") Display Conditions rule set - "Singular" here
+ * opens into its own Post Type + All/Specific nesting (see
+ * SingularConditionFields) rather than being a flat "one specific post"
+ * picker, matching Elementor's own Singular > [Post Type] > All/Specific
+ * condition tree.
  */
-function ruleTypeOptions( kind ) {
-	if ( 'single' === kind ) {
-		return [
-			{ label: __( 'Entire Site', 'blockive-premium-addon-for-block-pro' ), value: 'entire_site' },
-			{ label: __( 'Specific Post/Page', 'blockive-premium-addon-for-block-pro' ), value: 'singular' },
-		];
-	}
-
+function ruleTypeOptions() {
 	return [
 		{ label: __( 'Entire Site', 'blockive-premium-addon-for-block-pro' ), value: 'entire_site' },
-		{ label: __( 'Specific Post/Page', 'blockive-premium-addon-for-block-pro' ), value: 'singular' },
+		{ label: __( 'Singular', 'blockive-premium-addon-for-block-pro' ), value: 'singular' },
 		{ label: __( 'Post Type Archive', 'blockive-premium-addon-for-block-pro' ), value: 'post_type_archive' },
 		{ label: __( 'Taxonomy Archive', 'blockive-premium-addon-for-block-pro' ), value: 'taxonomy_archive' },
 		{ label: __( 'Author Archive', 'blockive-premium-addon-for-block-pro' ), value: 'author_archive' },
@@ -235,7 +236,77 @@ const SingularPicker = ( { value, onChange, postType } ) => {
 	);
 };
 
-const RuleValueField = ( { rule, onChange, postType } ) => {
+/**
+ * The general Display Conditions list's "Singular" rule, nested the same way
+ * Elementor's own Singular condition is: pick a Post Type ("Any Post Type"
+ * matches any singular content regardless of type), then whether it applies
+ * to All of that type or one Specific item. Local `mode` state tracks the
+ * user's All/Specific choice independently of `rule.value` being empty,
+ * since "Specific, no post chosen yet" and "All" are otherwise
+ * indistinguishable from the rule data alone.
+ */
+const SingularConditionFields = ( { rule, onChange } ) => {
+	const postTypes = useSelect(
+		( select ) =>
+			select( 'core' )
+				.getPostTypes( { per_page: -1 } )
+				?.filter( ( pt ) => pt.viewable ) || [],
+		[]
+	);
+
+	const postType = rule.postType || '';
+	const [ mode, setMode ] = useState( () => ( rule.value ? 'specific' : 'all' ) );
+
+	const currentPostType = postTypes.find( ( pt ) => pt.slug === postType );
+	const pluralLabel = currentPostType?.name || __( 'Post Types', 'blockive-premium-addon-for-block-pro' );
+	const singularLabel = POST_TYPE_SINGULAR_NAMES[ postType ] || pluralLabel;
+
+	return (
+		<>
+			<SelectControl
+				label={ __( 'Post Type', 'blockive-premium-addon-for-block-pro' ) }
+				value={ postType }
+				options={ [
+					{ label: __( 'Any Post Type', 'blockive-premium-addon-for-block-pro' ), value: '' },
+					...postTypes.map( ( pt ) => ( { label: pt.name, value: pt.slug } ) ),
+				] }
+				onChange={ ( value ) => {
+					setMode( 'all' );
+					onChange( { ...rule, postType: value, value: '' } );
+				} }
+			/>
+			<SelectControl
+				label={ __( 'Which', 'blockive-premium-addon-for-block-pro' ) }
+				value={ mode }
+				options={ [
+					{
+						label: postType
+							? sprintf( /* translators: %s: post type plural name, e.g. "Products". */ __( 'All %s', 'blockive-premium-addon-for-block-pro' ), pluralLabel )
+							: __( 'All Singular', 'blockive-premium-addon-for-block-pro' ),
+						value: 'all',
+					},
+					{
+						label: postType
+							? sprintf( /* translators: %s: post type singular name, e.g. "Product". */ __( 'Specific %s', 'blockive-premium-addon-for-block-pro' ), singularLabel )
+							: __( 'Specific Post/Page', 'blockive-premium-addon-for-block-pro' ),
+						value: 'specific',
+					},
+				] }
+				onChange={ ( value ) => {
+					setMode( value );
+					if ( 'all' === value ) {
+						onChange( { ...rule, value: '' } );
+					}
+				} }
+			/>
+			{ 'specific' === mode && (
+				<SingularPicker value={ rule.value || '' } onChange={ ( value ) => onChange( { ...rule, value } ) } postType={ postType || undefined } />
+			) }
+		</>
+	);
+};
+
+const RuleValueField = ( { rule, onChange } ) => {
 	const postTypes = useSelect(
 		( select ) =>
 			select( 'core' )
@@ -245,7 +316,7 @@ const RuleValueField = ( { rule, onChange, postType } ) => {
 	);
 
 	if ( 'singular' === rule.type ) {
-		return <SingularPicker value={ rule.value || '' } onChange={ onChange } postType={ postType } />;
+		return <SingularConditionFields rule={ rule } onChange={ onChange } />;
 	}
 
 	if ( 'post_type_archive' === rule.type ) {
@@ -305,6 +376,15 @@ const TemplateKindPanel = () => {
 
 	const templateType = meta?._bpafb_template_type || 'post';
 	const postTypeOptions = usePostTypeOptions();
+
+	// Elementor labels this exact choice "All Products" / "Specific Product"
+	// once you've picked "Product" as the singular document type - since
+	// Single Post/Page's Post Type is already fixed above, the condition
+	// row's two options are relabeled the same way instead of the generic
+	// "Entire Site" / "Specific Post/Page" wording the general rule list uses.
+	const templateTypeObject = useSelect( ( select ) => select( 'core' ).getPostType( templateType ), [ templateType ] );
+	const templateTypePluralLabel = templateTypeObject?.name || templateType;
+	const templateTypeSingularLabel = POST_TYPE_SINGULAR_NAMES[ templateType ] || templateTypePluralLabel;
 
 	const rules = Array.isArray( meta?._bpafb_display_condition_rules ) ? meta._bpafb_display_condition_rules : [];
 	const setRules = ( nextRules ) => setMeta( { ...meta, _bpafb_display_condition_rules: nextRules } );
@@ -396,11 +476,20 @@ const TemplateKindPanel = () => {
 								<SelectControl
 									label={ __( 'Condition', 'blockive-premium-addon-for-block-pro' ) }
 									value={ singleRule.type }
-									options={ ruleTypeOptions( 'single' ) }
+									options={ [
+										{
+											label: sprintf( /* translators: %s: post type plural name, e.g. "Products". */ __( 'All %s', 'blockive-premium-addon-for-block-pro' ), templateTypePluralLabel ),
+											value: 'entire_site',
+										},
+										{
+											label: sprintf( /* translators: %s: post type singular name, e.g. "Product". */ __( 'Specific %s', 'blockive-premium-addon-for-block-pro' ), templateTypeSingularLabel ),
+											value: 'singular',
+										},
+									] }
 									onChange={ ( value ) => updateSingleRule( { type: value, value: '' } ) }
 								/>
 								{ 'singular' === singleRule.type && (
-									<RuleValueField rule={ singleRule } onChange={ ( value ) => updateSingleRule( { value } ) } postType={ templateType } />
+									<SingularPicker value={ singleRule.value } onChange={ ( value ) => updateSingleRule( { value } ) } postType={ templateType } />
 								) }
 							</FlexBlock>
 						</Flex>
@@ -414,11 +503,20 @@ const TemplateKindPanel = () => {
 										<SelectControl
 											label={ __( 'Condition', 'blockive-premium-addon-for-block-pro' ) }
 											value={ rule.type }
-											options={ ruleTypeOptions( kind ) }
-											onChange={ ( value ) => updateRule( index, { type: value, value: '' } ) }
+											options={ ruleTypeOptions() }
+											onChange={ ( value ) => updateRule( index, { type: value, value: '', postType: '' } ) }
 										/>
 										{ RULE_TYPES_WITH_VALUE.includes( rule.type ) && (
-											<RuleValueField rule={ rule } onChange={ ( value ) => updateRule( index, { value } ) } />
+											<RuleValueField
+												rule={ rule }
+												onChange={ ( valueOrPatch ) =>
+													// SingularConditionFields (rendered for 'singular') needs to
+													// update both `postType` and `value` together, so it passes
+													// a full patch object; every other rule type's field just
+													// passes the new bare value.
+													updateRule( index, 'singular' === rule.type ? valueOrPatch : { value: valueOrPatch } )
+												}
+											/>
 										) }
 									</FlexBlock>
 									<FlexItem>
