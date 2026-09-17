@@ -1,9 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/editor';
-import { PanelRow, SelectControl, TextControl, Button, Flex, FlexBlock, FlexItem } from '@wordpress/components';
+import { PanelRow, SelectControl, TextControl, Button, Flex, FlexBlock, FlexItem, ComboboxControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { useEntityProp } from '@wordpress/core-data';
+import { useState, useEffect } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@wordpress/url';
 
 const TEMPLATE_POST_TYPE = window.bpafbTemplateBuilder?.postType || 'blockive_template';
 
@@ -20,7 +23,7 @@ const KIND_OPTIONS = [
 
 // Rule types that need a value picked by the user; the rest (entire_site,
 // date_archive, search, 404, logged_in, logged_out) are self-contained.
-const RULE_TYPES_WITH_VALUE = [ 'post_type_archive', 'taxonomy_archive', 'author_archive', 'user_role' ];
+const RULE_TYPES_WITH_VALUE = [ 'post_type_archive', 'taxonomy_archive', 'author_archive', 'user_role', 'singular' ];
 
 const ROLE_OPTIONS = [
 	{ label: __( 'Administrator', 'blockive-premium-addon-for-block-pro' ), value: 'administrator' },
@@ -35,6 +38,7 @@ const ROLE_OPTIONS = [
 function ruleTypeOptions() {
 	return [
 		{ label: __( 'Entire Site', 'blockive-premium-addon-for-block-pro' ), value: 'entire_site' },
+		{ label: __( 'Specific Post/Page', 'blockive-premium-addon-for-block-pro' ), value: 'singular' },
 		{ label: __( 'Post Type Archive', 'blockive-premium-addon-for-block-pro' ), value: 'post_type_archive' },
 		{ label: __( 'Taxonomy Archive', 'blockive-premium-addon-for-block-pro' ), value: 'taxonomy_archive' },
 		{ label: __( 'Author Archive', 'blockive-premium-addon-for-block-pro' ), value: 'author_archive' },
@@ -137,6 +141,79 @@ const PopupSettings = ( { meta, setMeta } ) => {
 	);
 };
 
+/**
+ * Searchable post/page picker for the "singular" rule type, backed by
+ * WordPress core's own aggregated `/wp/v2/search` endpoint (the same one
+ * Gutenberg's own link-insertion UI uses) rather than a single post type's
+ * entity-records query, since a "specific post/page" condition should be
+ * able to target any searchable content, not just one post type at a time.
+ */
+const SingularPicker = ( { value, onChange } ) => {
+	const [ options, setOptions ] = useState( [] );
+
+	useEffect( () => {
+		let cancelled = false;
+		apiFetch( { path: addQueryArgs( '/wp/v2/search', { search: '', per_page: 20 } ) } )
+			.then( ( results ) => {
+				if ( cancelled ) return;
+				setOptions( ( results || [] ).map( ( r ) => ( { value: String( r.id ), label: `${ r.title } (${ r.subtype || r.type })` } ) ) );
+			} )
+			.catch( () => {} );
+		return () => {
+			cancelled = true;
+		};
+	}, [] );
+
+	const handleFilterChange = ( search ) => {
+		apiFetch( { path: addQueryArgs( '/wp/v2/search', { search, per_page: 20 } ) } )
+			.then( ( results ) => {
+				setOptions( ( results || [] ).map( ( r ) => ( { value: String( r.id ), label: `${ r.title } (${ r.subtype || r.type })` } ) ) );
+			} )
+			.catch( () => {} );
+	};
+
+	// A saved rule's target might not appear in the default (unsearched)
+	// results list - e.g. it's older than the 20 most recent items. Resolve
+	// its real title directly by ID so re-opening a template never shows a
+	// bare "#id" instead of the actual post/page name.
+	useEffect( () => {
+		if ( ! value || options.some( ( option ) => option.value === value ) ) {
+			return;
+		}
+		let cancelled = false;
+		apiFetch( { path: addQueryArgs( '/wp/v2/search', { include: [ value ], per_page: 1 } ) } )
+			.then( ( results ) => {
+				if ( cancelled || ! results?.length ) return;
+				const r = results[ 0 ];
+				setOptions( ( current ) =>
+					current.some( ( option ) => option.value === String( r.id ) )
+						? current
+						: [ { value: String( r.id ), label: `${ r.title } (${ r.subtype || r.type })` }, ...current ]
+				);
+			} )
+			.catch( () => {} );
+		return () => {
+			cancelled = true;
+		};
+	}, [ value ] );
+
+	// Still fall back to a plain "#id" label while the by-ID lookup above is
+	// in flight (or if it fails), rather than losing the selection entirely.
+	const knownOptions = value && ! options.some( ( option ) => option.value === value )
+		? [ { value, label: `#${ value }` }, ...options ]
+		: options;
+
+	return (
+		<ComboboxControl
+			label={ __( 'Post/Page', 'blockive-premium-addon-for-block-pro' ) }
+			value={ value || '' }
+			options={ knownOptions }
+			onFilterValueChange={ handleFilterChange }
+			onChange={ ( newValue ) => onChange( newValue || '' ) }
+		/>
+	);
+};
+
 const RuleValueField = ( { rule, onChange } ) => {
 	const postTypes = useSelect(
 		( select ) =>
@@ -145,6 +222,10 @@ const RuleValueField = ( { rule, onChange } ) => {
 				?.filter( ( postType ) => postType.viewable ) || [],
 		[]
 	);
+
+	if ( 'singular' === rule.type ) {
+		return <SingularPicker value={ rule.value || '' } onChange={ onChange } />;
+	}
 
 	if ( 'post_type_archive' === rule.type ) {
 		return (

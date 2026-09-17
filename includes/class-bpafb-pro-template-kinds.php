@@ -69,6 +69,13 @@ class Bpafb_Pro_Template_Kinds
 		'author_archive'    => 20,
 		'post_type_archive' => 20,
 		'taxonomy_archive'  => 30,
+		// Highest specificity: naming one exact post/page is the same
+		// "beats everything broader" precedence the free plugin's own
+		// singular-kind "specific posts" scope already has over its "all"
+		// scope (see Bpafb_Template_Display_Conditions::get_matching_template_id()) -
+		// a Popup/Header/etc. targeted at one specific page should win over
+		// an "Entire Site" one the same way, regardless of priority.
+		'singular'          => 100,
 	];
 
 	/**
@@ -125,6 +132,7 @@ class Bpafb_Pro_Template_Kinds
 		'user_role'         => 'User Role',
 		'logged_in'         => 'Logged In',
 		'logged_out'        => 'Logged Out',
+		'singular'          => 'Specific Post/Page',
 	];
 
 	/**
@@ -176,6 +184,12 @@ class Bpafb_Pro_Template_Kinds
 			$type  = isset($rule['type']) ? $rule['type'] : '';
 			$value = isset($rule['value']) ? $rule['value'] : '';
 			$label = self::RULE_TYPE_LABELS[$type] ?? $type;
+
+			if ('singular' === $type && $value !== '') {
+				$title = get_the_title((int) $value);
+				return $label . ': ' . ($title !== '' ? $title : '#' . $value);
+			}
+
 			return $value !== '' ? $label . ': ' . $value : $label;
 		}, $rules);
 
@@ -336,6 +350,14 @@ class Bpafb_Pro_Template_Kinds
 
 			case 'logged_out':
 				return !is_user_logged_in();
+
+			case 'singular':
+				// Post IDs are globally unique regardless of post type, so
+				// there's no need to also store/compare a post type here -
+				// matching the exact object being viewed is enough.
+				return $value !== ''
+					&& is_singular()
+					&& (int) get_queried_object_id() === (int) $value;
 		}
 
 		return false;
