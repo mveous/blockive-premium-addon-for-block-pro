@@ -24,9 +24,15 @@
  * into whatever product/post a surrounding context (e.g. a future Loop
  * Builder item) already has in scope.
  *
- * Gated entirely on WooCommerce being active - none of this runs at all
- * otherwise, and the free plugin's teaser blocks keep advertising these as
- * "(Pro)" exactly as before.
+ * Registration (both the PHP blocks below and their client-side teaser
+ * replacement) is NOT gated on WooCommerce being active - these blocks are
+ * a Pro feature, unlocked the moment Pro is active, regardless of which
+ * third-party plugins happen to be installed alongside it. Every render
+ * method that touches a WooCommerce function checks function_exists()
+ * (directly, or via with_product_context(), which checks it once for all
+ * the callers that funnel through it) before calling it, so a block stays
+ * safely insertable - and quietly renders nothing - even on a site that
+ * doesn't have WooCommerce installed at all.
  *
  * @package BlockivePro
  */
@@ -44,10 +50,6 @@ class Bpafb_Pro_Woo_Blocks
 	 */
 	public function __construct()
 	{
-		if (!class_exists('WooCommerce')) {
-			return;
-		}
-
 		// Priority 21: after Bpafb_Template_Blocks::fire_registration_hook()
 		// (priority 20, which is what actually fires the
 		// blockive_register_template_block action these blocks register on).
@@ -65,7 +67,7 @@ class Bpafb_Pro_Woo_Blocks
 	 */
 	private static function with_product_context($post_id, callable $render)
 	{
-		if (!$post_id) {
+		if (!$post_id || !function_exists('wc_get_product')) {
 			return '';
 		}
 
@@ -131,7 +133,7 @@ class Bpafb_Pro_Woo_Blocks
 	public function render_product_images($attributes, $content, $block)
 	{
 		$product_id = self::post_id($block);
-		if (!$product_id) {
+		if (!$product_id || !function_exists('wc_get_product')) {
 			return '';
 		}
 		$product = wc_get_product($product_id);
@@ -189,7 +191,7 @@ class Bpafb_Pro_Woo_Blocks
 	public function render_product_stock($attributes, $content, $block)
 	{
 		$product_id = self::post_id($block);
-		if (!$product_id) {
+		if (!$product_id || !function_exists('wc_get_product')) {
 			return '';
 		}
 		$product = wc_get_product($product_id);
@@ -208,7 +210,7 @@ class Bpafb_Pro_Woo_Blocks
 	public function render_product_description($attributes, $content, $block)
 	{
 		$product_id = self::post_id($block);
-		if (!$product_id) {
+		if (!$product_id || !function_exists('wc_get_product')) {
 			return '';
 		}
 		$product = wc_get_product($product_id);
@@ -269,7 +271,7 @@ class Bpafb_Pro_Woo_Blocks
 	public function render_product_variations($attributes, $content, $block)
 	{
 		$product_id = self::post_id($block);
-		if (!$product_id) {
+		if (!$product_id || !function_exists('wc_get_product')) {
 			return '';
 		}
 		$product = wc_get_product($product_id);

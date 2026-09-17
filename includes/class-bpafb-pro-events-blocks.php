@@ -7,12 +7,17 @@
  * built under a future free-only install (where these stay inert teasers)
  * keeps rendering unchanged once Pro is active.
  *
- * Gated entirely on The Events Calendar being active. Every render method
- * additionally guards each individual tribe_*() call with function_exists()
- * before calling it, rather than assuming the exact set available in every
- * Events Calendar version - the plugin's public template-tag API has grown
- * over major versions, and a missing tag should make that one block quietly
- * render nothing rather than fatal the whole page.
+ * Registration (both the PHP blocks below and their client-side teaser
+ * replacement) is NOT gated on The Events Calendar being active - these
+ * blocks are a Pro feature, unlocked the moment Pro is active, regardless
+ * of which third-party plugins happen to be installed alongside it. Every
+ * render method individually guards each tribe_*() call with
+ * function_exists() before calling it (both because Events Calendar's
+ * public template-tag API has grown over major versions and a missing tag
+ * should make that one block quietly render nothing rather than fatal the
+ * whole page, and because that's what makes it safe for these blocks to
+ * stay registered - and therefore insertable in the editor - even on a
+ * site that doesn't have Events Calendar installed at all).
  *
  * @package BlockivePro
  */
@@ -30,10 +35,6 @@ class Bpafb_Pro_Events_Blocks
 	 */
 	public function __construct()
 	{
-		if (!class_exists('Tribe__Events__Main')) {
-			return;
-		}
-
 		add_action('blockive_register_template_block', [$this, 'register_blocks']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets'], 21);
 	}
