@@ -1,17 +1,18 @@
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/editor';
-import { PanelRow, SelectControl, TextControl, Button, Flex, FlexBlock, FlexItem, ComboboxControl } from '@wordpress/components';
+import { PanelRow, SelectControl, TextControl, Button, Flex, FlexBlock, FlexItem, ComboboxControl, ToggleControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { useEntityProp } from '@wordpress/core-data';
 import { useState, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
+import { usePostTypeOptions, isFreePostType } from '../template-builder/template-settings-panel';
 
 const TEMPLATE_POST_TYPE = window.bpafbTemplateBuilder?.postType || 'blockive_template';
 
 const KIND_OPTIONS = [
-	{ label: __( 'Single post/page (Template Settings panel)', 'blockive-premium-addon-for-block-pro' ), value: 'single' },
+	{ label: __( 'Single Post/Page', 'blockive-premium-addon-for-block-pro' ), value: 'single' },
 	{ label: __( 'Header', 'blockive-premium-addon-for-block-pro' ), value: 'header' },
 	{ label: __( 'Footer', 'blockive-premium-addon-for-block-pro' ), value: 'footer' },
 	{ label: __( 'Archive', 'blockive-premium-addon-for-block-pro' ), value: 'archive' },
@@ -35,7 +36,20 @@ const ROLE_OPTIONS = [
 	{ label: __( 'Shop Manager (WooCommerce)', 'blockive-premium-addon-for-block-pro' ), value: 'shop_manager' },
 ];
 
-function ruleTypeOptions() {
+/**
+ * A "Single Post/Page" template only ever has one legacy scope value (all of
+ * its Post Type, or one specific post - see Bpafb_Template_Display_Conditions),
+ * so its Display Conditions list is restricted to the two conditions that
+ * actually map onto that model. Every other kind gets the full rule set.
+ */
+function ruleTypeOptions( kind ) {
+	if ( 'single' === kind ) {
+		return [
+			{ label: __( 'Entire Site', 'blockive-premium-addon-for-block-pro' ), value: 'entire_site' },
+			{ label: __( 'Specific Post/Page', 'blockive-premium-addon-for-block-pro' ), value: 'singular' },
+		];
+	}
+
 	return [
 		{ label: __( 'Entire Site', 'blockive-premium-addon-for-block-pro' ), value: 'entire_site' },
 		{ label: __( 'Specific Post/Page', 'blockive-premium-addon-for-block-pro' ), value: 'singular' },
@@ -145,15 +159,20 @@ const PopupSettings = ( { meta, setMeta } ) => {
  * Searchable post/page picker for the "singular" rule type, backed by
  * WordPress core's own aggregated `/wp/v2/search` endpoint (the same one
  * Gutenberg's own link-insertion UI uses) rather than a single post type's
- * entity-records query, since a "specific post/page" condition should be
- * able to target any searchable content, not just one post type at a time.
+ * entity-records query, since a "specific post/page" condition should
+ * generally be able to target any searchable content, not just one post
+ * type at a time. An optional `postType` prop narrows the search results to
+ * one post type via the endpoint's own `subtype` param - used only by the
+ * Single Post/Page Display Conditions adapter, where the legacy
+ * `_bpafb_display_condition_ids` meta is documented as "IDs of the
+ * template's own Post Type", so the picker shouldn't offer unrelated types.
  */
-const SingularPicker = ( { value, onChange } ) => {
+const SingularPicker = ( { value, onChange, postType } ) => {
 	const [ options, setOptions ] = useState( [] );
 
 	useEffect( () => {
 		let cancelled = false;
-		apiFetch( { path: addQueryArgs( '/wp/v2/search', { search: '', per_page: 20 } ) } )
+		apiFetch( { path: addQueryArgs( '/wp/v2/search', { search: '', per_page: 20, ...( postType ? { subtype: postType } : {} ) } ) } )
 			.then( ( results ) => {
 				if ( cancelled ) return;
 				setOptions( ( results || [] ).map( ( r ) => ( { value: String( r.id ), label: `${ r.title } (${ r.subtype || r.type })` } ) ) );
@@ -162,10 +181,10 @@ const SingularPicker = ( { value, onChange } ) => {
 		return () => {
 			cancelled = true;
 		};
-	}, [] );
+	}, [ postType ] );
 
 	const handleFilterChange = ( search ) => {
-		apiFetch( { path: addQueryArgs( '/wp/v2/search', { search, per_page: 20 } ) } )
+		apiFetch( { path: addQueryArgs( '/wp/v2/search', { search, per_page: 20, ...( postType ? { subtype: postType } : {} ) } ) } )
 			.then( ( results ) => {
 				setOptions( ( results || [] ).map( ( r ) => ( { value: String( r.id ), label: `${ r.title } (${ r.subtype || r.type })` } ) ) );
 			} )
@@ -174,8 +193,10 @@ const SingularPicker = ( { value, onChange } ) => {
 
 	// A saved rule's target might not appear in the default (unsearched)
 	// results list - e.g. it's older than the 20 most recent items. Resolve
-	// its real title directly by ID so re-opening a template never shows a
-	// bare "#id" instead of the actual post/page name.
+	// its real title directly by ID (unrestricted by `postType`, so a
+	// mismatch still shows the real title instead of a wrong "not found")
+	// so re-opening a template never shows a bare "#id" instead of the
+	// actual post/page name.
 	useEffect( () => {
 		if ( ! value || options.some( ( option ) => option.value === value ) ) {
 			return;
@@ -214,17 +235,17 @@ const SingularPicker = ( { value, onChange } ) => {
 	);
 };
 
-const RuleValueField = ( { rule, onChange } ) => {
+const RuleValueField = ( { rule, onChange, postType } ) => {
 	const postTypes = useSelect(
 		( select ) =>
 			select( 'core' )
 				.getPostTypes( { per_page: -1 } )
-				?.filter( ( postType ) => postType.viewable ) || [],
+				?.filter( ( pt ) => pt.viewable ) || [],
 		[]
 	);
 
 	if ( 'singular' === rule.type ) {
-		return <SingularPicker value={ rule.value || '' } onChange={ onChange } />;
+		return <SingularPicker value={ rule.value || '' } onChange={ onChange } postType={ postType } />;
 	}
 
 	if ( 'post_type_archive' === rule.type ) {
@@ -234,7 +255,7 @@ const RuleValueField = ( { rule, onChange } ) => {
 				value={ rule.value || '' }
 				options={ [
 					{ label: __( '— Select —', 'blockive-premium-addon-for-block-pro' ), value: '' },
-					...postTypes.map( ( postType ) => ( { label: postType.name, value: postType.slug } ) ),
+					...postTypes.map( ( pt ) => ( { label: pt.name, value: pt.slug } ) ),
 				] }
 				onChange={ onChange }
 			/>
@@ -280,8 +301,12 @@ const TemplateKindPanel = () => {
 	const [ meta, setMeta ] = useEntityProp( 'postType', TEMPLATE_POST_TYPE, 'meta' );
 
 	const kind = meta?._bpafb_template_kind || 'single';
-	const rules = Array.isArray( meta?._bpafb_display_condition_rules ) ? meta._bpafb_display_condition_rules : [];
+	const isSingle = 'single' === kind;
 
+	const templateType = meta?._bpafb_template_type || 'post';
+	const postTypeOptions = usePostTypeOptions();
+
+	const rules = Array.isArray( meta?._bpafb_display_condition_rules ) ? meta._bpafb_display_condition_rules : [];
 	const setRules = ( nextRules ) => setMeta( { ...meta, _bpafb_display_condition_rules: nextRules } );
 
 	const updateRule = ( index, patch ) => {
@@ -298,67 +323,187 @@ const TemplateKindPanel = () => {
 		setRules( [ ...rules, { type: 'entire_site', value: '' } ] );
 	};
 
+	// Single Post/Page has only ever had one condition value in the legacy
+	// data model (Bpafb_Template_Display_Conditions): "all" of its Post Type,
+	// or a list of specific IDs. This adapter presents that exact same model
+	// through the same Condition-row UI every other kind uses, reading/
+	// writing the legacy meta instead of _bpafb_display_condition_rules so
+	// the free plugin's resolver keeps working completely unchanged.
+	const scope = meta?._bpafb_display_condition_scope || 'all';
+	const conditionIds = Array.isArray( meta?._bpafb_display_condition_ids ) ? meta._bpafb_display_condition_ids : [];
+	const singleRule = {
+		type: 'specific' === scope ? 'singular' : 'entire_site',
+		value: conditionIds[ 0 ] != null ? String( conditionIds[ 0 ] ) : '',
+	};
+	const updateSingleRule = ( patch ) => {
+		const next = { ...singleRule, ...patch };
+		if ( 'singular' === next.type ) {
+			setMeta( {
+				...meta,
+				_bpafb_display_condition_scope: 'specific',
+				_bpafb_display_condition_ids: next.value ? [ Number( next.value ) ] : [],
+			} );
+		} else {
+			setMeta( { ...meta, _bpafb_display_condition_scope: 'all', _bpafb_display_condition_ids: [] } );
+		}
+	};
+
+	const priority = Number.isFinite( meta?._bpafb_template_priority ) ? meta._bpafb_template_priority : 10;
+
 	return (
-		<PluginDocumentSettingPanel
-			name="bpafb-pro-template-kind"
-			title={ __( 'Location (Pro)', 'blockive-premium-addon-for-block-pro' ) }
-			className="bpafb-pro-template-kind-panel"
-		>
-			<PanelRow>
-				<SelectControl
-					label={ __( 'Where should this template be used?', 'blockive-premium-addon-for-block-pro' ) }
-					help={
-						'single' === kind
-							? __( 'Overrides a single post/page\'s content - configure which one(s) in the Template Settings and Display Conditions panels above.', 'blockive-premium-addon-for-block-pro' )
-							: __( 'The Template Settings panel\'s Post Type field does not apply to this kind - use the conditions below instead.', 'blockive-premium-addon-for-block-pro' )
-					}
-					value={ kind }
-					options={ KIND_OPTIONS }
-					onChange={ ( value ) => setMeta( { ...meta, _bpafb_template_kind: value } ) }
-				/>
-			</PanelRow>
+		<>
+			<PluginDocumentSettingPanel
+				name="bpafb-pro-template-type"
+				title={ __( 'Template Type', 'blockive-premium-addon-for-block-pro' ) }
+				className="bpafb-pro-template-type-panel"
+			>
+				<PanelRow>
+					<SelectControl
+						label={ __( 'Template Type', 'blockive-premium-addon-for-block-pro' ) }
+						value={ kind }
+						options={ KIND_OPTIONS }
+						onChange={ ( value ) => setMeta( { ...meta, _bpafb_template_kind: value } ) }
+					/>
+				</PanelRow>
 
-			{ 'single' !== kind && (
-				<>
-					{ rules.map( ( rule, index ) => (
-						<PanelRow key={ index }>
-							<Flex align="flex-end">
-								<FlexBlock>
-									<SelectControl
-										label={ __( 'Condition', 'blockive-premium-addon-for-block-pro' ) }
-										value={ rule.type }
-										options={ ruleTypeOptions() }
-										onChange={ ( value ) => updateRule( index, { type: value, value: '' } ) }
-									/>
-									{ RULE_TYPES_WITH_VALUE.includes( rule.type ) && (
-										<RuleValueField rule={ rule } onChange={ ( value ) => updateRule( index, { value } ) } />
-									) }
-								</FlexBlock>
-								<FlexItem>
-									<Button icon="trash" label={ __( 'Remove condition', 'blockive-premium-addon-for-block-pro' ) } onClick={ () => removeRule( index ) } />
-								</FlexItem>
-							</Flex>
-						</PanelRow>
-					) ) }
-
+				{ isSingle && (
 					<PanelRow>
-						<Button variant="secondary" onClick={ addRule }>
-							{ __( '+ Add condition', 'blockive-premium-addon-for-block-pro' ) }
-						</Button>
+						<SelectControl
+							label={ __( 'Post Type', 'blockive-premium-addon-for-block-pro' ) }
+							help={ __( 'Which post type this template overrides the content of. Template Blocks use it to source live preview data.', 'blockive-premium-addon-for-block-pro' ) }
+							value={ templateType }
+							options={ postTypeOptions }
+							onChange={ ( value ) => {
+								if ( ! isFreePostType( value ) ) {
+									return;
+								}
+								setMeta( { ...meta, _bpafb_template_type: value } );
+							} }
+						/>
 					</PanelRow>
+				) }
+			</PluginDocumentSettingPanel>
 
-					{ 0 === rules.length && (
+			<PluginDocumentSettingPanel
+				name="bpafb-pro-display-conditions"
+				title={ __( 'Display Conditions', 'blockive-premium-addon-for-block-pro' ) }
+				className="bpafb-pro-display-conditions-panel"
+			>
+				{ isSingle ? (
+					<PanelRow>
+						<Flex align="flex-end">
+							<FlexBlock>
+								<SelectControl
+									label={ __( 'Condition', 'blockive-premium-addon-for-block-pro' ) }
+									value={ singleRule.type }
+									options={ ruleTypeOptions( 'single' ) }
+									onChange={ ( value ) => updateSingleRule( { type: value, value: '' } ) }
+								/>
+								{ 'singular' === singleRule.type && (
+									<RuleValueField rule={ singleRule } onChange={ ( value ) => updateSingleRule( { value } ) } postType={ templateType } />
+								) }
+							</FlexBlock>
+						</Flex>
+					</PanelRow>
+				) : (
+					<>
+						{ rules.map( ( rule, index ) => (
+							<PanelRow key={ index }>
+								<Flex align="flex-end">
+									<FlexBlock>
+										<SelectControl
+											label={ __( 'Condition', 'blockive-premium-addon-for-block-pro' ) }
+											value={ rule.type }
+											options={ ruleTypeOptions( kind ) }
+											onChange={ ( value ) => updateRule( index, { type: value, value: '' } ) }
+										/>
+										{ RULE_TYPES_WITH_VALUE.includes( rule.type ) && (
+											<RuleValueField rule={ rule } onChange={ ( value ) => updateRule( index, { value } ) } />
+										) }
+									</FlexBlock>
+									<FlexItem>
+										<Button icon="trash" label={ __( 'Remove condition', 'blockive-premium-addon-for-block-pro' ) } onClick={ () => removeRule( index ) } />
+									</FlexItem>
+								</Flex>
+							</PanelRow>
+						) ) }
+
 						<PanelRow>
-							<p className="bpafb-pro-no-conditions-notice">
-								{ __( 'This template matches nowhere until you add at least one condition.', 'blockive-premium-addon-for-block-pro' ) }
-							</p>
+							<Button variant="secondary" onClick={ addRule }>
+								{ __( '+ Add condition', 'blockive-premium-addon-for-block-pro' ) }
+							</Button>
 						</PanelRow>
-					) }
-				</>
-			) }
 
-			{ 'popup' === kind && <PopupSettings meta={ meta } setMeta={ setMeta } /> }
-		</PluginDocumentSettingPanel>
+						{ 0 === rules.length && (
+							<PanelRow>
+								<p className="bpafb-pro-no-conditions-notice">
+									{ __( 'This template matches nowhere until you add at least one condition.', 'blockive-premium-addon-for-block-pro' ) }
+								</p>
+							</PanelRow>
+						) }
+					</>
+				) }
+
+				<PanelRow>
+					<TextControl
+						type="number"
+						label={ __( 'Priority', 'blockive-premium-addon-for-block-pro' ) }
+						help={ __( 'When more than one template matches equally specifically, the lower priority number wins.', 'blockive-premium-addon-for-block-pro' ) }
+						value={ priority }
+						onChange={ ( value ) => {
+							const parsed = parseInt( value, 10 );
+							setMeta( { ...meta, _bpafb_template_priority: Number.isNaN( parsed ) ? 10 : parsed } );
+						} }
+					/>
+				</PanelRow>
+
+				{ isSingle && (
+					<>
+						<PanelRow>
+							<ToggleControl
+								label={ __( 'Full width (no sidebar)', 'blockive-premium-addon-for-block-pro' ) }
+								checked={ !! meta?._bpafb_full_width }
+								onChange={ ( value ) => setMeta( { ...meta, _bpafb_full_width: value } ) }
+							/>
+						</PanelRow>
+
+						<PanelRow>
+							<ToggleControl
+								label={ __( "Hide theme's post title", 'blockive-premium-addon-for-block-pro' ) }
+								checked={ meta?._bpafb_hide_title !== false }
+								onChange={ ( value ) => setMeta( { ...meta, _bpafb_hide_title: value } ) }
+							/>
+						</PanelRow>
+
+						<PanelRow>
+							<ToggleControl
+								label={ __( "Hide theme's featured image", 'blockive-premium-addon-for-block-pro' ) }
+								checked={ meta?._bpafb_hide_featured_image !== false }
+								onChange={ ( value ) => setMeta( { ...meta, _bpafb_hide_featured_image: value } ) }
+							/>
+						</PanelRow>
+
+						<PanelRow>
+							<ToggleControl
+								label={ __( 'Hide comments', 'blockive-premium-addon-for-block-pro' ) }
+								checked={ !! meta?._bpafb_hide_comments }
+								onChange={ ( value ) => setMeta( { ...meta, _bpafb_hide_comments: value } ) }
+							/>
+						</PanelRow>
+
+						<PanelRow>
+							<ToggleControl
+								label={ __( 'Hide post navigation (previous/next)', 'blockive-premium-addon-for-block-pro' ) }
+								checked={ !! meta?._bpafb_hide_post_nav }
+								onChange={ ( value ) => setMeta( { ...meta, _bpafb_hide_post_nav: value } ) }
+							/>
+						</PanelRow>
+					</>
+				) }
+
+				{ 'popup' === kind && <PopupSettings meta={ meta } setMeta={ setMeta } /> }
+			</PluginDocumentSettingPanel>
+		</>
 	);
 };
 
