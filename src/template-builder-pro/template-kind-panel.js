@@ -47,6 +47,96 @@ function ruleTypeOptions() {
 	];
 }
 
+const TRIGGER_TYPE_OPTIONS = [
+	{ label: __( 'Page Load (delay)', 'blockive-premium-addon-for-block-pro' ), value: 'page_load' },
+	{ label: __( 'Scroll Percentage', 'blockive-premium-addon-for-block-pro' ), value: 'scroll' },
+	{ label: __( 'Click (element selector)', 'blockive-premium-addon-for-block-pro' ), value: 'click' },
+	{ label: __( 'Exit Intent', 'blockive-premium-addon-for-block-pro' ), value: 'exit_intent' },
+];
+
+const FREQUENCY_OPTIONS = [
+	{ label: __( 'Every page load', 'blockive-premium-addon-for-block-pro' ), value: 'always' },
+	{ label: __( 'Once per session', 'blockive-premium-addon-for-block-pro' ), value: 'session' },
+	{ label: __( 'Once every N days', 'blockive-premium-addon-for-block-pro' ), value: 'days' },
+];
+
+const PopupSettings = ( { meta, setMeta } ) => {
+	const triggerType = meta?._bpafb_popup_trigger_type || 'page_load';
+	const triggerValue = meta?._bpafb_popup_trigger_value ?? '3000';
+	const frequency = meta?._bpafb_popup_frequency || 'session';
+	const frequencyDays = meta?._bpafb_popup_frequency_days ?? 1;
+
+	return (
+		<>
+			<PanelRow>
+				<SelectControl
+					label={ __( 'Trigger', 'blockive-premium-addon-for-block-pro' ) }
+					value={ triggerType }
+					options={ TRIGGER_TYPE_OPTIONS }
+					onChange={ ( value ) => {
+						const defaults = { page_load: '3000', scroll: '50', click: '', exit_intent: '' };
+						setMeta( { ...meta, _bpafb_popup_trigger_type: value, _bpafb_popup_trigger_value: defaults[ value ] ?? '' } );
+					} }
+				/>
+			</PanelRow>
+
+			{ 'page_load' === triggerType && (
+				<PanelRow>
+					<TextControl
+						type="number"
+						label={ __( 'Delay (milliseconds)', 'blockive-premium-addon-for-block-pro' ) }
+						value={ triggerValue }
+						onChange={ ( value ) => setMeta( { ...meta, _bpafb_popup_trigger_value: value } ) }
+					/>
+				</PanelRow>
+			) }
+
+			{ 'scroll' === triggerType && (
+				<PanelRow>
+					<TextControl
+						type="number"
+						label={ __( 'Scrolled down (%)', 'blockive-premium-addon-for-block-pro' ) }
+						value={ triggerValue }
+						onChange={ ( value ) => setMeta( { ...meta, _bpafb_popup_trigger_value: value } ) }
+					/>
+				</PanelRow>
+			) }
+
+			{ 'click' === triggerType && (
+				<PanelRow>
+					<TextControl
+						label={ __( 'CSS selector', 'blockive-premium-addon-for-block-pro' ) }
+						help={ __( 'Any element matching this selector opens the popup when clicked. Leave blank to use [data-bpafb-popup-trigger].', 'blockive-premium-addon-for-block-pro' ) }
+						value={ triggerValue }
+						onChange={ ( value ) => setMeta( { ...meta, _bpafb_popup_trigger_value: value } ) }
+					/>
+				</PanelRow>
+			) }
+
+			<PanelRow>
+				<SelectControl
+					label={ __( 'Frequency', 'blockive-premium-addon-for-block-pro' ) }
+					help={ __( 'How often the same visitor sees this popup again after closing it.', 'blockive-premium-addon-for-block-pro' ) }
+					value={ frequency }
+					options={ FREQUENCY_OPTIONS }
+					onChange={ ( value ) => setMeta( { ...meta, _bpafb_popup_frequency: value } ) }
+				/>
+			</PanelRow>
+
+			{ 'days' === frequency && (
+				<PanelRow>
+					<TextControl
+						type="number"
+						label={ __( 'Days', 'blockive-premium-addon-for-block-pro' ) }
+						value={ frequencyDays }
+						onChange={ ( value ) => setMeta( { ...meta, _bpafb_popup_frequency_days: Number( value ) || 1 } ) }
+					/>
+				</PanelRow>
+			) }
+		</>
+	);
+};
+
 const RuleValueField = ( { rule, onChange } ) => {
 	const postTypes = useSelect(
 		( select ) =>
@@ -185,6 +275,8 @@ const TemplateKindPanel = () => {
 					) }
 				</>
 			) }
+
+			{ 'popup' === kind && <PopupSettings meta={ meta } setMeta={ setMeta } /> }
 		</PluginDocumentSettingPanel>
 	);
 };
