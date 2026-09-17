@@ -121,9 +121,13 @@ class Bpafb_Pro_Events_Blocks
 			return '';
 		}
 
-		$parts = array_filter([$venue, $address]);
+		// tribe_get_venue() is a plain-text title and needs escaping, but
+		// tribe_get_full_address() already returns its own HTML markup
+		// (microformat <span> wrappers) - escaping that too would print the
+		// markup itself as visible text instead of a formatted address.
+		$parts = array_filter([$venue !== '' ? esc_html($venue) : '', $address]);
 
-		return '<div class="bpafb-tb-event-venue">' . wp_kses_post(implode('<br>', array_map('esc_html', $parts))) . '</div>';
+		return '<div class="bpafb-tb-event-venue">' . wp_kses_post(implode('<br>', $parts)) . '</div>';
 	}
 
 	public function render_event_organizer($attributes, $content, $block)
