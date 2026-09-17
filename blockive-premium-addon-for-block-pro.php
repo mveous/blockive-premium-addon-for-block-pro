@@ -72,6 +72,7 @@ function bpafb_pro_bootstrap()
 	require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-woo-blocks.php';
 	require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-events-blocks.php';
 	require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-popup-builder.php';
+	require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-dynamic-tags.php';
 
 	new Blockive_Premium_Addon_For_Block();
 	new Bpafb_Pro_Template_Kinds();
@@ -80,6 +81,7 @@ function bpafb_pro_bootstrap()
 	new Bpafb_Pro_Woo_Blocks();
 	new Bpafb_Pro_Events_Blocks();
 	new Bpafb_Pro_Popup_Builder();
+	new Bpafb_Pro_Dynamic_Tags();
 
 	// Pro unlocks the two extension points the free plugin's Template
 	// Builder already exposes for exactly this purpose - see

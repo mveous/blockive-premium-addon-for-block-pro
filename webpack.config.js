@@ -29,6 +29,10 @@ const extraEntry = {
 		__dirname,
 		'src/post-grid-pro/index.js'
 	),
+	'dynamic-tags/index': path.resolve(
+		__dirname,
+		'src/dynamic-tags/index.js'
+	),
 };
 
 // Mirrors the free plugin's webpack.config.js (kept in sync manually, since
