@@ -91,16 +91,25 @@ function bpafb_pro_bootstrap()
 }
 
 /**
- * Every publicly viewable post type (posts, pages, WooCommerce products,
- * Events Calendar events, any custom post type a site registers, ...)
- * except the `blockive_template` CPT itself, which is deliberately not
- * publicly viewable (see Bpafb_Template_Post_Type) and would never appear
- * here anyway.
+ * Every viewable post type (posts, pages, WooCommerce products, Events
+ * Calendar events, any custom post type a site registers, ...) except the
+ * `blockive_template` CPT itself, which is deliberately not viewable (see
+ * Bpafb_Template_Post_Type) and would never appear here anyway.
+ *
+ * Deliberately does NOT pre-filter get_post_types() by `'public' => true`
+ * first: is_post_type_viewable() already returns true for a post type that
+ * is publicly_queryable (or built-in + public) even when its own `public`
+ * argument is false - some plugins register exactly this combination for a
+ * utility post type meant to be linked to but not listed everywhere (e.g.
+ * The Events Calendar's Calendar Embeds). Pre-filtering by `public` first
+ * would silently exclude those from this Pro build's unlocked list even
+ * though the block editor's own /wp/v2/types `viewable` field (the exact
+ * thing the Template Type / Post Type pickers filter on) already says yes.
  *
  * @return string[] Post type slugs.
  */
 function bpafb_pro_all_viewable_post_types()
 {
-	return array_values(array_filter(get_post_types(['public' => true]), 'is_post_type_viewable'));
+	return array_values(array_filter(get_post_types(), 'is_post_type_viewable'));
 }
 add_action('plugins_loaded', 'bpafb_pro_bootstrap');
