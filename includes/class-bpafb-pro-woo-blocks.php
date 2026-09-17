@@ -405,5 +405,18 @@ class Bpafb_Pro_Woo_Blocks
 			$asset['version'],
 			true
 		);
+
+		// The bundle always removes the free plugin's teaser (Pro never shows
+		// its own included features as a locked "(Pro)" placeholder), but
+		// only re-registers the real block when WooCommerce is actually
+		// installed - otherwise a Product block would sit in the inserter
+		// doing nothing on a site that has no products at all. PHP-side
+		// registration (register_blocks() above) stays unconditional
+		// regardless, so a template built while WooCommerce was active still
+		// renders (as empty, per every render method's own guard) rather
+		// than breaking if WooCommerce is later deactivated.
+		wp_localize_script('bpafb-pro-template-blocks-woo', 'bpafbProWooBlocks', [
+			'active' => class_exists('WooCommerce'),
+		]);
 	}
 }

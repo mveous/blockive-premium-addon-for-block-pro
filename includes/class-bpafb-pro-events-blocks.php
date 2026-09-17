@@ -275,5 +275,18 @@ class Bpafb_Pro_Events_Blocks
 			$asset['version'],
 			true
 		);
+
+		// The bundle always removes the free plugin's teaser (Pro never shows
+		// its own included features as a locked "(Pro)" placeholder), but
+		// only re-registers the real block when The Events Calendar is
+		// actually installed - otherwise an Event block would sit in the
+		// inserter doing nothing on a site with no events plugin at all.
+		// PHP-side registration (register_blocks() above) stays
+		// unconditional regardless, so a template built while Events
+		// Calendar was active still renders (as empty, per every render
+		// method's own guard) rather than breaking if it's later deactivated.
+		wp_localize_script('bpafb-pro-template-blocks-events', 'bpafbProEventsBlocks', [
+			'active' => class_exists('Tribe__Events__Main'),
+		]);
 	}
 }

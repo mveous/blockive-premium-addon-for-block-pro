@@ -8,11 +8,20 @@
  * This bundle is enqueued with an explicit dependency on the free plugin's
  * `bpafb-template-blocks` handle (which registers those teasers), so it is
  * guaranteed to run after them regardless of enqueue order, and unregisters
- * each teaser immediately before registering the real block in its place.
+ * each teaser immediately before deciding whether to register the real
+ * block in its place. That decision depends on `bpafbProWooBlocks.active`
+ * (localized from `class_exists('WooCommerce')` - see
+ * Bpafb_Pro_Woo_Blocks::enqueue_editor_assets()): Pro never shows these as
+ * locked upsell placeholders (unlike Free), but also shouldn't clutter the
+ * inserter with Product blocks on a site that has no WooCommerce at all -
+ * so the teaser is removed either way, and the real block only takes its
+ * place when WooCommerce is actually installed.
  */
 import { registerBlockType, unregisterBlockType, getBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import { createDynamicBlockEdit } from '../pro-dynamic-blocks-shared/dynamic-block-edit';
+
+const WOOCOMMERCE_ACTIVE = !! window.bpafbProWooBlocks?.active;
 
 const NAME_PREFIX = 'blockive-premium-addon-for-block/tb-';
 
@@ -42,6 +51,10 @@ BLOCKS.forEach( ( { slug, title, icon } ) => {
 
 	if ( getBlockType( name ) ) {
 		unregisterBlockType( name );
+	}
+
+	if ( ! WOOCOMMERCE_ACTIVE ) {
+		return;
 	}
 
 	registerBlockType( name, {

@@ -2,11 +2,16 @@
  * Replaces the free plugin's 9 client-only Events Calendar "(Pro)" teaser
  * blocks with real, server-rendered blocks - see
  * class-bpafb-pro-events-blocks.php for the render side. Same replace
- * strategy as src/template-blocks-woo - see that file's docblock.
+ * strategy as src/template-blocks-woo - see that file's docblock: the
+ * teaser is always removed, but the real block only takes its place when
+ * `bpafbProEventsBlocks.active` (localized from
+ * `class_exists('Tribe__Events__Main')`) is true.
  */
 import { registerBlockType, unregisterBlockType, getBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import { createDynamicBlockEdit } from '../pro-dynamic-blocks-shared/dynamic-block-edit';
+
+const EVENTS_CALENDAR_ACTIVE = !! window.bpafbProEventsBlocks?.active;
 
 const NAME_PREFIX = 'blockive-premium-addon-for-block/tb-';
 
@@ -27,6 +32,10 @@ BLOCKS.forEach( ( { slug, title, icon } ) => {
 
 	if ( getBlockType( name ) ) {
 		unregisterBlockType( name );
+	}
+
+	if ( ! EVENTS_CALENDAR_ACTIVE ) {
+		return;
 	}
 
 	registerBlockType( name, {
