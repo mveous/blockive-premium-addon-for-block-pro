@@ -319,7 +319,35 @@ class Bpafb_Pro_Dynamic_Tags
 				'tag'   => ['type' => 'string', 'default' => ''],
 				'param' => ['type' => 'string', 'default' => ''],
 			],
-			'supports'        => ['html' => false],
+			// Must exactly match the JS registration's `supports`
+			// (src/dynamic-tags/index.js) - real typography/color/spacing
+			// support instead of a bare unstyled <span>, matching how
+			// Elementor's own dedicated dynamic-content widgets are always
+			// fully styleable. get_block_wrapper_attributes() in
+			// render_dynamic_field_block() is what actually turns these into
+			// the generated class/inline-style on the rendered markup.
+			'supports'        => [
+				'html'            => false,
+				'className'       => true,
+				'customClassName' => true,
+				'reusable'        => false,
+				'typography'      => [
+					'fontSize'                    => true,
+					'lineHeight'                  => true,
+					'__experimentalFontFamily'    => true,
+					'__experimentalFontWeight'    => true,
+					'__experimentalLetterSpacing' => true,
+				],
+				'color'           => [
+					'text'       => true,
+					'background' => true,
+					'link'       => true,
+				],
+				'spacing'         => [
+					'margin'  => true,
+					'padding' => true,
+				],
+			],
 			'render_callback' => [$this, 'render_dynamic_field_block'],
 		]);
 
@@ -343,7 +371,14 @@ class Bpafb_Pro_Dynamic_Tags
 		$param = isset($attributes['param']) ? $attributes['param'] : '';
 		$token = $param !== '' ? '{{' . $tag . ':' . $param . '}}' : '{{' . $tag . '}}';
 
-		return '<span class="bpafb-tb-dynamic-field">' . esc_html(self::resolve_string($token, $block)) . '</span>';
+		// Merges the typography/color/spacing/custom-class supports'
+		// generated class(es) and inline style into the wrapper - without
+		// this, declaring those supports would do nothing on the frontend
+		// (the editor's own useBlockProps() would still preview them,
+		// silently diverging from what actually renders).
+		$wrapper_attributes = get_block_wrapper_attributes(['class' => 'bpafb-tb-dynamic-field']);
+
+		return '<span ' . $wrapper_attributes . '>' . esc_html(self::resolve_string($token, $block)) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**

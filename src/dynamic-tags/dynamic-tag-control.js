@@ -45,12 +45,16 @@ function findTag( key ) {
  * for this MVP.
  *
  * @param {Object}   props
- * @param {string}   props.label    Field label, e.g. "Content" or "URL".
- * @param {Function} props.onInsert Called with the built token string.
+ * @param {string}   props.label       Field label, e.g. "Content" or "URL".
+ * @param {Function} props.onInsert    Called with the built token string.
+ * @param {string}   [props.initialTag]   Tag key to preselect - the field/
+ *   block's already-saved tag, if any, so reopening it shows what's
+ *   actually selected instead of resetting to "— Select a tag —" every time.
+ * @param {string}   [props.initialParam] Param to preselect alongside initialTag.
  */
-export default function DynamicTagControl( { label, onInsert } ) {
-	const [ tagKey, setTagKey ] = useState( '' );
-	const [ param, setParam ] = useState( '' );
+export default function DynamicTagControl( { label, onInsert, initialTag = '', initialParam = '' } ) {
+	const [ tagKey, setTagKey ] = useState( initialTag );
+	const [ param, setParam ] = useState( initialParam );
 
 	const tag = tagKey ? findTag( tagKey ) : null;
 
