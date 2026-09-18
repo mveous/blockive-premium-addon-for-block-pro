@@ -35,7 +35,7 @@ class Bpafb_Pro_Dynamic_Tags
 	 *
 	 * @var string
 	 */
-	const TOKEN_PATTERN = '/\{\{\s*([a-z_]+)\s*(?::\s*([a-zA-Z0-9 ,\.\/\-:]*)\s*)?\}\}/';
+	const TOKEN_PATTERN = '/\{\{\s*([a-z_]+)\s*(?::\s*([a-zA-Z0-9_ ,\.\/\-:]*)\s*)?\}\}/';
 
 	/**
 	 * Constructor.
@@ -101,6 +101,7 @@ class Bpafb_Pro_Dynamic_Tags
 					],
 					'featured_image_url' => [
 						'label'    => __('Featured Image URL', 'blockive-premium-addon-for-block-pro'),
+						'type'     => 'image',
 						'hasParam' => true,
 						'resolve'  => function ($post_id, $param) {
 							if (!$post_id || !has_post_thumbnail($post_id)) {
@@ -109,6 +110,55 @@ class Bpafb_Pro_Dynamic_Tags
 							$size = $param !== '' ? $param : 'full';
 							$src  = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), $size);
 							return $src ? $src[0] : '';
+						},
+					],
+					'post_custom_field' => [
+						'label'    => __('Custom Field', 'blockive-premium-addon-for-block-pro'),
+						'hasParam' => true,
+						// Param is the meta key. Coerced to a display string
+						// the same defensive way WordPress's own "Custom
+						// Fields" panel does - a scalar value is used as-is,
+						// anything else (a serialized array some plugins
+						// store) has no sane single-string representation.
+						'resolve'  => function ($post_id, $param) {
+							if (!$post_id || $param === '') {
+								return '';
+							}
+							$value = get_post_meta($post_id, $param, true);
+							return is_scalar($value) ? (string) $value : '';
+						},
+					],
+					'post_custom_field_image' => [
+						'label'    => __('Custom Field (Image)', 'blockive-premium-addon-for-block-pro'),
+						'type'     => 'image',
+						'hasParam' => true,
+						// Accepts the common shapes a custom field ends up
+						// storing an image as: a plain attachment ID, an
+						// ACF-style array (has 'url', or an 'ID'/'id' this
+						// falls through to below), or an already-complete URL.
+						'resolve'  => function ($post_id, $param) {
+							if (!$post_id || $param === '') {
+								return '';
+							}
+							$value = get_post_meta($post_id, $param, true);
+
+							if (is_array($value)) {
+								if (!empty($value['url'])) {
+									return (string) $value['url'];
+								}
+								$value = $value['ID'] ?? ($value['id'] ?? '');
+							}
+
+							if (is_numeric($value)) {
+								$url = wp_get_attachment_image_url((int) $value, 'full');
+								return $url ?: '';
+							}
+
+							if (is_string($value) && filter_var($value, FILTER_VALIDATE_URL)) {
+								return $value;
+							}
+
+							return '';
 						},
 					],
 				],
@@ -130,6 +180,7 @@ class Bpafb_Pro_Dynamic_Tags
 					],
 					'author_avatar_url' => [
 						'label'    => __('Author Avatar URL', 'blockive-premium-addon-for-block-pro'),
+						'type'     => 'image',
 						'hasParam' => true,
 						'resolve'  => function ($post_id, $param) {
 							if (!$post_id) {
@@ -154,7 +205,7 @@ class Bpafb_Pro_Dynamic_Tags
 					'site_url'     => ['label' => __('Site URL', 'blockive-premium-addon-for-block-pro'), 'resolve' => function () {
 						return home_url('/');
 					}],
-					'site_logo_url' => ['label' => __('Site Logo URL', 'blockive-premium-addon-for-block-pro'), 'resolve' => function () {
+					'site_logo_url' => ['label' => __('Site Logo URL', 'blockive-premium-addon-for-block-pro'), 'type' => 'image', 'resolve' => function () {
 						$logo_id = get_theme_mod('custom_logo');
 						if (!$logo_id) {
 							return '';
@@ -368,8 +419,9 @@ class Bpafb_Pro_Dynamic_Tags
 		if ($tag === '') {
 			return '';
 		}
-		$param = isset($attributes['param']) ? $attributes['param'] : '';
-		$token = $param !== '' ? '{{' . $tag . ':' . $param . '}}' : '{{' . $tag . '}}';
+		$param    = isset($attributes['param']) ? $attributes['param'] : '';
+		$token    = $param !== '' ? '{{' . $tag . ':' . $param . '}}' : '{{' . $tag . '}}';
+		$resolved = self::resolve_string($token, $block);
 
 		// Merges the typography/color/spacing/custom-class supports'
 		// generated class(es) and inline style into the wrapper - without
@@ -378,7 +430,17 @@ class Bpafb_Pro_Dynamic_Tags
 		// silently diverging from what actually renders).
 		$wrapper_attributes = get_block_wrapper_attributes(['class' => 'bpafb-tb-dynamic-field']);
 
-		return '<span ' . $wrapper_attributes . '>' . esc_html(self::resolve_string($token, $block)) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		$tag_def  = self::flat_tags()[$tag] ?? null;
+		$is_image = $tag_def && 'image' === ($tag_def['type'] ?? 'text');
+
+		if ($is_image) {
+			if ($resolved === '') {
+				return '';
+			}
+			return '<span ' . $wrapper_attributes . '><img src="' . esc_url($resolved) . '" alt="" style="max-width:100%;height:auto;" /></span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+
+		return '<span ' . $wrapper_attributes . '>' . esc_html($resolved) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
@@ -430,6 +492,12 @@ class Bpafb_Pro_Dynamic_Tags
 							'key'      => $key,
 							'label'    => $tag['label'],
 							'hasParam' => !empty($tag['hasParam']),
+							'type'     => $tag['type'] ?? 'text',
+							// Flags the two "type the meta key yourself"
+							// tags so the editor can offer a picker of the
+							// current post's own known meta keys instead of
+							// a completely blank text field.
+							'isCustomField' => in_array($key, ['post_custom_field', 'post_custom_field_image'], true),
 						];
 					},
 					array_keys($group['tags']),
