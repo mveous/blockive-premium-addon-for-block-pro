@@ -19,11 +19,46 @@ if (!defined('ABSPATH')) {
 class Bpafb_Pro_Admin_Bar
 {
     /**
+     * The single instance of this class.
+     *
+     * @var Bpafb_Pro_Admin_Bar|null
+     */
+    private static $instance = null;
+
+    /**
+     * Retrieves (creating if necessary) the single instance of this class.
+     *
+     * @return Bpafb_Pro_Admin_Bar
+     */
+    public static function get_instance()
+    {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    /**
      * Constructor.
      */
-    public function __construct()
+    private function __construct()
     {
         add_action('admin_bar_menu', [$this, 'add_menu'], 100);
+    }
+
+    /**
+     * Prevents cloning of the instance.
+     */
+    private function __clone()
+    {
+    }
+
+    /**
+     * Prevents unserializing of the instance.
+     */
+    public function __wakeup()
+    {
+        throw new \Exception('Cannot unserialize a singleton.');
     }
 
     /**

@@ -50,14 +50,49 @@ class Bpafb_Pro_Theme_Locations
 	private static $swapped_kind = '';
 
 	/**
+	 * The single instance of this class.
+	 *
+	 * @var Bpafb_Pro_Theme_Locations|null
+	 */
+	private static $instance = null;
+
+	/**
+	 * Retrieves (creating if necessary) the single instance of this class.
+	 *
+	 * @return Bpafb_Pro_Theme_Locations
+	 */
+	public static function get_instance()
+	{
+		if (null === self::$instance) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	/**
 	 * Constructor.
 	 */
-	public function __construct()
+	private function __construct()
 	{
 		add_action('wp_body_open', [$this, 'render_header'], 5);
 		add_action('wp_footer', [$this, 'render_footer'], 20);
 		add_filter('pre_render_block', [$this, 'suppress_theme_template_part'], 10, 2);
 		add_filter('template_include', [$this, 'maybe_swap_archive_search_404_template'], PHP_INT_MAX);
+	}
+
+	/**
+	 * Prevents cloning of the instance.
+	 */
+	private function __clone()
+	{
+	}
+
+	/**
+	 * Prevents unserializing of the instance.
+	 */
+	public function __wakeup()
+	{
+		throw new \Exception('Cannot unserialize a singleton.');
 	}
 
 	/**

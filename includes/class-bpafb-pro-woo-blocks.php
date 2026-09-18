@@ -46,15 +46,50 @@ class Bpafb_Pro_Woo_Blocks
 	const NAME_PREFIX = 'blockive-premium-addon-for-block/tb-';
 
 	/**
+	 * The single instance of this class.
+	 *
+	 * @var Bpafb_Pro_Woo_Blocks|null
+	 */
+	private static $instance = null;
+
+	/**
+	 * Retrieves (creating if necessary) the single instance of this class.
+	 *
+	 * @return Bpafb_Pro_Woo_Blocks
+	 */
+	public static function get_instance()
+	{
+		if (null === self::$instance) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	/**
 	 * Constructor.
 	 */
-	public function __construct()
+	private function __construct()
 	{
 		// Priority 21: after Bpafb_Template_Blocks::fire_registration_hook()
 		// (priority 20, which is what actually fires the
 		// blockive_register_template_block action these blocks register on).
 		add_action('blockive_register_template_block', [$this, 'register_blocks']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets'], 21);
+	}
+
+	/**
+	 * Prevents cloning of the instance.
+	 */
+	private function __clone()
+	{
+	}
+
+	/**
+	 * Prevents unserializing of the instance.
+	 */
+	public function __wakeup()
+	{
+		throw new \Exception('Cannot unserialize a singleton.');
 	}
 
 	/**

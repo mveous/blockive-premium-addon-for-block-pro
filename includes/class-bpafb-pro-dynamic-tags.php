@@ -38,9 +38,29 @@ class Bpafb_Pro_Dynamic_Tags
 	const TOKEN_PATTERN = '/\{\{\s*([a-z_]+)\s*(?::\s*([a-zA-Z0-9_ ,\.\/\-:]*)\s*)?\}\}/';
 
 	/**
+	 * The single instance of this class.
+	 *
+	 * @var Bpafb_Pro_Dynamic_Tags|null
+	 */
+	private static $instance = null;
+
+	/**
+	 * Retrieves (creating if necessary) the single instance of this class.
+	 *
+	 * @return Bpafb_Pro_Dynamic_Tags
+	 */
+	public static function get_instance()
+	{
+		if (null === self::$instance) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	/**
 	 * Constructor.
 	 */
-	public function __construct()
+	private function __construct()
 	{
 		add_action('init', [$this, 'register_dynamic_field_block']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets'], 22);
@@ -49,6 +69,21 @@ class Bpafb_Pro_Dynamic_Tags
 		// already injected container styles/classes - token resolution
 		// should see and can safely run on top of that finished markup.
 		add_filter('render_block', [$this, 'resolve_block_tokens'], 20, 2);
+	}
+
+	/**
+	 * Prevents cloning of the instance.
+	 */
+	private function __clone()
+	{
+	}
+
+	/**
+	 * Prevents unserializing of the instance.
+	 */
+	public function __wakeup()
+	{
+		throw new \Exception('Cannot unserialize a singleton.');
 	}
 
 	/**

@@ -76,9 +76,29 @@ class Bpafb_Pro_Template_Kinds
 	];
 
 	/**
+	 * The single instance of this class.
+	 *
+	 * @var Bpafb_Pro_Template_Kinds|null
+	 */
+	private static $instance = null;
+
+	/**
+	 * Retrieves (creating if necessary) the single instance of this class.
+	 *
+	 * @return Bpafb_Pro_Template_Kinds
+	 */
+	public static function get_instance()
+	{
+		if (null === self::$instance) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	/**
 	 * Constructor.
 	 */
-	public function __construct()
+	private function __construct()
 	{
 		add_action('init', [$this, 'register_meta']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_assets']);
@@ -94,6 +114,21 @@ class Bpafb_Pro_Template_Kinds
 		// real answer instead.
 		add_filter('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_columns', [$this, 'add_admin_column']);
 		add_action('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_custom_column', [$this, 'render_admin_column'], 10, 2);
+	}
+
+	/**
+	 * Prevents cloning of the instance.
+	 */
+	private function __clone()
+	{
+	}
+
+	/**
+	 * Prevents unserializing of the instance.
+	 */
+	public function __wakeup()
+	{
+		throw new \Exception('Cannot unserialize a singleton.');
 	}
 
 	/**

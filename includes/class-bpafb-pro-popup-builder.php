@@ -32,9 +32,29 @@ class Bpafb_Pro_Popup_Builder
 	const FREQUENCIES     = ['always', 'session', 'days'];
 
 	/**
+	 * The single instance of this class.
+	 *
+	 * @var Bpafb_Pro_Popup_Builder|null
+	 */
+	private static $instance = null;
+
+	/**
+	 * Retrieves (creating if necessary) the single instance of this class.
+	 *
+	 * @return Bpafb_Pro_Popup_Builder
+	 */
+	public static function get_instance()
+	{
+		if (null === self::$instance) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	/**
 	 * Constructor.
 	 */
-	public function __construct()
+	private function __construct()
 	{
 		add_action('init', [$this, 'register_meta']);
 		// Enqueuing on wp_footer itself is too late: WordPress's own
@@ -47,6 +67,21 @@ class Bpafb_Pro_Popup_Builder
 		// wp_footer.
 		add_action('wp_enqueue_scripts', [$this, 'maybe_enqueue_assets']);
 		add_action('wp_footer', [$this, 'render_popup'], 25);
+	}
+
+	/**
+	 * Prevents cloning of the instance.
+	 */
+	private function __clone()
+	{
+	}
+
+	/**
+	 * Prevents unserializing of the instance.
+	 */
+	public function __wakeup()
+	{
+		throw new \Exception('Cannot unserialize a singleton.');
 	}
 
 	/**
