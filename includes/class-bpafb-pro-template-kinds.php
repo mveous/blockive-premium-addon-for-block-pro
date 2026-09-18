@@ -39,6 +39,7 @@ class Bpafb_Pro_Template_Kinds
 		'404',
 		'popup',
 		'loop-item',
+		'mega-menu-item',
 	];
 
 	/**
@@ -124,13 +125,14 @@ class Bpafb_Pro_Template_Kinds
 	 * @var array<string,string>
 	 */
 	const KIND_LABELS = [
-		'header'    => 'Header',
-		'footer'    => 'Footer',
-		'archive'   => 'Archive',
-		'search'    => 'Search Results',
-		'404'       => '404 Page',
-		'popup'     => 'Popup',
-		'loop-item' => 'Loop Item',
+		'header'         => 'Header',
+		'footer'         => 'Footer',
+		'archive'        => 'Archive',
+		'search'         => 'Search Results',
+		'404'            => '404 Page',
+		'popup'          => 'Popup',
+		'loop-item'      => 'Loop Item',
+		'mega-menu-item' => 'Mega Menu Item',
 	];
 
 	/**

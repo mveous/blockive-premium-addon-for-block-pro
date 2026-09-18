@@ -113,7 +113,7 @@ class Bpafb_Pro_Admin_Bar
         }
 
         if (class_exists('Bpafb_Pro_Template_Kinds')) {
-            $kinds_to_check = array_diff(Bpafb_Pro_Template_Kinds::KINDS, ['loop-item']);
+            $kinds_to_check = array_diff(Bpafb_Pro_Template_Kinds::KINDS, ['loop-item', 'mega-menu-item']);
 
             // A quick check before calling the slower matching function.
             // Archive/Search/404 templates can never apply outside their

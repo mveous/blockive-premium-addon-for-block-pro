@@ -1,0 +1,402 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "blockive-premium-addon-for-block/mega-menu",
+	"version": "0.1.0",
+	"title": "Mega Menu",
+	"category": "bpafb-widgets",
+	"icon": "grid-view",
+	"description": "A menu whose items can open a full-width dropdown built from a Blockive Template, Pro-only.",
+	"attributes": {
+		"items": {
+			"type": "array",
+			"default": [
+				{
+					"id": "1",
+					"title": "Home",
+					"link": "#",
+					"linkNewTab": false,
+					"hasDropdown": false,
+					"templateId": 0
+				},
+				{
+					"id": "2",
+					"title": "Services",
+					"link": "#",
+					"linkNewTab": false,
+					"hasDropdown": true,
+					"templateId": 0
+				},
+				{
+					"id": "3",
+					"title": "Contact",
+					"link": "#",
+					"linkNewTab": false,
+					"hasDropdown": false,
+					"templateId": 0
+				}
+			]
+		},
+		"itemGap": {
+			"type": "number",
+			"default": 24
+		},
+		"itemPaddingV": {
+			"type": "number",
+			"default": 10
+		},
+		"itemPaddingH": {
+			"type": "number",
+			"default": 6
+		},
+		"itemColor": {
+			"type": "string",
+			"default": ""
+		},
+		"itemHoverColor": {
+			"type": "string",
+			"default": ""
+		},
+		"itemActiveColor": {
+			"type": "string",
+			"default": ""
+		},
+		"itemFontFamily": {
+			"type": "string",
+			"default": ""
+		},
+		"itemFontSize": {
+			"type": "number",
+			"default": null
+		},
+		"itemFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"itemLineHeight": {
+			"type": "number",
+			"default": null
+		},
+		"itemLetterSpacing": {
+			"type": "number",
+			"default": null
+		},
+		"itemTextTransform": {
+			"type": "string",
+			"default": ""
+		},
+		"itemTextDecoration": {
+			"type": "string",
+			"default": ""
+		},
+		"dropdownWidth": {
+			"type": "string",
+			"default": "full"
+		},
+		"dropdownBgColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"dropdownPadding": {
+			"type": "number",
+			"default": 32
+		},
+		"dropdownBorderType": {
+			"type": "string",
+			"default": "solid"
+		},
+		"dropdownBorderWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"dropdownBorderRadius": {
+			"type": "number",
+			"default": 8
+		},
+		"dropdownBorderColor": {
+			"type": "string",
+			"default": "#e2e8f0"
+		},
+		"dropdownShadowEnabled": {
+			"type": "boolean",
+			"default": true
+		},
+		"dropdownShadowColor": {
+			"type": "string",
+			"default": "rgba(15,23,42,0.12)"
+		},
+		"dropdownShadowBlur": {
+			"type": "number",
+			"default": 24
+		},
+		"dropdownShadowSpread": {
+			"type": "number",
+			"default": 0
+		},
+		"mobileBreakpoint": {
+			"type": "number",
+			"default": 768
+		},
+		"toggleIconColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbUid": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbDisplay": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbOverflow": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbPosition": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerWidth": {
+			"type": "number"
+		},
+		"bpafbContainerWidthUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"bpafbContainerMinHeight": {
+			"type": "number"
+		},
+		"bpafbContainerMaxHeight": {
+			"type": "number"
+		},
+		"bpafbContainerBgType": {
+			"type": "string",
+			"default": "color"
+		},
+		"bpafbContainerBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBgGradient": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBgImageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBgImageId": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbContainerBgImageSize": {
+			"type": "string",
+			"default": "cover"
+		},
+		"bpafbContainerOverlayColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBorderStyle": {
+			"type": "string",
+			"default": "none"
+		},
+		"bpafbContainerBorderWidth": {
+			"type": "number"
+		},
+		"bpafbContainerBorderRadius": {
+			"type": "number"
+		},
+		"bpafbContainerBorderColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerBoxShadow": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbContainerShadowColor": {
+			"type": "string",
+			"default": "rgba(0,0,0,0.15)"
+		},
+		"bpafbContainerShadowBlur": {
+			"type": "number",
+			"default": 15
+		},
+		"bpafbContainerShadowSpread": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbContainerHoverBoxShadow": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbContainerHoverShadowColor": {
+			"type": "string",
+			"default": "rgba(0,0,0,0.15)"
+		},
+		"bpafbContainerHoverShadowBlur": {
+			"type": "number",
+			"default": 15
+		},
+		"bpafbContainerHoverShadowSpread": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbHideDesktop": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbHideTablet": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbHideMobile": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbAnimationType": {
+			"type": "string",
+			"default": "none"
+		},
+		"bpafbAnimationDuration": {
+			"type": "number",
+			"default": 800
+		},
+		"bpafbAnimationDelay": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbAnimationEasing": {
+			"type": "string",
+			"default": "ease"
+		},
+		"bpafbTransformRotate": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbTransformScale": {
+			"type": "number",
+			"default": 100
+		},
+		"bpafbTransformTranslateX": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbTransformTranslateY": {
+			"type": "number",
+			"default": 0
+		},
+		"bpafbHoverAnimation": {
+			"type": "string",
+			"default": "none"
+		},
+		"bpafbFloatingEffect": {
+			"type": "boolean",
+			"default": false
+		},
+		"bpafbZIndex": {
+			"type": "number"
+		},
+		"bpafbHtmlId": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbHtmlClasses": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbCustomCss": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerAlign": {
+			"type": "string",
+			"default": ""
+		},
+		"bpafbContainerPaddingTop": {
+			"type": "number"
+		},
+		"bpafbContainerMarginTop": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingRight": {
+			"type": "number"
+		},
+		"bpafbContainerMarginRight": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingBottom": {
+			"type": "number"
+		},
+		"bpafbContainerMarginBottom": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingLeft": {
+			"type": "number"
+		},
+		"bpafbContainerMarginLeft": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingTopTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginTopTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingRightTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginRightTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingBottomTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginBottomTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingLeftTablet": {
+			"type": "number"
+		},
+		"bpafbContainerMarginLeftTablet": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingTopMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginTopMobile": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingRightMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginRightMobile": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingBottomMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginBottomMobile": {
+			"type": "number"
+		},
+		"bpafbContainerPaddingLeftMobile": {
+			"type": "number"
+		},
+		"bpafbContainerMarginLeftMobile": {
+			"type": "number"
+		}
+	},
+	"supports": {
+		"align": [ "wide", "full" ],
+		"html": false,
+		"anchor": true
+	},
+	"textdomain": "blockive-premium-addon-for-block-pro",
+	"render": "file:./render.php",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./index.css",
+	"viewScript": "file:./view.js"
+}

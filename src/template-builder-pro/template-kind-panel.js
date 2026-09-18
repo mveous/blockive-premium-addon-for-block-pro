@@ -26,6 +26,7 @@ const KIND_OPTIONS = [
 	{ label: __( '404 Page', 'blockive-premium-addon-for-block-pro' ), value: '404' },
 	{ label: __( 'Popup', 'blockive-premium-addon-for-block-pro' ), value: 'popup' },
 	{ label: __( 'Loop Item', 'blockive-premium-addon-for-block-pro' ), value: 'loop-item' },
+	{ label: __( 'Mega Menu Item', 'blockive-premium-addon-for-block-pro' ), value: 'mega-menu-item' },
 ];
 
 // Rule types where the user needs to pick a value. The others (entire_site,
