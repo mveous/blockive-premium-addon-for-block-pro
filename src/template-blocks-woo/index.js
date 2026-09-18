@@ -1,21 +1,15 @@
 /**
- * Replaces the free plugin's 18 client-only WooCommerce "(Pro)" teaser
- * blocks (registered unconditionally by src/template-blocks/pro-teasers in
- * the free plugin, since it has no way to know whether Pro's real versions
- * exist) with real, server-rendered blocks - see class-bpafb-pro-woo-blocks.php
- * for the render side.
+ * Replaces the free plugin's 18 locked WooCommerce "(Pro)" placeholder
+ * blocks with the real, working ones - see class-bpafb-pro-woo-blocks.php
+ * for the server-side code.
  *
- * This bundle is enqueued with an explicit dependency on the free plugin's
- * `bpafb-template-blocks` handle (which registers those teasers), so it is
- * guaranteed to run after them regardless of enqueue order, and unregisters
- * each teaser immediately before deciding whether to register the real
- * block in its place. That decision depends on `bpafbProWooBlocks.active`
- * (localized from `class_exists('WooCommerce')` - see
- * Bpafb_Pro_Woo_Blocks::enqueue_editor_assets()): Pro never shows these as
- * locked upsell placeholders (unlike Free), but also shouldn't clutter the
- * inserter with Product blocks on a site that has no WooCommerce at all -
- * so the teaser is removed either way, and the real block only takes its
- * place when WooCommerce is actually installed.
+ * This file is loaded with a set dependency on the free plugin's
+ * `bpafb-template-blocks` file (which registers those placeholders), so it
+ * always runs after them. It removes each placeholder first, then decides
+ * whether to add the real block, based on `bpafbProWooBlocks.active` (sent
+ * from PHP, from `class_exists('WooCommerce')`). The placeholder is always
+ * removed, but the real block only takes its place when WooCommerce is
+ * actually installed.
  */
 import { registerBlockType, unregisterBlockType, getBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';

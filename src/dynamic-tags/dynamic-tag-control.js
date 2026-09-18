@@ -4,20 +4,17 @@ import { useSelect } from '@wordpress/data';
 import { Button, Popover, ComboboxControl, TextControl } from '@wordpress/components';
 import { tag as tagIcon, settings as settingsIcon, closeSmall as closeIcon } from '@wordpress/icons';
 
-// Matches a field's whole raw value against a single "{{tag}}" /
-// "{{tag:param}}" token - anchored (^...$) because, unlike the render-time
-// PHP pattern (which finds tokens anywhere inside surrounding text), a
-// field wired through DynamicTagSwitcher is either entirely a token or
-// entirely a static value, never a mix.
+// Matches a field's whole value against one "{{tag}}" or "{{tag:param}}"
+// token. Uses ^...$ so the whole value must be the token, because a field
+// using DynamicTagSwitcher is always either a full token or a plain value,
+// never a mix of both - unlike the PHP pattern used at render time, which
+// finds tokens anywhere inside a longer piece of text.
 export const TOKEN_PATTERN = /^\{\{\s*([a-z_]+)\s*(?::\s*(.*)\s*)?\}\}$/;
 
 /**
- * Flattens the localized registry (see
- * Bpafb_Pro_Dynamic_Tags::enqueue_editor_assets()) into groups filtered by
- * `acceptedTypes` - e.g. an image field (Image Box's imageUrl) has no sane
- * use for a plain text tag like Post Title, the same way Elementor Pro's own
- * dynamic tags list only offers tags compatible with the field you opened it
- * from.
+ * Turns the tag list sent from PHP (see
+ * Bpafb_Pro_Dynamic_Tags::enqueue_editor_assets()) into groups, filtered
+ * by `acceptedTypes`, so for example an image field only shows image-type tags.
  *
  * @param {string[]} [acceptedTypes] Tag `type`s to include; omit for all.
  */
@@ -46,12 +43,10 @@ function findTag( key ) {
 }
 
 /**
- * The current post's own custom field keys (the block editor already has
- * its full meta object loaded - no extra request needed), for the "Custom
- * Field" tags' parameter picker. Excludes underscore-prefixed keys, the
- * WordPress convention for "internal/protected", which is almost always
- * plugin bookkeeping (this plugin's own meta included) rather than a
- * genuine content field a site owner would want to output.
+ * The current post's own custom field keys, for the "Custom Field" tag's
+ * picker. Leaves out keys starting with an underscore, which is
+ * WordPress's own way of marking a field as internal, almost always used
+ * for plugin data rather than real content.
  */
 function useCurrentPostMetaKeys() {
 	return useSelect( ( select ) => {
@@ -61,10 +56,9 @@ function useCurrentPostMetaKeys() {
 }
 
 /**
- * The tag-settings popover content - lets the user set or change a tag's
- * parameter (e.g. which custom field key to read) after it's already been
- * inserted, mirroring Elementor Pro's own "gear icon reopens a small
- * settings popup" flow for tags that take one.
+ * The popup content for changing a tag's parameter (for example, which
+ * custom field key to read), after the tag has already been added. Clicking
+ * a small gear icon opens this popup, for tags that take a parameter.
  */
 function TagSettingsForm( { tag, initialParam, onApply } ) {
 	const [ param, setParam ] = useState( initialParam );
@@ -96,10 +90,9 @@ function TagSettingsForm( { tag, initialParam, onApply } ) {
 }
 
 /**
- * The categorized tag-picker popover, grouped exactly like the localized
- * registry and filtered to the types the field accepts - Elementor Pro's
- * own dynamic tags list works the same way (a text control only ever shows
- * text-category tags, an image control only image-category tags, etc.).
+ * The tag-picker popup, grouped the same way as the tag list sent from
+ * PHP, and only showing the types the field accepts (a text field only
+ * shows text tags, an image field only shows image tags, and so on).
  */
 function TagsListPopover( { acceptedTypes, onSelect } ) {
 	const groups = getFilteredGroups( acceptedTypes );
@@ -140,21 +133,18 @@ function TagsListPopover( { acceptedTypes, onSelect } ) {
 }
 
 /**
- * A field-level dynamic tag switcher matching Elementor Pro's own dynamic
- * tags UX: a small icon button next to the field opens a category-filtered
- * list of tags (text-only for a text field, image-only for an image field,
- * url-only for a URL field); picking one switches the field into a
- * "dynamic" cover state - the tag's name plus a settings gear (for tags
- * that take a parameter) and a remove button - instead of showing the raw
- * "{{tag}}" token, and the gear reopens the same parameter editor to change
- * it later. No new block attributes needed: the field's own existing
- * string attribute holds the token directly, same as before.
+ * A dynamic tag switcher for one field: a small icon button next to the
+ * field opens a filtered list of tags. Picking one turns the field into a
+ * "dynamic" state showing the tag's name, a settings gear (for tags that
+ * take a parameter), and a remove button, instead of the raw "{{tag}}"
+ * text. The field's own existing setting stores the token directly - no
+ * new block settings are added.
  *
  * @param {Object}   props
  * @param {string}   props.label           Field label, e.g. "Image" or "Button Link".
- * @param {string}   props.value           The field's current raw attribute value.
- * @param {Function} props.onChange        Called with the new raw value - "" to clear
- *   back to a static value, or a "{{tag}}" / "{{tag:param}}" token.
+ * @param {string}   props.value           The field's current raw value.
+ * @param {Function} props.onChange        Called with the new value - "" clears it back
+ *   to a plain value, or pass a "{{tag}}" / "{{tag:param}}" token.
  * @param {string[]} [props.acceptedTypes] Tag `type`s this field can use; omit for all.
  */
 export default function DynamicTagSwitcher( { label, value, onChange, acceptedTypes } ) {

@@ -3,14 +3,12 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { Placeholder } from '@wordpress/components';
 
 /**
- * Builds the `edit` component for a real, server-rendered Template Block
- * whose actual output only exists on the frontend (it's resolved from
- * WooCommerce/Events Calendar data at render time - see
- * Bpafb_Pro_Woo_Blocks / Bpafb_Pro_Events_Blocks). The editor shows a
- * static placeholder rather than attempting a live per-block preview
- * (unlike e.g. the free plugin's Post Title block, which fetches real
- * text cheaply) - most of these render rich, structured markup (a
- * gallery, tabs, a variation form) that isn't worth reproducing twice.
+ * Builds the `edit` view for a real Template Block whose content comes
+ * from WooCommerce or Events Calendar data on the server (see
+ * Bpafb_Pro_Woo_Blocks / Bpafb_Pro_Events_Blocks). Shows a plain
+ * placeholder instead of a live preview, since most of these show
+ * detailed markup (a gallery, tabs, a variation form) that is not worth
+ * building twice.
  *
  * @param {string} title Block title, e.g. "Product Price".
  * @param {string} icon  Dashicon name matching the block's real icon.

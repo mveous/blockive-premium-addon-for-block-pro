@@ -1,26 +1,21 @@
 <?php
 /**
- * Renders a matched Header/Footer/Archive/Search/404-kind Blockive Template
- * (see Bpafb_Pro_Template_Kinds) into the actual frontend output.
+ * Shows a matched Header, Footer, Archive, Search, or 404-kind Blockive
+ * Template (see Bpafb_Pro_Template_Kinds) on the live site.
  *
- * Header/Footer: injected via `wp_body_open`/`wp_footer` - universal hooks
- * every theme (classic or block) fires, unlike trying to override
- * get_header()/get_footer() per theme. On a block theme, the matching
- * `core/template-part` (header/footer) is also suppressed so nothing shows
- * twice. On a classic theme, there is no reliable, theme-agnostic way to
- * suppress an arbitrary theme's own header.php/footer.php output (every
- * page-builder plugin runs into this) - the Pro header/footer is added
- * alongside it, and a site owner who wants to fully replace a classic
- * theme's header/footer should use that theme's own "disable header/
- * footer for this page" setting where one exists (Astra, GeneratePress,
- * OceanWP, Kadence, Neve, and Blocksy all have one).
+ * Header and Footer are added using the `wp_body_open` and `wp_footer`
+ * hooks, since every theme fires these, unlike trying to change
+ * get_header()/get_footer() for each theme. On a block theme, the theme's
+ * own matching `core/template-part` block is hidden. On a classic theme,
+ * there is no safe way to hide an unknown theme's own header.php or
+ * footer.php file, so the Pro header/footer is simply added alongside it.
+ * A site owner can use their theme's own "disable header/footer for this
+ * page" setting, if it has one, to fully replace it.
  *
- * Archive/Search/404: swapped in via `template_include`, replacing the
- * theme's own archive/search/404 template file with a thin wrapper that
- * still calls get_header()/get_footer() - so the theme's <head> assets,
- * nav, and (if matched) the Header/Footer templates above still render
- * exactly as on any other page - but renders the matched template's
- * content instead of the theme's own loop markup.
+ * Archive, Search, and 404 pages are swapped in through `template_include`.
+ * The theme's own template file is replaced with a short wrapper file that
+ * still calls get_header() and get_footer(), so the theme's scripts, styles,
+ * and menu still show. Only the main list of posts is replaced.
  *
  * @package BlockivePro
  */
@@ -32,32 +27,32 @@ if (!defined('ABSPATH')) {
 class Bpafb_Pro_Theme_Locations
 {
 	/**
-	 * Template post ID swapped in for the current request by
-	 * maybe_swap_archive_search_404_template(), read back by the wrapper
-	 * template it points at (templates/archive-search-404-wrapper.php).
+	 * Template post ID chosen for the current page by
+	 * maybe_swap_archive_search_404_template(). Read back by the wrapper
+	 * template it points to (templates/archive-search-404-wrapper.php).
 	 *
 	 * @var int
 	 */
 	private static $swapped_template_id = 0;
 
 	/**
-	 * Kind ('archive'|'search'|'404') resolved alongside
-	 * $swapped_template_id, so the wrapper template can give its output
-	 * wrapper the matching bpafb-pro-{kind} class instead of a hardcoded one.
+	 * The kind ('archive', 'search', or '404') that goes with
+	 * $swapped_template_id above. Lets the wrapper template give its
+	 * wrapper the matching bpafb-pro-{kind} class, instead of a fixed one.
 	 *
 	 * @var string
 	 */
 	private static $swapped_kind = '';
 
 	/**
-	 * The single instance of this class.
+	 * The one and only instance of this class.
 	 *
 	 * @var Bpafb_Pro_Theme_Locations|null
 	 */
 	private static $instance = null;
 
 	/**
-	 * Retrieves (creating if necessary) the single instance of this class.
+	 * Gives back the one instance of this class, making it first if needed.
 	 *
 	 * @return Bpafb_Pro_Theme_Locations
 	 */
@@ -81,14 +76,14 @@ class Bpafb_Pro_Theme_Locations
 	}
 
 	/**
-	 * Prevents cloning of the instance.
+	 * Stops this class from being copied.
 	 */
 	private function __clone()
 	{
 	}
 
 	/**
-	 * Prevents unserializing of the instance.
+	 * Stops this class from being restored from stored data.
 	 */
 	public function __wakeup()
 	{
@@ -96,8 +91,8 @@ class Bpafb_Pro_Theme_Locations
 	}
 
 	/**
-	 * Renders a matched template's content for a given kind, wrapped the
-	 * same way Bpafb_Template_Frontend_Render wraps a singular override.
+	 * Shows a matched template's content for a given kind, wrapped the
+	 * same way Bpafb_Template_Frontend_Render wraps a single-post override.
 	 *
 	 * @param string $kind Bpafb_Pro_Template_Kinds::KINDS entry.
 	 */
@@ -123,9 +118,9 @@ class Bpafb_Pro_Theme_Locations
 	}
 
 	/**
-	 * Fires on `wp_body_open`, right after `<body>` opens on every theme -
-	 * classic or block - so a matched Header-kind template always renders
-	 * above the theme's own header regardless of theme markup structure.
+	 * Fires on `wp_body_open`, right after `<body>` opens on every theme,
+	 * so a matched Header-kind template always shows above the theme's own
+	 * header, no matter how the theme's HTML is structured.
 	 */
 	public function render_header()
 	{
@@ -133,9 +128,9 @@ class Bpafb_Pro_Theme_Locations
 	}
 
 	/**
-	 * Fires on `wp_footer`. Priority 20 (after the WordPress/plugin default
-	 * of 10) so a matched Footer-kind template renders after most other
-	 * wp_footer output (admin bar aside, which always prints last).
+	 * Fires on `wp_footer`. Priority 20, which is after WordPress's usual
+	 * default of 10, so a matched Footer-kind template shows after most
+	 * other wp_footer output (the admin bar always shows last, though).
 	 */
 	public function render_footer()
 	{
@@ -143,11 +138,8 @@ class Bpafb_Pro_Theme_Locations
 	}
 
 	/**
-	 * Suppresses a block theme's own Header/Footer template parts when a
-	 * Pro Header/Footer template matches the current request, the same
-	 * "return '' instead of rendering" technique the free plugin's
-	 * Bpafb_Template_Frontend_Render::suppress_duplicate_theme_blocks()
-	 * uses for duplicate title/featured-image blocks.
+	 * Hides a block theme's own Header/Footer template parts when a Pro
+	 * Header/Footer template matches the current page.
 	 *
 	 * @param string|null $pre_render   Short-circuit value; non-null skips this block entirely.
 	 * @param array       $parsed_block The block about to render.
@@ -178,12 +170,8 @@ class Bpafb_Pro_Theme_Locations
 	}
 
 	/**
-	 * Resolves the Template Kind for the current main-query request, if
-	 * any of Archive/Search/404 applies. Order matters: is_search() and
-	 * is_404() are mutually exclusive with is_archive()/is_home() and with
-	 * each other in WordPress's own conditional tags, so checking in this
-	 * order without `elseif` chains would still be correct, but reads
-	 * clearer as one.
+	 * Works out the Template Kind for the current page, if Archive,
+	 * Search, or 404 applies.
 	 *
 	 * @return string|null
 	 */
@@ -195,10 +183,11 @@ class Bpafb_Pro_Theme_Locations
 		if (is_search()) {
 			return 'search';
 		}
-		// is_home() covers the default blog listing (no static front page
-		// assigned, or the page assigned as "Posts page") - not otherwise
-		// matched by is_archive(), but conceptually the same "list of
-		// posts" location an Archive-kind template is meant to cover.
+		// is_home() covers the default blog listing page (either no
+		// static front page is set, or a page is set as "Posts page").
+		// is_archive() does not cover this case on its own, but it is
+		// still the same "list of posts" that an Archive-kind template
+		// should cover.
 		if (is_archive() || is_home()) {
 			return 'archive';
 		}
@@ -206,10 +195,8 @@ class Bpafb_Pro_Theme_Locations
 	}
 
 	/**
-	 * Swaps in a thin wrapper template when the current request's kind
-	 * (see current_request_kind()) has a matching published Blockive
-	 * Template, so its content renders instead of the theme's own archive/
-	 * search/404 template.
+	 * Swaps in a short wrapper template when the current page's kind (see
+	 * current_request_kind()) has a matching published Blockive Template.
 	 *
 	 * @param string $template Absolute path to the template PHP core resolved.
 	 * @return string
@@ -242,8 +229,9 @@ class Bpafb_Pro_Theme_Locations
 	}
 
 	/**
-	 * Returns the template post ID maybe_swap_archive_search_404_template()
-	 * resolved for the current request, for the wrapper template file to render.
+	 * Returns the template post ID that
+	 * maybe_swap_archive_search_404_template() found for the current
+	 * page, for the wrapper template file to show.
 	 *
 	 * @return int
 	 */
@@ -253,8 +241,8 @@ class Bpafb_Pro_Theme_Locations
 	}
 
 	/**
-	 * Returns the kind ('archive'|'search'|'404') resolved alongside
-	 * get_swapped_template_id(), for the wrapper template's output wrapper class.
+	 * Returns the kind ('archive', 'search', or '404') that goes with
+	 * get_swapped_template_id(), for the wrapper template's own class name.
 	 *
 	 * @return string
 	 */

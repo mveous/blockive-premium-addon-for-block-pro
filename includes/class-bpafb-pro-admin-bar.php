@@ -1,13 +1,10 @@
 <?php
 /**
- * Adds an "Edit Template" item to the frontend WP admin bar, the same
- * "jump straight to the template that's actually rendering this bit of the
- * page" convenience Elementor Pro's Theme Builder gives you - except
- * Blockive Templates can be assembled from several independently-resolved
- * pieces at once (a Header template, a Footer template, and either a
- * Single-kind override or an Archive/Search/404 template, plus a Popup),
- * so this lists every one of them that's actually active on the current
- * request rather than a single "Edit with Elementor"-style link.
+ * Adds an "Edit Template" item to the WordPress admin bar on the live
+ * site, listing every Blockive Template that is active on the current
+ * page. A Header, a Footer, a Single-post or Archive/Search/404 override,
+ * and a Popup can all be active on the same page at once. So this shows a
+ * list, not just one "Edit with ..." link.
  *
  * @package BlockivePro
  */
@@ -19,14 +16,14 @@ if (!defined('ABSPATH')) {
 class Bpafb_Pro_Admin_Bar
 {
     /**
-     * The single instance of this class.
+     * The one and only instance of this class.
      *
      * @var Bpafb_Pro_Admin_Bar|null
      */
     private static $instance = null;
 
     /**
-     * Retrieves (creating if necessary) the single instance of this class.
+     * Gives back the one instance of this class, making it first if needed.
      *
      * @return Bpafb_Pro_Admin_Bar
      */
@@ -47,14 +44,14 @@ class Bpafb_Pro_Admin_Bar
     }
 
     /**
-     * Prevents cloning of the instance.
+     * Stops this class from being copied.
      */
     private function __clone()
     {
     }
 
     /**
-     * Prevents unserializing of the instance.
+     * Stops this class from being restored from stored data.
      */
     public function __wakeup()
     {
@@ -62,11 +59,9 @@ class Bpafb_Pro_Admin_Bar
     }
 
     /**
-     * Adds the "Edit Template" node and one child node per Blockive
-     * Template actually active on the current frontend request. Adds
-     * nothing at all - matching how WordPress's own "Edit Page" item
-     * only appears when there's something to edit - if no template
-     * matches or the current user can't edit any of the ones that do.
+     * Adds the "Edit Template" item, and one item under it for every
+     * Blockive Template active on the current page. Adds nothing if no
+     * template matches, or the user cannot edit any of the ones that do.
      *
      * @param WP_Admin_Bar $wp_admin_bar
      */
@@ -98,13 +93,11 @@ class Bpafb_Pro_Admin_Bar
     }
 
     /**
-     * Resolves every Blockive Template active on the current request -
-     * the Free plugin's singular override (Post/Page/Product/Event/... -
-     * whatever real post type is being viewed) plus every Pro kind whose
-     * own condition rules match, skipping kinds that only ever apply
-     * inside another template's own rendering context (Loop Item) rather
-     * than to a whole page view - then filters out any the current user
-     * isn't actually allowed to edit.
+     * Finds every Blockive Template active on the current page - the free
+     * plugin's single-post override, plus every Pro kind whose condition
+     * rules match. Loop Item is skipped, since it only applies inside
+     * another template, not to a whole page. Then keeps only the ones the
+     * user is allowed to edit.
      *
      * @return array<int,array{id:int,label:string,edit_url:string}>
      */
@@ -122,11 +115,10 @@ class Bpafb_Pro_Admin_Bar
         if (class_exists('Bpafb_Pro_Template_Kinds')) {
             $kinds_to_check = array_diff(Bpafb_Pro_Template_Kinds::KINDS, ['loop-item']);
 
-            // Fast pre-check against the current conditional tags before
-            // ever calling the resolver - Archive/Search/404 templates
-            // can never legitimately apply outside their own matching
-            // page type, so this skips a get_posts() query on every other
-            // page load for kinds that couldn't possibly match anyway.
+            // A quick check before calling the slower matching function.
+            // Archive/Search/404 templates can never apply outside their
+            // own matching page type, so this skips a database query on
+            // every other page load for kinds that could not match anyway.
             foreach ($kinds_to_check as $kind) {
                 if ('archive' === $kind && !(is_archive() || is_home())) {
                     continue;
@@ -167,10 +159,9 @@ class Bpafb_Pro_Admin_Bar
     }
 
     /**
-     * A human label for the template's own kind - one of Bpafb_Pro_Template_Kinds
-     * ::KIND_LABELS for a Pro kind, or the real post type's singular name
-     * (Post/Page/Product/Event/...) for a "single" one, matching how the
-     * free plugin's own Template Type control already describes it.
+     * A plain-text label for the template's kind: from
+     * Bpafb_Pro_Template_Kinds::KIND_LABELS for a Pro kind, or the real
+     * post type's singular name for a "single" one.
      *
      * @param int $template_id Blockive Template post ID.
      * @return string

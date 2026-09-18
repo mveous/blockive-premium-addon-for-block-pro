@@ -1,18 +1,14 @@
 <?php
 /**
- * Renders a matched "popup"-kind Blockive Template (see
- * Bpafb_Pro_Template_Kinds) as an on-page popup, with a small vanilla-JS
- * trigger engine (assets/js/popup-triggers.js) driving when it opens.
+ * Shows a matched "popup"-kind Blockive Template (see
+ * Bpafb_Pro_Template_Kinds) as an on-page popup. A small plain-JavaScript
+ * file (assets/js/popup-triggers.js) controls when it opens.
  *
- * Placement ("where does this popup appear") reuses the exact same
- * Display Conditions engine every other kind uses
- * (Bpafb_Pro_Template_Kinds::get_matching_template_id()) - this class only
- * adds the "when/how" layer on top: trigger type (page load delay, scroll
- * %, click, exit intent) and frequency capping (always / once per
- * session / once every N days), matching Elementor's Popup "Triggers" +
- * "Timing" split. Elementor's fuller Timing options (traffic source,
- * URL-arrival rules, device/browser targeting, adblock detection) are a
- * deliberate backlog item, not implemented here.
+ * Where a popup applies reuses the same Display Conditions system every
+ * other kind uses (Bpafb_Pro_Template_Kinds::get_matching_template_id());
+ * this class only adds the "when and how" part: the trigger (page load
+ * delay, scroll percent, click, exit intent) and how often it can show
+ * (always, once per session, once every N days).
  *
  * @package BlockivePro
  */
@@ -32,14 +28,14 @@ class Bpafb_Pro_Popup_Builder
 	const FREQUENCIES     = ['always', 'session', 'days'];
 
 	/**
-	 * The single instance of this class.
+	 * The one and only instance of this class.
 	 *
 	 * @var Bpafb_Pro_Popup_Builder|null
 	 */
 	private static $instance = null;
 
 	/**
-	 * Retrieves (creating if necessary) the single instance of this class.
+	 * Gives back the one instance of this class, making it first if needed.
 	 *
 	 * @return Bpafb_Pro_Popup_Builder
 	 */
@@ -57,27 +53,25 @@ class Bpafb_Pro_Popup_Builder
 	private function __construct()
 	{
 		add_action('init', [$this, 'register_meta']);
-		// Enqueuing on wp_footer itself is too late: WordPress's own
-		// wp_print_footer_scripts() is hooked to wp_footer at priority 10 and
-		// only ever runs once per request, so a script enqueued from a later
-		// wp_footer callback (this class used to hook priority 25 directly
-		// into render_popup()) never actually gets printed. Resolving/
-		// enqueueing has to happen on wp_enqueue_scripts (which always fires
-		// well before wp_footer); only the actual HTML output waits for
-		// wp_footer.
+		// Loading this on wp_footer itself is too late: WordPress's own
+		// wp_print_footer_scripts() runs on wp_footer at priority 10, and
+		// only runs once per page. A script added from a later wp_footer
+		// callback never actually gets printed. So loading scripts and
+		// styles has to happen on wp_enqueue_scripts instead, which always
+		// runs before wp_footer. Only the popup's HTML waits for wp_footer.
 		add_action('wp_enqueue_scripts', [$this, 'maybe_enqueue_assets']);
 		add_action('wp_footer', [$this, 'render_popup'], 25);
 	}
 
 	/**
-	 * Prevents cloning of the instance.
+	 * Stops this class from being copied.
 	 */
 	private function __clone()
 	{
 	}
 
 	/**
-	 * Prevents unserializing of the instance.
+	 * Stops this class from being restored from stored data.
 	 */
 	public function __wakeup()
 	{
@@ -85,11 +79,10 @@ class Bpafb_Pro_Popup_Builder
 	}
 
 	/**
-	 * Resolves whether a popup matches the current request and, if so,
-	 * enqueues its assets. Called early enough (wp_enqueue_scripts) that the
-	 * enqueue actually takes effect; render_popup() re-reads the same
-	 * (memoized - see Bpafb_Pro_Template_Kinds) resolution later to output
-	 * the markup once wp_footer fires.
+	 * Checks if a popup matches the current page, and if so, loads its
+	 * files. Runs early (on wp_enqueue_scripts) so the loading actually
+	 * works. render_popup() checks the same result again later, once
+	 * wp_footer fires, to print the popup's HTML.
 	 */
 	public function maybe_enqueue_assets()
 	{
@@ -113,7 +106,8 @@ class Bpafb_Pro_Popup_Builder
 	}
 
 	/**
-	 * Registers the Popup trigger/frequency meta on the `blockive_template` CPT.
+	 * Registers the Popup trigger and frequency meta fields on the
+	 * `blockive_template` post type.
 	 */
 	public function register_meta()
 	{
@@ -156,9 +150,9 @@ class Bpafb_Pro_Popup_Builder
 	}
 
 	/**
-	 * Outputs the matched popup's markup (hidden until its trigger fires)
-	 * and enqueues the trigger engine, gated to only when a popup actually
-	 * matches the current request so no popup assets load otherwise.
+	 * Prints the matched popup's HTML (hidden until its trigger fires),
+	 * only when a popup actually matches the current page, so no popup
+	 * HTML is added otherwise.
 	 */
 	public function render_popup()
 	{

@@ -1,16 +1,14 @@
 /**
  * Adds a "Loop Template (Pro)" control to the free plugin's Post Grid
- * block, letting it render a "loop-item"-kind Blockive Template per queried
- * post instead of its own built-in card layout (see
- * Bpafb_Pro_Loop_Builder::maybe_render_loop_template() for the frontend
- * side).
+ * block, letting it show a "loop-item"-kind Blockive Template for each
+ * post it lists, instead of its own built-in card layout (see
+ * Bpafb_Pro_Loop_Builder::maybe_render_loop_template() for the live-site side).
  *
- * Post Grid's own block.json/edit.js are synced verbatim from the free
- * plugin, so this attaches from the outside via the standard
- * `blocks.registerBlockType` (adds the attribute) and `editor.BlockEdit`
- * (adds the control) filters, rather than editing that block's source -
- * the same extensibility mechanism any third-party plugin would use to
- * extend a block it doesn't own.
+ * Post Grid's own block.json and edit.js files are copied over as-is from
+ * the free plugin, so this adds to it from the outside, using the normal
+ * `blocks.registerBlockType` filter (to add the setting) and
+ * `editor.BlockEdit` filter (to add the control), instead of editing that
+ * block's own files.
  */
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';

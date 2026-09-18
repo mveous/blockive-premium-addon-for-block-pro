@@ -1,20 +1,15 @@
 <?php
 /**
- * Pro-only: the "Template Kind" dimension (header/footer/archive/search/
- * 404/popup/loop-item, in addition to the free plugin's singular "single"
- * override) plus the richer, rule-based Display Conditions that go with it.
+ * A Pro-only feature: the "Template Kind" setting (header, footer,
+ * archive, search, 404, popup, loop-item, plus the free plugin's own
+ * "single" post override) and the rule-based Display Conditions that go
+ * with it.
  *
- * Deliberately its own file rather than an edit to the free plugin's
- * class-bpafb-template-post-type.php / class-bpafb-template-display-
- * conditions.php: those files are synced verbatim from the free plugin (see
- * bin/sync-shared-source.js) and would have this class's additions
- * overwritten on the next sync. Registering more post meta on the same
- * `blockive_template` CPT from a second class is a normal WordPress
- * pattern and doesn't conflict with the free plugin's own registrations.
- *
- * This class only builds the schema + resolver API; wiring the resolver's
- * result into actual header/footer/archive/search/404/popup rendering is a
- * later phase.
+ * This is its own file, instead of an edit to the free plugin's
+ * class-bpafb-template-post-type.php or class-bpafb-template-display-
+ * conditions.php, because those files are copied over as-is from the free
+ * plugin (see bin/sync-shared-source.js). Any change made there directly
+ * would be lost the next time that copy runs.
  *
  * @package BlockivePro
  */
@@ -29,10 +24,10 @@ class Bpafb_Pro_Template_Kinds
 	const META_CONDITION_RULES = '_bpafb_display_condition_rules';
 
 	/**
-	 * Every kind beyond "single" (the free plugin's only kind - a
-	 * singular-content override). "single" is intentionally omitted here:
-	 * it's not a Pro concept and Bpafb_Template_Display_Conditions::
-	 * get_matching_template_id() remains the sole resolver for it.
+	 * Every kind except "single", which is the free plugin's only kind (a
+	 * single-post override). "single" is left out here on purpose: it is
+	 * not a Pro feature, and Bpafb_Template_Display_Conditions::
+	 * get_matching_template_id() is still the only place that handles it.
 	 *
 	 * @var string[]
 	 */
@@ -47,14 +42,12 @@ class Bpafb_Pro_Template_Kinds
 	];
 
 	/**
-	 * Condition rule types available on non-"single" kinds, with a
-	 * specificity score used to pick a winner when more than one template
-	 * matches the same request (higher = more specific = wins), mirroring
-	 * Elementor's "more specific condition wins" model. Ties within the
-	 * same specificity fall back to the existing
-	 * Bpafb_Template_Display_Conditions::META_PRIORITY meta (lower wins),
-	 * so Pro reuses the same tie-break control the free plugin already
-	 * exposes rather than adding a second priority field.
+	 * Condition rule types for kinds other than "single", along with a
+	 * score used to pick a winner when more than one template matches the
+	 * same page (a higher score wins). If two rules end up with the same
+	 * score, the one with the lower
+	 * Bpafb_Template_Display_Conditions::META_PRIORITY value wins. This
+	 * reuses that same free-plugin setting instead of adding a second one.
 	 *
 	 * @var array<string,int>
 	 */
@@ -69,21 +62,19 @@ class Bpafb_Pro_Template_Kinds
 		'author_archive'    => 20,
 		'post_type_archive' => 20,
 		'taxonomy_archive'  => 30,
-		// 'singular' is intentionally absent here - matching Elementor's own
-		// Singular > [Post Type] > All/Specific nesting, its specificity
-		// depends on how narrowly the rule itself is scoped (see
-		// rule_specificity() below), not a single fixed value.
+		// 'singular' is left out here on purpose. Its score is not fixed -
+		// it depends on how narrow the rule is (see rule_specificity() below).
 	];
 
 	/**
-	 * The single instance of this class.
+	 * The one and only instance of this class.
 	 *
 	 * @var Bpafb_Pro_Template_Kinds|null
 	 */
 	private static $instance = null;
 
 	/**
-	 * Retrieves (creating if necessary) the single instance of this class.
+	 * Gives back the one instance of this class, making it first if needed.
 	 *
 	 * @return Bpafb_Pro_Template_Kinds
 	 */
@@ -103,28 +94,23 @@ class Bpafb_Pro_Template_Kinds
 		add_action('init', [$this, 'register_meta']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_assets']);
 
-		// The free plugin's own "Template Type" / "Display Condition"
-		// admin-list columns (Bpafb_Template_Post_Type::add_admin_columns())
-		// only ever show _bpafb_template_type / _bpafb_display_condition_scope
-		// - for a Header/Archive/Popup/etc. template those are just unused
-		// defaults, so every non-"single" row misleadingly shows something
-		// like "Post | All Posts" regardless of its real kind/conditions.
-		// Rather than fight those two columns (synced, and an action can't
-		// suppress another callback's output anyway), add a column with the
-		// real answer instead.
+		// The free plugin's own admin-list columns only show
+		// _bpafb_template_type and _bpafb_display_condition_scope, which
+		// mean nothing for a non-"single" template. We add a column that
+		// shows the real answer instead.
 		add_filter('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_columns', [$this, 'add_admin_column']);
 		add_action('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_custom_column', [$this, 'render_admin_column'], 10, 2);
 	}
 
 	/**
-	 * Prevents cloning of the instance.
+	 * Stops this class from being copied.
 	 */
 	private function __clone()
 	{
 	}
 
 	/**
-	 * Prevents unserializing of the instance.
+	 * Stops this class from being restored from stored data.
 	 */
 	public function __wakeup()
 	{
@@ -132,8 +118,8 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
-	 * Human-readable labels matching the "Location (Pro)" panel's own
-	 * KIND_OPTIONS (src/template-builder-pro/template-kind-panel.js).
+	 * Text labels for the "Location (Pro)" panel's own KIND_OPTIONS
+	 * (src/template-builder-pro/template-kind-panel.js).
 	 *
 	 * @var array<string,string>
 	 */
@@ -148,8 +134,8 @@ class Bpafb_Pro_Template_Kinds
 	];
 
 	/**
-	 * Human-readable labels matching the "Location (Pro)" panel's own
-	 * ruleTypeOptions() (same file).
+	 * Text labels for the "Location (Pro)" panel's own ruleTypeOptions()
+	 * (same file).
 	 *
 	 * @var array<string,string>
 	 */
@@ -181,9 +167,10 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
-	 * Renders the "Location (Pro)" column: blank for a "single" kind
-	 * template (the free plugin's own two columns already describe it
-	 * accurately), otherwise the kind plus a summary of its condition rules.
+	 * Fills in the "Location (Pro)" column. Blank for a "single" kind
+	 * template, since the free plugin's own two columns already describe
+	 * it well. For every other kind, shows the kind plus a short summary
+	 * of its condition rules.
 	 *
 	 * @param string $column  Column key.
 	 * @param int    $post_id Post ID.
@@ -242,10 +229,10 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
-	 * Enqueues the "Location (Pro)" panel bundle, gated to the Template
-	 * Builder editor only - same gate and file-existence guards as the free
-	 * plugin's own Bpafb_Template_Builder::enqueue_assets(), which this
-	 * bundle is loaded alongside (not instead of).
+	 * Loads the "Location (Pro)" panel's files, only on the Template
+	 * Builder editor screen. Uses the same checks as the free plugin's own
+	 * Bpafb_Template_Builder::enqueue_assets(), since this loads alongside
+	 * that file, not in place of it.
 	 */
 	public function enqueue_assets()
 	{
@@ -274,9 +261,9 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
-	 * Registers the Template Kind and Display Condition Rules meta on the
-	 * `blockive_template` CPT (already registered by the free plugin's
-	 * Bpafb_Template_Post_Type).
+	 * Registers the Template Kind and Display Condition Rules meta fields
+	 * on the `blockive_template` post type (which the free plugin's
+	 * Bpafb_Template_Post_Type already registers).
 	 */
 	public function register_meta()
 	{
@@ -306,11 +293,11 @@ class Bpafb_Pro_Template_Kinds
 						'properties' => [
 							'type'     => ['type' => 'string'],
 							'value'    => ['type' => 'string'],
-							// Only meaningful for a 'singular' rule - which post
-							// type it's scoped to ('' = any). Declared explicitly
-							// so the REST API's schema sanitizer doesn't silently
-							// strip it back out on save (unknown object
-							// properties are dropped, not just ignored).
+							// Only used by a 'singular' rule, for which post
+							// type it applies to ('' means any type). We
+							// list it here by name so the REST API does
+							// not quietly remove it when saving (an
+							// unlisted property gets dropped, not just skipped).
 							'postType' => ['type' => 'string'],
 						],
 					],
@@ -321,9 +308,10 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
-	 * Resolves the Template Kind of a Blockive Template post. Absent/empty
-	 * (no Pro yet at the time it was created, or never touched by the Kind
-	 * control) means "single" - the free plugin's only kind.
+	 * Gets the Template Kind of a Blockive Template post. A blank or
+	 * missing value means "single" - the free plugin's only kind. This
+	 * happens for a template made before Pro was active, or one the Kind
+	 * control was never used on.
 	 *
 	 * @param int $template_id Blockive Template post ID.
 	 * @return string
@@ -335,7 +323,7 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
-	 * Resolves the saved condition rules of a Blockive Template post.
+	 * Gets the saved condition rules of a Blockive Template post.
 	 *
 	 * @param int $template_id Blockive Template post ID.
 	 * @return array<int,array{type:string,value:string}>
@@ -347,11 +335,11 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
-	 * Whether a single condition rule matches the current request. Called
-	 * only on the frontend, once per rule of every published template of
-	 * the kind being resolved (see get_matching_template_id()) - cheap
-	 * conditional-tag checks, no extra queries beyond what author_archive/
-	 * taxonomy_archive already need to resolve their target.
+	 * Whether one condition rule matches the current page. Only runs on
+	 * the live site, once per rule of every published template of the
+	 * kind being checked (see get_matching_template_id()). These are
+	 * cheap checks - no extra database queries beyond what
+	 * author_archive/taxonomy_archive already need.
 	 *
 	 * @param array{type:string,value:string} $rule Condition rule.
 	 * @return bool
@@ -369,10 +357,10 @@ class Bpafb_Pro_Template_Kinds
 				return is_post_type_archive($value !== '' ? $value : null);
 
 			case 'taxonomy_archive':
-				// v1 value format: "taxonomy:term_id" (a plain taxonomy
-				// slug alone matches any term archive of that taxonomy).
-				// A term picker UI is a follow-up refinement, not required
-				// for the resolver API itself.
+				// The value is stored as "taxonomy:term_id". A taxonomy
+				// slug alone (with no term_id) matches any term archive
+				// of that taxonomy. A picker for choosing one exact term
+				// can be added later; it is not needed for this to work.
 				if (strpos($value, ':') !== false) {
 					list($taxonomy, $term_id) = array_pad(explode(':', $value, 2), 2, '');
 					return $taxonomy !== '' && is_tax($taxonomy, $term_id !== '' ? (int) $term_id : null);
@@ -403,11 +391,10 @@ class Bpafb_Pro_Template_Kinds
 				return !is_user_logged_in();
 
 			case 'singular':
-				// Mirrors Elementor's own Singular > [Post Type] > All/Specific
-				// nesting: an empty postType means "any post type" (Post IDs
-				// are globally unique regardless of type, so that alone is
-				// still an exact match), an empty value means "all of that
-				// post type" rather than one specific item.
+				// An empty postType means "any post type" (a post ID is
+				// unique across all post types, so that alone is still an
+				// exact match). An empty value means "all posts of that
+				// type", not one specific post.
 				if (!is_singular()) {
 					return false;
 				}
@@ -422,28 +409,25 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
-	 * Per-request memoized result of get_matching_template_id(), keyed by
-	 * kind. Header and Footer are resolved once per page load each (from
-	 * wp_body_open / wp_footer), and an Archive/Search/404 swap resolves its
-	 * kind from both template_include and the wrapper template it points
-	 * at - without this, that's up to 2x the get_posts() calls this
-	 * function would otherwise need per request.
+	 * Remembers the result of get_matching_template_id() for this page
+	 * load, by kind, so we don't run the same database lookup twice.
+	 * Header and Footer are each resolved once per page (from
+	 * wp_body_open / wp_footer), and an Archive/Search/404 swap looks up
+	 * its kind from both template_include and the wrapper template it
+	 * points at. Without this, that could mean up to twice as many
+	 * database lookups per page.
 	 *
 	 * @var array<string,int>
 	 */
 	private static $resolved = [];
 
 	/**
-	 * Specificity score for one matched rule. Every type but 'singular' uses
-	 * the flat RULE_SPECIFICITY table; 'singular' varies by how narrowly the
-	 * rule itself is scoped, mirroring Elementor's Singular > [Post Type] >
-	 * All/Specific nesting: naming one exact post/page is always the most
-	 * specific thing any condition can say (same "beats everything broader"
-	 * precedence the free plugin's own singular-kind "specific posts" scope
-	 * already has - see Bpafb_Template_Display_Conditions::get_matching_template_id()),
-	 * restricting to one post type ("All Products") is more specific than
-	 * an unscoped "All Singular", which is in turn more specific than
-	 * "Entire Site" (it excludes archives, search, 404, etc.).
+	 * A score for how specific one matched rule is. Every type except
+	 * 'singular' uses the fixed RULE_SPECIFICITY table above. 'singular'
+	 * changes based on how narrow it is: naming one exact post or page
+	 * scores highest, limiting to one post type ("All Products") scores
+	 * next, an unscoped "All Singular" scores below that, and "Entire
+	 * Site" scores lowest.
 	 *
 	 * @param array{type:string,value:string,postType?:string} $rule Condition rule.
 	 * @return int
@@ -466,10 +450,10 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
-	 * Finds the best-matching published Blockive Template for a given
-	 * non-"single" kind against the current request. More specific matched
-	 * rule wins across templates; ties broken by the lower
-	 * Bpafb_Template_Display_Conditions::META_PRIORITY value.
+	 * Finds the best matching published Blockive Template for a given
+	 * non-"single" kind, on the current page. The most specific matched
+	 * rule wins, across all templates checked. Ties go to the template
+	 * with the lower Bpafb_Template_Display_Conditions::META_PRIORITY value.
 	 *
 	 * @param string $kind One of self::KINDS.
 	 * @return int Matched template post ID, or 0 if none matched.

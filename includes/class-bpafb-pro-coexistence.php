@@ -1,9 +1,9 @@
 <?php
 /**
  * Keeps Blockive Pro and the free plugin from ever running at the same
- * time, without touching any block/template data - both plugins agree on
- * identical block names, the `blockive_template` CPT slug, and every meta
- * key, so nothing needs to migrate in either direction.
+ * time, without touching any block or template data. Both plugins use the
+ * same block names, the same `blockive_template` post type, and the same
+ * meta keys, so nothing ever needs to move or change either way.
  *
  * @package BlockivePro
  */
@@ -15,8 +15,8 @@ if (!defined('ABSPATH')) {
 class Bpafb_Pro_Coexistence
 {
 	/**
-	 * Runs on Pro's own activation. If the free plugin is active, deactivates
-	 * it and queues an admin notice explaining why.
+	 * Runs when Pro is activated. If the free plugin is active, turns it
+	 * off and shows an admin notice explaining why.
 	 */
 	public static function on_activate()
 	{
@@ -24,23 +24,21 @@ class Bpafb_Pro_Coexistence
 	}
 
 	/**
-	 * Runs on Pro's deactivation. Deliberately does nothing beyond what
-	 * WordPress already does on its own (the built-in "Plugin deactivated."
-	 * notice): a custom admin_notices message here would need to fire on the
-	 * *next* page load, by which point Pro's PHP is no longer included at
-	 * all - there's nothing left running to register that hook. (This is
-	 * also why Pro never auto-reactivates the free plugin here: that would
-	 * be a surprising background action the user didn't ask for, on top of
-	 * not being reliably announceable anyway.)
+	 * Runs when Pro is deactivated. Left empty on purpose, beyond
+	 * WordPress's own built-in "Plugin deactivated." message. A custom
+	 * message here would need to show on the *next* page load, but by then
+	 * Pro's code is no longer loaded to add that message. This is also why
+	 * Pro never turns the free plugin back on by itself - that would be a
+	 * surprising change the user did not ask for.
 	 */
 	public static function on_deactivate()
 	{
 	}
 
 	/**
-	 * Fires whenever any plugin is activated. Catches a user manually
-	 * re-activating the free plugin while Pro is still active, and stands it
-	 * back down immediately rather than leaving both nominally "active".
+	 * Runs whenever any plugin is activated. Catches a user turning the
+	 * free plugin back on by hand while Pro is still active, and turns it
+	 * off again right away, instead of leaving both plugins active.
 	 *
 	 * @param string $plugin Plugin basename that was just activated.
 	 */
@@ -52,7 +50,7 @@ class Bpafb_Pro_Coexistence
 	}
 
 	/**
-	 * Deactivates the free plugin if it's active, and queues the "why did
+	 * Turns off the free plugin if it is active, and sets up the "why did
 	 * this happen" admin notice.
 	 */
 	private static function deactivate_free_if_active()
@@ -70,9 +68,9 @@ class Bpafb_Pro_Coexistence
 	}
 
 	/**
-	 * Renders the one-time "why did Blockive Free just disappear" admin
-	 * notice (WordPress clears the transient once read here, so it shows
-	 * only immediately after the triggering activation).
+	 * Shows the one-time "why did Blockive Free just disappear" admin
+	 * notice. This clears its own stored flag once shown, so it only
+	 * shows right after the activation that caused it.
 	 */
 	public static function render_admin_notices()
 	{

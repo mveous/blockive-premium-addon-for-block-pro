@@ -1,17 +1,14 @@
 /**
- * Wires the Dynamic Tags picker (dynamic-tag-control.js) into the highest-
- * value existing fields - Heading's content, Button's text/link, Image
- * Box's image/link - via the standard `editor.BlockEdit` filter, the same
- * external-extension approach used elsewhere in this plugin (see
- * post-grid-pro) to add to a block without editing its synced source. No
- * new attributes needed: a tag is inserted as the literal string value of
- * the field it targets (e.g. Heading's `content` becomes the string
- * "{{post_title}}"), resolved back to real content at render time by
- * Bpafb_Pro_Dynamic_Tags::resolve_block_tokens() - a generic render_block
- * hook that works on every Blockive block's output, not just these three.
+ * Adds the Dynamic Tags picker (dynamic-tag-control.js) to a few useful
+ * fields: Heading's content, Button's text and link, and Image Box's image
+ * and link. This uses the normal `editor.BlockEdit` filter, so a block can
+ * be extended without editing its own copied source files. No new
+ * attributes are needed - a tag is just saved as plain text in the field
+ * (like "{{post_title}}"), and turned into real content by
+ * Bpafb_Pro_Dynamic_Tags::resolve_block_tokens() when the page is shown.
  *
- * Also replaces the free plugin's client-only "Dynamic Field" teaser block
- * with the real one - see class-bpafb-pro-dynamic-tags.php.
+ * This also swaps in the real "Dynamic Field" block, replacing the free
+ * plugin's locked teaser version - see class-bpafb-pro-dynamic-tags.php.
  */
 import { registerBlockType, unregisterBlockType, getBlockType } from '@wordpress/blocks';
 import { createHigherOrderComponent } from '@wordpress/compose';
@@ -29,13 +26,13 @@ import './editor.scss';
 const DYNAMIC_FIELD_BLOCK = 'blockive-premium-addon-for-block/tb-dynamic-field';
 
 /**
- * Fetches a tag's resolved value via the same `/wp/v2/block-renderer`
- * endpoint the block editor's own dynamic-block previews use - reuses the
- * Dynamic Field block's real PHP render (Bpafb_Pro_Dynamic_Tags::
- * render_dynamic_field_block()) rather than re-implementing tag resolution
- * in JS, so a preview can never drift from what the frontend actually shows.
- * Returns the rendered HTML string (a `<span>` wrapping either escaped text
- * or, for an image-type tag, a real `<img>`).
+ * Gets a tag's real value from the server, using the same
+ * `/wp/v2/block-renderer` endpoint the block editor already uses for
+ * dynamic-block previews. This reuses the real PHP code
+ * (Bpafb_Pro_Dynamic_Tags::render_dynamic_field_block()) instead of
+ * re-writing the same logic in JavaScript, so the preview can never show
+ * something different from the live site. Returns the rendered HTML: a
+ * `<span>` with escaped text, or a real `<img>` for an image-type tag.
  *
  * @param {string}        tag
  * @param {string}        param
@@ -57,10 +54,10 @@ function fetchResolvedTagHtml( tag, param, postId ) {
 }
 
 /**
- * Extracts the bare value (text or image `src`) from fetchResolvedTagHtml()'s
- * wrapped HTML, for substituting directly into an existing field's own
- * plain-string attribute (as opposed to the Dynamic Field block, which can
- * just render the wrapped HTML as-is via RawHTML).
+ * Pulls out the plain value (text, or an image's `src`) from the HTML
+ * fetchResolvedTagHtml() returns, so it can be put straight into an
+ * existing field's plain-text setting. The Dynamic Field block does not
+ * need this - it can show the wrapped HTML as-is, using RawHTML.
  *
  * @param {string} html
  * @return {string}
@@ -72,16 +69,11 @@ function extractResolvedValue( html ) {
 	return img ? img.getAttribute( 'src' ) || '' : container.textContent.trim();
 }
 
-// `acceptedTypes` restricts which tags a field's picker offers - an image
-// field has no sane use for a text tag (Post Title) any more than a text
-// field has a use for an image URL as its literal text. `isImage` marks
-// which fields additionally need the live image-preview substitution below,
-// since unlike the dedicated Dynamic Field block (a dynamic, PHP-rendered
-// block whose own editor preview already goes through block-renderer),
-// Heading/Button/Image Box are static blocks whose synced edit() renders
-// `attributes.imageUrl` directly as an <img src> - a raw "{{tag}}" token
-// there is a broken image in the editor even though it resolves correctly
-// on the frontend, so image-type tokens need substituting for display only.
+// `acceptedTypes` controls which tags a field's picker shows. `isImage`
+// marks fields that need the live image-preview swap below: Heading,
+// Button, and Image Box are static blocks that show `attributes.imageUrl`
+// directly as an <img src>. A raw "{{tag}}" token there would look like a
+// broken image in the editor, even though it works fine on the live site.
 const FIELDS_BY_BLOCK = {
 	'blockive-premium-addon-for-block/heading': [
 		{ attribute: 'content', label: __( 'Heading Text', 'blockive-premium-addon-for-block-pro' ), acceptedTypes: [ 'text' ] },
@@ -97,12 +89,11 @@ const FIELDS_BY_BLOCK = {
 };
 
 /**
- * For a block's `isImage`-flagged fields, resolves any currently-set
- * "{{tag}}" token to its real value and returns an `attributes` object with
- * just those fields substituted for display - the real stored value (the
- * token itself) is untouched, so `setAttributes` calls from the wrapped
- * block's own UI, frontend resolution, and reopening the field later all
- * still see the genuine token, not this preview's resolved value.
+ * For a block's image fields, swaps any "{{tag}}" token for its real value,
+ * and returns a copy of `attributes` with just those fields changed, for
+ * showing in the editor. The real stored value (the token itself) is not
+ * touched - so saving, the live site, and reopening the field later all
+ * still see the real token.
  */
 function useImageFieldPreviewAttributes( attributes, fields, contextPostId ) {
 	const editedPostId = useSelect( ( select ) => select( 'core/editor' )?.getCurrentPostId?.(), [] );
@@ -131,8 +122,8 @@ function useImageFieldPreviewAttributes( attributes, fields, contextPostId ) {
 		return () => {
 			cancelled = true;
 		};
-		// tokenSignature stands in for imageFields/attributes - only the
-		// image fields' own values should trigger a refetch.
+		// tokenSignature stands in for imageFields/attributes here - we
+		// only want to fetch again when an image field's own value changes.
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ tokenSignature, postId ] );
 
@@ -186,13 +177,10 @@ if ( getBlockType( DYNAMIC_FIELD_BLOCK ) ) {
 	unregisterBlockType( DYNAMIC_FIELD_BLOCK );
 }
 
-// Real block supports (typography/color/spacing/custom class) instead of
-// the bare, unstyled <span> the teaser implied - matching how Elementor's
-// own dedicated dynamic-content widgets (Post Info, etc.) are always fully
-// styleable widgets, not a plain value dump. The render callback
-// (Bpafb_Pro_Dynamic_Tags::render_dynamic_field_block()) must declare the
-// identical `supports` and call get_block_wrapper_attributes() for these to
-// actually reach the frontend markup, not just the editor preview.
+// The render function (Bpafb_Pro_Dynamic_Tags::render_dynamic_field_block())
+// must list the exact same `supports` and call
+// get_block_wrapper_attributes(), or these settings would only show in the
+// editor preview and do nothing on the live site.
 const DYNAMIC_FIELD_SUPPORTS = {
 	html: false,
 	className: true,
@@ -217,16 +205,10 @@ const DYNAMIC_FIELD_SUPPORTS = {
 };
 
 /**
- * Renders the block's actual resolved value in the editor canvas - instead
- * of a raw "{{tag:param}}" token string, so what you see while editing
- * matches what visitors see, the same live-preview behavior Elementor's own
- * Dynamic Tags already give you (resolving against your own post while
- * you're editing it, or the block's own postId context - e.g. inside a Loop
- * Item template - when it declares one). For an image-type tag this is the
- * real `<img>` markup fetchResolvedTagHtml() returns, rendered as-is via
- * RawHTML - no separate image-handling needed here, unlike the
- * attribute-substitution case above, since this block has no other design
- * to preserve around the value.
+ * Shows the block's real value in the editor, instead of a raw
+ * "{{tag:param}}" token, using either the current post or the block's own
+ * postId context (like inside a Loop Item template). For an image-type
+ * tag, this shows the real `<img>` markup from fetchResolvedTagHtml(), as-is.
  */
 function useDynamicFieldPreview( tag, param, contextPostId ) {
 	const [ html, setHtml ] = useState( null );

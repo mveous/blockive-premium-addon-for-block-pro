@@ -1,38 +1,27 @@
 <?php
 /**
- * Real, server-rendered implementations of the 18 WooCommerce Template
- * Blocks the free plugin already advertises as client-only "(Pro)" teaser
- * placeholders (see src/template-blocks/pro-teasers/block-list.js) - same
- * block names (blockive-premium-addon-for-block/tb-product-*), so a
- * template built under a future free-only install (where these stay inert
- * teasers) keeps rendering unchanged once Pro is active.
+ * The real, working versions of the 18 WooCommerce Template Blocks. The
+ * free plugin only shows these as locked "(Pro)" placeholders (see
+ * src/template-blocks/pro-teasers/block-list.js). Same block names are
+ * used, so a template built without Pro keeps working the same once Pro is
+ * turned on.
  *
- * Registered via register_block_type() with inline args rather than a
- * block.json + render.php pair per block - 18 near-identical small
- * directories would add more indirection than value here, and unlike the
- * free plugin's Template Blocks none of these need their own build-time
- * asset pipeline; the client-side registration lives in one small
- * dedicated bundle (src/template-blocks-woo) whose only job is replacing
- * each teaser with a real one.
+ * These are registered with register_block_type() and plain settings,
+ * instead of a block.json plus render.php file for each one. With 18
+ * nearly identical blocks, that would just add extra folders with no real benefit.
  *
- * Every render method resolves its product the same way every other
- * Template Block resolves its post (Bpafb_Template_Block_Render::get_post_id()),
- * and almost every underlying `woocommerce_template_*()` core function
- * requires `global $product` (some also `global $post`) rather than taking
- * the product as a parameter - with_product_context() sets both up and
- * restores them afterward, so rendering one of these blocks can never leak
- * into whatever product/post a surrounding context (e.g. a future Loop
- * Builder item) already has in scope.
+ * Almost every WooCommerce `woocommerce_template_*()` function needs
+ * `global $product` (and sometimes `global $post`) set, instead of taking
+ * the product as an argument. with_product_context() sets those up, then
+ * puts them back afterward, so showing one of these blocks never changes
+ * the product or post that some other code is already using.
  *
- * Registration (both the PHP blocks below and their client-side teaser
- * replacement) is NOT gated on WooCommerce being active - these blocks are
- * a Pro feature, unlocked the moment Pro is active, regardless of which
- * third-party plugins happen to be installed alongside it. Every render
- * method that touches a WooCommerce function checks function_exists()
- * (directly, or via with_product_context(), which checks it once for all
- * the callers that funnel through it) before calling it, so a block stays
- * safely insertable - and quietly renders nothing - even on a site that
- * doesn't have WooCommerce installed at all.
+ * This does not check if WooCommerce is active - these blocks are a Pro
+ * feature, unlocked as soon as Pro is active, no matter what other plugins
+ * are installed. Every render function checks function_exists() before
+ * calling a WooCommerce function (either directly, or through
+ * with_product_context()), so a block stays usable, and just shows nothing,
+ * even on a site with no WooCommerce installed.
  *
  * @package BlockivePro
  */
@@ -46,14 +35,14 @@ class Bpafb_Pro_Woo_Blocks
 	const NAME_PREFIX = 'blockive-premium-addon-for-block/tb-';
 
 	/**
-	 * The single instance of this class.
+	 * The one and only instance of this class.
 	 *
 	 * @var Bpafb_Pro_Woo_Blocks|null
 	 */
 	private static $instance = null;
 
 	/**
-	 * Retrieves (creating if necessary) the single instance of this class.
+	 * Gives back the one instance of this class, making it first if needed.
 	 *
 	 * @return Bpafb_Pro_Woo_Blocks
 	 */
@@ -70,22 +59,23 @@ class Bpafb_Pro_Woo_Blocks
 	 */
 	private function __construct()
 	{
-		// Priority 21: after Bpafb_Template_Blocks::fire_registration_hook()
-		// (priority 20, which is what actually fires the
-		// blockive_register_template_block action these blocks register on).
+		// Priority 21, so this runs after
+		// Bpafb_Template_Blocks::fire_registration_hook() (priority 20),
+		// which is what actually fires the blockive_register_template_block
+		// action these blocks register on.
 		add_action('blockive_register_template_block', [$this, 'register_blocks']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets'], 21);
 	}
 
 	/**
-	 * Prevents cloning of the instance.
+	 * Stops this class from being copied.
 	 */
 	private function __clone()
 	{
 	}
 
 	/**
-	 * Prevents unserializing of the instance.
+	 * Stops this class from being restored from stored data.
 	 */
 	public function __wakeup()
 	{
@@ -93,8 +83,8 @@ class Bpafb_Pro_Woo_Blocks
 	}
 
 	/**
-	 * Runs $render with the WooCommerce/post globals temporarily pointed at
-	 * a specific product, then restores whatever they held before.
+	 * Runs $render with the WooCommerce and post globals set to one
+	 * specific product, then puts back whatever they held before.
 	 *
 	 * @param int      $post_id Product post ID.
 	 * @param callable $render  Receives the resolved WC_Product; its echoed output is captured and returned.
@@ -136,8 +126,8 @@ class Bpafb_Pro_Woo_Blocks
 	}
 
 	/**
-	 * Resolves the product post id a block instance should render, the same
-	 * way every free Template Block resolves its post.
+	 * Finds the product post ID a block instance should show, the same
+	 * way every free Template Block finds its post.
 	 *
 	 * @param WP_Block $block Block instance.
 	 * @return int
@@ -295,13 +285,10 @@ class Bpafb_Pro_Woo_Blocks
 	}
 
 	/**
-	 * Only renders anything for variable products - WooCommerce doesn't
-	 * expose "just the variation picker" as a template separate from the
-	 * whole add-to-cart form the way it does for price/rating/sku/etc., so
-	 * this reuses the same variable-product add-to-cart template
-	 * (variation dropdowns + Add to Cart button together) rather than
-	 * approximating a split that doesn't exist upstream. Use the Add To
-	 * Cart block instead for simple products.
+	 * Only shows anything for variable products. WooCommerce has no
+	 * "just the variation picker" template on its own, separate from the
+	 * whole add-to-cart form, so this reuses that whole form. Use the Add
+	 * To Cart block instead for simple products.
 	 */
 	public function render_product_variations($attributes, $content, $block)
 	{
@@ -337,10 +324,10 @@ class Bpafb_Pro_Woo_Blocks
 	}
 
 	/**
-	 * Based on the current cart's contents (WooCommerce's own cross-sell
-	 * concept), not the previewed/rendered product - meaningful on a Cart
-	 * template, a no-op empty-cart response elsewhere. No product/post
-	 * context needed.
+	 * Based on what's in the current cart (WooCommerce's own cross-sell
+	 * feature), not on the product being previewed or shown. This only
+	 * shows something real on a Cart template - it does nothing if the
+	 * cart is empty. No product or post context is needed here.
 	 */
 	public function render_product_cross_sells($attributes, $content, $block)
 	{
@@ -354,8 +341,8 @@ class Bpafb_Pro_Woo_Blocks
 	// -- Registration -----------------------------------------------------
 
 	/**
-	 * Block slug => [title, icon, render method] for every block this
-	 * class provides.
+	 * Block slug => [title, icon, render method], for every block this
+	 * class adds.
 	 *
 	 * @return array<string,array{0:string,1:string,2:string}>
 	 */
@@ -384,9 +371,9 @@ class Bpafb_Pro_Woo_Blocks
 	}
 
 	/**
-	 * Registers every block above and marks it as a Template Block, via the
-	 * exact extension point the free plugin already fires for this purpose
-	 * (see Bpafb_Template_Blocks::fire_registration_hook()).
+	 * Registers every block above, and marks each one as a Template Block,
+	 * using the same hook the free plugin already fires for this exact
+	 * purpose (see Bpafb_Template_Blocks::fire_registration_hook()).
 	 */
 	public function register_blocks()
 	{
@@ -408,10 +395,9 @@ class Bpafb_Pro_Woo_Blocks
 	}
 
 	/**
-	 * Enqueues the client-side registration bundle that replaces each
-	 * block's free-plugin teaser with the real thing, gated to the
-	 * Template Builder editor only (same gate every other Template Block
-	 * editor bundle uses).
+	 * Loads the editor file that swaps each block's free-plugin teaser for
+	 * the real one, only on the Template Builder editor screen (the same
+	 * check every other Template Block editor file uses).
 	 */
 	public function enqueue_editor_assets()
 	{
@@ -433,23 +419,23 @@ class Bpafb_Pro_Woo_Blocks
 		wp_enqueue_script(
 			'bpafb-pro-template-blocks-woo',
 			BPAFB_PRO_URL . 'build/template-blocks-woo/index.js',
-			// Explicit dependency on the free plugin's Template Blocks bundle
-			// (which registers the client-only teasers this bundle replaces)
-			// guarantees this always runs after it, regardless of enqueue order.
+			// Depends on the free plugin's Template Blocks file (which
+			// registers the locked teasers this file replaces), so this
+			// always runs after it, no matter the load order.
 			array_unique(array_merge($asset['dependencies'], ['bpafb-template-blocks'])),
 			$asset['version'],
 			true
 		);
 
-		// The bundle always removes the free plugin's teaser (Pro never shows
-		// its own included features as a locked "(Pro)" placeholder), but
-		// only re-registers the real block when WooCommerce is actually
-		// installed - otherwise a Product block would sit in the inserter
-		// doing nothing on a site that has no products at all. PHP-side
-		// registration (register_blocks() above) stays unconditional
-		// regardless, so a template built while WooCommerce was active still
-		// renders (as empty, per every render method's own guard) rather
-		// than breaking if WooCommerce is later deactivated.
+		// This always removes the free plugin's teaser (Pro never shows a
+		// locked "(Pro)" placeholder for its own included features), but
+		// only adds the real block back when WooCommerce is actually
+		// installed. Otherwise a Product block would sit in the block list
+		// doing nothing, on a site with no products at all. The PHP-side
+		// registration (register_blocks() above) always runs, though, so a
+		// template made while WooCommerce was active still works (showing
+		// empty content, from each render method's own check) even if
+		// WooCommerce is later turned off.
 		wp_localize_script('bpafb-pro-template-blocks-woo', 'bpafbProWooBlocks', [
 			'active' => class_exists('WooCommerce'),
 		]);

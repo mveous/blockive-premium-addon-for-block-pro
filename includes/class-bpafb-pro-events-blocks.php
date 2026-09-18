@@ -1,23 +1,16 @@
 <?php
 /**
- * Real, server-rendered implementations of the 9 Events Calendar Template
- * Blocks the free plugin already advertises as client-only "(Pro)" teaser
- * placeholders (see src/template-blocks/pro-teasers/block-list.js) - same
- * block names (blockive-premium-addon-for-block/tb-event-*), so a template
- * built under a future free-only install (where these stay inert teasers)
- * keeps rendering unchanged once Pro is active.
+ * The real, working versions of the 9 Events Calendar Template Blocks. The
+ * free plugin only shows these as locked "(Pro)" placeholders (see
+ * src/template-blocks/pro-teasers/block-list.js). Same block names are
+ * used, so a template built without Pro keeps working the same once Pro is
+ * turned on.
  *
- * Registration (both the PHP blocks below and their client-side teaser
- * replacement) is NOT gated on The Events Calendar being active - these
- * blocks are a Pro feature, unlocked the moment Pro is active, regardless
- * of which third-party plugins happen to be installed alongside it. Every
- * render method individually guards each tribe_*() call with
- * function_exists() before calling it (both because Events Calendar's
- * public template-tag API has grown over major versions and a missing tag
- * should make that one block quietly render nothing rather than fatal the
- * whole page, and because that's what makes it safe for these blocks to
- * stay registered - and therefore insertable in the editor - even on a
- * site that doesn't have Events Calendar installed at all).
+ * This does not check if The Events Calendar is active - these blocks are
+ * a Pro feature, unlocked as soon as Pro is active. Every render function
+ * checks function_exists() before calling a tribe_*() function, so a
+ * missing function makes that block show nothing instead of crashing the
+ * page. This also keeps these blocks usable even without Events Calendar installed.
  *
  * @package BlockivePro
  */
@@ -31,14 +24,14 @@ class Bpafb_Pro_Events_Blocks
 	const NAME_PREFIX = 'blockive-premium-addon-for-block/tb-';
 
 	/**
-	 * The single instance of this class.
+	 * The one and only instance of this class.
 	 *
 	 * @var Bpafb_Pro_Events_Blocks|null
 	 */
 	private static $instance = null;
 
 	/**
-	 * Retrieves (creating if necessary) the single instance of this class.
+	 * Gives back the one instance of this class, making it first if needed.
 	 *
 	 * @return Bpafb_Pro_Events_Blocks
 	 */
@@ -60,14 +53,14 @@ class Bpafb_Pro_Events_Blocks
 	}
 
 	/**
-	 * Prevents cloning of the instance.
+	 * Stops this class from being copied.
 	 */
 	private function __clone()
 	{
 	}
 
 	/**
-	 * Prevents unserializing of the instance.
+	 * Stops this class from being restored from stored data.
 	 */
 	public function __wakeup()
 	{
@@ -75,7 +68,7 @@ class Bpafb_Pro_Events_Blocks
 	}
 
 	/**
-	 * Resolves the event post id a block instance should render.
+	 * Finds the event post ID a block instance should show.
 	 *
 	 * @param WP_Block $block Block instance.
 	 * @return int
@@ -156,10 +149,10 @@ class Bpafb_Pro_Events_Blocks
 			return '';
 		}
 
-		// tribe_get_venue() is a plain-text title and needs escaping, but
-		// tribe_get_full_address() already returns its own HTML markup
-		// (microformat <span> wrappers) - escaping that too would print the
-		// markup itself as visible text instead of a formatted address.
+		// tribe_get_venue() gives back plain text and needs escaping, but
+		// tribe_get_full_address() already gives back its own HTML (with
+		// <span> tags). Escaping that too would print the HTML tags
+		// themselves as visible text, instead of a formatted address.
 		$parts = array_filter([$venue !== '' ? esc_html($venue) : '', $address]);
 
 		return '<div class="bpafb-tb-event-venue">' . wp_kses_post(implode('<br>', $parts)) . '</div>';
@@ -205,10 +198,10 @@ class Bpafb_Pro_Events_Blocks
 	}
 
 	/**
-	 * Links to the event's own page. Full ticket-selling/RSVP integration
-	 * belongs to the separate Event Tickets plugin's own APIs, not core
-	 * Events Calendar - out of scope here; this is the "View Event" style
-	 * call to action every event page can support on its own.
+	 * Links to the event's own page. Selling tickets or taking RSVPs is
+	 * handled by the separate Event Tickets plugin, not by Events Calendar
+	 * itself, so it is not covered here. This is just a "View Event"
+	 * button, which every event page can support on its own.
 	 */
 	public function render_event_register_button($attributes, $content, $block)
 	{
@@ -237,8 +230,8 @@ class Bpafb_Pro_Events_Blocks
 	// -- Registration -----------------------------------------------------
 
 	/**
-	 * Block slug => [title, icon, render method] for every block this
-	 * class provides.
+	 * Block slug => [title, icon, render method], for every block this
+	 * class adds.
 	 *
 	 * @return array<string,array{0:string,1:string,2:string}>
 	 */
@@ -258,9 +251,9 @@ class Bpafb_Pro_Events_Blocks
 	}
 
 	/**
-	 * Registers every block above and marks it as a Template Block, via the
-	 * exact extension point the free plugin already fires for this purpose
-	 * (see Bpafb_Template_Blocks::fire_registration_hook()).
+	 * Registers every block above, and marks each one as a Template Block,
+	 * using the same hook the free plugin already fires for this exact
+	 * purpose (see Bpafb_Template_Blocks::fire_registration_hook()).
 	 */
 	public function register_blocks()
 	{
@@ -282,9 +275,8 @@ class Bpafb_Pro_Events_Blocks
 	}
 
 	/**
-	 * Enqueues the client-side registration bundle that replaces each
-	 * block's free-plugin teaser with the real thing, gated to the
-	 * Template Builder editor only.
+	 * Loads the editor file that swaps each block's free-plugin teaser for
+	 * the real one, only on the Template Builder editor screen.
 	 */
 	public function enqueue_editor_assets()
 	{
@@ -311,15 +303,15 @@ class Bpafb_Pro_Events_Blocks
 			true
 		);
 
-		// The bundle always removes the free plugin's teaser (Pro never shows
-		// its own included features as a locked "(Pro)" placeholder), but
-		// only re-registers the real block when The Events Calendar is
-		// actually installed - otherwise an Event block would sit in the
-		// inserter doing nothing on a site with no events plugin at all.
-		// PHP-side registration (register_blocks() above) stays
-		// unconditional regardless, so a template built while Events
-		// Calendar was active still renders (as empty, per every render
-		// method's own guard) rather than breaking if it's later deactivated.
+		// This always removes the free plugin's teaser (Pro never shows a
+		// locked "(Pro)" placeholder for its own included features), but
+		// only adds the real block back when The Events Calendar is
+		// actually installed. Otherwise an Event block would sit in the
+		// block list doing nothing, on a site with no events plugin at
+		// all. The PHP-side registration (register_blocks() above) always
+		// runs, though, so a template made while Events Calendar was
+		// active still works (showing empty content, from each render
+		// method's own check) even if Events Calendar is later turned off.
 		wp_localize_script('bpafb-pro-template-blocks-events', 'bpafbProEventsBlocks', [
 			'active' => class_exists('Tribe__Events__Main'),
 		]);

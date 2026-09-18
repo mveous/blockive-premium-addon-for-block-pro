@@ -1,17 +1,15 @@
 <?php
 /**
- * Dynamic Tags: lets any Blockive block's text/URL attribute contain a
- * `{{tag}}` or `{{tag:param}}` token (e.g. `{{post_title}}`,
- * `{{post_date:F j, Y}}`) that's resolved to real content at render time,
- * the same way every page-builder's "dynamic content" feature works.
+ * Dynamic Tags: lets any Blockive block's text or URL setting hold a
+ * `{{tag}}` or `{{tag:param}}` token (like `{{post_title}}` or
+ * `{{post_date:F j, Y}}`), which gets swapped for real content when the
+ * page is shown. This is the same idea as "dynamic content" in other
+ * page builders.
  *
- * Resolution hooks the generic `render_block` filter, scoped to the
- * `blockive-premium-addon-for-block/` namespace - the exact same boundary
- * Bpafb_Core::bpafb_render_block_container() already uses for container
- * styling - so it works uniformly across every Blockive block, static or
- * dynamic, without per-block wiring: a static block's saved HTML (Heading,
- * Button, Image Box, ...) still passes through `render_block` like any
- * other block's output, token or not.
+ * This works by hooking into the general `render_block` filter, but only
+ * for blocks named `blockive-premium-addon-for-block/...`. That way it
+ * works for every Blockive block, static or dynamic, with no extra setup
+ * needed on each block.
  *
  * @package BlockivePro
  */
@@ -26,26 +24,25 @@ class Bpafb_Pro_Dynamic_Tags
 	const DYNAMIC_FIELD_BLOCK = self::NAME_PREFIX . 'tb-dynamic-field';
 
 	/**
-	 * Matches `{{tag}}` or `{{tag:param}}`. Tag/param characters are kept
-	 * deliberately narrow (letters, numbers, underscore, space, common date-
-	 * format punctuation) - wide enough for every tag's own param format,
-	 * narrow enough that ordinary curly-brace text elsewhere in a block
-	 * (code samples, JSON examples a user typed) doesn't look like a tag and
-	 * get silently eaten.
+	 * Matches `{{tag}}` or `{{tag:param}}`. Only lets in letters, numbers,
+	 * underscores, spaces, and common date-format characters. This is wide
+	 * enough for every tag's own param, but narrow enough that normal
+	 * curly-brace text elsewhere in a block (like a code sample or JSON
+	 * example a user typed) does not get mistaken for a tag and removed.
 	 *
 	 * @var string
 	 */
 	const TOKEN_PATTERN = '/\{\{\s*([a-z_]+)\s*(?::\s*([a-zA-Z0-9_ ,\.\/\-:]*)\s*)?\}\}/';
 
 	/**
-	 * The single instance of this class.
+	 * The one and only instance of this class.
 	 *
 	 * @var Bpafb_Pro_Dynamic_Tags|null
 	 */
 	private static $instance = null;
 
 	/**
-	 * Retrieves (creating if necessary) the single instance of this class.
+	 * Gives back the one instance of this class, making it first if needed.
 	 *
 	 * @return Bpafb_Pro_Dynamic_Tags
 	 */
@@ -64,22 +61,22 @@ class Bpafb_Pro_Dynamic_Tags
 	{
 		add_action('init', [$this, 'register_dynamic_field_block']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets'], 22);
-		// Priority 20: after Bpafb_Core::bpafb_render_block_container() (the
-		// free plugin's own render_block hook, default priority 10) has
-		// already injected container styles/classes - token resolution
-		// should see and can safely run on top of that finished markup.
+		// Priority 20: this runs after Bpafb_Core::bpafb_render_block_container()
+		// (the free plugin's own render_block hook, priority 10) has
+		// already added container styles and classes. So token resolution
+		// can safely run on top of that finished HTML.
 		add_filter('render_block', [$this, 'resolve_block_tokens'], 20, 2);
 	}
 
 	/**
-	 * Prevents cloning of the instance.
+	 * Stops this class from being copied.
 	 */
 	private function __clone()
 	{
 	}
 
 	/**
-	 * Prevents unserializing of the instance.
+	 * Stops this class from being restored from stored data.
 	 */
 	public function __wakeup()
 	{
@@ -87,9 +84,9 @@ class Bpafb_Pro_Dynamic_Tags
 	}
 
 	/**
-	 * Tag definitions grouped for the editor's picker UI. Each resolver
-	 * receives the resolved "current" post ID (falls back to the main
-	 * queried post) and the raw param string from the token, if any.
+	 * The tag list, grouped for the editor's picker. Each resolver
+	 * function gets the current post ID (or falls back to the main post
+	 * being viewed) and the raw param text from the token, if there is one.
 	 *
 	 * @return array<string,array{label:string,tags:array<string,array{label:string,hasParam?:bool,resolve:callable}>}>
 	 */
@@ -150,11 +147,11 @@ class Bpafb_Pro_Dynamic_Tags
 					'post_custom_field' => [
 						'label'    => __('Custom Field', 'blockive-premium-addon-for-block-pro'),
 						'hasParam' => true,
-						// Param is the meta key. Coerced to a display string
-						// the same defensive way WordPress's own "Custom
-						// Fields" panel does - a scalar value is used as-is,
-						// anything else (a serialized array some plugins
-						// store) has no sane single-string representation.
+						// The param is the meta key. We only show a value we
+						// can safely turn into plain text - the same way
+						// WordPress's own "Custom Fields" panel does. Some
+						// plugins store an array instead of plain text, and
+						// there is no safe way to show that as one string.
 						'resolve'  => function ($post_id, $param) {
 							if (!$post_id || $param === '') {
 								return '';
@@ -167,10 +164,10 @@ class Bpafb_Pro_Dynamic_Tags
 						'label'    => __('Custom Field (Image)', 'blockive-premium-addon-for-block-pro'),
 						'type'     => 'image',
 						'hasParam' => true,
-						// Accepts the common shapes a custom field ends up
-						// storing an image as: a plain attachment ID, an
-						// ACF-style array (has 'url', or an 'ID'/'id' this
-						// falls through to below), or an already-complete URL.
+						// Accepts the common ways a custom field can store an
+						// image: a plain attachment ID, an ACF-style array
+						// (with a 'url', or an 'ID'/'id' handled below), or
+						// a URL that is already complete.
 						'resolve'  => function ($post_id, $param) {
 							if (!$post_id || $param === '') {
 								return '';
@@ -292,9 +289,9 @@ class Bpafb_Pro_Dynamic_Tags
 		}
 
 		/**
-		 * Filters the Dynamic Tags registry, letting other code add its own
-		 * groups/tags (matching Bpafb_Template_Blocks::register_block_name()'s
-		 * "extend without editing core files" precedent elsewhere in this plugin).
+		 * Lets other code add its own groups and tags to the Dynamic Tags
+		 * list. This is the same "add features without editing the plugin's
+		 * own files" idea as Bpafb_Template_Blocks::register_block_name().
 		 *
 		 * @param array $registry Group => {label, tags: {tag_key => {label, hasParam, resolve}}}.
 		 */
@@ -302,7 +299,7 @@ class Bpafb_Pro_Dynamic_Tags
 	}
 
 	/**
-	 * Flat tag_key => resolver map, built once per request.
+	 * A flat tag_key => resolver list, built once per page load.
 	 *
 	 * @return array<string,array{resolve:callable,hasParam:bool}>
 	 */
@@ -322,10 +319,9 @@ class Bpafb_Pro_Dynamic_Tags
 	}
 
 	/**
-	 * Resolves the post ID a tag should use: the block's own context if it
-	 * declares postId (matching every Template Block's own resolution
-	 * order), otherwise the main queried post in whatever loop is currently
-	 * rendering.
+	 * Finds the post ID a tag should use. Uses the block's own context
+	 * first, if it has a postId (the same order every Template Block
+	 * uses). Otherwise, falls back to the main post being viewed.
 	 *
 	 * @param WP_Block|null $block Block instance, when available.
 	 * @return int
@@ -340,7 +336,7 @@ class Bpafb_Pro_Dynamic_Tags
 	}
 
 	/**
-	 * Replaces every `{{tag}}` / `{{tag:param}}` occurrence in $text.
+	 * Replaces every `{{tag}}` or `{{tag:param}}` found in $text.
 	 *
 	 * @param string        $text  Text potentially containing tokens.
 	 * @param WP_Block|null $block Block instance, for context-aware tags.
@@ -370,7 +366,7 @@ class Bpafb_Pro_Dynamic_Tags
 	}
 
 	/**
-	 * Resolves tokens in a Blockive block's already-rendered HTML.
+	 * Replaces tokens in a Blockive block's HTML, after it has rendered.
 	 *
 	 * @param string   $block_content Rendered block HTML.
 	 * @param array    $block         Parsed block array.
@@ -388,10 +384,10 @@ class Bpafb_Pro_Dynamic_Tags
 	}
 
 	/**
-	 * Registers the real, generic "Dynamic Field" block - the free plugin's
-	 * client-only teaser of the same name (see pro-teasers/block-list.js)
-	 * outputs a tag's resolved value directly, for placing any tag
-	 * somewhere no other block's attribute already covers.
+	 * Registers the real "Dynamic Field" block. The free plugin only has a
+	 * locked teaser version of this block (see
+	 * pro-teasers/block-list.js). This real one shows any tag's value
+	 * directly, for cases no other block's own setting already covers.
 	 */
 	public function register_dynamic_field_block()
 	{
@@ -405,13 +401,12 @@ class Bpafb_Pro_Dynamic_Tags
 				'tag'   => ['type' => 'string', 'default' => ''],
 				'param' => ['type' => 'string', 'default' => ''],
 			],
-			// Must exactly match the JS registration's `supports`
-			// (src/dynamic-tags/index.js) - real typography/color/spacing
-			// support instead of a bare unstyled <span>, matching how
-			// Elementor's own dedicated dynamic-content widgets are always
-			// fully styleable. get_block_wrapper_attributes() in
-			// render_dynamic_field_block() is what actually turns these into
-			// the generated class/inline-style on the rendered markup.
+			// Must match the JS registration's `supports` exactly
+			// (src/dynamic-tags/index.js). This gives the block real
+			// typography, color, and spacing settings, instead of a plain
+			// unstyled <span>. get_block_wrapper_attributes(), in
+			// render_dynamic_field_block() below, is what actually turns
+			// these settings into a class and inline style on the HTML.
 			'supports'        => [
 				'html'            => false,
 				'className'       => true,
@@ -458,11 +453,10 @@ class Bpafb_Pro_Dynamic_Tags
 		$token    = $param !== '' ? '{{' . $tag . ':' . $param . '}}' : '{{' . $tag . '}}';
 		$resolved = self::resolve_string($token, $block);
 
-		// Merges the typography/color/spacing/custom-class supports'
-		// generated class(es) and inline style into the wrapper - without
-		// this, declaring those supports would do nothing on the frontend
-		// (the editor's own useBlockProps() would still preview them,
-		// silently diverging from what actually renders).
+		// Adds the class(es) and inline style from the typography, color,
+		// spacing, and custom-class settings onto the wrapper. Without
+		// this, those settings would show a preview in the editor but do
+		// nothing on the live site.
 		$wrapper_attributes = get_block_wrapper_attributes(['class' => 'bpafb-tb-dynamic-field']);
 
 		$tag_def  = self::flat_tags()[$tag] ?? null;
@@ -479,22 +473,16 @@ class Bpafb_Pro_Dynamic_Tags
 	}
 
 	/**
-	 * Enqueues the Dynamic Tags editor bundle, localizing the tag registry
-	 * (labels + which tags take a param - resolvers stay server-side only).
+	 * Loads the Dynamic Tags editor files, and sends the tag list to the
+	 * browser (only labels and which tags take a param - the resolver
+	 * functions stay on the server).
 	 *
-	 * Unconditional on every block editor screen (not gated to the Template
-	 * Builder the way the WooCommerce/Events blocks bundles are): Heading,
-	 * Button, and Image Box are ordinary blocks used on any Post/Page/
-	 * Product, not Template Blocks. Deliberately no dependency on the free
-	 * plugin's `bpafb-template-blocks` handle for this reason - that handle
-	 * is itself only ever enqueued on the Template Builder screen, and a
-	 * script depending on a handle that's never enqueued elsewhere is
-	 * silently skipped everywhere else too. The Dynamic Field block's own
-	 * teaser replacement doesn't need that dependency either: the free
-	 * plugin's teaser script does a plain (unguarded) registerBlockType(),
-	 * so whichever of the two scripts runs first simply "wins" the name -
-	 * this one already registers the real block unconditionally, so the
-	 * outcome is correct regardless of load order.
+	 * This loads on every block editor screen, not just the Template
+	 * Builder: Heading, Button, and Image Box are normal blocks used on
+	 * any Post, Page, or Product, not just Template Blocks. It does not
+	 * depend on the free plugin's `bpafb-template-blocks` file, since that
+	 * only loads on the Template Builder screen, and a script that depends
+	 * on a file loaded nowhere else would be silently skipped too.
 	 */
 	public function enqueue_editor_assets()
 	{
@@ -537,10 +525,10 @@ class Bpafb_Pro_Dynamic_Tags
 							'label'    => $tag['label'],
 							'hasParam' => !empty($tag['hasParam']),
 							'type'     => $tag['type'] ?? 'text',
-							// Flags the two "type the meta key yourself"
-							// tags so the editor can offer a picker of the
-							// current post's own known meta keys instead of
-							// a completely blank text field.
+							// Marks the two tags where the user types their
+							// own meta key, so the editor can show a picker
+							// of the current post's known meta keys instead
+							// of a blank text field.
 							'isCustomField' => in_array($key, ['post_custom_field', 'post_custom_field_image'], true),
 						];
 					},

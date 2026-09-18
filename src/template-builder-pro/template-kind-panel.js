@@ -11,11 +11,10 @@ import { usePostTypeOptions, isFreePostType } from '../template-builder/template
 
 const TEMPLATE_POST_TYPE = window.bpafbTemplateBuilder?.postType || 'blockive_template';
 
-// Localized from Bpafb_Template_Builder::get_post_type_singular_names() -
-// core's own `/wp/v2/types` REST response only has the plural `name`, not
-// `labels.singular_name`, so "All Products" / "Specific Product"-style
-// wording (matching Elementor's own Singular > [Post Type] > All/Specific
-// condition wording) needs this separately localized map.
+// Sent from PHP by Bpafb_Template_Builder::get_post_type_singular_names().
+// The `/wp/v2/types` REST response only has the plural `name`, not the
+// singular one, so this separate list is needed for wording like "All
+// Products" or "Specific Product".
 const POST_TYPE_SINGULAR_NAMES = window.bpafbTemplateBuilder?.postTypeSingularNames || {};
 
 const KIND_OPTIONS = [
@@ -29,8 +28,8 @@ const KIND_OPTIONS = [
 	{ label: __( 'Loop Item', 'blockive-premium-addon-for-block-pro' ), value: 'loop-item' },
 ];
 
-// Rule types that need a value picked by the user; the rest (entire_site,
-// date_archive, search, 404, logged_in, logged_out) are self-contained.
+// Rule types where the user needs to pick a value. The others (entire_site,
+// date_archive, search, 404, logged_in, logged_out) need nothing else.
 const RULE_TYPES_WITH_VALUE = [ 'post_type_archive', 'taxonomy_archive', 'author_archive', 'user_role', 'singular' ];
 
 const ROLE_OPTIONS = [
@@ -44,11 +43,9 @@ const ROLE_OPTIONS = [
 ];
 
 /**
- * The general (non-"single") Display Conditions rule set - "Singular" here
- * opens into its own Post Type + All/Specific nesting (see
- * SingularConditionFields) rather than being a flat "one specific post"
- * picker, matching Elementor's own Singular > [Post Type] > All/Specific
- * condition tree.
+ * The Display Conditions rule types for kinds other than "single".
+ * "Singular" here opens its own Post Type, then All/Specific choice (see
+ * SingularConditionFields), instead of being one flat "pick a post" field.
  */
 function ruleTypeOptions() {
 	return [
@@ -158,15 +155,11 @@ const PopupSettings = ( { meta, setMeta } ) => {
 
 /**
  * Searchable post/page picker for the "singular" rule type, backed by
- * WordPress core's own aggregated `/wp/v2/search` endpoint (the same one
- * Gutenberg's own link-insertion UI uses) rather than a single post type's
- * entity-records query, since a "specific post/page" condition should
- * generally be able to target any searchable content, not just one post
- * type at a time. An optional `postType` prop narrows the search results to
- * one post type via the endpoint's own `subtype` param - used only by the
- * Single Post/Page Display Conditions adapter, where the legacy
- * `_bpafb_display_condition_ids` meta is documented as "IDs of the
- * template's own Post Type", so the picker shouldn't offer unrelated types.
+ * core's aggregated `/wp/v2/search` endpoint rather than a single post
+ * type's entity-records query, since a "specific post/page" condition can
+ * generally target any searchable content. An optional `postType` prop
+ * narrows results to one type via the endpoint's own `subtype` param,
+ * used only by the Single Post/Page Display Conditions adapter.
  */
 const SingularPicker = ( { value, onChange, postType } ) => {
 	const [ options, setOptions ] = useState( [] );
@@ -192,12 +185,10 @@ const SingularPicker = ( { value, onChange, postType } ) => {
 			.catch( () => {} );
 	};
 
-	// A saved rule's target might not appear in the default (unsearched)
-	// results list - e.g. it's older than the 20 most recent items. Resolve
-	// its real title directly by ID (unrestricted by `postType`, so a
-	// mismatch still shows the real title instead of a wrong "not found")
-	// so re-opening a template never shows a bare "#id" instead of the
-	// actual post/page name.
+	// A saved rule's post might not be in the default results list (for
+	// example, if it is older than the 20 newest items). This looks it up
+	// directly by ID instead, so opening a saved template shows the real
+	// post title, instead of a bare "#id".
 	useEffect( () => {
 		if ( ! value || options.some( ( option ) => option.value === value ) ) {
 			return;
@@ -219,8 +210,8 @@ const SingularPicker = ( { value, onChange, postType } ) => {
 		};
 	}, [ value ] );
 
-	// Still fall back to a plain "#id" label while the by-ID lookup above is
-	// in flight (or if it fails), rather than losing the selection entirely.
+	// Show a plain "#id" label while the lookup above is still running (or
+	// if it fails), instead of losing the selection completely.
 	const knownOptions = value && ! options.some( ( option ) => option.value === value )
 		? [ { value, label: `#${ value }` }, ...options ]
 		: options;
@@ -237,13 +228,12 @@ const SingularPicker = ( { value, onChange, postType } ) => {
 };
 
 /**
- * The general Display Conditions list's "Singular" rule, nested the same way
- * Elementor's own Singular condition is: pick a Post Type ("Any Post Type"
- * matches any singular content regardless of type), then whether it applies
- * to All of that type or one Specific item. Local `mode` state tracks the
- * user's All/Specific choice independently of `rule.value` being empty,
- * since "Specific, no post chosen yet" and "All" are otherwise
- * indistinguishable from the rule data alone.
+ * The Display Conditions "Singular" rule: first pick a Post Type ("Any
+ * Post Type" matches any single content), then choose whether it applies
+ * to All of that type or one Specific item. The local `mode` value tracks
+ * the All/Specific choice on its own, apart from `rule.value` being empty,
+ * since "Specific, but no post picked yet" and "All" would otherwise look
+ * the same in the saved data.
  */
 const SingularConditionFields = ( { rule, onChange } ) => {
 	const postTypes = useSelect(
@@ -377,11 +367,10 @@ const TemplateKindPanel = () => {
 	const templateType = meta?._bpafb_template_type || 'post';
 	const postTypeOptions = usePostTypeOptions();
 
-	// Elementor labels this exact choice "All Products" / "Specific Product"
-	// once you've picked "Product" as the singular document type - since
-	// Single Post/Page's Post Type is already fixed above, the condition
-	// row's two options are relabeled the same way instead of the generic
-	// "Entire Site" / "Specific Post/Page" wording the general rule list uses.
+	// Since Single Post/Page's own Post Type is already fixed above, this
+	// row's two options are relabeled to match it (like "All Products" /
+	// "Specific Product"), instead of using the generic "Entire Site" /
+	// "Specific Post/Page" wording the general rule list uses.
 	const templateTypeObject = useSelect( ( select ) => select( 'core' ).getPostType( templateType ), [ templateType ] );
 	const templateTypePluralLabel = templateTypeObject?.name || templateType;
 	const templateTypeSingularLabel = POST_TYPE_SINGULAR_NAMES[ templateType ] || templateTypePluralLabel;
@@ -403,12 +392,13 @@ const TemplateKindPanel = () => {
 		setRules( [ ...rules, { type: 'entire_site', value: '' } ] );
 	};
 
-	// Single Post/Page has only ever had one condition value in the legacy
-	// data model (Bpafb_Template_Display_Conditions): "all" of its Post Type,
-	// or a list of specific IDs. This adapter presents that exact same model
-	// through the same Condition-row UI every other kind uses, reading/
-	// writing the legacy meta instead of _bpafb_display_condition_rules so
-	// the free plugin's resolver keeps working completely unchanged.
+	// Single Post/Page has always stored just one condition value, in the
+	// free plugin's own older data format (Bpafb_Template_Display_Conditions):
+	// either "all" of its Post Type, or a list of specific IDs. This
+	// converts that older format into the same Condition-row shape every
+	// other kind uses here, reading and writing the older meta fields
+	// instead of _bpafb_display_condition_rules, so the free plugin's own
+	// code keeps working exactly as before.
 	const scope = meta?._bpafb_display_condition_scope || 'all';
 	const conditionIds = Array.isArray( meta?._bpafb_display_condition_ids ) ? meta._bpafb_display_condition_ids : [];
 	const singleRule = {
@@ -510,10 +500,10 @@ const TemplateKindPanel = () => {
 											<RuleValueField
 												rule={ rule }
 												onChange={ ( valueOrPatch ) =>
-													// SingularConditionFields (rendered for 'singular') needs to
-													// update both `postType` and `value` together, so it passes
-													// a full patch object; every other rule type's field just
-													// passes the new bare value.
+													// SingularConditionFields (used for 'singular') needs to
+													// update both `postType` and `value` at once, so it passes
+													// a full patch object. Every other rule type's field just
+													// passes the plain new value.
 													updateRule( index, 'singular' === rule.type ? valueOrPatch : { value: valueOrPatch } )
 												}
 											/>

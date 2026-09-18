@@ -8,9 +8,9 @@ import { useEffect, useState } from '@wordpress/element';
 const TEMPLATE_POST_TYPE = window.bpafbTemplateBuilder?.postType || 'blockive_template';
 
 /**
- * Same publish-button interception selector the free plugin's own
- * save-conflict-guard.js uses for the "single" kind - covers both the
- * pre-publish flyout's Publish button and the Update button shown once a
+ * The same Publish-button target the free plugin's own
+ * save-conflict-guard.js uses for the "single" kind. This covers both the
+ * pre-publish flyout's Publish button, and the Update button shown once a
  * template is already published.
  */
 const PUBLISH_BUTTON_SELECTOR = '.editor-post-publish-button__button';
@@ -26,13 +26,10 @@ const getRecordTitle = ( record ) => {
 };
 
 /**
- * Whether two condition-rule arrays share at least one identical
- * {type, value} rule - the same "exact match" standard the free plugin's
- * own guard uses (same target post type + same "all" scope), rather than
- * attempting general overlap detection between differently-specific rules
- * (e.g. "Entire Site" technically overlaps every other rule; that's a much
- * fuzzier problem than this MVP needs to solve to catch the common
- * "I made two Header templates for the whole site" mistake).
+ * Whether two lists of condition rules share at least one exactly matching
+ * {type, value} rule. This is a simple exact-match check, not a full
+ * overlap check between rules of different kinds, but it is enough to
+ * catch the common "I made two Header templates for the whole site" mistake.
  *
  * @param {Array} rulesA
  * @param {Array} rulesB
@@ -45,11 +42,11 @@ function rulesOverlap( rulesA, rulesB ) {
 }
 
 /**
- * Warns before publishing a Header/Footer/Archive/Search/404/Popup/Loop
- * Item-kind template if another published template of the same kind
- * shares an identical condition rule, and offers to move the other one to
- * Draft - the equivalent of the free plugin's save-conflict-guard.js for
- * the "single" kind, which only ever checks that one case.
+ * Warns before publishing a Header, Footer, Archive, Search, 404, Popup,
+ * or Loop Item template if another published template of the same kind
+ * shares a matching condition rule, and offers to move the other one to
+ * Draft. This does for every other kind what the free plugin's own
+ * save-conflict-guard.js already does for the "single" kind.
  */
 const KindConflictGuard = () => {
 	const [ meta ] = useEntityProp( 'postType', TEMPLATE_POST_TYPE, 'meta' );
@@ -65,9 +62,9 @@ const KindConflictGuard = () => {
 
 	const conflictingTemplate = useSelect(
 		( select ) => {
-			// "single" is the free plugin's own concept, already covered by
-			// its save-conflict-guard.js - this guard only covers the kinds
-			// Pro adds on top of it.
+			// "single" is the free plugin's own kind, already handled by its
+			// save-conflict-guard.js. This guard only checks the other
+			// kinds that Pro adds.
 			if ( 'single' === kind || 0 === rules.length ) {
 				return null;
 			}
@@ -121,12 +118,11 @@ const KindConflictGuard = () => {
 		setIsConfirmOpen( false );
 	};
 
-	// Unlike the free plugin's save-conflict-guard.js (whose "Cancel" just
-	// closes the modal - there, keeping both templates active for the same
-	// post type/scope is treated as a mistake, not a real option), Pro's
-	// rule-based conditions can legitimately overlap on purpose, so both
-	// buttons here actually publish - they only differ on whether the other
-	// template also gets demoted to Draft.
+	// The free plugin's save-conflict-guard.js just closes its modal on
+	// Cancel, since keeping both templates active there is always a
+	// mistake, never a real choice. Here, Pro's rule-based conditions can
+	// overlap on purpose, so both buttons below actually publish - they
+	// only differ on whether the other template also gets moved to Draft.
 	const publish = async () => {
 		setIsSaving( true );
 		try {
