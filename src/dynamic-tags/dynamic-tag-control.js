@@ -191,7 +191,7 @@ export default function DynamicTagSwitcher( { label, value, onChange, acceptedTy
 						onClick={ () => onChange( '' ) }
 					/>
 					{ isSettingsOpen && (
-						<Popover placement="bottom-start" onClose={ () => setIsSettingsOpen( false ) }>
+						<Popover placement="bottom-start" focusOnMount={ false } onClose={ () => setIsSettingsOpen( false ) }>
 							<TagSettingsForm
 								tag={ tag }
 								initialParam={ param }
