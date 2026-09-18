@@ -23,10 +23,10 @@ import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
-import DynamicTagControl from './dynamic-tag-control';
+import DynamicTagSwitcher, { TOKEN_PATTERN } from './dynamic-tag-control';
+import './editor.scss';
 
 const DYNAMIC_FIELD_BLOCK = 'blockive-premium-addon-for-block/tb-dynamic-field';
-const TOKEN_PATTERN = /^\{\{\s*([a-z_]+)\s*(?::\s*(.*)\s*)?\}\}$/;
 
 /**
  * Fetches a tag's resolved value via the same `/wp/v2/block-renderer`
@@ -163,19 +163,15 @@ const withDynamicTagsControl = createHigherOrderComponent( ( BlockEdit ) => ( pr
 			<BlockEdit { ...props } attributes={ previewAttributes } />
 			<InspectorControls>
 				<PanelBody title={ __( 'Dynamic Tags (Pro)', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-					{ fields.map( ( field ) => {
-						const match = typeof props.attributes[ field.attribute ] === 'string' && props.attributes[ field.attribute ].match( TOKEN_PATTERN );
-						return (
-							<DynamicTagControl
-								key={ field.attribute }
-								label={ field.label }
-								acceptedTypes={ field.acceptedTypes }
-								initialTag={ match ? match[ 1 ] : '' }
-								initialParam={ match ? match[ 2 ] || '' : '' }
-								onInsert={ ( token ) => props.setAttributes( { [ field.attribute ]: token } ) }
-							/>
-						);
-					} ) }
+					{ fields.map( ( field ) => (
+						<DynamicTagSwitcher
+							key={ field.attribute }
+							label={ field.label }
+							acceptedTypes={ field.acceptedTypes }
+							value={ props.attributes[ field.attribute ] }
+							onChange={ ( value ) => props.setAttributes( { [ field.attribute ]: value } ) }
+						/>
+					) ) }
 				</PanelBody>
 			</InspectorControls>
 		</>
@@ -282,12 +278,15 @@ registerBlockType( DYNAMIC_FIELD_BLOCK, {
 			<>
 				<InspectorControls>
 					<PanelBody title={ __( 'Dynamic Tag', 'blockive-premium-addon-for-block-pro' ) }>
-						<DynamicTagControl
+						<DynamicTagSwitcher
 							label={ __( 'Tag', 'blockive-premium-addon-for-block-pro' ) }
-							initialTag={ attributes.tag }
-							initialParam={ attributes.param }
-							onInsert={ ( token ) => {
-								const match = token.match( TOKEN_PATTERN );
+							value={ attributes.tag ? ( attributes.param ? `{{${ attributes.tag }:${ attributes.param }}}` : `{{${ attributes.tag }}}` ) : '' }
+							onChange={ ( value ) => {
+								if ( ! value ) {
+									setAttributes( { tag: '', param: '' } );
+									return;
+								}
+								const match = value.match( TOKEN_PATTERN );
 								if ( match ) {
 									setAttributes( { tag: match[ 1 ], param: match[ 2 ] || '' } );
 								}

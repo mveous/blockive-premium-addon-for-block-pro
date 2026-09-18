@@ -482,6 +482,15 @@ class Bpafb_Pro_Dynamic_Tags
 			true
 		);
 
+		if (file_exists(BPAFB_PRO_PATH . 'build/dynamic-tags/index.css')) {
+			wp_enqueue_style(
+				'bpafb-pro-dynamic-tags',
+				BPAFB_PRO_URL . 'build/dynamic-tags/index.css',
+				['wp-components'],
+				$asset['version']
+			);
+		}
+
 		$js_registry = [];
 		foreach (self::get_registry() as $group_key => $group) {
 			$js_registry[$group_key] = [
