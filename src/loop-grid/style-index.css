@@ -1,0 +1,104 @@
+.bpafb-pro-loop-grid {
+	--bpafb-pro-loop-grid-columns: 3;
+	--bpafb-pro-loop-grid-columns-tablet: 2;
+	--bpafb-pro-loop-grid-columns-mobile: 1;
+	--bpafb-pro-loop-grid-column-gap: 24px;
+	--bpafb-pro-loop-grid-row-gap: 24px;
+}
+
+.bpafb-pro-loop-grid--grid .bpafb-pro-loop-grid-items {
+	display: grid;
+	grid-template-columns: repeat(var(--bpafb-pro-loop-grid-columns), 1fr);
+	column-gap: var(--bpafb-pro-loop-grid-column-gap);
+	row-gap: var(--bpafb-pro-loop-grid-row-gap);
+}
+
+.bpafb-pro-loop-grid--grid:not(.bpafb-pro-loop-grid--equal-height) .bpafb-pro-loop-grid-items {
+	align-items: start;
+}
+
+.bpafb-pro-loop-grid--masonry .bpafb-pro-loop-grid-items {
+	columns: var(--bpafb-pro-loop-grid-columns);
+	column-gap: var(--bpafb-pro-loop-grid-column-gap);
+}
+
+.bpafb-pro-loop-grid--masonry .bpafb-pro-loop-grid-item {
+	break-inside: avoid;
+	margin-bottom: var(--bpafb-pro-loop-grid-row-gap);
+}
+
+@media (max-width: 1024px) {
+	.bpafb-pro-loop-grid--grid .bpafb-pro-loop-grid-items {
+		grid-template-columns: repeat(var(--bpafb-pro-loop-grid-columns-tablet), 1fr);
+	}
+
+	.bpafb-pro-loop-grid--masonry .bpafb-pro-loop-grid-items {
+		columns: var(--bpafb-pro-loop-grid-columns-tablet);
+	}
+}
+
+@media (max-width: 767px) {
+	.bpafb-pro-loop-grid--grid .bpafb-pro-loop-grid-items {
+		grid-template-columns: repeat(var(--bpafb-pro-loop-grid-columns-mobile), 1fr);
+	}
+
+	.bpafb-pro-loop-grid--masonry .bpafb-pro-loop-grid-items {
+		columns: var(--bpafb-pro-loop-grid-columns-mobile);
+	}
+}
+
+.bpafb-pro-loop-grid-nothing-found {
+	text-align: center;
+	padding: 32px 0;
+}
+
+.bpafb-pro-loop-grid-placeholder {
+	padding: 24px;
+	text-align: center;
+	border: 1px dashed #cbd5e1;
+	border-radius: 8px;
+	color: #64748b;
+}
+
+.bpafb-pro-loop-grid-pagination {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 24px;
+}
+
+.bpafb-pro-loop-grid-pagination--start {
+	justify-content: flex-start;
+}
+
+.bpafb-pro-loop-grid-pagination--center {
+	justify-content: center;
+}
+
+.bpafb-pro-loop-grid-pagination--end {
+	justify-content: flex-end;
+}
+
+.bpafb-pro-loop-grid-pagination a,
+.bpafb-pro-loop-grid-pagination span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 36px;
+	height: 36px;
+	padding: 0 10px;
+	border: 1px solid #e2e8f0;
+	border-radius: 4px;
+	text-decoration: none;
+	color: inherit;
+}
+
+.bpafb-pro-loop-grid-pagination .current {
+	background: #111827;
+	color: #fff;
+	border-color: #111827;
+}
+
+.bpafb-pro-loop-grid-pagination .dots {
+	border: none;
+}
