@@ -5,6 +5,14 @@
 	"author": "Lionecoders",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
+	"files": [
+		"assets/**",
+		"build/**",
+		"includes/**",
+		"blockive-premium-addon-for-block-pro.php",
+		"readme.txt",
+		"wpml-config.xml"
+	],
 	"scripts": {
 		"sync": "node bin/sync-shared-source.js",
 		"build": "wp-scripts build --blocks-manifest",
