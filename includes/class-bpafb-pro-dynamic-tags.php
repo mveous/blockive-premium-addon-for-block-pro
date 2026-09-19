@@ -338,11 +338,24 @@ class Bpafb_Pro_Dynamic_Tags
 	/**
 	 * Replaces every `{{tag}}` or `{{tag:param}}` found in $text.
 	 *
-	 * @param string        $text  Text potentially containing tokens.
-	 * @param WP_Block|null $block Block instance, for context-aware tags.
+	 * $escape stays off by default for render_dynamic_field_block(), which
+	 * resolves one token at a time and escapes the whole result itself
+	 * afterward (esc_url() for an image tag, esc_html() otherwise) - the
+	 * correct approach when only one call site touches the value. But
+	 * resolve_block_tokens() below substitutes tokens straight into HTML
+	 * that has already been rendered, in whatever text or attribute context
+	 * the token happens to sit in, so it needs each value escaped right
+	 * here, per tag, before it goes back into that string. Tag data isn't
+	 * always author-controlled (e.g. `{{author_bio}}` reads a profile field
+	 * a lower-privileged user can set) and has to be treated the same as
+	 * any other untrusted output.
+	 *
+	 * @param string        $text   Text potentially containing tokens.
+	 * @param WP_Block|null $block  Block instance, for context-aware tags.
+	 * @param bool          $escape Escape each resolved value before substituting it back in.
 	 * @return string
 	 */
-	public static function resolve_string($text, $block = null)
+	public static function resolve_string($text, $block = null, $escape = false)
 	{
 		if (strpos($text, '{{') === false) {
 			return $text;
@@ -353,13 +366,20 @@ class Bpafb_Pro_Dynamic_Tags
 
 		return preg_replace_callback(
 			self::TOKEN_PATTERN,
-			function ($matches) use ($tags, $post_id) {
+			function ($matches) use ($tags, $post_id, $escape) {
 				$key = $matches[1];
 				if (!isset($tags[$key])) {
 					return $matches[0];
 				}
-				$param = isset($matches[2]) ? $matches[2] : '';
-				return (string) call_user_func($tags[$key]['resolve'], $post_id, $param);
+				$param    = isset($matches[2]) ? $matches[2] : '';
+				$resolved = (string) call_user_func($tags[$key]['resolve'], $post_id, $param);
+
+				if (!$escape) {
+					return $resolved;
+				}
+
+				$is_image = 'image' === ($tags[$key]['type'] ?? 'text');
+				return $is_image ? esc_url($resolved) : esc_html($resolved);
 			},
 			$text
 		);
@@ -380,7 +400,7 @@ class Bpafb_Pro_Dynamic_Tags
 		if (strpos($block_content, '{{') === false) {
 			return $block_content;
 		}
-		return self::resolve_string($block_content, null);
+		return self::resolve_string($block_content, null, true);
 	}
 
 	/**

@@ -14,19 +14,9 @@ if (!defined('ABSPATH')) {
  */
 
 $bpafb_template_id = isset($attributes['templateId']) ? absint($attributes['templateId']) : 0;
+$bpafb_template_post = Bpafb_Pro_Template_Kinds::get_renderable_template($bpafb_template_id, 'loop-item');
 
-if (!$bpafb_template_id) {
-	return;
-}
-
-$bpafb_template_post = get_post($bpafb_template_id);
-if (
-	!$bpafb_template_post
-	|| $bpafb_template_post->post_type !== Bpafb_Template_Post_Type::POST_TYPE
-	|| $bpafb_template_post->post_status !== 'publish'
-	|| empty($bpafb_template_post->post_content)
-	|| Bpafb_Pro_Template_Kinds::get_kind($bpafb_template_id) !== 'loop-item'
-) {
+if (!$bpafb_template_post) {
 	return;
 }
 

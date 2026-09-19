@@ -37,18 +37,8 @@ $bpafb_wrapper_attributes = get_block_wrapper_attributes([
  * @return string
  */
 $bpafb_render_dropdown = function ($template_id) {
-	if (!$template_id) {
-		return '';
-	}
-
-	$template_post = get_post($template_id);
-	if (
-		!$template_post
-		|| $template_post->post_type !== Bpafb_Template_Post_Type::POST_TYPE
-		|| $template_post->post_status !== 'publish'
-		|| empty($template_post->post_content)
-		|| Bpafb_Pro_Template_Kinds::get_kind($template_id) !== 'mega-menu-item'
-	) {
+	$template_post = Bpafb_Pro_Template_Kinds::get_renderable_template($template_id, 'mega-menu-item');
+	if (!$template_post) {
 		return '';
 	}
 

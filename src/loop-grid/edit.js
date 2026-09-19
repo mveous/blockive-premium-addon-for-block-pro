@@ -16,6 +16,7 @@ import {
 import InspectorTabs from '../components/inspector-tabs';
 import AdvancedTab from '../components/advanced-tab';
 import ResponsiveControls from '../components/responsive-controls';
+import useTemplateOptions from '../components/use-template-options';
 
 const TEMPLATE_KIND = 'loop-item';
 
@@ -56,25 +57,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		paginationAlign,
 	} = attributes;
 
-	const templateOptions = useSelect( ( select ) => {
-		const records = select( 'core' ).getEntityRecords( 'postType', 'blockive_template', {
-			status: 'publish',
-			per_page: -1,
-			context: 'view',
-		} );
-
-		const matching = ( records || [] ).filter(
-			( record ) => record.meta?._bpafb_template_kind === TEMPLATE_KIND
-		);
-
-		return [
-			{ label: __( 'Select a template…', 'blockive-premium-addon-for-block-pro' ), value: 0 },
-			...matching.map( ( record ) => ( {
-				label: record.title?.rendered || `#${ record.id }`,
-				value: record.id,
-			} ) ),
-		];
-	}, [] );
+	const templateOptions = useTemplateOptions( TEMPLATE_KIND );
 
 	// Derived from the current URL rather than a new localized value, since
 	// the block editor always runs under /wp-admin/ (post.php, post-new.php,

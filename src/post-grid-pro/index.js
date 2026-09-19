@@ -14,8 +14,9 @@ import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, SelectControl } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
+
+import useTemplateOptions from '../components/use-template-options';
 
 const POST_GRID_BLOCK = 'blockive-premium-addon-for-block/post-grid';
 
@@ -37,25 +38,10 @@ const withLoopTemplateControl = createHigherOrderComponent( ( BlockEdit ) => ( p
 		return <BlockEdit { ...props } />;
 	}
 
-	const loopTemplateOptions = useSelect( ( select ) => {
-		const records = select( 'core' ).getEntityRecords( 'postType', 'blockive_template', {
-			status: 'publish',
-			per_page: -1,
-			context: 'view',
-		} );
-
-		const loopTemplates = ( records || [] ).filter(
-			( record ) => record.meta?._bpafb_template_kind === 'loop-item'
-		);
-
-		return [
-			{ label: __( 'Default card layout', 'blockive-premium-addon-for-block-pro' ), value: 0 },
-			...loopTemplates.map( ( record ) => ( {
-				label: record.title?.rendered || `#${ record.id }`,
-				value: record.id,
-			} ) ),
-		];
-	}, [] );
+	const loopTemplateOptions = useTemplateOptions(
+		'loop-item',
+		__( 'Default card layout', 'blockive-premium-addon-for-block-pro' )
+	);
 
 	return (
 		<>

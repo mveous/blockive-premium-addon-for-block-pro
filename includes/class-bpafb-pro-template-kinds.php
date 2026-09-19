@@ -452,6 +452,38 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
+	 * Checks that a Blockive Template post is ready to render as a specific
+	 * kind: it exists, is the right post type, is published, has content,
+	 * and is actually set to the kind the caller expects. Every place that
+	 * renders one Blockive Template's content directly - Mega Menu's
+	 * dropdown, Loop Grid, and Post Grid Pro's Loop Builder - used to
+	 * repeat these same five checks by hand; they now all call this instead.
+	 *
+	 * @param int    $template_id Blockive Template post ID.
+	 * @param string $kind        Expected kind (see self::KINDS).
+	 * @return WP_Post|null The template post, or null if it isn't usable.
+	 */
+	public static function get_renderable_template($template_id, $kind)
+	{
+		if (!$template_id) {
+			return null;
+		}
+
+		$template_post = get_post($template_id);
+		if (
+			!$template_post
+			|| $template_post->post_type !== Bpafb_Template_Post_Type::POST_TYPE
+			|| $template_post->post_status !== 'publish'
+			|| empty($template_post->post_content)
+			|| self::get_kind($template_id) !== $kind
+		) {
+			return null;
+		}
+
+		return $template_post;
+	}
+
+	/**
 	 * Finds the best matching published Blockive Template for a given
 	 * non-"single" kind, on the current page. The most specific matched
 	 * rule wins, across all templates checked. Ties go to the template

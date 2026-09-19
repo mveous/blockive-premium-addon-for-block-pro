@@ -84,18 +84,8 @@ class Bpafb_Pro_Loop_Builder
 		$attrs = isset($parsed_block['attrs']) ? $parsed_block['attrs'] : [];
 
 		$template_id = isset($attrs['bpafbLoopTemplateId']) ? absint($attrs['bpafbLoopTemplateId']) : 0;
-		if (!$template_id) {
-			return $block_content;
-		}
-
-		$template_post = get_post($template_id);
-		if (
-			!$template_post
-			|| $template_post->post_type !== Bpafb_Template_Post_Type::POST_TYPE
-			|| $template_post->post_status !== 'publish'
-			|| empty($template_post->post_content)
-			|| Bpafb_Pro_Template_Kinds::get_kind($template_id) !== 'loop-item'
-		) {
+		$template_post = Bpafb_Pro_Template_Kinds::get_renderable_template($template_id, 'loop-item');
+		if (!$template_post) {
 			return $block_content;
 		}
 
