@@ -1,39 +1,45 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "blockive-premium-addon-for-block/media-carousel",
+	"name": "blockive-premium-addon-for-block/gallery",
 	"version": "1.0.0",
-	"title": "Media Carousel",
+	"title": "Gallery",
 	"category": "bpafb-widgets",
-	"icon": "images-alt2",
-	"description": "An image and video carousel with carousel, slideshow (with thumbnails), and coverflow skins, plus a lightbox.",
+	"icon": "format-gallery",
+	"description": "An image gallery in a grid, masonry, or justified layout, with filter tabs and a lightbox.",
 	"keywords": [
-		"carousel",
 		"gallery",
-		"slider",
 		"images",
+		"masonry",
+		"justified",
 		"lightbox",
-		"video"
+		"filter",
+		"portfolio"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
 	"attributes": {
-		"items": {
+		"galleries": {
 			"type": "array",
-			"default": []
+			"default": [
+				{
+					"title": "Gallery 1",
+					"images": []
+				}
+			]
 		},
-		"skin": {
+		"layout": {
 			"type": "string",
-			"default": "carousel"
+			"default": "grid"
 		},
-		"slidesPerView": {
+		"columns": {
 			"type": "number",
-			"default": 3
+			"default": 4
 		},
-		"slidesPerViewTablet": {
+		"columnsTablet": {
 			"type": "number",
 			"default": 2
 		},
-		"slidesPerViewMobile": {
+		"columnsMobile": {
 			"type": "number",
 			"default": 1
 		},
@@ -41,83 +47,23 @@
 			"type": "number",
 			"default": 10
 		},
-		"speed": {
+		"aspectRatio": {
+			"type": "string",
+			"default": "1/1"
+		},
+		"rowHeight": {
 			"type": "number",
-			"default": 500
+			"default": 220
 		},
-		"autoplay": {
-			"type": "boolean",
-			"default": true
-		},
-		"autoplaySpeed": {
-			"type": "number",
-			"default": 5000
-		},
-		"pauseOnHover": {
-			"type": "boolean",
-			"default": true
-		},
-		"loop": {
-			"type": "boolean",
-			"default": true
-		},
-		"navigation": {
-			"type": "string",
-			"default": "both"
-		},
-		"arrowPosition": {
-			"type": "string",
-			"default": "inside"
-		},
-		"arrowSize": {
-			"type": "number",
-			"default": 18
-		},
-		"arrowColor": {
-			"type": "string",
-			"default": ""
-		},
-		"arrowBgColor": {
-			"type": "string",
-			"default": ""
-		},
-		"arrowHoverColor": {
-			"type": "string",
-			"default": ""
-		},
-		"arrowHoverBgColor": {
-			"type": "string",
-			"default": ""
-		},
-		"dotSize": {
-			"type": "number",
-			"default": 10
-		},
-		"dotColor": {
-			"type": "string",
-			"default": ""
-		},
-		"dotActiveColor": {
-			"type": "string",
-			"default": ""
-		},
-		"height": {
-			"type": "number",
-			"default": 300
-		},
-		"heightTablet": {
+		"rowHeightTablet": {
 			"type": "number"
 		},
-		"heightMobile": {
+		"rowHeightMobile": {
 			"type": "number"
-		},
-		"imageFit": {
-			"type": "string",
-			"default": "cover"
 		},
 		"imageSize": {
 			"type": "string",
-			"default": "large"
+			"default": "medium_large"
 		},
 		"onClick": {
 			"type": "string",
@@ -172,17 +118,62 @@
 			"type": "string",
 			"default": ""
 		},
-		"playIconSize": {
-			"type": "number",
-			"default": 48
+		"showAllFilter": {
+			"type": "boolean",
+			"default": true
 		},
-		"playIconColor": {
+		"allFilterLabel": {
+			"type": "string",
+			"default": "All"
+		},
+		"filterAlign": {
+			"type": "string",
+			"default": "center"
+		},
+		"filterFontFamily": {
 			"type": "string",
 			"default": ""
 		},
-		"thumbSize": {
+		"filterFontSize": {
+			"type": "number"
+		},
+		"filterFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"filterLineHeight": {
+			"type": "number"
+		},
+		"filterLetterSpacing": {
+			"type": "number"
+		},
+		"filterTextTransform": {
+			"type": "string",
+			"default": ""
+		},
+		"filterTextDecoration": {
+			"type": "string",
+			"default": ""
+		},
+		"filterColor": {
+			"type": "string",
+			"default": ""
+		},
+		"filterBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"filterActiveColor": {
+			"type": "string",
+			"default": ""
+		},
+		"filterActiveBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"filterRadius": {
 			"type": "number",
-			"default": 70
+			"default": 20
 		},
 		"bpafbUid": {
 			"type": "string",
@@ -442,7 +433,6 @@
 	"render": "file:./render.php",
 	"editorScript": "file:./index.js",
 	"style": [
-		"bpafb-pro-carousel",
 		"bpafb-pro-lightbox",
 		"file:./style-index.css"
 	],

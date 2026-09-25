@@ -22,18 +22,23 @@ export function initCarousel( root, { onChange } = {} ) {
 	if ( root.dataset.bpafbReady ) {
 		return null;
 	}
-	const track = root.querySelector( '.bpafb-carousel__track' );
+	// Only this carousel's own parts, not those of a carousel nested in a
+	// slide (e.g. a Media Carousel inside a Loop Carousel card).
+	const own = ( selector ) => [ ...root.querySelectorAll( selector ) ].filter( ( node ) => node.closest( '.bpafb-carousel' ) === root );
+	const mine = ( event ) => event.target.closest( '.bpafb-carousel' ) === root;
+
+	const track = own( '.bpafb-carousel__track' )[ 0 ];
 	if ( ! track ) {
 		return null;
 	}
 	root.dataset.bpafbReady = '1';
 
 	const slides = [ ...track.children ];
-	const viewport = root.querySelector( '.bpafb-carousel__viewport' );
-	const dots = [ ...root.querySelectorAll( '.bpafb-carousel__dot' ) ];
-	const prev = root.querySelector( '.bpafb-carousel__arrow--prev' );
-	const next = root.querySelector( '.bpafb-carousel__arrow--next' );
-	const pauseBtn = root.querySelector( '.bpafb-carousel__pause' );
+	const viewport = own( '.bpafb-carousel__viewport' )[ 0 ];
+	const dots = own( '.bpafb-carousel__dot' );
+	const prev = own( '.bpafb-carousel__arrow--prev' )[ 0 ];
+	const next = own( '.bpafb-carousel__arrow--next' )[ 0 ];
+	const pauseBtn = own( '.bpafb-carousel__pause' )[ 0 ];
 	const loop = root.dataset.loop === '1';
 	const interval = parseInt( root.dataset.interval, 10 ) || 5000;
 	const centered = root.classList.contains( 'bpafb-carousel--centered' );
@@ -193,7 +198,7 @@ export function initCarousel( root, { onChange } = {} ) {
 	document.addEventListener( 'visibilitychange', schedule );
 
 	root.addEventListener( 'keydown', ( event ) => {
-		if ( event.target.closest( 'input, textarea, select' ) ) {
+		if ( ! mine( event ) || event.target.closest( 'input, textarea, select' ) ) {
 			return;
 		}
 		const rtl = window.getComputedStyle( root ).direction === 'rtl';
@@ -210,7 +215,7 @@ export function initCarousel( root, { onChange } = {} ) {
 	viewport.addEventListener(
 		'pointerdown',
 		( event ) => {
-			if ( event.pointerType === 'mouse' ) {
+			if ( event.pointerType === 'mouse' || ! mine( event ) ) {
 				return;
 			}
 			startX = event.clientX;

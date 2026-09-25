@@ -17,23 +17,6 @@ if (!defined('ABSPATH')) {
 
 class Bpafb_Pro_Carousel
 {
-	const STYLE_HANDLE = 'bpafb-pro-carousel';
-
-	/**
-	 * Registers the shared carousel stylesheet, which each carousel block
-	 * lists by handle in its block.json "style". Runs on `init` before the
-	 * blocks are registered.
-	 */
-	public static function register_style()
-	{
-		$file = 'build/pro-components/carousel/style-index.css';
-		if (!file_exists(BPAFB_PRO_PATH . $file)) {
-			return;
-		}
-		wp_register_style(self::STYLE_HANDLE, BPAFB_PRO_URL . $file, [], BPAFB_PRO_VERSION);
-		wp_style_add_data(self::STYLE_HANDLE, 'rtl', 'replace');
-	}
-
 	/**
 	 * Wrapper attributes for get_block_wrapper_attributes().
 	 *

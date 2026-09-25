@@ -1,188 +1,181 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "blockive-premium-addon-for-block/media-carousel",
+	"name": "blockive-premium-addon-for-block/table-of-contents",
 	"version": "1.0.0",
-	"title": "Media Carousel",
+	"title": "Table of Contents",
 	"category": "bpafb-widgets",
-	"icon": "images-alt2",
-	"description": "An image and video carousel with carousel, slideshow (with thumbnails), and coverflow skins, plus a lightbox.",
+	"icon": "list-view",
+	"description": "A linked list of the page's headings, built in the browser, with nesting, collapse, and scroll highlighting.",
 	"keywords": [
-		"carousel",
-		"gallery",
-		"slider",
-		"images",
-		"lightbox",
-		"video"
+		"toc",
+		"table of contents",
+		"headings",
+		"anchors",
+		"navigation"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
 	"attributes": {
-		"items": {
+		"title": {
+			"type": "string",
+			"default": "Table of Contents"
+		},
+		"titleTag": {
+			"type": "string",
+			"default": "h4"
+		},
+		"headingTags": {
 			"type": "array",
-			"default": []
+			"items": {
+				"type": "string"
+			},
+			"default": [
+				"h2",
+				"h3",
+				"h4"
+			]
 		},
-		"skin": {
+		"container": {
 			"type": "string",
-			"default": "carousel"
+			"default": ""
 		},
-		"slidesPerView": {
-			"type": "number",
-			"default": 3
+		"exclude": {
+			"type": "string",
+			"default": ""
 		},
-		"slidesPerViewTablet": {
-			"type": "number",
-			"default": 2
+		"marker": {
+			"type": "string",
+			"default": "numbers"
 		},
-		"slidesPerViewMobile": {
-			"type": "number",
-			"default": 1
-		},
-		"gap": {
-			"type": "number",
-			"default": 10
-		},
-		"speed": {
-			"type": "number",
-			"default": 500
-		},
-		"autoplay": {
+		"hierarchical": {
 			"type": "boolean",
 			"default": true
 		},
-		"autoplaySpeed": {
-			"type": "number",
-			"default": 5000
-		},
-		"pauseOnHover": {
+		"collapsible": {
 			"type": "boolean",
 			"default": true
 		},
-		"loop": {
+		"collapsed": {
+			"type": "boolean",
+			"default": false
+		},
+		"collapsedMobile": {
 			"type": "boolean",
 			"default": true
 		},
-		"navigation": {
-			"type": "string",
-			"default": "both"
-		},
-		"arrowPosition": {
-			"type": "string",
-			"default": "inside"
-		},
-		"arrowSize": {
-			"type": "number",
-			"default": 18
-		},
-		"arrowColor": {
-			"type": "string",
-			"default": ""
-		},
-		"arrowBgColor": {
-			"type": "string",
-			"default": ""
-		},
-		"arrowHoverColor": {
-			"type": "string",
-			"default": ""
-		},
-		"arrowHoverBgColor": {
-			"type": "string",
-			"default": ""
-		},
-		"dotSize": {
-			"type": "number",
-			"default": 10
-		},
-		"dotColor": {
-			"type": "string",
-			"default": ""
-		},
-		"dotActiveColor": {
-			"type": "string",
-			"default": ""
-		},
-		"height": {
-			"type": "number",
-			"default": 300
-		},
-		"heightTablet": {
-			"type": "number"
-		},
-		"heightMobile": {
-			"type": "number"
-		},
-		"imageFit": {
-			"type": "string",
-			"default": "cover"
-		},
-		"imageSize": {
-			"type": "string",
-			"default": "large"
-		},
-		"onClick": {
-			"type": "string",
-			"default": "lightbox"
-		},
-		"captions": {
-			"type": "string",
-			"default": "none"
-		},
-		"hoverEffect": {
-			"type": "string",
-			"default": "zoom"
-		},
-		"overlayColor": {
-			"type": "string",
-			"default": ""
-		},
-		"borderRadius": {
+		"scrollOffset": {
 			"type": "number",
 			"default": 0
 		},
-		"captionFontFamily": {
+		"noHeadingsText": {
+			"type": "string",
+			"default": "No headings were found on this page."
+		},
+		"bgColor": {
 			"type": "string",
 			"default": ""
 		},
-		"captionFontSize": {
-			"type": "number"
-		},
-		"captionFontWeight": {
+		"borderColor": {
 			"type": "string",
 			"default": ""
 		},
-		"captionLineHeight": {
-			"type": "number"
-		},
-		"captionLetterSpacing": {
-			"type": "number"
-		},
-		"captionTextTransform": {
-			"type": "string",
-			"default": ""
-		},
-		"captionTextDecoration": {
-			"type": "string",
-			"default": ""
-		},
-		"captionColor": {
-			"type": "string",
-			"default": ""
-		},
-		"captionBgColor": {
-			"type": "string",
-			"default": ""
-		},
-		"playIconSize": {
+		"borderWidth": {
 			"type": "number",
-			"default": 48
+			"default": 1
 		},
-		"playIconColor": {
+		"borderRadius": {
+			"type": "number",
+			"default": 6
+		},
+		"padding": {
+			"type": "number",
+			"default": 20
+		},
+		"titleFontFamily": {
 			"type": "string",
 			"default": ""
 		},
-		"thumbSize": {
+		"titleFontSize": {
+			"type": "number"
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"titleLineHeight": {
+			"type": "number"
+		},
+		"titleLetterSpacing": {
+			"type": "number"
+		},
+		"titleTextTransform": {
+			"type": "string",
+			"default": ""
+		},
+		"titleTextDecoration": {
+			"type": "string",
+			"default": ""
+		},
+		"titleColor": {
+			"type": "string",
+			"default": ""
+		},
+		"titleBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"separator": {
+			"type": "boolean",
+			"default": true
+		},
+		"linkFontFamily": {
+			"type": "string",
+			"default": ""
+		},
+		"linkFontSize": {
+			"type": "number"
+		},
+		"linkFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"linkLineHeight": {
+			"type": "number"
+		},
+		"linkLetterSpacing": {
+			"type": "number"
+		},
+		"linkTextTransform": {
+			"type": "string",
+			"default": ""
+		},
+		"linkTextDecoration": {
+			"type": "string",
+			"default": ""
+		},
+		"linkColor": {
+			"type": "string",
+			"default": ""
+		},
+		"linkHoverColor": {
+			"type": "string",
+			"default": ""
+		},
+		"linkActiveColor": {
+			"type": "string",
+			"default": ""
+		},
+		"markerColor": {
+			"type": "string",
+			"default": ""
+		},
+		"indent": {
 			"type": "number",
-			"default": 70
+			"default": 16
+		},
+		"itemSpacing": {
+			"type": "number",
+			"default": 6
 		},
 		"bpafbUid": {
 			"type": "string",
@@ -441,11 +434,7 @@
 	},
 	"render": "file:./render.php",
 	"editorScript": "file:./index.js",
-	"style": [
-		"bpafb-pro-carousel",
-		"bpafb-pro-lightbox",
-		"file:./style-index.css"
-	],
+	"style": "file:./style-index.css",
 	"editorStyle": "file:./index.css",
 	"viewScript": "file:./view.js"
 }

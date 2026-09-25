@@ -5,10 +5,8 @@
  * the generated -rtl.css (rtlcss negates the translateX), so the only
  * [dir] rule here mirrors the arrow glyphs.
  *
- * Built as its own entry (see webpack.config.js) and registered as the
- * `bpafb-pro-carousel` style handle, which each carousel block lists in
- * its block.json "style" - importing it from every block would put it in
- * only one block's style-index.css (wp-scripts' shared style chunk).
+ * Registered as the `bpafb-pro-carousel` style handle; see
+ * Bpafb_Pro_Shared_Assets.
  */
 .bpafb-carousel {
 	--bpafb-carousel-cols: var(--bpafb-carousel-per-view, 1);
@@ -103,15 +101,15 @@
 }
 
 /* Arrows outside: room is made beside the slides. */
-.bpafb-carousel--arrows-outside .bpafb-carousel__stage {
+.bpafb-carousel--arrows-outside > .bpafb-carousel__stage {
 	padding-inline: calc(var(--bpafb-carousel-arrow-size, 18px) + 34px);
 }
 
-.bpafb-carousel--arrows-outside .bpafb-carousel__arrow--prev {
+.bpafb-carousel--arrows-outside > .bpafb-carousel__stage > .bpafb-carousel__arrow--prev {
 	left: 0;
 }
 
-.bpafb-carousel--arrows-outside .bpafb-carousel__arrow--next {
+.bpafb-carousel--arrows-outside > .bpafb-carousel__stage > .bpafb-carousel__arrow--next {
 	right: 0;
 }
 
@@ -174,12 +172,12 @@
 }
 
 /* Nothing to scroll at this breakpoint (view.js sets is-static). */
-.bpafb-carousel.is-static .bpafb-carousel__arrow,
-.bpafb-carousel.is-static .bpafb-carousel__bottom {
+.bpafb-carousel.is-static > .bpafb-carousel__stage > .bpafb-carousel__arrow,
+.bpafb-carousel.is-static > .bpafb-carousel__bottom {
 	display: none;
 }
 
-.bpafb-carousel.is-static.bpafb-carousel--arrows-outside .bpafb-carousel__stage {
+.bpafb-carousel.is-static.bpafb-carousel--arrows-outside > .bpafb-carousel__stage {
 	padding-inline: 0;
 }
 

@@ -134,6 +134,56 @@ class Bpafb_Pro_Loop_Builder
 	}
 
 	/**
+	 * WP_Query arguments for the Loop Grid and Loop Carousel blocks, from
+	 * their shared query attributes (postType, postsPerPage, orderBy,
+	 * order, taxonomy, termIds, excludeCurrentPost).
+	 *
+	 * @param array $attributes Block attributes.
+	 * @param int   $defaults_per_page Items when postsPerPage is not set.
+	 * @return array
+	 */
+	public static function block_query_args($attributes, $defaults_per_page = 6)
+	{
+		$post_type = isset($attributes['postType']) && is_post_type_viewable($attributes['postType']) ? $attributes['postType'] : 'post';
+
+		$posts_per_page = isset($attributes['postsPerPage']) ? absint($attributes['postsPerPage']) : $defaults_per_page;
+		$posts_per_page = max(1, min(50, $posts_per_page));
+
+		$allowed_orderby = ['date', 'title', 'rand', 'id', 'menu_order'];
+		$orderby = isset($attributes['orderBy']) && in_array($attributes['orderBy'], $allowed_orderby, true) ? $attributes['orderBy'] : 'date';
+		$orderby = ('id' === $orderby) ? 'ID' : $orderby;
+
+		$order = isset($attributes['order']) && in_array(strtolower((string) $attributes['order']), ['asc', 'desc'], true)
+			? $attributes['order']
+			: 'desc';
+
+		$args = [
+			'post_type'      => $post_type,
+			'posts_per_page' => $posts_per_page,
+			'orderby'        => $orderby,
+			'order'          => $order,
+			'post_status'    => 'publish',
+		];
+
+		$taxonomy = isset($attributes['taxonomy']) ? sanitize_key($attributes['taxonomy']) : '';
+		$term_ids = isset($attributes['termIds']) && is_array($attributes['termIds']) ? array_map('absint', $attributes['termIds']) : [];
+
+		if ($taxonomy && !empty($term_ids) && taxonomy_exists($taxonomy)) {
+			$args['tax_query'] = [[ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+				'taxonomy' => $taxonomy,
+				'field'    => 'term_id',
+				'terms'    => $term_ids,
+			]];
+		}
+
+		if (!empty($attributes['excludeCurrentPost']) && is_singular()) {
+			$args['post__not_in'] = [get_the_ID()];
+		}
+
+		return $args;
+	}
+
+	/**
 	 * Loads the Loop Template control, on every editor screen, not just
 	 * the Template Builder, since Post Grid is a normal block that can be
 	 * used on any Post or Page, not a Template Block.

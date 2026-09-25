@@ -157,14 +157,7 @@ $bpafb_wrapper = Bpafb_Pro_Carousel::wrapper_attrs(
 	__('Media carousel', 'blockive-premium-addon-for-block-pro'),
 	'coverflow' === $bpafb_skin
 );
-$bpafb_wrapper['data-l10n'] = wp_json_encode([
-	'dialog'  => __('Media viewer', 'blockive-premium-addon-for-block-pro'),
-	'close'   => __('Close', 'blockive-premium-addon-for-block-pro'),
-	'prev'    => __('Previous', 'blockive-premium-addon-for-block-pro'),
-	'next'    => __('Next', 'blockive-premium-addon-for-block-pro'),
-	/* translators: 1: current item number, 2: total items. */
-	'counter' => __('%1$d / %2$d', 'blockive-premium-addon-for-block-pro'),
-]);
+$bpafb_wrapper['data-l10n'] = Bpafb_Pro_Shared_Assets::lightbox_l10n();
 
 printf(
 	'<div %1$s>%2$s%3$s</div>',

@@ -20,19 +20,6 @@ if (!$bpafb_template_post) {
 	return;
 }
 
-$bpafb_post_type = isset($attributes['postType']) && is_post_type_viewable($attributes['postType']) ? $attributes['postType'] : 'post';
-
-$bpafb_posts_per_page = isset($attributes['postsPerPage']) ? absint($attributes['postsPerPage']) : 6;
-$bpafb_posts_per_page = max(1, min(50, $bpafb_posts_per_page));
-
-$bpafb_allowed_orderby = ['date', 'title', 'rand', 'id', 'menu_order'];
-$bpafb_orderby = isset($attributes['orderBy']) && in_array($attributes['orderBy'], $bpafb_allowed_orderby, true) ? $attributes['orderBy'] : 'date';
-$bpafb_orderby = ('id' === $bpafb_orderby) ? 'ID' : $bpafb_orderby;
-
-$bpafb_order = isset($attributes['order']) && in_array(strtolower((string) $attributes['order']), ['asc', 'desc'], true)
-	? $attributes['order']
-	: 'desc';
-
 $bpafb_pagination_type = isset($attributes['paginationType']) && in_array($attributes['paginationType'], ['numbers', 'prev_next'], true)
 	? $attributes['paginationType']
 	: 'none';
@@ -42,29 +29,8 @@ if ('none' !== $bpafb_pagination_type && isset($_GET['bpafb-page'])) {
 	$bpafb_paged = max(1, absint(wp_unslash($_GET['bpafb-page'])));
 }
 
-$bpafb_query_args = [
-	'post_type'      => $bpafb_post_type,
-	'posts_per_page' => $bpafb_posts_per_page,
-	'paged'          => $bpafb_paged,
-	'orderby'        => $bpafb_orderby,
-	'order'          => $bpafb_order,
-	'post_status'    => 'publish',
-];
-
-$bpafb_taxonomy = isset($attributes['taxonomy']) ? sanitize_key($attributes['taxonomy']) : '';
-$bpafb_term_ids = isset($attributes['termIds']) && is_array($attributes['termIds']) ? array_map('absint', $attributes['termIds']) : [];
-
-if ($bpafb_taxonomy && !empty($bpafb_term_ids) && taxonomy_exists($bpafb_taxonomy)) {
-	$bpafb_query_args['tax_query'] = [[ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-		'taxonomy' => $bpafb_taxonomy,
-		'field'    => 'term_id',
-		'terms'    => $bpafb_term_ids,
-	]];
-}
-
-if (!empty($attributes['excludeCurrentPost']) && is_singular()) {
-	$bpafb_query_args['post__not_in'] = [get_the_ID()];
-}
+$bpafb_query_args = Bpafb_Pro_Loop_Builder::block_query_args($attributes, 6);
+$bpafb_query_args['paged'] = $bpafb_paged;
 
 $bpafb_uid = !empty($attributes['bpafbUid']) ? sanitize_html_class($attributes['bpafbUid']) : wp_unique_id('bpafb-pro-loop-grid-');
 $bpafb_masonry = !empty($attributes['masonry']);

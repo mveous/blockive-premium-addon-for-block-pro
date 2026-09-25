@@ -37,11 +37,15 @@ const extraEntry = {
 		__dirname,
 		'src/dynamic-tags/index.js'
 	),
-	// Shared carousel stylesheet, registered as the bpafb-pro-carousel
-	// style handle (see Bpafb_Pro_Carousel::register_style()).
+	// Shared stylesheets, registered as style handles by
+	// Bpafb_Pro_Shared_Assets::register_styles().
 	'pro-components/carousel/index': path.resolve(
 		__dirname,
 		'src/pro-components/carousel/index.js'
+	),
+	'pro-components/lightbox/index': path.resolve(
+		__dirname,
+		'src/pro-components/lightbox/index.js'
 	),
 };
 
