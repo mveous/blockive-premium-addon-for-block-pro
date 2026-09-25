@@ -1,0 +1,330 @@
+/* ------------------------------------------------------------------
+ * Archive Posts / Archive Products.
+ * Built into build/template-blocks-site/index.css, which
+ * Bpafb_Pro_Site_Blocks::enqueue_style() loads with style-index.css.
+ * ------------------------------------------------------------------ */
+
+.bpafb-tb-archive-grid,
+.bpafb-tb-archive--woocommerce ul.products {
+	display: grid;
+	grid-template-columns: repeat(var(--bpafb-archive-columns, 3), minmax(0, 1fr));
+	column-gap: var(--bpafb-archive-column-gap, 24px);
+	row-gap: var(--bpafb-archive-row-gap, 24px);
+}
+
+@media (max-width: 1024px) {
+	.bpafb-tb-archive-grid,
+	.bpafb-tb-archive--woocommerce ul.products {
+		grid-template-columns: repeat(var(--bpafb-archive-columns-tablet, 2), minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 767px) {
+	.bpafb-tb-archive-grid,
+	.bpafb-tb-archive--woocommerce ul.products {
+		grid-template-columns: repeat(var(--bpafb-archive-columns-mobile, 1), minmax(0, 1fr));
+	}
+}
+
+.bpafb-tb-archive-item {
+	min-width: 0;
+}
+
+.bpafb-tb-archive--equal .bpafb-tb-archive-item {
+	height: 100%;
+}
+
+/* WooCommerce's native loop: themes size it with floats and widths, the grid takes over. */
+.bpafb-tb-archive--woocommerce ul.products {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.bpafb-tb-archive--woocommerce ul.products::before,
+.bpafb-tb-archive--woocommerce ul.products::after {
+	display: none !important;
+}
+
+.bpafb-tb-archive--woocommerce ul.products li.product {
+	float: none !important;
+	width: auto !important;
+	margin: 0 !important;
+	clear: none !important;
+}
+
+/* Card */
+.bpafb-tb-archive-card {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	box-sizing: border-box;
+	background: var(--bpafb-archive-card-bg, transparent);
+	border: var(--bpafb-archive-card-border-width, 0) solid var(--bpafb-archive-card-border-color, #e5e7eb);
+	border-radius: var(--bpafb-archive-card-radius, 8px);
+	transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.bpafb-tb-archive-posts .bpafb-tb-archive-card {
+	background: var(--bpafb-archive-card-bg, #fff);
+}
+
+.bpafb-tb-archive--shadow .bpafb-tb-archive-card {
+	box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+}
+
+.bpafb-tb-archive--shadow .bpafb-tb-archive-card:hover {
+	box-shadow: 0 10px 28px rgba(15, 23, 42, 0.14);
+	transform: translateY(-3px);
+}
+
+.bpafb-tb-archive-card__media {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	line-height: 0;
+}
+
+.bpafb-tb-archive-card__media img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: var(--bpafb-archive-image-ratio, auto);
+	object-fit: cover;
+	transition: transform 0.4s ease;
+}
+
+.bpafb-tb-archive-card:hover .bpafb-tb-archive-card__media img {
+	transform: scale(1.04);
+}
+
+.bpafb-tb-archive-card__body {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	gap: 10px;
+	padding: var(--bpafb-archive-card-padding, 20px);
+}
+
+.bpafb-tb-archive-products .bpafb-tb-archive-card__body {
+	padding: var(--bpafb-archive-card-padding, 0);
+	padding-top: max(var(--bpafb-archive-card-padding, 0px), 14px);
+}
+
+.bpafb-tb-archive-card--center {
+	text-align: center;
+}
+
+.bpafb-tb-archive-card--right {
+	text-align: right;
+}
+
+.bpafb-tb-archive-card__title {
+	margin: 0;
+	font-family: var(--bpafb-archive-title-font-family, inherit);
+	font-size: var(--bpafb-archive-title-font-size, 1.15em);
+	font-weight: var(--bpafb-archive-title-font-weight, 600);
+	line-height: var(--bpafb-archive-title-line-height, 1.35);
+	letter-spacing: var(--bpafb-archive-title-letter-spacing, normal);
+	text-transform: var(--bpafb-archive-title-text-transform, none);
+}
+
+.bpafb-tb-archive-products .bpafb-tb-archive-card__title {
+	padding: 0 !important;
+	font-size: var(--bpafb-archive-title-font-size, 1em);
+}
+
+.bpafb-tb-archive-card__title a {
+	color: var(--bpafb-archive-title-color, inherit);
+	text-decoration: var(--bpafb-archive-title-text-decoration, none);
+	transition: color 0.2s ease;
+}
+
+.bpafb-tb-archive-card__title a:hover,
+.bpafb-tb-archive-card__title a:focus-visible {
+	color: var(--bpafb-archive-title-hover-color, var(--bpafb-archive-title-color, inherit));
+}
+
+.bpafb-tb-archive-card__terms,
+.bpafb-tb-archive-card__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	font-size: 0.85em;
+	color: var(--bpafb-archive-meta-color, #6b7280);
+}
+
+.bpafb-tb-archive-card__terms a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.bpafb-tb-archive-card__sep {
+	opacity: 0.6;
+}
+
+.bpafb-tb-archive-card__excerpt {
+	font-size: 0.95em;
+	line-height: 1.6;
+	color: var(--bpafb-archive-excerpt-color, inherit);
+}
+
+.bpafb-tb-archive-card__more {
+	margin-top: auto;
+	font-weight: 600;
+	color: var(--bpafb-archive-more-color, inherit);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.bpafb-tb-archive-card__more:hover,
+.bpafb-tb-archive-card__more:focus-visible {
+	color: var(--bpafb-archive-more-hover-color, var(--bpafb-archive-more-color, inherit));
+}
+
+.bpafb-tb-archive-card__badge {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	padding: 4px 10px;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.4;
+	color: var(--bpafb-archive-badge-color, #fff);
+	background: var(--bpafb-archive-badge-bg, #e11d48);
+	border-radius: 999px;
+}
+
+.bpafb-tb-archive-card__rating .star-rating {
+	float: none;
+	margin: 0;
+}
+
+.bpafb-tb-archive-card--center .bpafb-tb-archive-card__rating .star-rating {
+	margin: 0 auto;
+}
+
+.bpafb-tb-archive-card--right .bpafb-tb-archive-card__rating .star-rating {
+	margin-left: auto;
+}
+
+.bpafb-tb-archive-card__price {
+	font-weight: 600;
+	color: var(--bpafb-archive-price-color, inherit);
+}
+
+.bpafb-tb-archive-card__price del {
+	font-weight: 400;
+	opacity: 0.55;
+}
+
+.bpafb-tb-archive-card__price ins {
+	text-decoration: none;
+}
+
+.bpafb-tb-archive-card__cart {
+	margin-top: auto;
+}
+
+.bpafb-tb-archive-card__cart .button {
+	display: inline-block;
+	margin: 0;
+	padding: 10px 18px;
+	font-size: 14px;
+	line-height: 1.3;
+	color: var(--bpafb-archive-button-color, #fff);
+	background: var(--bpafb-archive-button-bg, #1f2937);
+	border: 0;
+	border-radius: var(--bpafb-archive-button-radius, 4px);
+	text-decoration: none;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.bpafb-tb-archive-card__cart .button:hover,
+.bpafb-tb-archive-card__cart .button:focus-visible {
+	color: var(--bpafb-archive-button-hover-color, var(--bpafb-archive-button-color, #fff));
+	background: var(--bpafb-archive-button-hover-bg, #111827);
+}
+
+.bpafb-tb-archive-card__cart .added_to_cart {
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 14px;
+}
+
+/* Result count + sorting */
+.bpafb-tb-archive-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+
+.bpafb-tb-archive-toolbar .woocommerce-result-count,
+.bpafb-tb-archive-toolbar .woocommerce-ordering {
+	float: none;
+	margin: 0;
+}
+
+.bpafb-tb-archive-toolbar .woocommerce-ordering {
+	margin-left: auto;
+}
+
+/* Pagination */
+.bpafb-tb-archive-pagination {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 36px;
+}
+
+.bpafb-tb-archive-pagination--left {
+	justify-content: flex-start;
+}
+
+.bpafb-tb-archive-pagination--center {
+	justify-content: center;
+}
+
+.bpafb-tb-archive-pagination--right {
+	justify-content: flex-end;
+}
+
+.bpafb-tb-archive-pagination .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 38px;
+	height: 38px;
+	padding: 0 12px;
+	box-sizing: border-box;
+	color: var(--bpafb-archive-page-color, inherit);
+	border: 1px solid rgba(127, 127, 127, 0.3);
+	border-radius: 4px;
+	text-decoration: none;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.bpafb-tb-archive-pagination .page-numbers.current,
+.bpafb-tb-archive-pagination a.page-numbers:hover {
+	color: var(--bpafb-archive-page-active-color, #fff);
+	background: var(--bpafb-archive-page-active-bg, #1f2937);
+	border-color: var(--bpafb-archive-page-active-bg, #1f2937);
+}
+
+.bpafb-tb-archive-pagination .page-numbers.dots {
+	border-color: transparent;
+}
+
+.bpafb-tb-archive-empty {
+	margin: 0;
+	padding: 24px 0;
+}
+
+.bpafb-tb-archive-editor-note {
+	margin: 0 0 12px;
+	font-size: 12px;
+	color: #757575;
+}

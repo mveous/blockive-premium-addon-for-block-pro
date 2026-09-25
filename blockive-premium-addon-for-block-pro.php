@@ -121,6 +121,7 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-woo-blocks.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-events-blocks.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-site-blocks.php';
+		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-archive-loop.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-popup-builder.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-dynamic-tags.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-admin-bar.php';

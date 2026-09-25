@@ -7,6 +7,10 @@
  * Button already exist as regular Blockive blocks, so they are not
  * repeated here.
  *
+ * Also registers Archive Posts and Archive Products (listed under the
+ * "Blockive Template" category), which loop the main query for Archive /
+ * Search Results templates - see Bpafb_Pro_Archive_Loop.
+ *
  * Unlike the Woo/Events blocks, these have no free-plugin teaser to
  * replace, so each one is a normal block.json + render.php block under
  * src/template-blocks-site/. They live two folders deep in build/, which
@@ -39,6 +43,8 @@ class Bpafb_Pro_Site_Blocks
 		'login',
 		'sitemap',
 		'copyright',
+		'archive-posts',
+		'archive-products',
 	];
 
 	/**

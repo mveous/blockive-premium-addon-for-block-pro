@@ -5,6 +5,7 @@
  * from the free plugin) and loaded only on the Template Builder screen.
  */
 import './style.css';
+import './archive.css';
 
 import './site-logo';
 import './site-title';
@@ -15,3 +16,5 @@ import './menu-cart';
 import './login';
 import './sitemap';
 import './copyright';
+import './archive-posts';
+import './archive-products';

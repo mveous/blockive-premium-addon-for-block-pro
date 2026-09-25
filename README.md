@@ -106,6 +106,15 @@ Defined in `includes/class-bpafb-pro-site-blocks.php`, source in `src/template-b
 | **Sitemap** | Columns of pages, posts, custom post types, or taxonomies. Can be nested, sorted, and responsive. |
 | **Copyright** | Footer line with `{year}`, `{site_title}`, and `{site_url}` placeholders, so the year never goes stale. |
 
+## Archive Template Blocks (2)
+
+Source in `src/template-blocks-site/archive-*`, shared loop code in `includes/class-bpafb-pro-archive-loop.php`. Unlike Post Grid and Loop Grid, which run their own query, these list what the **main query** already found. That means the category, tag, author, date, custom post type archive, blog page, search results, or WooCommerce shop being viewed. They use WordPress's own `/page/2/` pagination, and items per page come from Settings → Reading (or WooCommerce's catalog settings).
+
+| Block | Description |
+|:---|:---|
+| **Archive Posts** | Shows each result as a Blockive card (image with aspect ratio, categories, title, date, author, comments, excerpt, read more) or as a **Loop Item** template. Responsive columns, numbered or previous/next pagination, and a custom "nothing found" message. Renders nothing on singular pages. |
+| **Archive Products** | Three layouts: Blockive card (image, sale badge, title, rating, price, AJAX add-to-cart), WooCommerce's native loop (`content-product.php`, keeps theme and plugin compatibility), or a Loop Item template. Includes WooCommerce's result count and sorting dropdown. Only renders on product listings, so an Archive template shared with the blog is safe. |
+
 ## WooCommerce Template Blocks (17)
 
 Defined in `includes/class-bpafb-pro-woo-blocks.php`: Product Title, Product Gallery, Product Images, Product Price, Sale Badge, Product Rating, Add To Cart, Product SKU, Product Stock, Product Short Description, Product Description, Product Attributes, Product Meta, Product Tabs, Product Variations, Related Products, Upsells, Cross Sells.
