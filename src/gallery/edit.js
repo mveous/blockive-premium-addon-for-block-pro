@@ -9,6 +9,7 @@ import ResponsiveControls from '../components/responsive-controls';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
 import { typoValues, typoOnChange, typoVars, cssVars } from '../template-blocks-site/shared';
+import { filterBarVars, FilterBarPreview, FilterBarSettingsPanel, FilterBarStylePanel } from '../pro-components/filter-bar/editor';
 
 import './editor.css';
 
@@ -60,14 +61,6 @@ export default function Edit( { attributes, setAttributes } ) {
 		gap,
 		captionColor,
 		captionBgColor,
-		showAllFilter,
-		allFilterLabel,
-		filterAlign,
-		filterColor,
-		filterBgColor,
-		filterActiveColor,
-		filterActiveBgColor,
-		filterRadius,
 	} = attributes;
 
 	// Which gallery the sidebar edits ('all' previews every gallery).
@@ -99,7 +92,9 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const blockProps = useBlockProps( {
 		className: `bpafb-gallery bpafb-gallery--${ layout } bpafb-gallery--caption-${ captions } bpafb-gallery--hover-${ hoverEffect }${ aspectRatio === 'auto' ? ' bpafb-gallery--ratio-auto' : '' }`,
-		style: cssVars( {
+		style: {
+			...filterBarVars( attributes ),
+			...cssVars( {
 			'--bpafb-gallery-columns': typeof attributes.columns === 'number' ? String( attributes.columns ) : undefined,
 			'--bpafb-gallery-gap': gap,
 			'--bpafb-gallery-aspect': aspectRatio,
@@ -108,14 +103,9 @@ export default function Edit( { attributes, setAttributes } ) {
 			'--bpafb-gallery-overlay': overlayColor,
 			'--bpafb-gallery-caption-color': captionColor,
 			'--bpafb-gallery-caption-bg': captionBgColor,
-			'--bpafb-gallery-filter-color': filterColor,
-			'--bpafb-gallery-filter-bg': filterBgColor,
-			'--bpafb-gallery-filter-active-color': filterActiveColor,
-			'--bpafb-gallery-filter-active-bg': filterActiveBgColor,
-			'--bpafb-gallery-filter-radius': filterRadius,
 			...typoVars( attributes, 'caption', '--bpafb-gallery-caption' ),
-			...typoVars( attributes, 'filter', '--bpafb-gallery-filter' ),
-		} ),
+			} ),
+		},
 	} );
 
 	const galleryPicker = ( label, variant = 'secondary' ) => (
@@ -284,22 +274,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								onChange={ set( 'captions' ) }
 							/>
 						</PanelBody>
-						{ galleries.length > 1 && (
-							<PanelBody title={ __( 'Filter', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-								<ToggleControl label={ __( 'Show "All" Button', 'blockive-premium-addon-for-block-pro' ) } checked={ !! showAllFilter } onChange={ set( 'showAllFilter' ) } />
-								{ showAllFilter && <TextControl label={ __( '"All" Label', 'blockive-premium-addon-for-block-pro' ) } value={ allFilterLabel } onChange={ set( 'allFilterLabel' ) } /> }
-								<SelectControl
-									label={ __( 'Alignment', 'blockive-premium-addon-for-block-pro' ) }
-									value={ filterAlign }
-									options={ [
-										{ label: __( 'Left', 'blockive-premium-addon-for-block-pro' ), value: 'left' },
-										{ label: __( 'Center', 'blockive-premium-addon-for-block-pro' ), value: 'center' },
-										{ label: __( 'Right', 'blockive-premium-addon-for-block-pro' ), value: 'right' },
-									] }
-									onChange={ set( 'filterAlign' ) }
-								/>
-							</PanelBody>
-						) }
+						{ galleries.length > 1 && <FilterBarSettingsPanel attributes={ attributes } setAttributes={ setAttributes } /> }
 					</>
 				}
 				style={
@@ -329,22 +304,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								/>
 							</PanelBody>
 						) }
-						{ galleries.length > 1 && (
-							<PanelBody title={ __( 'Filter Buttons', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-								<TypographyControls values={ typoValues( attributes, 'filter' ) } onChange={ typoOnChange( setAttributes, 'filter' ) } />
-								<ColorStateControls
-									normal={ [
-										{ label: __( 'Text', 'blockive-premium-addon-for-block-pro' ), value: filterColor, onChange: set( 'filterColor' ) },
-										{ label: __( 'Background', 'blockive-premium-addon-for-block-pro' ), value: filterBgColor, onChange: set( 'filterBgColor' ) },
-									] }
-									hover={ [
-										{ label: __( 'Text', 'blockive-premium-addon-for-block-pro' ), value: filterActiveColor, onChange: set( 'filterActiveColor' ) },
-										{ label: __( 'Background', 'blockive-premium-addon-for-block-pro' ), value: filterActiveBgColor, onChange: set( 'filterActiveBgColor' ) },
-									] }
-								/>
-								<RangeControl label={ __( 'Border Radius (px)', 'blockive-premium-addon-for-block-pro' ) } value={ filterRadius } onChange={ set( 'filterRadius' ) } min={ 0 } max={ 40 } />
-							</PanelBody>
-						) }
+						{ galleries.length > 1 && <FilterBarStylePanel attributes={ attributes } setAttributes={ setAttributes } /> }
 					</>
 				}
 				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
@@ -352,28 +312,17 @@ export default function Edit( { attributes, setAttributes } ) {
 
 			<div { ...blockProps }>
 				{ multi && (
-					<div className={ `bpafb-gallery__filters bpafb-gallery__filters--${ filterAlign }` }>
-						{ showAllFilter && (
-							<button type="button" className={ `bpafb-gallery__filter${ current === 'all' ? ' is-active' : '' }` } onClick={ () => setCurrent( 'all' ) }>
-								{ allFilterLabel || __( 'All', 'blockive-premium-addon-for-block-pro' ) }
-							</button>
-						) }
-						{ galleries.map( ( g, i ) =>
-							( g.images || [] ).length ? (
-								<button
-									type="button"
-									key={ i }
-									className={ `bpafb-gallery__filter${ current !== 'all' && i === galleryIndex ? ' is-active' : '' }` }
-									onClick={ () => {
-										setCurrent( i );
-										setSelectedImage( null );
-									} }
-								>
-									{ g.title || sprintf( __( 'Gallery %d', 'blockive-premium-addon-for-block-pro' ), i + 1 ) }
-								</button>
-							) : null
-						) }
-					</div>
+					<FilterBarPreview
+						attributes={ attributes }
+						filters={ galleries
+							.map( ( g, i ) => ( { key: String( i ), label: g.title || sprintf( __( 'Gallery %d', 'blockive-premium-addon-for-block-pro' ), i + 1 ), count: ( g.images || [] ).length } ) )
+							.filter( ( f ) => f.count ) }
+						active={ current === 'all' ? 'all' : String( galleryIndex ) }
+						onSelect={ ( key ) => {
+							setCurrent( key === 'all' ? 'all' : Number( key ) );
+							setSelectedImage( null );
+						} }
+					/>
 				) }
 				{ shown.length ? (
 					<div className="bpafb-gallery__items">

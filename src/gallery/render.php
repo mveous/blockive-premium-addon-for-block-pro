@@ -72,7 +72,7 @@ foreach ($bpafb_galleries as $bpafb_g => $bpafb_gallery) {
 		}
 
 		$bpafb_items .= sprintf(
-			'<figure class="bpafb-gallery__item" data-gallery="%1$d" style="--bpafb-gallery-ratio:%2$s">%3$s%4$s</figure>',
+			'<figure class="bpafb-gallery__item" data-filter-keys="%1$d" style="--bpafb-gallery-ratio:%2$s">%3$s%4$s</figure>',
 			$bpafb_g,
 			esc_attr((string) $bpafb_item_ratio),
 			$bpafb_media,
@@ -92,31 +92,9 @@ if (!$bpafb_n) {
 	return;
 }
 
-// Filter buttons, only when there is more than one gallery to choose from.
-$bpafb_filter_html = '';
-if (count($bpafb_filters) > 1) {
-	$bpafb_show_all = !isset($attributes['showAllFilter']) || !empty($attributes['showAllFilter']);
-	$bpafb_buttons = '';
-	if ($bpafb_show_all) {
-		$bpafb_buttons .= '<button type="button" class="bpafb-gallery__filter is-active" data-filter="all" aria-pressed="true">'
-			. esc_html(isset($attributes['allFilterLabel']) && '' !== $attributes['allFilterLabel'] ? $attributes['allFilterLabel'] : __('All', 'blockive-premium-addon-for-block-pro'))
-			. '</button>';
-	}
-	$bpafb_first = true;
-	foreach ($bpafb_filters as $bpafb_g => $bpafb_title) {
-		$bpafb_active = !$bpafb_show_all && $bpafb_first;
-		$bpafb_buttons .= sprintf(
-			'<button type="button" class="bpafb-gallery__filter%1$s" data-filter="%2$d" aria-pressed="%3$s">%4$s</button>',
-			$bpafb_active ? ' is-active' : '',
-			$bpafb_g,
-			$bpafb_active ? 'true' : 'false',
-			esc_html($bpafb_title)
-		);
-		$bpafb_first = false;
-	}
-	$bpafb_align = isset($attributes['filterAlign']) && in_array($attributes['filterAlign'], ['left', 'center', 'right'], true) ? $attributes['filterAlign'] : 'center';
-	$bpafb_filter_html = '<div class="bpafb-gallery__filters bpafb-gallery__filters--' . $bpafb_align . '" role="group" aria-label="' . esc_attr__('Filter gallery', 'blockive-premium-addon-for-block-pro') . '">' . $bpafb_buttons . '</div>';
-}
+// Filter buttons (one per gallery that has images), only when there is
+// more than one to choose from.
+$bpafb_filter_html = Bpafb_Pro_Shared_Assets::filter_bar_html($attributes, $bpafb_filters, __('Filter gallery', 'blockive-premium-addon-for-block-pro'));
 
 $bpafb_row_height = function ($key) use ($attributes) {
 	return isset($attributes[$key]) && is_numeric($attributes[$key]) ? max(50, absint($attributes[$key])) . 'px' : '';
@@ -140,14 +118,9 @@ echo $bpafb_s::scoped_vars_css($bpafb_uid, array_merge(
 		'--bpafb-gallery-overlay'           => $bpafb_s::color($attributes, 'overlayColor'),
 		'--bpafb-gallery-caption-color'     => $bpafb_s::color($attributes, 'captionColor'),
 		'--bpafb-gallery-caption-bg'        => $bpafb_s::color($attributes, 'captionBgColor'),
-		'--bpafb-gallery-filter-color'      => $bpafb_s::color($attributes, 'filterColor'),
-		'--bpafb-gallery-filter-bg'         => $bpafb_s::color($attributes, 'filterBgColor'),
-		'--bpafb-gallery-filter-active-color' => $bpafb_s::color($attributes, 'filterActiveColor'),
-		'--bpafb-gallery-filter-active-bg'  => $bpafb_s::color($attributes, 'filterActiveBgColor'),
-		'--bpafb-gallery-filter-radius'     => $bpafb_s::px($attributes, 'filterRadius'),
 	],
 	$bpafb_s::typography_vars($attributes, 'caption', '--bpafb-gallery-caption'),
-	$bpafb_s::typography_vars($attributes, 'filter', '--bpafb-gallery-filter')
+	Bpafb_Pro_Shared_Assets::filter_bar_vars($attributes)
 ));
 
 printf(

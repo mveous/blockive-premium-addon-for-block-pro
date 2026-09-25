@@ -47,6 +47,10 @@ const extraEntry = {
 		__dirname,
 		'src/pro-components/lightbox/index.js'
 	),
+	'pro-components/filter-bar/index': path.resolve(
+		__dirname,
+		'src/pro-components/filter-bar/index.js'
+	),
 };
 
 // Mirrors the free plugin's webpack.config.js (kept in sync manually, since

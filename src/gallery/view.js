@@ -1,8 +1,10 @@
 /**
- * Gallery: filter buttons (one gallery at a time, or all) and the shared
- * lightbox, which steps through only the images the filter leaves visible.
+ * Gallery: the shared filter buttons (one gallery at a time, or all) and
+ * the shared lightbox, which steps through only the images the filter
+ * leaves visible.
  */
 import { bindLightbox } from '../pro-components/lightbox/lightbox';
+import { initFilterBar } from '../pro-components/filter-bar/filter-bar';
 
 function initGallery( root ) {
 	if ( root.dataset.bpafbReady ) {
@@ -11,24 +13,7 @@ function initGallery( root ) {
 	root.dataset.bpafbReady = '1';
 
 	const items = [ ...root.querySelectorAll( '.bpafb-gallery__item' ) ];
-	const buttons = [ ...root.querySelectorAll( '.bpafb-gallery__filter' ) ];
-
-	const apply = ( filter ) => {
-		buttons.forEach( ( button ) => {
-			const active = button.dataset.filter === filter;
-			button.classList.toggle( 'is-active', active );
-			button.setAttribute( 'aria-pressed', active ? 'true' : 'false' );
-		} );
-		items.forEach( ( item ) => {
-			item.hidden = filter !== 'all' && item.dataset.gallery !== filter;
-		} );
-	};
-
-	buttons.forEach( ( button ) => button.addEventListener( 'click', () => apply( button.dataset.filter ) ) );
-	const initial = buttons.find( ( button ) => button.classList.contains( 'is-active' ) );
-	if ( initial ) {
-		apply( initial.dataset.filter );
-	}
+	initFilterBar( root, items );
 
 	bindLightbox( root, () =>
 		items.filter( ( item ) => ! item.hidden ).map( ( item ) => item.querySelector( '[data-bpafb-lightbox]' ) ).filter( Boolean )

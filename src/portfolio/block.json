@@ -1,31 +1,72 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "blockive-premium-addon-for-block/gallery",
+	"name": "blockive-premium-addon-for-block/portfolio",
 	"version": "1.0.0",
-	"title": "Gallery",
+	"title": "Portfolio",
 	"category": "bpafb-widgets",
-	"icon": "format-gallery",
-	"description": "An image gallery in a grid, masonry, or justified layout, with filter tabs and a lightbox.",
+	"icon": "portfolio",
+	"description": "Posts or projects in an image grid, with filter buttons for their categories and titles over or below each image.",
 	"keywords": [
-		"gallery",
-		"images",
-		"masonry",
-		"justified",
-		"lightbox",
+		"portfolio",
+		"projects",
+		"work",
 		"filter",
-		"portfolio"
+		"grid",
+		"gallery"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
 	"attributes": {
-		"galleries": {
+		"postType": {
+			"type": "string",
+			"default": "post"
+		},
+		"taxonomy": {
+			"type": "string",
+			"default": ""
+		},
+		"termIds": {
 			"type": "array",
-			"default": [
-				{
-					"title": "Gallery 1",
-					"images": []
-				}
-			]
+			"items": {
+				"type": "number"
+			},
+			"default": []
+		},
+		"postsPerPage": {
+			"type": "number",
+			"default": 12
+		},
+		"orderBy": {
+			"type": "string",
+			"default": "date"
+		},
+		"order": {
+			"type": "string",
+			"default": "desc"
+		},
+		"excludeCurrentPost": {
+			"type": "boolean",
+			"default": false
+		},
+		"filterTaxonomy": {
+			"type": "string",
+			"default": "category"
+		},
+		"showFilter": {
+			"type": "boolean",
+			"default": true
+		},
+		"showAllFilter": {
+			"type": "boolean",
+			"default": true
+		},
+		"allFilterLabel": {
+			"type": "string",
+			"default": "All"
+		},
+		"filterAlign": {
+			"type": "string",
+			"default": "center"
 		},
 		"layout": {
 			"type": "string",
@@ -33,7 +74,7 @@
 		},
 		"columns": {
 			"type": "number",
-			"default": 4
+			"default": 3
 		},
 		"columnsTablet": {
 			"type": "number",
@@ -49,29 +90,23 @@
 		},
 		"aspectRatio": {
 			"type": "string",
-			"default": "1/1"
-		},
-		"rowHeight": {
-			"type": "number",
-			"default": 220
-		},
-		"rowHeightTablet": {
-			"type": "number"
-		},
-		"rowHeightMobile": {
-			"type": "number"
+			"default": "4/3"
 		},
 		"imageSize": {
 			"type": "string",
 			"default": "medium_large"
 		},
-		"onClick": {
+		"titlePosition": {
 			"type": "string",
-			"default": "lightbox"
+			"default": "overlay"
 		},
-		"captions": {
+		"titleTag": {
 			"type": "string",
-			"default": "none"
+			"default": "h3"
+		},
+		"showTerms": {
+			"type": "boolean",
+			"default": true
 		},
 		"hoverEffect": {
 			"type": "string",
@@ -85,50 +120,42 @@
 			"type": "number",
 			"default": 0
 		},
-		"captionFontFamily": {
+		"nothingFoundText": {
+			"type": "string",
+			"default": "No items found."
+		},
+		"titleFontFamily": {
 			"type": "string",
 			"default": ""
 		},
-		"captionFontSize": {
+		"titleFontSize": {
 			"type": "number"
 		},
-		"captionFontWeight": {
+		"titleFontWeight": {
 			"type": "string",
 			"default": ""
 		},
-		"captionLineHeight": {
+		"titleLineHeight": {
 			"type": "number"
 		},
-		"captionLetterSpacing": {
+		"titleLetterSpacing": {
 			"type": "number"
 		},
-		"captionTextTransform": {
+		"titleTextTransform": {
 			"type": "string",
 			"default": ""
 		},
-		"captionTextDecoration": {
+		"titleTextDecoration": {
 			"type": "string",
 			"default": ""
 		},
-		"captionColor": {
+		"titleColor": {
 			"type": "string",
 			"default": ""
 		},
-		"captionBgColor": {
+		"termsColor": {
 			"type": "string",
 			"default": ""
-		},
-		"showAllFilter": {
-			"type": "boolean",
-			"default": true
-		},
-		"allFilterLabel": {
-			"type": "string",
-			"default": "All"
-		},
-		"filterAlign": {
-			"type": "string",
-			"default": "center"
 		},
 		"filterFontFamily": {
 			"type": "string",
@@ -433,7 +460,6 @@
 	"render": "file:./render.php",
 	"editorScript": "file:./index.js",
 	"style": [
-		"bpafb-pro-lightbox",
 		"bpafb-pro-filter-bar",
 		"file:./style-index.css"
 	],

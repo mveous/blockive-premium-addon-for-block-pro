@@ -6,7 +6,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ## Key Highlights
 
-- **44 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
+- **45 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
 - **Full Template Builder**: Build Single, Header, Footer, Archive, Search Results, 404, and Popup templates, each with its own Display Conditions.
 - **WooCommerce & Events Blocks**: 17 WooCommerce product blocks and 9 Events blocks for building fully custom product and event templates.
 - **Dynamic Tags**: `{{tag}}` tokens (e.g. `{{post_title}}`, `{{post_date:F j, Y}}`) work in any text or URL field on any Blockive block.
@@ -17,7 +17,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ---
 
-## Included 44 Blocks
+## Included 45 Blocks
 
 | Block Name | Description | Key Customization Features |
 |:---|:---|:---|
@@ -61,6 +61,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Testimonial Carousel** | Customer quotes with photo, name, and title in a carousel. | Default or speech-bubble skin, five image positions, alignment, responsive slides per view, card and typography styling. |
 | **Blockive Reviews** | Review cards with star rating and source icon in a carousel. | Half-star ratings, Google/Facebook/Yelp/etc. icons in official or custom colors, linked names, card and header styling. |
 | **Blockive Gallery** | Image gallery with filter tabs and a lightbox. | Grid, masonry, or justified layout; several named galleries as filters; captions on hover or below; custom links; responsive columns and row height. |
+| **Blockive Portfolio** | Posts or projects in an image grid with category filter buttons. | Loop Grid's query (any post type, taxonomy filters), filter by any taxonomy, grid or masonry, image ratio, title over the image on hover or below it, responsive columns. |
 | **Blockive Table of Contents** | A linked list of the page's headings, built in the browser. | Choose H1–H6, nested or flat, numbers/bullets/none, collapsible (optionally collapsed on mobile), current-section highlight, scroll offset, include/exclude selectors. |
 | **Blockive Animated Headline** | A headline with a hand-drawn highlight or rotating words. | 9 highlight shapes (circle, underline, zigzag, X, ...) drawn on scroll, or rotating words with typing, clip, flip, slide, and drop-in; loop pauses on hover; screen readers get the plain sentence; static for reduced motion. |
 | **Blockive Price List** | Menu-style list of items with prices. | Optional photo per item (left or right), dotted/dashed/solid/double leader line, linked titles, dividers, title/price/description typography. |
