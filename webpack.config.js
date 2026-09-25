@@ -37,6 +37,12 @@ const extraEntry = {
 		__dirname,
 		'src/dynamic-tags/index.js'
 	),
+	// Shared carousel stylesheet, registered as the bpafb-pro-carousel
+	// style handle (see Bpafb_Pro_Carousel::register_style()).
+	'pro-components/carousel/index': path.resolve(
+		__dirname,
+		'src/pro-components/carousel/index.js'
+	),
 };
 
 // Mirrors the free plugin's webpack.config.js (kept in sync manually, since

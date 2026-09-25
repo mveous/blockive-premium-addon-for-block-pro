@@ -6,7 +6,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ## Key Highlights
 
-- **36 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
+- **39 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
 - **Full Template Builder**: Build Single, Header, Footer, Archive, Search Results, 404, and Popup templates, each with its own Display Conditions.
 - **WooCommerce & Events Blocks**: 17 WooCommerce product blocks and 9 Events blocks for building fully custom product and event templates.
 - **Dynamic Tags**: `{{tag}}` tokens (e.g. `{{post_title}}`, `{{post_date:F j, Y}}`) work in any text or URL field on any Blockive block.
@@ -17,7 +17,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ---
 
-## Included 36 Blocks
+## Included 39 Blocks
 
 | Block Name | Description | Key Customization Features |
 |:---|:---|:---|
@@ -56,6 +56,9 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Flip Box** | Two-sided card revealing its back on hover, keyboard focus, or tap. | Flip (3D), slide, push, fade, zoom in/out in four directions, per-side backgrounds, button or whole-side link. |
 | **Blockive Slides** | Full-width hero slider with per-slide background, heading, text, and button. | Slide/fade, autoplay with pause button, arrows, dots, swipe, keyboard, Ken Burns zoom, responsive height. No Swiper dependency. |
 | **Blockive Share Buttons** | Share the current page or post (or the Loop Grid card's post). | 10 networks plus email, copy link, print, and the native share sheet. Flat/gradient/framed/minimal skins, brand or custom colors. |
+| **Blockive Media Carousel** | Image and video carousel with a built-in lightbox. | Carousel, slideshow with thumbnails, or coverflow skins; YouTube/Vimeo/MP4 videos; captions, hover zoom, responsive slides per view and height. |
+| **Blockive Testimonial Carousel** | Customer quotes with photo, name, and title in a carousel. | Default or speech-bubble skin, five image positions, alignment, responsive slides per view, card and typography styling. |
+| **Blockive Reviews** | Review cards with star rating and source icon in a carousel. | Half-star ratings, Google/Facebook/Yelp/etc. icons in official or custom colors, linked names, card and header styling. |
 | **Blockive Off-Canvas** | Slide-in panel that holds any blocks, e.g. a mobile menu. | Left/right/top/bottom, trigger button or any `#panel-id` link, overlay, focus trap, Esc to close, scroll lock. |
 
 ---

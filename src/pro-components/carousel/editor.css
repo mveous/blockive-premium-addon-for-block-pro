@@ -1,0 +1,27 @@
+.bpafb-carousel-editor__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-bottom: 16px;
+}
+
+.bpafb-carousel .bpafb-carousel__slide.is-editing {
+	outline: 2px dashed var(--wp-admin-theme-color, #3858e9);
+	outline-offset: -2px;
+}
+
+.bpafb-carousel .bpafb-carousel__slide {
+	cursor: pointer;
+}
+
+.bpafb-carousel-editor__placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	min-height: 120px;
+	color: #6b7280;
+	background: repeating-linear-gradient(45deg, #f3f4f6, #f3f4f6 10px, #e5e7eb 10px, #e5e7eb 20px);
+	font-size: 13px;
+}
