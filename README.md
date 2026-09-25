@@ -129,6 +129,15 @@ Source in `src/template-blocks-site/archive-*`, shared loop code in `includes/cl
 | **Archive Posts** | Shows each result as a Blockive card (image with aspect ratio, categories, title, date, author, comments, excerpt, read more) or as a **Loop Item** template. Responsive columns, numbered or previous/next pagination, and a custom "nothing found" message. Renders nothing on singular pages. |
 | **Archive Products** | Three layouts: Blockive card (image, sale badge, title, rating, price, AJAX add-to-cart), WooCommerce's native loop (`content-product.php`, keeps theme and plugin compatibility), or a Loop Item template. Includes WooCommerce's result count and sorting dropdown. Only renders on product listings, so an Archive template shared with the blog is safe. |
 
+## Single Post Template Blocks (Pro, 2)
+
+Source in `src/template-blocks-site/author-box` and `post-comments`, styles in `src/template-blocks-site/post.css`. They add to the free plugin's post Template Blocks (Author, Author Avatar, Comments Count, and the rest). In the editor they preview the newest post of the template's type through the block's own `render.php`.
+
+| Block | Description |
+|:---|:---|
+| **Author Box** | The post author's photo (Gravatar), name, bio, and a button to their posts or website, or a custom person entered in the block. Photo left, top, or right; box, photo, name, bio, and button styling. |
+| **Post Comments** | The post's comments through WordPress's own `wp_list_comments()` and `comment_form()`, so threading (Settings → Discussion), reply links, moderation notices, and comment plugins keep working. Comment count title, order, avatars, closed message, and styling for comments, the form fields, and the submit button. |
+
 ## WooCommerce Template Blocks (17)
 
 Defined in `includes/class-bpafb-pro-woo-blocks.php`: Product Title, Product Gallery, Product Images, Product Price, Sale Badge, Product Rating, Add To Cart, Product SKU, Product Stock, Product Short Description, Product Description, Product Attributes, Product Meta, Product Tabs, Product Variations, Related Products, Upsells, Cross Sells.

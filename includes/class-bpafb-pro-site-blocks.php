@@ -9,7 +9,8 @@
  *
  * Also registers Archive Posts and Archive Products (listed under the
  * "Blockive Template" category), which loop the main query for Archive /
- * Search Results templates - see Bpafb_Pro_Archive_Loop.
+ * Search Results templates - see Bpafb_Pro_Archive_Loop - and the Author
+ * Box and Post Comments blocks for Single templates.
  *
  * Unlike the Woo/Events blocks, these have no free-plugin teaser to
  * replace, so each one is a normal block.json + render.php block under
@@ -45,6 +46,8 @@ class Bpafb_Pro_Site_Blocks
 		'copyright',
 		'archive-posts',
 		'archive-products',
+		'author-box',
+		'post-comments',
 	];
 
 	/**

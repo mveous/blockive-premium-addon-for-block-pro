@@ -6,6 +6,7 @@
  */
 import './style.css';
 import './archive.css';
+import './post.css';
 
 import './site-logo';
 import './site-title';
@@ -18,3 +19,5 @@ import './sitemap';
 import './copyright';
 import './archive-posts';
 import './archive-products';
+import './author-box';
+import './post-comments';
