@@ -83,13 +83,13 @@
 	color: var(--bpafb-author-box-name-color, inherit);
 }
 
-.bpafb-author-box__name a {
+.bpafb-author-box .bpafb-author-box__name a {
 	color: inherit;
 	text-decoration: none;
 }
 
-.bpafb-author-box__name a:hover,
-.bpafb-author-box__name a:focus-visible {
+.bpafb-author-box .bpafb-author-box__name a:hover,
+.bpafb-author-box .bpafb-author-box__name a:focus-visible {
 	color: var(--bpafb-author-box-name-hover, inherit);
 	text-decoration: underline;
 }
@@ -113,7 +113,9 @@
 	margin-bottom: 0;
 }
 
-.bpafb-author-box__button {
+/* a.class inside the box: outweighs theme and editor link rules such as
+   .entry-content a or .editor-styles-wrapper a. */
+.bpafb-author-box a.bpafb-author-box__button {
 	display: inline-block;
 	margin-top: 4px;
 	padding: 8px 18px;
@@ -128,28 +130,34 @@
 	transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.bpafb-author-box__button--filled {
+/* Themes underline links with rules as heavy as the one above (e.g. Astra's
+   .editor-styles-wrapper .is-root-container a), so repeat the class. */
+.bpafb-author-box.bpafb-author-box a.bpafb-author-box__button:not(.bpafb-author-box__button--link) {
+	text-decoration: none;
+}
+
+.bpafb-author-box a.bpafb-author-box__button--filled {
 	color: var(--bpafb-author-box-btn-color, #fff);
 	background: var(--bpafb-author-box-btn-bg, #1f2937);
 	border-color: var(--bpafb-author-box-btn-border, var(--bpafb-author-box-btn-bg, #1f2937));
 }
 
-.bpafb-author-box__button--link {
+.bpafb-author-box a.bpafb-author-box__button--link {
 	padding: 0;
 	background: none;
 	border: 0;
 	text-decoration: underline;
 }
 
-.bpafb-author-box__button:hover,
-.bpafb-author-box__button:focus-visible {
+.bpafb-author-box a.bpafb-author-box__button:hover,
+.bpafb-author-box a.bpafb-author-box__button:focus-visible {
 	color: var(--bpafb-author-box-btn-hover-color, #fff);
 	background: var(--bpafb-author-box-btn-hover-bg, #1f2937);
 	border-color: var(--bpafb-author-box-btn-hover-bg, #1f2937);
 }
 
-.bpafb-author-box__button--link:hover,
-.bpafb-author-box__button--link:focus-visible {
+.bpafb-author-box a.bpafb-author-box__button--link:hover,
+.bpafb-author-box a.bpafb-author-box__button--link:focus-visible {
 	color: var(--bpafb-author-box-btn-hover-color, inherit);
 	background: none;
 }
