@@ -116,6 +116,32 @@ class Bpafb_Pro_Site_Blocks
 				unregister_block_type($data['name']);
 			}
 
+			// build/blocks-manifest.php lists these nested blocks by their
+			// folder name alone, so the first registration pass (in
+			// Blockive_Premium_Addon_For_Block::bpafb_register_blocks())
+			// looks for their files under build/<folder>/ and registers
+			// each script/style handle with an empty URL. WordPress never
+			// re-registers an existing handle, so those broken handles
+			// have to be removed before registering from the real folder,
+			// or e.g. the Search Form overlay and Menu Cart dropdown
+			// scripts never load. Same fix as the core class applies to
+			// build/template-blocks/.
+			foreach (['editorScript' => 'script', 'script' => 'script', 'viewScript' => 'script', 'editorStyle' => 'style', 'style' => 'style', 'viewStyle' => 'style'] as $field => $kind) {
+				if (empty($data[$field])) {
+					continue;
+				}
+				foreach ((array) $data[$field] as $index => $value) {
+					if (!is_string($value) || strpos($value, 'file:') !== 0) {
+						continue;
+					}
+					$handle = generate_block_asset_handle($data['name'], $field, $index);
+					if ('script' === $kind) {
+						wp_deregister_script($handle);
+					} else {
+						wp_deregister_style($handle);
+					}
+				}
+			}
 
 			register_block_type($path);
 			Bpafb_Template_Blocks::register_block_name($data['name']);
