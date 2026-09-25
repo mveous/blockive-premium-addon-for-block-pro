@@ -1,0 +1,190 @@
+.bpafb-hotspot__stage {
+	position: relative;
+	display: inline-block;
+	max-width: 100%;
+	line-height: 0;
+	vertical-align: top;
+}
+
+.bpafb-hotspot__image {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.bpafb-hotspot__spot {
+	position: absolute;
+	z-index: 1;
+	line-height: 1.4;
+	transform: translate(-50%, -50%);
+}
+
+.bpafb-hotspot__spot.is-open,
+.bpafb-hotspot__spot:focus-within {
+	z-index: 3;
+}
+
+/* Pin */
+.bpafb-hotspot__pin {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	box-sizing: border-box;
+	min-width: var(--bpafb-hotspot-pin-size, 34px);
+	height: var(--bpafb-hotspot-pin-size, 34px);
+	padding: 0;
+	font-size: var(--bpafb-hotspot-icon-size, 14px);
+	color: var(--bpafb-hotspot-pin-color, #fff);
+	background: var(--bpafb-hotspot-pin-bg, #111827);
+	border: 2px solid rgba(255, 255, 255, 0.9);
+	border-radius: 999px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.bpafb-hotspot__pin--label {
+	padding: 0 14px;
+	font-family: var(--bpafb-hotspot-label-font-family, inherit);
+	font-size: var(--bpafb-hotspot-label-font-size, 13px);
+	font-weight: var(--bpafb-hotspot-label-font-weight, 600);
+	letter-spacing: var(--bpafb-hotspot-label-letter-spacing, normal);
+	text-transform: var(--bpafb-hotspot-label-text-transform, none);
+	white-space: nowrap;
+}
+
+.bpafb-hotspot__pin:hover,
+.bpafb-hotspot__spot.is-open .bpafb-hotspot__pin {
+	transform: scale(1.1);
+}
+
+.bpafb-hotspot__pin:focus-visible {
+	outline: 3px solid #fff;
+	outline-offset: 2px;
+	box-shadow: 0 0 0 5px var(--bpafb-hotspot-pin-bg, #111827);
+}
+
+.bpafb-hotspot__spot.is-open .bpafb-hotspot__pin i {
+	transform: rotate(45deg);
+}
+
+.bpafb-hotspot__pin i {
+	transition: transform 0.2s ease;
+}
+
+/* Pulse ring */
+.bpafb-hotspot--pulse .bpafb-hotspot__pin::before {
+	position: absolute;
+	inset: -2px;
+	border: 2px solid var(--bpafb-hotspot-pin-bg, #111827);
+	border-radius: inherit;
+	content: "";
+	pointer-events: none;
+	animation: bpafb-hotspot-pulse 2s ease-out infinite;
+}
+
+@keyframes bpafb-hotspot-pulse {
+	from {
+		opacity: 0.8;
+		transform: scale(1);
+	}
+
+	to {
+		opacity: 0;
+		transform: scale(1.8);
+	}
+}
+
+/* Tooltip */
+.bpafb-hotspot__tooltip {
+	position: absolute;
+	z-index: 2;
+	box-sizing: border-box;
+	width: max-content;
+	max-width: min(var(--bpafb-hotspot-tip-width, 240px), 80vw);
+	padding: 12px 14px;
+	font-family: var(--bpafb-hotspot-tip-font-family, inherit);
+	font-size: var(--bpafb-hotspot-tip-font-size, 14px);
+	font-weight: var(--bpafb-hotspot-tip-font-weight, inherit);
+	line-height: var(--bpafb-hotspot-tip-line-height, 1.5);
+	letter-spacing: var(--bpafb-hotspot-tip-letter-spacing, normal);
+	text-transform: var(--bpafb-hotspot-tip-text-transform, none);
+	text-align: start;
+	color: var(--bpafb-hotspot-tip-color, #111827);
+	background: var(--bpafb-hotspot-tip-bg, #fff);
+	border-radius: var(--bpafb-hotspot-tip-radius, 6px);
+	box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.bpafb-hotspot__tooltip p {
+	margin: 0;
+}
+
+.bpafb-hotspot__tooltip p + p {
+	margin-top: 8px;
+}
+
+.bpafb-hotspot__tooltip a {
+	color: inherit;
+	font-weight: 600;
+}
+
+.bpafb-hotspot__spot--top .bpafb-hotspot__tooltip {
+	bottom: calc(100% + 12px);
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.bpafb-hotspot__spot--bottom .bpafb-hotspot__tooltip {
+	top: calc(100% + 12px);
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.bpafb-hotspot__spot--left .bpafb-hotspot__tooltip {
+	top: 50%;
+	right: calc(100% + 12px);
+	transform: translateY(-50%);
+}
+
+.bpafb-hotspot__spot--right .bpafb-hotspot__tooltip {
+	top: 50%;
+	left: calc(100% + 12px);
+	transform: translateY(-50%);
+}
+
+/* Shown: without JavaScript on hover / focus; with it, when open (and on
+   hover / focus in hover mode). */
+.bpafb-hotspot:not(.is-ready) .bpafb-hotspot__spot:is(:hover, :focus-within) .bpafb-hotspot__tooltip,
+.bpafb-hotspot--trigger-hover .bpafb-hotspot__spot:is(:hover, :focus-within) .bpafb-hotspot__tooltip,
+.bpafb-hotspot__spot.is-open .bpafb-hotspot__tooltip {
+	visibility: visible;
+	opacity: 1;
+	transition: opacity 0.2s ease, visibility 0s;
+}
+
+.bpafb-hotspot .screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bpafb-hotspot--pulse .bpafb-hotspot__pin::before {
+		animation: none;
+	}
+
+	.bpafb-hotspot__pin,
+	.bpafb-hotspot__pin i,
+	.bpafb-hotspot__tooltip {
+		transition: none;
+	}
+}

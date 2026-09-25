@@ -1,0 +1,8 @@
+.bpafb-hotspot-editor__stage {
+	cursor: crosshair;
+}
+
+.bpafb-hotspot__spot.is-editing .bpafb-hotspot__pin {
+	outline: 2px dashed #fff;
+	outline-offset: 3px;
+}
