@@ -28,6 +28,7 @@
 		"@wordpress/blocks": "latest",
 		"@wordpress/i18n": "latest",
 		"chart.js": "^4.5.1",
+		"prismjs": "^1.30.0",
 		"swiper": "^12.2.0"
 	},
 	"devDependencies": {

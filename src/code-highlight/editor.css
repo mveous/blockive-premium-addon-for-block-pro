@@ -1,0 +1,25 @@
+.bpafb-code .bpafb-code-editor__input {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 6em;
+	padding: 0 16px;
+	font: inherit;
+	line-height: inherit;
+	color: inherit;
+	white-space: pre;
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	resize: none;
+	tab-size: 4;
+}
+
+.bpafb-code--wrap .bpafb-code-editor__input {
+	white-space: pre-wrap;
+}
+
+.bpafb-code .bpafb-code-editor__input:focus {
+	outline: none;
+	box-shadow: none;
+}
