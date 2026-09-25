@@ -6,7 +6,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ## Key Highlights
 
-- **42 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
+- **44 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
 - **Full Template Builder**: Build Single, Header, Footer, Archive, Search Results, 404, and Popup templates, each with its own Display Conditions.
 - **WooCommerce & Events Blocks**: 17 WooCommerce product blocks and 9 Events blocks for building fully custom product and event templates.
 - **Dynamic Tags**: `{{tag}}` tokens (e.g. `{{post_title}}`, `{{post_date:F j, Y}}`) work in any text or URL field on any Blockive block.
@@ -17,7 +17,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ---
 
-## Included 42 Blocks
+## Included 44 Blocks
 
 | Block Name | Description | Key Customization Features |
 |:---|:---|:---|
@@ -62,6 +62,8 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Reviews** | Review cards with star rating and source icon in a carousel. | Half-star ratings, Google/Facebook/Yelp/etc. icons in official or custom colors, linked names, card and header styling. |
 | **Blockive Gallery** | Image gallery with filter tabs and a lightbox. | Grid, masonry, or justified layout; several named galleries as filters; captions on hover or below; custom links; responsive columns and row height. |
 | **Blockive Table of Contents** | A linked list of the page's headings, built in the browser. | Choose H1–H6, nested or flat, numbers/bullets/none, collapsible (optionally collapsed on mobile), current-section highlight, scroll offset, include/exclude selectors. |
+| **Blockive Animated Headline** | A headline with a hand-drawn highlight or rotating words. | 9 highlight shapes (circle, underline, zigzag, X, ...) drawn on scroll, or rotating words with typing, clip, flip, slide, and drop-in; loop pauses on hover; screen readers get the plain sentence; static for reduced motion. |
+| **Blockive Price List** | Menu-style list of items with prices. | Optional photo per item (left or right), dotted/dashed/solid/double leader line, linked titles, dividers, title/price/description typography. |
 | **Blockive Off-Canvas** | Slide-in panel that holds any blocks, e.g. a mobile menu. | Left/right/top/bottom, trigger button or any `#panel-id` link, overlay, focus trap, Esc to close, scroll lock. |
 
 ---

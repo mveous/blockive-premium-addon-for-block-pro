@@ -1,0 +1,4 @@
+.bpafb-price-list .bpafb-price-list__item.is-editing {
+	outline: 2px dashed var(--wp-admin-theme-color, #3858e9);
+	outline-offset: 4px;
+}
