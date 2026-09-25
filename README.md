@@ -6,7 +6,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ## Key Highlights
 
-- **28 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
+- **32 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
 - **Full Template Builder**: Build Single, Header, Footer, Archive, Search Results, 404, and Popup templates, each with its own Display Conditions.
 - **WooCommerce & Events Blocks**: 17 WooCommerce product blocks and 9 Events blocks for building fully custom product and event templates.
 - **Dynamic Tags**: `{{tag}}` tokens (e.g. `{{post_title}}`, `{{post_date:F j, Y}}`) work in any text or URL field on any Blockive block.
@@ -17,7 +17,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ---
 
-## Included 28 Blocks
+## Included 32 Blocks
 
 | Block Name | Description | Key Customization Features |
 |:---|:---|:---|
@@ -49,6 +49,10 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Team** | Showcase team members with photos, roles, bios, and social links. | Per-member social links, responsive columns, avatar shape and bio styling. |
 | **Blockive Testimonial** | Testimonials slider with star ratings and avatars. | Swiper slider, pausable autoplay, star ratings, avatar styling, navigation arrows. |
 | **Blockive Video** | Responsive video embed with custom cover image and lightbox. | Custom cover image, play button design, lightbox modal playback. |
+| **Blockive Icon** | A single Font Awesome icon with an optional link. | Default / stacked / framed views, circle / square / rounded shapes, responsive size, rotate, hover colors. |
+| **Blockive Icon List** | Icon + text items for contact details, features, or footer links. | Per-item icon and link (`tel:`/`mailto:` supported), stacked or inline layout, dividers, typography, hover colors. |
+| **Blockive Google Maps** | Keyless Google Maps embed for any address or coordinates. | Zoom, roadmap/satellite, responsive height, grayscale with hover reveal, lazy loading. |
+| **Blockive Off-Canvas** | Slide-in panel that holds any blocks, e.g. a mobile menu. | Left/right/top/bottom, trigger button or any `#panel-id` link, overlay, focus trap, Esc to close, scroll lock. |
 
 ---
 
