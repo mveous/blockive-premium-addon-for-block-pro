@@ -120,6 +120,7 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-loop-builder.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-woo-blocks.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-events-blocks.php';
+		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-site-blocks.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-popup-builder.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-dynamic-tags.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-admin-bar.php';
@@ -130,6 +131,7 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 		Bpafb_Pro_Loop_Builder::get_instance();
 		Bpafb_Pro_Woo_Blocks::get_instance();
 		Bpafb_Pro_Events_Blocks::get_instance();
+		Bpafb_Pro_Site_Blocks::get_instance();
 		Bpafb_Pro_Popup_Builder::get_instance();
 		Bpafb_Pro_Dynamic_Tags::get_instance();
 		Bpafb_Pro_Admin_Bar::get_instance();

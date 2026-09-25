@@ -25,6 +25,10 @@ const extraEntry = {
 		__dirname,
 		'src/template-blocks-events/index.js'
 	),
+	'template-blocks-site/index': path.resolve(
+		__dirname,
+		'src/template-blocks-site/index.js'
+	),
 	'post-grid-pro/index': path.resolve(
 		__dirname,
 		'src/post-grid-pro/index.js'

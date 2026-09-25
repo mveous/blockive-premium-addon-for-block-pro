@@ -90,6 +90,22 @@ Build the templates above using dynamic content blocks:
 
 ---
 
+## Header & Footer Template Blocks (9)
+
+Defined in `includes/class-bpafb-pro-site-blocks.php`, source in `src/template-blocks-site/`. They appear under **Blockive Header & Footer** in the Template Builder's inserter. Together with the existing Menu / Mega Menu, Social Icons, and Button blocks, they cover Elementor Pro's "Site" widgets.
+
+| Block | Description |
+|:---|:---|
+| **Site Logo** | Custom logo from the Customizer or Site Editor, or a custom image. Responsive width, max height, radius, and hover opacity. Falls back to the site title when no logo is set. |
+| **Site Title** | Site name from Settings → General. Optional home link, H1–H6/p/div/span tag, and hover color. |
+| **Site Tagline** | Site tagline from Settings → General. |
+| **Page Title** | Context-aware title for the current page, post, archive (prefix optional), search results, or 404 page. |
+| **Search Form** | Classic (field + button), Minimal (field with icon), or Full Screen (icon opens an accessible overlay). Can limit results to one post type. |
+| **Menu Cart** | WooCommerce cart icon with count badge, subtotal, and mini-cart dropdown. Updates live through cart fragments. Only shown in the inserter when WooCommerce is active. |
+| **Login** | Login/logout link with greeting and avatar for headers, or a full login form. Supports login and logout redirects. |
+| **Sitemap** | Columns of pages, posts, custom post types, or taxonomies. Can be nested, sorted, and responsive. |
+| **Copyright** | Footer line with `{year}`, `{site_title}`, and `{site_url}` placeholders, so the year never goes stale. |
+
 ## WooCommerce Template Blocks (17)
 
 Defined in `includes/class-bpafb-pro-woo-blocks.php`: Product Title, Product Gallery, Product Images, Product Price, Sale Badge, Product Rating, Add To Cart, Product SKU, Product Stock, Product Short Description, Product Description, Product Attributes, Product Meta, Product Tabs, Product Variations, Related Products, Upsells, Cross Sells.
