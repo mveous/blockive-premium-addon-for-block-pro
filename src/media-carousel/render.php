@@ -27,24 +27,6 @@ $bpafb_hover = isset($attributes['hoverEffect']) && 'none' === $attributes['hove
 $bpafb_fit = isset($attributes['imageFit']) && 'contain' === $attributes['imageFit'] ? 'contain' : 'cover';
 $bpafb_size = isset($attributes['imageSize']) && in_array($attributes['imageSize'], get_intermediate_image_sizes(), true) ? $attributes['imageSize'] : 'full';
 
-/**
- * A YouTube / Vimeo embed URL (autoplaying, for the lightbox) and the
- * YouTube poster, or a direct video file URL.
- */
-$bpafb_video = function ($url) {
-	$url = trim((string) $url);
-	if (preg_match('~(?:youtube(?:-nocookie)?\.com/(?:watch\?(?:.*&)?v=|embed/|shorts/|live/|v/)|youtu\.be/)([\w-]{11})~', $url, $m)) {
-		return ['embed' => 'https://www.youtube-nocookie.com/embed/' . $m[1] . '?autoplay=1&rel=0', 'poster' => 'https://i.ytimg.com/vi/' . $m[1] . '/hqdefault.jpg', 'file' => ''];
-	}
-	if (preg_match('~vimeo\.com/(?:.*?/)?(\d{6,})~', $url, $m)) {
-		return ['embed' => 'https://player.vimeo.com/video/' . $m[1] . '?autoplay=1', 'poster' => '', 'file' => ''];
-	}
-	if (preg_match('~^https?://\S+\.(?:mp4|webm|ogv|mov)(?:\?\S*)?$~i', $url)) {
-		return ['embed' => '', 'poster' => '', 'file' => $url];
-	}
-	return null;
-};
-
 $bpafb_slides = [];
 $bpafb_thumbs = [];
 foreach ($bpafb_items as $bpafb_item) {
@@ -52,7 +34,7 @@ foreach ($bpafb_items as $bpafb_item) {
 	$bpafb_saved_url = isset($bpafb_item['imageUrl']) ? $bpafb_item['imageUrl'] : '';
 	$bpafb_caption = isset($bpafb_item['caption']) ? trim(wp_strip_all_tags($bpafb_item['caption'])) : '';
 	$bpafb_alt = isset($bpafb_item['alt']) ? $bpafb_item['alt'] : '';
-	$bpafb_video_data = (isset($bpafb_item['type']) && 'video' === $bpafb_item['type'] && !empty($bpafb_item['videoUrl'])) ? $bpafb_video($bpafb_item['videoUrl']) : null;
+	$bpafb_video_data = (isset($bpafb_item['type']) && 'video' === $bpafb_item['type'] && !empty($bpafb_item['videoUrl'])) ? Bpafb_Pro_Shared_Assets::video_embed($bpafb_item['videoUrl']) : null;
 
 	$bpafb_img_url = $bpafb_s::image_url($bpafb_id, $bpafb_saved_url, $bpafb_size);
 	if (!$bpafb_img_url && $bpafb_video_data) {

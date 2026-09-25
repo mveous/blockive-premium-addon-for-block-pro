@@ -19,6 +19,7 @@ import {
 	carouselClasses,
 } from '../pro-components/carousel/editor';
 import { typoValues, typoOnChange, typoVars, cssVars } from '../template-blocks-site/shared';
+import { youtubePoster } from '../pro-components/video';
 
 const BLANK = { type: 'image', imageId: 0, imageUrl: '', alt: '', videoUrl: '', caption: '', link: '', newTab: false };
 
@@ -29,17 +30,6 @@ const IMAGE_SIZES = [
 	{ label: __( 'Large', 'blockive-premium-addon-for-block-pro' ), value: 'large' },
 	{ label: __( 'Full', 'blockive-premium-addon-for-block-pro' ), value: 'full' },
 ];
-
-/**
- * Same match as the $bpafb_video closure in render.php, for the poster.
- *
- * @param {string} url Video URL.
- * @return {string} YouTube poster URL, or ''.
- */
-function youtubePoster( url ) {
-	const m = /(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/|v\/)|youtu\.be\/)([\w-]{11})/.exec( url || '' );
-	return m ? `https://i.ytimg.com/vi/${ m[ 1 ] }/hqdefault.jpg` : '';
-}
 
 const fromMedia = ( media ) => ( {
 	...BLANK,

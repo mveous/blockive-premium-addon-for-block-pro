@@ -107,6 +107,30 @@ class Bpafb_Pro_Shared_Assets
 	}
 
 	/**
+	 * How to play a video URL (Media Carousel, Video Playlist): a
+	 * YouTube (privacy-enhanced) or Vimeo embed URL that autoplays, since
+	 * it only loads after a click, plus the YouTube poster; or a direct
+	 * video file. Null for anything else.
+	 *
+	 * @param string $url Video URL as entered.
+	 * @return array{embed:string,poster:string,file:string}|null
+	 */
+	public static function video_embed($url)
+	{
+		$url = trim((string) $url);
+		if (preg_match('~(?:youtube(?:-nocookie)?\.com/(?:watch\?(?:.*&)?v=|embed/|shorts/|live/|v/)|youtu\.be/)([\w-]{11})~', $url, $m)) {
+			return ['embed' => 'https://www.youtube-nocookie.com/embed/' . $m[1] . '?autoplay=1&rel=0', 'poster' => 'https://i.ytimg.com/vi/' . $m[1] . '/hqdefault.jpg', 'file' => ''];
+		}
+		if (preg_match('~vimeo\.com/(?:.*?/)?(\d{6,})~', $url, $m)) {
+			return ['embed' => 'https://player.vimeo.com/video/' . $m[1] . '?autoplay=1', 'poster' => '', 'file' => ''];
+		}
+		if (preg_match('~^https?://\S+\.(?:mp4|webm|ogv|mov)(?:\?\S*)?$~i', $url)) {
+			return ['embed' => '', 'poster' => '', 'file' => $url];
+		}
+		return null;
+	}
+
+	/**
 	 * Translated lightbox labels, for the block wrapper's data-l10n
 	 * attribute (read by src/pro-components/lightbox/lightbox.js).
 	 *
