@@ -354,6 +354,44 @@ class Bpafb_Pro_Site_Blocks
 	}
 
 	/**
+	 * An image URL from a Media Library id, falling back to the URL saved
+	 * with the block (e.g. when the attachment was since deleted).
+	 *
+	 * @param int    $id   Attachment id.
+	 * @param string $url  Saved URL.
+	 * @param string $size Image size.
+	 * @return string Unescaped URL, or ''.
+	 */
+	public static function image_url($id, $url, $size = 'full')
+	{
+		$found = $id ? wp_get_attachment_image_url((int) $id, $size) : '';
+		return $found ? $found : (string) $url;
+	}
+
+	/**
+	 * ` href="…"` plus target/rel attributes for a link.
+	 *
+	 * @param string $url     Link URL.
+	 * @param bool   $new_tab Open in a new tab.
+	 * @return string
+	 */
+	public static function link_attrs($url, $new_tab)
+	{
+		return ' href="' . esc_url($url) . '"' . ($new_tab ? ' target="_blank" rel="noopener noreferrer"' : '');
+	}
+
+	/**
+	 * A Font Awesome class string, stripped to safe characters.
+	 *
+	 * @param string $value Class string.
+	 * @return string
+	 */
+	public static function icon_class($value)
+	{
+		return trim(preg_replace('/[^a-z0-9\s_-]/i', '', (string) $value));
+	}
+
+	/**
 	 * The block's uid, or a fresh unique one when the block has none yet.
 	 *
 	 * @param array  $attributes Block attributes.

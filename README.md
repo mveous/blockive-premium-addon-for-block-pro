@@ -6,7 +6,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ## Key Highlights
 
-- **32 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
+- **36 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
 - **Full Template Builder**: Build Single, Header, Footer, Archive, Search Results, 404, and Popup templates, each with its own Display Conditions.
 - **WooCommerce & Events Blocks**: 17 WooCommerce product blocks and 9 Events blocks for building fully custom product and event templates.
 - **Dynamic Tags**: `{{tag}}` tokens (e.g. `{{post_title}}`, `{{post_date:F j, Y}}`) work in any text or URL field on any Blockive block.
@@ -17,7 +17,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ---
 
-## Included 32 Blocks
+## Included 36 Blocks
 
 | Block Name | Description | Key Customization Features |
 |:---|:---|:---|
@@ -52,6 +52,10 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Icon** | A single Font Awesome icon with an optional link. | Default / stacked / framed views, circle / square / rounded shapes, responsive size, rotate, hover colors. |
 | **Blockive Icon List** | Icon + text items for contact details, features, or footer links. | Per-item icon and link (`tel:`/`mailto:` supported), stacked or inline layout, dividers, typography, hover colors. |
 | **Blockive Google Maps** | Keyless Google Maps embed for any address or coordinates. | Zoom, roadmap/satellite, responsive height, grayscale with hover reveal, lazy loading. |
+| **Blockive Call to Action** | Promo box with image, heading, text, button, and ribbon. | Classic (image left/right/top) or cover skin, overlay with hover color, image zoom/move effects, whole-box link. |
+| **Blockive Flip Box** | Two-sided card revealing its back on hover, keyboard focus, or tap. | Flip (3D), slide, push, fade, zoom in/out in four directions, per-side backgrounds, button or whole-side link. |
+| **Blockive Slides** | Full-width hero slider with per-slide background, heading, text, and button. | Slide/fade, autoplay with pause button, arrows, dots, swipe, keyboard, Ken Burns zoom, responsive height. No Swiper dependency. |
+| **Blockive Share Buttons** | Share the current page or post (or the Loop Grid card's post). | 10 networks plus email, copy link, print, and the native share sheet. Flat/gradient/framed/minimal skins, brand or custom colors. |
 | **Blockive Off-Canvas** | Slide-in panel that holds any blocks, e.g. a mobile menu. | Left/right/top/bottom, trigger button or any `#panel-id` link, overlay, focus trap, Esc to close, scroll lock. |
 
 ---

@@ -1,0 +1,261 @@
+.bpafb-cta {
+	position: relative;
+	display: flex;
+	overflow: hidden;
+	min-height: var(--bpafb-cta-min-height, 0);
+	border-radius: var(--bpafb-cta-radius, 0);
+}
+
+.bpafb-cta__media {
+	position: relative;
+	overflow: hidden;
+	min-height: var(--bpafb-cta-image-min-height, 260px);
+}
+
+.bpafb-cta__img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.8s ease;
+}
+
+.bpafb-cta__overlay {
+	position: absolute;
+	inset: 0;
+	background: var(--bpafb-cta-overlay, transparent);
+	transition: background-color 0.5s ease;
+}
+
+.bpafb-cta:hover .bpafb-cta__overlay {
+	background: var(--bpafb-cta-overlay-hover, var(--bpafb-cta-overlay, transparent));
+}
+
+.bpafb-cta--hover-zoom-in:hover .bpafb-cta__img {
+	transform: scale(1.12);
+}
+
+.bpafb-cta--hover-zoom-out .bpafb-cta__img {
+	transform: scale(1.12);
+}
+
+.bpafb-cta--hover-zoom-out:hover .bpafb-cta__img {
+	transform: scale(1);
+}
+
+.bpafb-cta--hover-move-left .bpafb-cta__img,
+.bpafb-cta--hover-move-right .bpafb-cta__img {
+	transform: scale(1.12);
+}
+
+.bpafb-cta--hover-move-left:hover .bpafb-cta__img {
+	transform: scale(1.12) translateX(-5%);
+}
+
+.bpafb-cta--hover-move-right:hover .bpafb-cta__img {
+	transform: scale(1.12) translateX(5%);
+}
+
+.bpafb-cta__content {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	gap: 14px;
+	box-sizing: border-box;
+	padding: var(--bpafb-cta-padding, 40px);
+	background: var(--bpafb-cta-content-bg, #f3f4f6);
+}
+
+/* Classic skin */
+.bpafb-cta--classic.has-image.bpafb-cta--image-left .bpafb-cta__media,
+.bpafb-cta--classic.has-image.bpafb-cta--image-right .bpafb-cta__media {
+	flex: 0 0 var(--bpafb-cta-image-width, 50%);
+}
+
+.bpafb-cta--classic.bpafb-cta--image-right {
+	flex-direction: row-reverse;
+}
+
+.bpafb-cta--classic.bpafb-cta--image-top {
+	flex-direction: column;
+}
+
+/* Cover skin */
+.bpafb-cta--cover {
+	min-height: var(--bpafb-cta-min-height, 360px);
+}
+
+.bpafb-cta--cover .bpafb-cta__media {
+	position: absolute;
+	inset: 0;
+	min-height: 0;
+}
+
+.bpafb-cta--cover .bpafb-cta__overlay {
+	background: var(--bpafb-cta-overlay, rgba(0, 0, 0, 0.45));
+}
+
+.bpafb-cta--cover .bpafb-cta__content {
+	color: #fff;
+	background: var(--bpafb-cta-content-bg, transparent);
+}
+
+/* Alignment */
+.bpafb-cta--align-left .bpafb-cta__content {
+	align-items: flex-start;
+	text-align: left;
+}
+
+.bpafb-cta--align-center .bpafb-cta__content {
+	align-items: center;
+	text-align: center;
+}
+
+.bpafb-cta--align-right .bpafb-cta__content {
+	align-items: flex-end;
+	text-align: right;
+}
+
+.bpafb-cta--valign-top .bpafb-cta__content {
+	justify-content: flex-start;
+}
+
+.bpafb-cta--valign-center .bpafb-cta__content {
+	justify-content: center;
+}
+
+.bpafb-cta--valign-bottom .bpafb-cta__content {
+	justify-content: flex-end;
+}
+
+/* Content */
+.bpafb-cta__icon {
+	font-size: var(--bpafb-cta-icon-size, 44px);
+	line-height: 1;
+	color: var(--bpafb-cta-icon-color, currentColor);
+}
+
+.bpafb-cta__title {
+	margin: 0;
+	font-family: var(--bpafb-cta-title-font-family, inherit);
+	font-size: var(--bpafb-cta-title-font-size, 1.75em);
+	font-weight: var(--bpafb-cta-title-font-weight, 700);
+	line-height: var(--bpafb-cta-title-line-height, 1.25);
+	letter-spacing: var(--bpafb-cta-title-letter-spacing, normal);
+	text-transform: var(--bpafb-cta-title-text-transform, none);
+	text-decoration: var(--bpafb-cta-title-text-decoration, none);
+	color: var(--bpafb-cta-title-color, inherit);
+}
+
+.bpafb-cta__desc {
+	font-family: var(--bpafb-cta-desc-font-family, inherit);
+	font-size: var(--bpafb-cta-desc-font-size, inherit);
+	font-weight: var(--bpafb-cta-desc-font-weight, inherit);
+	line-height: var(--bpafb-cta-desc-line-height, 1.6);
+	letter-spacing: var(--bpafb-cta-desc-letter-spacing, normal);
+	text-transform: var(--bpafb-cta-desc-text-transform, none);
+	color: var(--bpafb-cta-desc-color, inherit);
+}
+
+.bpafb-cta__desc > :last-child {
+	margin-bottom: 0;
+}
+
+.bpafb-cta__button {
+	display: inline-block;
+	margin-top: 6px;
+	padding: 12px 26px;
+	font-weight: 600;
+	line-height: 1.2;
+	color: var(--bpafb-cta-btn-color, #fff);
+	background: var(--bpafb-cta-btn-bg, #4f46e5);
+	border: 2px solid var(--bpafb-cta-btn-bg, #4f46e5);
+	border-radius: var(--bpafb-cta-btn-radius, 4px);
+	text-decoration: none;
+	transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.bpafb-cta__button--outline {
+	color: var(--bpafb-cta-btn-color, currentColor);
+	background: transparent;
+	border-color: var(--bpafb-cta-btn-bg, currentColor);
+}
+
+a.bpafb-cta__button:hover,
+a.bpafb-cta__button:focus-visible,
+.bpafb-cta__box-link:hover ~ .bpafb-cta__content .bpafb-cta__button {
+	color: var(--bpafb-cta-btn-hover-color, var(--bpafb-cta-btn-color, #fff));
+	background: var(--bpafb-cta-btn-hover-bg, #4338ca);
+	border-color: var(--bpafb-cta-btn-hover-bg, #4338ca);
+}
+
+.bpafb-cta__box-link {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+}
+
+.bpafb-cta__box-link:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: -4px;
+}
+
+/* Ribbon */
+.bpafb-cta__ribbon {
+	position: absolute;
+	top: 0;
+	z-index: 3;
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.bpafb-cta__ribbon--right {
+	right: 0;
+}
+
+.bpafb-cta__ribbon--left {
+	left: 0;
+}
+
+.bpafb-cta__ribbon span {
+	position: absolute;
+	top: 30px;
+	display: block;
+	width: 200px;
+	padding: 6px 0;
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1.3;
+	text-align: center;
+	color: var(--bpafb-cta-ribbon-color, #fff);
+	background: var(--bpafb-cta-ribbon-bg, #e11d48);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.bpafb-cta__ribbon--right span {
+	right: -50px;
+	transform: rotate(45deg);
+}
+
+.bpafb-cta__ribbon--left span {
+	left: -50px;
+	transform: rotate(-45deg);
+}
+
+@media (max-width: 767px) {
+	.bpafb-cta--classic.bpafb-cta--image-left,
+	.bpafb-cta--classic.bpafb-cta--image-right {
+		flex-direction: column;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bpafb-cta__img {
+		transition: none;
+	}
+}
