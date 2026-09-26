@@ -373,24 +373,24 @@ class Bpafb_Pro_Site_Tools
 
 				<div class="bpafb-dashboard-body">
 					<!-- Sidebar Tabs Navigation -->
-					<div class="bpafb-nav-tabs" role="tablist">
-						<button type="button" class="bpafb-tab-btn is-active" data-tab="custom-code" role="tab" aria-selected="true">
+					<div class="bpafb-nav-tabs" role="tablist" aria-orientation="vertical" aria-label="<?php esc_attr_e('Site Tools sections', 'blockive-premium-addon-for-block-pro'); ?>">
+						<button type="button" class="bpafb-tab-btn is-active" id="bpafb-tab-btn-custom-code" data-tab="custom-code" role="tab" aria-controls="tab-custom-code" aria-selected="true" tabindex="0">
 							<span class="bpafb-tab-icon dashicons dashicons-editor-code"></span>
 							<span><?php esc_html_e('Custom Code', 'blockive-premium-addon-for-block-pro'); ?></span>
 						</button>
-						<button type="button" class="bpafb-tab-btn" data-tab="custom-fonts" role="tab" aria-selected="false">
+						<button type="button" class="bpafb-tab-btn" id="bpafb-tab-btn-custom-fonts" data-tab="custom-fonts" role="tab" aria-controls="tab-custom-fonts" aria-selected="false" tabindex="-1">
 							<span class="bpafb-tab-icon dashicons dashicons-editor-customchar"></span>
 							<span><?php esc_html_e('Custom Fonts', 'blockive-premium-addon-for-block-pro'); ?></span>
 						</button>
-						<button type="button" class="bpafb-tab-btn" data-tab="page-transitions" role="tab" aria-selected="false">
+						<button type="button" class="bpafb-tab-btn" id="bpafb-tab-btn-page-transitions" data-tab="page-transitions" role="tab" aria-controls="tab-page-transitions" aria-selected="false" tabindex="-1">
 							<span class="bpafb-tab-icon dashicons dashicons-image-rotate"></span>
 							<span><?php esc_html_e('Page Transitions', 'blockive-premium-addon-for-block-pro'); ?></span>
 						</button>
-						<button type="button" class="bpafb-tab-btn" data-tab="role-manager" role="tab" aria-selected="false">
+						<button type="button" class="bpafb-tab-btn" id="bpafb-tab-btn-role-manager" data-tab="role-manager" role="tab" aria-controls="tab-role-manager" aria-selected="false" tabindex="-1">
 							<span class="bpafb-tab-icon dashicons dashicons-shield"></span>
 							<span><?php esc_html_e('Role Access', 'blockive-premium-addon-for-block-pro'); ?></span>
 						</button>
-						<button type="button" class="bpafb-tab-btn" data-tab="element-manager" role="tab" aria-selected="false">
+						<button type="button" class="bpafb-tab-btn" id="bpafb-tab-btn-element-manager" data-tab="element-manager" role="tab" aria-controls="tab-element-manager" aria-selected="false" tabindex="-1">
 							<span class="bpafb-tab-icon dashicons dashicons-screenoptions"></span>
 							<span><?php esc_html_e('Element Manager', 'blockive-premium-addon-for-block-pro'); ?></span>
 						</button>
@@ -399,7 +399,7 @@ class Bpafb_Pro_Site_Tools
 					<!-- Tab Contents -->
 					<div class="bpafb-tab-contents">
 						<!-- 1. Custom Code Tab -->
-						<div class="bpafb-tab-panel is-active" id="tab-custom-code">
+						<div class="bpafb-tab-panel is-active" id="tab-custom-code" role="tabpanel" aria-labelledby="bpafb-tab-btn-custom-code" tabindex="0">
 							<div class="bpafb-card">
 								<div class="bpafb-card-header">
 									<div class="bpafb-card-header-left">
@@ -431,12 +431,12 @@ class Bpafb_Pro_Site_Tools
 						</div>
 
 						<!-- 2. Custom Fonts Tab -->
-						<div class="bpafb-tab-panel" id="tab-custom-fonts">
+						<div class="bpafb-tab-panel" id="tab-custom-fonts" role="tabpanel" aria-labelledby="bpafb-tab-btn-custom-fonts" tabindex="0">
 							<?php Bpafb_Pro_Custom_Fonts::render_section(); ?>
 						</div>
 
 						<!-- 3. Page Transitions Tab -->
-						<div class="bpafb-tab-panel" id="tab-page-transitions">
+						<div class="bpafb-tab-panel" id="tab-page-transitions" role="tabpanel" aria-labelledby="bpafb-tab-btn-page-transitions" tabindex="0">
 							<div class="bpafb-card">
 								<div class="bpafb-card-header">
 									<div class="bpafb-card-header-left">
@@ -472,12 +472,12 @@ class Bpafb_Pro_Site_Tools
 						</div>
 
 						<!-- 4. Role Manager Tab -->
-						<div class="bpafb-tab-panel" id="tab-role-manager">
+						<div class="bpafb-tab-panel" id="tab-role-manager" role="tabpanel" aria-labelledby="bpafb-tab-btn-role-manager" tabindex="0">
 							<?php Bpafb_Pro_Role_Manager::render_section(); ?>
 						</div>
 
 						<!-- 5. Element Manager Tab -->
-						<div class="bpafb-tab-panel" id="tab-element-manager">
+						<div class="bpafb-tab-panel" id="tab-element-manager" role="tabpanel" aria-labelledby="bpafb-tab-btn-element-manager" tabindex="0">
 							<div class="bpafb-card">
 								<div class="bpafb-card-header">
 									<div class="bpafb-card-header-left">
@@ -552,31 +552,61 @@ class Bpafb_Pro_Site_Tools
 		<script>
 		( function () {
 			// Tab Navigation
-			var tabButtons = document.querySelectorAll( '.bpafb-tab-btn' );
+			var tabButtons = Array.prototype.slice.call( document.querySelectorAll( '.bpafb-tab-btn' ) );
 			var tabPanels = document.querySelectorAll( '.bpafb-tab-panel' );
+			// options.php sends us back to this field's URL after saving; the
+			// browser does not post the #tab, so it is added here to reopen
+			// the same tab.
+			var referer = document.querySelector( '#bpafb-site-tools-form input[name="_wp_http_referer"]' );
+			var refererBase = referer ? referer.value.split( '#' )[ 0 ] : '';
 			function switchTab( targetId ) {
 				tabButtons.forEach( function ( btn ) {
 					var isActive = btn.getAttribute( 'data-tab' ) === targetId;
 					btn.classList.toggle( 'is-active', isActive );
 					btn.setAttribute( 'aria-selected', isActive ? 'true' : 'false' );
+					btn.setAttribute( 'tabindex', isActive ? '0' : '-1' );
 				} );
 				tabPanels.forEach( function ( panel ) {
 					panel.classList.toggle( 'is-active', panel.id === 'tab-' + targetId );
 				} );
+				if ( referer ) {
+					referer.value = refererBase + '#' + targetId;
+				}
 				if ( window.history && window.history.replaceState ) {
-					window.history.replaceState( null, null, '#' + targetId );
+					window.history.replaceState( null, '', '#' + targetId );
 				}
 			}
 
-			tabButtons.forEach( function ( btn ) {
+			tabButtons.forEach( function ( btn, index ) {
 				btn.addEventListener( 'click', function () {
 					switchTab( this.getAttribute( 'data-tab' ) );
 				} );
+				// Arrow keys, Home, and End move between tabs (WAI-ARIA tabs).
+				btn.addEventListener( 'keydown', function ( event ) {
+					var last = tabButtons.length - 1;
+					var target = null;
+					if ( 'ArrowDown' === event.key || 'ArrowRight' === event.key ) {
+						target = index === last ? 0 : index + 1;
+					} else if ( 'ArrowUp' === event.key || 'ArrowLeft' === event.key ) {
+						target = index === 0 ? last : index - 1;
+					} else if ( 'Home' === event.key ) {
+						target = 0;
+					} else if ( 'End' === event.key ) {
+						target = last;
+					}
+					if ( null === target ) {
+						return;
+					}
+					event.preventDefault();
+					switchTab( tabButtons[ target ].getAttribute( 'data-tab' ) );
+					tabButtons[ target ].focus();
+				} );
 			} );
 
-			// Check URL hash for initial tab
-			var initialHash = window.location.hash ? window.location.hash.replace( '#', '' ) : 'custom-code';
-			if ( document.getElementById( 'tab-' + initialHash ) ) {
+			// Open the tab named in the URL (also after saving).
+			var initialHash = window.location.hash ? window.location.hash.replace( '#', '' ) : '';
+			var initialPanel = initialHash ? document.getElementById( 'tab-' + initialHash ) : null;
+			if ( initialPanel && initialPanel.classList.contains( 'bpafb-tab-panel' ) ) {
 				switchTab( initialHash );
 			}
 
@@ -585,7 +615,11 @@ class Bpafb_Pro_Site_Tools
 			var form = document.getElementById( 'bpafb-site-tools-form' );
 			if ( headerSaveBtn && form ) {
 				headerSaveBtn.addEventListener( 'click', function () {
-					form.submit();
+					if ( form.requestSubmit ) {
+						form.requestSubmit();
+					} else {
+						form.submit();
+					}
 				} );
 			}
 

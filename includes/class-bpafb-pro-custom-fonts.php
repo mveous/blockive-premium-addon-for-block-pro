@@ -262,13 +262,14 @@ class Bpafb_Pro_Custom_Fonts
 				</button>
 			</div>
 			<div class="bpafb-card-body">
+				<div class="bpafb-fonts-table-wrap">
 				<table class="bpafb-fonts-table" id="bpafb-fonts">
 					<thead>
 						<tr>
-							<th scope="col" style="width: 28%;"><?php esc_html_e('Font Family Name', 'blockive-premium-addon-for-block-pro'); ?></th>
-							<th scope="col" style="width: 18%;"><?php esc_html_e('Weight', 'blockive-premium-addon-for-block-pro'); ?></th>
-							<th scope="col" style="width: 18%;"><?php esc_html_e('Style', 'blockive-premium-addon-for-block-pro'); ?></th>
-							<th scope="col" style="width: 28%;"><?php esc_html_e('Font File', 'blockive-premium-addon-for-block-pro'); ?></th>
+							<th scope="col" style="width: 32%;"><?php esc_html_e('Font Family Name', 'blockive-premium-addon-for-block-pro'); ?></th>
+							<th scope="col" style="width: 14%;"><?php esc_html_e('Weight', 'blockive-premium-addon-for-block-pro'); ?></th>
+							<th scope="col" style="width: 16%;"><?php esc_html_e('Style', 'blockive-premium-addon-for-block-pro'); ?></th>
+							<th scope="col" style="width: 30%;"><?php esc_html_e('Font File', 'blockive-premium-addon-for-block-pro'); ?></th>
 							<th scope="col" style="width: 8%; text-align: right;"><span class="screen-reader-text"><?php esc_html_e('Actions', 'blockive-premium-addon-for-block-pro'); ?></span></th>
 						</tr>
 					</thead>
@@ -282,7 +283,7 @@ class Bpafb_Pro_Custom_Fonts
 								<td>
 									<select style="width: 100%; border-radius: var(--bpafb-radius-sm); border: 1px solid var(--bpafb-slate-300);" aria-label="<?php esc_attr_e('Weight', 'blockive-premium-addon-for-block-pro'); ?>" name="<?php echo esc_attr($name . '[' . $index . '][weight]'); ?>">
 										<?php foreach ($weights as $weight) : ?>
-											<option value="<?php echo esc_attr($weight); ?>" <?php selected(isset($row['weight']) ? $row['weight'] : '400', $weight); ?>><?php echo esc_html($weight . ('400' === $weight ? ' (Regular)' : ('700' === $weight ? ' (Bold)' : ''))); ?></option>
+											<option value="<?php echo esc_attr($weight); ?>" <?php selected(isset($row['weight']) ? $row['weight'] : '400', $weight); ?>><?php echo esc_html($weight); ?></option>
 										<?php endforeach; ?>
 									</select>
 								</td>
@@ -301,7 +302,8 @@ class Bpafb_Pro_Custom_Fonts
 								</td>
 								<td style="text-align: right;">
 									<button type="button" class="button-link button-link-delete bpafb-font-remove" style="color: var(--bpafb-danger); text-decoration: none;" title="<?php esc_attr_e('Remove row', 'blockive-premium-addon-for-block-pro'); ?>">
-										<span class="dashicons dashicons-trash" style="font-size: 18px; width: 18px; height: 18px; line-height: 18px;"></span>
+										<span class="dashicons dashicons-trash" aria-hidden="true" style="font-size: 18px; width: 18px; height: 18px; line-height: 18px;"></span>
+										<span class="screen-reader-text"><?php esc_html_e('Remove font', 'blockive-premium-addon-for-block-pro'); ?></span>
 									</button>
 								</td>
 							</tr>
@@ -313,6 +315,8 @@ class Bpafb_Pro_Custom_Fonts
 						?>
 					</tbody>
 				</table>
+				</div>
+				<p class="bpafb-fonts-empty" id="bpafb-fonts-empty"<?php echo $rows ? ' hidden' : ''; ?>><?php esc_html_e('No custom fonts yet. Click Add Font File to upload your first one.', 'blockive-premium-addon-for-block-pro'); ?></p>
 				<template id="bpafb-font-template"><?php $render_row('__i__', []); ?></template>
 			</div>
 		</div>
@@ -320,12 +324,25 @@ class Bpafb_Pro_Custom_Fonts
 		( function () {
 			var table = document.querySelector( '#bpafb-fonts tbody' );
 			if ( ! table ) return;
+			var empty = document.getElementById( 'bpafb-fonts-empty' );
+			var wrap = document.querySelector( '.bpafb-fonts-table-wrap' );
+			function syncEmpty() {
+				var none = ! table.querySelector( '.bpafb-font-row' );
+				if ( empty ) {
+					empty.hidden = ! none;
+				}
+				if ( wrap ) {
+					wrap.hidden = none;
+				}
+			}
+			syncEmpty();
 			var next = <?php echo (int) (count($rows) ? max(array_keys($rows)) + 1 : 0); ?>;
 			var addBtn = document.getElementById( 'bpafb-font-add' );
 			if ( addBtn ) {
 				addBtn.addEventListener( 'click', function () {
 					var html = document.getElementById( 'bpafb-font-template' ).innerHTML.split( '__i__' ).join( String( next++ ) );
 					table.insertAdjacentHTML( 'beforeend', html );
+					syncEmpty();
 					table.lastElementChild.querySelector( 'input[type="text"]' ).focus();
 				} );
 			}
@@ -336,6 +353,7 @@ class Bpafb_Pro_Custom_Fonts
 				}
 				if ( event.target.closest( '.bpafb-font-remove' ) ) {
 					row.remove();
+					syncEmpty();
 					return;
 				}
 				if ( event.target.closest( '.bpafb-font-pick' ) && window.wp && wp.media ) {

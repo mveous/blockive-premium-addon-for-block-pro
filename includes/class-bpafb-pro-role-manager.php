@@ -143,9 +143,19 @@ class Bpafb_Pro_Role_Manager
 				</div>
 			</div>
 			<div class="bpafb-card-body">
+				<?php
+				// With no role switched on, every role that can edit posts
+				// has access - the switches alone would suggest nobody has.
+				$status_open = __('Everyone who can edit posts has access. Switch on roles below to limit access to only those roles.', 'blockive-premium-addon-for-block-pro');
+				$status_limited = __('Only Administrators and the roles switched on below have access.', 'blockive-premium-addon-for-block-pro');
+				?>
+				<p class="bpafb-roles-status" id="bpafb-roles-status" role="status" data-open="<?php echo esc_attr($status_open); ?>" data-limited="<?php echo esc_attr($status_limited); ?>">
+					<span class="dashicons dashicons-info-outline" aria-hidden="true"></span>
+					<span class="bpafb-roles-status-text"><?php echo esc_html($allowed ? $status_limited : $status_open); ?></span>
+				</p>
 				<fieldset>
 					<legend class="screen-reader-text"><?php esc_html_e('User Roles', 'blockive-premium-addon-for-block-pro'); ?></legend>
-					<div class="bpafb-roles-grid">
+					<div class="bpafb-roles-grid<?php echo $allowed ? '' : ' is-open'; ?>" id="bpafb-roles-grid">
 						<div class="bpafb-role-card" style="background: var(--bpafb-slate-50); border-style: dashed;">
 							<div class="bpafb-role-info">
 								<h3><?php esc_html_e('Administrator', 'blockive-premium-addon-for-block-pro'); ?></h3>
@@ -166,6 +176,7 @@ class Bpafb_Pro_Role_Manager
 								<div class="bpafb-role-info">
 									<h3><?php echo esc_html(translate_user_role($role['name'])); ?></h3>
 									<p><?php printf(esc_html__('Role slug: %s', 'blockive-premium-addon-for-block-pro'), esc_html($slug)); ?></p>
+									<span class="bpafb-role-default"><?php esc_html_e('Has access (default)', 'blockive-premium-addon-for-block-pro'); ?></span>
 								</div>
 								<label class="bpafb-switch" title="<?php printf(esc_attr__('Toggle access for %s', 'blockive-premium-addon-for-block-pro'), esc_attr($role['name'])); ?>">
 									<input type="checkbox" name="<?php echo esc_attr(self::OPTION); ?>[]" value="<?php echo esc_attr($slug); ?>" <?php checked($is_checked); ?>>
@@ -175,11 +186,23 @@ class Bpafb_Pro_Role_Manager
 						<?php endforeach; ?>
 					</div>
 				</fieldset>
-				<p class="description" style="margin-top: 16px;">
-					<?php esc_html_e('Note: When no non-admin roles are checked, access defaults to any user who can edit posts.', 'blockive-premium-addon-for-block-pro'); ?>
-				</p>
 			</div>
 		</div>
+		<script>
+		( function () {
+			var grid = document.getElementById( 'bpafb-roles-grid' );
+			var status = document.getElementById( 'bpafb-roles-status' );
+			if ( ! grid || ! status ) {
+				return;
+			}
+			var text = status.querySelector( '.bpafb-roles-status-text' );
+			grid.addEventListener( 'change', function () {
+				var open = ! grid.querySelector( 'input[type="checkbox"]:checked' );
+				grid.classList.toggle( 'is-open', open );
+				text.textContent = status.getAttribute( open ? 'data-open' : 'data-limited' );
+			} );
+		} )();
+		</script>
 		<?php
 	}
 }

@@ -261,6 +261,12 @@
 	font-weight: 700;
 }
 
+.bpafb-tab-btn:focus-visible,
+.bpafb-tab-panel:focus-visible {
+	outline: 2px solid var(--bpafb-primary);
+	outline-offset: 2px;
+}
+
 .bpafb-tab-icon {
 	font-size: 16px;
 	width: 20px;
@@ -557,14 +563,34 @@
 }
 
 /* Custom Fonts Table */
+.bpafb-fonts-table-wrap {
+	overflow-x: auto;
+	margin-bottom: 20px;
+}
+
+.bpafb-fonts-table-wrap[hidden],
+.bpafb-fonts-empty[hidden] {
+	display: none;
+}
+
+.bpafb-fonts-empty {
+	margin: 0;
+	padding: 32px 16px;
+	text-align: center;
+	color: var(--bpafb-slate-500);
+	border: 1px dashed var(--bpafb-slate-300);
+	border-radius: var(--bpafb-radius-md);
+	background: var(--bpafb-slate-50);
+}
+
 .bpafb-fonts-table {
+	min-width: 640px;
 	width: 100%;
 	border-collapse: separate;
 	border-spacing: 0;
 	border: 1px solid var(--bpafb-slate-200);
 	border-radius: var(--bpafb-radius-md);
 	overflow: hidden;
-	margin-bottom: 20px;
 }
 
 .bpafb-fonts-table th {
@@ -606,8 +632,37 @@
 /* Role Manager Cards */
 .bpafb-roles-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
 	gap: 16px;
+}
+
+.bpafb-roles-status {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	margin: 0 0 16px;
+	padding: 12px 14px;
+	font-size: 13px;
+	color: var(--bpafb-slate-700);
+	background: var(--bpafb-primary-light);
+	border-radius: var(--bpafb-radius-md);
+}
+
+.bpafb-roles-status .dashicons {
+	color: var(--bpafb-primary);
+	flex-shrink: 0;
+}
+
+.bpafb-role-default {
+	display: none;
+	margin-top: 6px;
+	font-size: 11px;
+	font-weight: 700;
+	color: #047857; /* darker than --bpafb-success, for text contrast */
+}
+
+.bpafb-roles-grid.is-open .bpafb-role-default {
+	display: inline-block;
 }
 
 .bpafb-role-card {
