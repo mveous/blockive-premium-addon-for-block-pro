@@ -111,12 +111,44 @@ class Bpafb_Pro_Dynamic_Tags
 					'post_date' => [
 						'label'    => __('Post Date', 'blockive-premium-addon-for-block-pro'),
 						'hasParam' => true,
+						'paramLabel' => __('Date format', 'blockive-premium-addon-for-block-pro'),
+						'paramHelp'  => __('Blank uses the site\'s date format, e.g. F j, Y', 'blockive-premium-addon-for-block-pro'),
 						'resolve'  => function ($post_id, $param) {
 							if (!$post_id) {
 								return '';
 							}
 							$format = $param !== '' ? $param : get_option('date_format');
 							return get_the_date($format, $post_id);
+						},
+					],
+					'post_modified' => [
+						'label'     => __('Last Modified Date', 'blockive-premium-addon-for-block-pro'),
+						'hasParam'  => true,
+						'paramLabel' => __('Date format', 'blockive-premium-addon-for-block-pro'),
+						'paramHelp'  => __('Blank uses the site\'s date format, e.g. F j, Y', 'blockive-premium-addon-for-block-pro'),
+						'resolve'   => function ($post_id, $param) {
+							return $post_id ? get_the_modified_date($param !== '' ? $param : get_option('date_format'), $post_id) : '';
+						},
+					],
+					'post_terms' => [
+						'label'     => __('Post Terms', 'blockive-premium-addon-for-block-pro'),
+						'hasParam'  => true,
+						'paramLabel' => __('Taxonomy', 'blockive-premium-addon-for-block-pro'),
+						'paramHelp'  => __('Blank = category. E.g. post_tag or product_cat.', 'blockive-premium-addon-for-block-pro'),
+						// Names of the post's terms, comma-separated. Only public taxonomies.
+						'resolve'   => function ($post_id, $param) {
+							$taxonomy = $param !== '' ? sanitize_key($param) : 'category';
+							if (!$post_id || !taxonomy_exists($taxonomy) || !is_taxonomy_viewable($taxonomy)) {
+								return '';
+							}
+							$terms = get_the_terms($post_id, $taxonomy);
+							return is_array($terms) ? implode(', ', wp_list_pluck($terms, 'name')) : '';
+						},
+					],
+					'comment_count' => [
+						'label'   => __('Comment Count', 'blockive-premium-addon-for-block-pro'),
+						'resolve' => function ($post_id) {
+							return $post_id ? (string) get_comments_number($post_id) : '';
 						},
 					],
 					'post_permalink' => [
@@ -135,6 +167,8 @@ class Bpafb_Pro_Dynamic_Tags
 						'label'    => __('Featured Image URL', 'blockive-premium-addon-for-block-pro'),
 						'type'     => 'image',
 						'hasParam' => true,
+						'paramLabel' => __('Image size', 'blockive-premium-addon-for-block-pro'),
+						'paramHelp'  => __('Blank = full. E.g. thumbnail, medium, large', 'blockive-premium-addon-for-block-pro'),
 						'resolve'  => function ($post_id, $param) {
 							if (!$post_id || !has_post_thumbnail($post_id)) {
 								return '';
@@ -214,6 +248,8 @@ class Bpafb_Pro_Dynamic_Tags
 						'label'    => __('Author Avatar URL', 'blockive-premium-addon-for-block-pro'),
 						'type'     => 'image',
 						'hasParam' => true,
+						'paramLabel' => __('Size (px)', 'blockive-premium-addon-for-block-pro'),
+						'paramHelp'  => __('Blank = 96', 'blockive-premium-addon-for-block-pro'),
 						'resolve'  => function ($post_id, $param) {
 							if (!$post_id) {
 								return '';
@@ -247,9 +283,78 @@ class Bpafb_Pro_Dynamic_Tags
 					}],
 				],
 			],
+			'user' => [
+				// The visitor who is logged in, not the post author. A page
+				// cache must not serve these to other visitors.
+				'label' => __('Logged-in User', 'blockive-premium-addon-for-block-pro'),
+				'tags'  => [
+					'user_display_name' => ['label' => __('Display Name', 'blockive-premium-addon-for-block-pro'), 'resolve' => function () {
+						return is_user_logged_in() ? wp_get_current_user()->display_name : '';
+					}],
+					'user_first_name' => ['label' => __('First Name', 'blockive-premium-addon-for-block-pro'), 'resolve' => function () {
+						return is_user_logged_in() ? wp_get_current_user()->first_name : '';
+					}],
+					'user_last_name' => ['label' => __('Last Name', 'blockive-premium-addon-for-block-pro'), 'resolve' => function () {
+						return is_user_logged_in() ? wp_get_current_user()->last_name : '';
+					}],
+					'user_avatar_url' => ['label' => __('Avatar URL', 'blockive-premium-addon-for-block-pro'), 'type' => 'image', 'resolve' => function () {
+						return is_user_logged_in() ? (string) get_avatar_url(get_current_user_id(), ['size' => 96]) : '';
+					}],
+				],
+			],
+			'request' => [
+				'label' => __('Date & Request', 'blockive-premium-addon-for-block-pro'),
+				'tags'  => [
+					'current_date' => [
+						'label'     => __('Current Date & Time', 'blockive-premium-addon-for-block-pro'),
+						'hasParam'  => true,
+						'paramLabel' => __('Date format', 'blockive-premium-addon-for-block-pro'),
+						'paramHelp'  => __('Blank uses the site\'s date format. E.g. l, F j or g:i a', 'blockive-premium-addon-for-block-pro'),
+						'resolve'   => function ($post_id, $param) {
+							return wp_date($param !== '' ? $param : get_option('date_format'));
+						},
+					],
+					'request_param' => [
+						'label'     => __('URL Parameter', 'blockive-premium-addon-for-block-pro'),
+						'hasParam'  => true,
+						'paramLabel' => __('Parameter name', 'blockive-premium-addon-for-block-pro'),
+						'paramHelp'  => __('E.g. utm_campaign for ?utm_campaign=spring. Only letters, numbers, spaces, and - _ . , @ + are kept.', 'blockive-premium-addon-for-block-pro'),
+						// Visitor-supplied, so reduced to plain characters: it can
+						// then never form markup or a javascript: link, whatever
+						// setting it is placed in.
+						'resolve'   => function ($post_id, $param) {
+							$key = sanitize_key($param);
+							// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only display of a public query argument.
+							if ('' === $key || !isset($_GET[$key]) || !is_string($_GET[$key])) {
+								return '';
+							}
+							// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+							$value = sanitize_text_field(wp_unslash($_GET[$key]));
+							return mb_substr(preg_replace('/[^\p{L}\p{N} _.,@+-]/u', '', $value), 0, 200);
+						},
+					],
+				],
+			],
 			'archive' => [
 				'label' => __('Archive', 'blockive-premium-addon-for-block-pro'),
 				'tags'  => [
+					'archive_url' => [
+						'label'   => __('Archive URL', 'blockive-premium-addon-for-block-pro'),
+						'resolve' => function () {
+							$object = get_queried_object();
+							if ($object instanceof WP_Term) {
+								$link = get_term_link($object);
+								return is_wp_error($link) ? '' : $link;
+							}
+							if ($object instanceof WP_User) {
+								return get_author_posts_url($object->ID);
+							}
+							if ($object instanceof WP_Post_Type) {
+								return (string) get_post_type_archive_link($object->name);
+							}
+							return '';
+						},
+					],
 					'archive_title' => [
 						'label'   => __('Archive Title', 'blockive-premium-addon-for-block-pro'),
 						'resolve' => function () {
@@ -545,6 +650,8 @@ class Bpafb_Pro_Dynamic_Tags
 							'label'    => $tag['label'],
 							'hasParam' => !empty($tag['hasParam']),
 							'type'     => $tag['type'] ?? 'text',
+							'paramLabel' => $tag['paramLabel'] ?? '',
+							'paramHelp'  => $tag['paramHelp'] ?? '',
 							// Marks the two tags where the user types their
 							// own meta key, so the editor can show a picker
 							// of the current post's known meta keys instead

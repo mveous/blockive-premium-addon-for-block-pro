@@ -171,6 +171,8 @@ Defined in `includes/class-bpafb-pro-events-blocks.php`: Event Title, Event Imag
 
 `includes/class-bpafb-pro-dynamic-tags.php` hooks into `render_block` for every `blockive-premium-addon-for-block/*` block, replacing `{{tag}}` / `{{tag:param}}` tokens in text and URL attributes with live content — works on static and dynamic blocks alike, no per-block setup needed.
 
+Tags: **Post** (title, excerpt, date, last modified date, URL, ID, featured image, terms of any public taxonomy, comment count, custom field, custom field image), **Author** (name, bio, avatar), **Site** (title, tagline, URL, logo), **Logged-in User** (display, first, and last name, avatar), **Date & Request** (current date and time in any format, a URL parameter reduced to plain characters), **Archive** (title, description, URL), and **WooCommerce** (price, SKU). Logged-in user tags should not be used on pages a page cache serves to everyone.
+
 ---
 
 ## Advanced Shared Design Controls

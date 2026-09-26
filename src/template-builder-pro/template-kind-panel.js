@@ -140,7 +140,7 @@ const PopupRules = ( { meta, setMeta } ) => {
 				<TextControl type="datetime-local" label={ __( 'Start showing', 'blockive-premium-addon-for-block-pro' ) } value={ rules.startDate } onChange={ set( 'startDate' ) } />
 			</PanelRow>
 			<PanelRow>
-				<TextControl type="datetime-local" label={ __( 'Stop showing', 'blockive-premium-addon-for-block-pro' ) } help={ __( 'Both optional, in the site\x27s time zone. Logged-in or logged-out visitors: use Display Conditions.', 'blockive-premium-addon-for-block-pro' ) } value={ rules.endDate } onChange={ set( 'endDate' ) } />
+				<TextControl type="datetime-local" label={ __( 'Stop showing', 'blockive-premium-addon-for-block-pro' ) } help={ __( 'Both optional, in the site\'s time zone. Logged-in or logged-out visitors: use Display Conditions.', 'blockive-premium-addon-for-block-pro' ) } value={ rules.endDate } onChange={ set( 'endDate' ) } />
 			</PanelRow>
 		</>
 	);

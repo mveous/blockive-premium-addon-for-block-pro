@@ -77,7 +77,8 @@ function TagSettingsForm( { tag, initialParam, onApply } ) {
 				/>
 			) : (
 				<TextControl
-					label={ __( 'Parameter', 'blockive-premium-addon-for-block-pro' ) }
+					label={ tag.paramLabel || __( 'Parameter', 'blockive-premium-addon-for-block-pro' ) }
+					help={ tag.paramHelp || undefined }
 					value={ param }
 					onChange={ setParam }
 				/>
