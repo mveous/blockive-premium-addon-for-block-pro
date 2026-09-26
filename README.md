@@ -181,6 +181,7 @@ Defined in `includes/class-bpafb-pro-events-blocks.php`: Event Title, Event Imag
 - **Backgrounds**: Solid colors, multi-stop linear/radial gradients, and image backgrounds.
 - **Box Shadows & Text Shadows**: Multi-layered shadow effects with customizable blur, spread, and color.
 - **Animations**: Entrance and hover animations with custom speed and delay.
+- **Scrolling & Mouse Effects**: Vertical and horizontal scroll (parallax), transparency, blur, rotate, and scale while scrolling, over a chosen part of the window; mouse track and 3D tilt; per device. Nothing moves for visitors who turn on reduced motion (`class-bpafb-pro-motion.php`).
 - **Sticky**: Advanced → Position: Sticky takes a distance from the top (the admin bar is added automatically); the block sticks while its parent, such as a column, is in view.
 - **Custom Attributes**: Add any HTML attributes (e.g. `data-*`, `aria-*`, `role`) to a Blockive block from its Advanced panel, as `name|value` lines. Event handlers, style, id, class, and URL attributes are refused.
 
