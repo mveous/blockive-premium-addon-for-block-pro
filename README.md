@@ -91,7 +91,7 @@ Registered in `includes/class-bpafb-pro-template-kinds.php`:
 | **Archive** | Swapped in via `template_include`. |
 | **Search Results** | Swapped in via `template_include`. |
 | **404 Page** | Swapped in via `template_include`. |
-| **Popup** | Rendered on-page with a configurable trigger and display frequency (`class-bpafb-pro-popup-builder.php`). |
+| **Popup** | Rendered on-page (`class-bpafb-pro-popup-builder.php`). Triggers: page load delay, scroll %, click, exit intent, scrolled to an element, after inactivity. Frequency (always, once per session, every N days) plus Advanced Rules: after N page views or visits, at most N times, arrived from (search engine, other site, this site, address containing), devices, and start / end dates. Focus moves into the popup, stays there while open, and returns on close. |
 | **Loop Item** | One card, repeated by the Loop Grid, Loop Carousel, Archive Posts / Products, and Post Grid blocks. |
 | **Mega Menu Item** | A Mega Menu dropdown panel. |
 | **Section** | Reusable content shown wherever a **Template** block points to it. |

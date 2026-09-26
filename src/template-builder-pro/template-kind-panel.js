@@ -78,7 +78,73 @@ const TRIGGER_TYPE_OPTIONS = [
 	{ label: __( 'Scroll Percentage', 'blockive-premium-addon-for-block-pro' ), value: 'scroll' },
 	{ label: __( 'Click (element selector)', 'blockive-premium-addon-for-block-pro' ), value: 'click' },
 	{ label: __( 'Exit Intent', 'blockive-premium-addon-for-block-pro' ), value: 'exit_intent' },
+	{ label: __( 'Scrolled to an Element', 'blockive-premium-addon-for-block-pro' ), value: 'element' },
+	{ label: __( 'After Inactivity', 'blockive-premium-addon-for-block-pro' ), value: 'inactivity' },
 ];
+
+// Same as Bpafb_Pro_Popup_Builder::RULE_DEFAULTS.
+const RULE_DEFAULTS = {
+	pageViews: 0,
+	sessions: 0,
+	maxTimes: 0,
+	referrer: 'any',
+	referrerText: '',
+	desktop: true,
+	tablet: true,
+	mobile: true,
+	startDate: '',
+	endDate: '',
+};
+
+const REFERRER_OPTIONS = [
+	{ label: __( 'Anywhere', 'blockive-premium-addon-for-block-pro' ), value: 'any' },
+	{ label: __( 'A search engine', 'blockive-premium-addon-for-block-pro' ), value: 'search' },
+	{ label: __( 'Another website', 'blockive-premium-addon-for-block-pro' ), value: 'external' },
+	{ label: __( 'This website', 'blockive-premium-addon-for-block-pro' ), value: 'internal' },
+	{ label: __( 'An address containing…', 'blockive-premium-addon-for-block-pro' ), value: 'contains' },
+];
+
+/**
+ * Advanced Rules for a popup (Bpafb_Pro_Popup_Builder::META_RULES).
+ */
+const PopupRules = ( { meta, setMeta } ) => {
+	const rules = { ...RULE_DEFAULTS, ...( meta?._bpafb_popup_rules || {} ) };
+	const set = ( key ) => ( value ) => setMeta( { ...meta, _bpafb_popup_rules: { ...rules, [ key ]: value } } );
+	const count = ( key ) => ( value ) => set( key )( Math.max( 0, parseInt( value, 10 ) || 0 ) );
+
+	return (
+		<>
+			<h3 className="components-base-control__label" style={ { marginTop: 16 } }>{ __( 'Advanced Rules', 'blockive-premium-addon-for-block-pro' ) }</h3>
+			<PanelRow>
+				<TextControl type="number" min={ 0 } label={ __( 'Show after this many page views', 'blockive-premium-addon-for-block-pro' ) } help={ __( '0 = right away. Counts pages where this popup may show.', 'blockive-premium-addon-for-block-pro' ) } value={ rules.pageViews } onChange={ count( 'pageViews' ) } />
+			</PanelRow>
+			<PanelRow>
+				<TextControl type="number" min={ 0 } label={ __( 'Show after this many visits', 'blockive-premium-addon-for-block-pro' ) } help={ __( '0 = on the first visit. A visit starts when the visitor opens the site in a new tab.', 'blockive-premium-addon-for-block-pro' ) } value={ rules.sessions } onChange={ count( 'sessions' ) } />
+			</PanelRow>
+			<PanelRow>
+				<TextControl type="number" min={ 0 } label={ __( 'Show at most this many times', 'blockive-premium-addon-for-block-pro' ) } help={ __( '0 = no limit. Per visitor, on top of Frequency.', 'blockive-premium-addon-for-block-pro' ) } value={ rules.maxTimes } onChange={ count( 'maxTimes' ) } />
+			</PanelRow>
+			<PanelRow>
+				<SelectControl label={ __( 'Visitor arrived from', 'blockive-premium-addon-for-block-pro' ) } value={ rules.referrer } options={ REFERRER_OPTIONS } onChange={ set( 'referrer' ) } />
+			</PanelRow>
+			{ 'contains' === rules.referrer && (
+				<PanelRow>
+					<TextControl label={ __( 'Address contains', 'blockive-premium-addon-for-block-pro' ) } help={ __( 'E.g. facebook.com or a campaign name.', 'blockive-premium-addon-for-block-pro' ) } value={ rules.referrerText } onChange={ set( 'referrerText' ) } />
+				</PanelRow>
+			) }
+			<p className="components-base-control__label" style={ { margin: '16px 0 8px' } }>{ __( 'Show on', 'blockive-premium-addon-for-block-pro' ) }</p>
+			<ToggleControl label={ __( 'Desktop', 'blockive-premium-addon-for-block-pro' ) } checked={ !! rules.desktop } onChange={ set( 'desktop' ) } />
+			<ToggleControl label={ __( 'Tablet', 'blockive-premium-addon-for-block-pro' ) } checked={ !! rules.tablet } onChange={ set( 'tablet' ) } />
+			<ToggleControl label={ __( 'Mobile', 'blockive-premium-addon-for-block-pro' ) } checked={ !! rules.mobile } onChange={ set( 'mobile' ) } />
+			<PanelRow>
+				<TextControl type="datetime-local" label={ __( 'Start showing', 'blockive-premium-addon-for-block-pro' ) } value={ rules.startDate } onChange={ set( 'startDate' ) } />
+			</PanelRow>
+			<PanelRow>
+				<TextControl type="datetime-local" label={ __( 'Stop showing', 'blockive-premium-addon-for-block-pro' ) } help={ __( 'Both optional, in the site\x27s time zone. Logged-in or logged-out visitors: use Display Conditions.', 'blockive-premium-addon-for-block-pro' ) } value={ rules.endDate } onChange={ set( 'endDate' ) } />
+			</PanelRow>
+		</>
+	);
+};
 
 const FREQUENCY_OPTIONS = [
 	{ label: __( 'Every page load', 'blockive-premium-addon-for-block-pro' ), value: 'always' },
@@ -100,7 +166,7 @@ const PopupSettings = ( { meta, setMeta } ) => {
 					value={ triggerType }
 					options={ TRIGGER_TYPE_OPTIONS }
 					onChange={ ( value ) => {
-						const defaults = { page_load: '3000', scroll: '50', click: '', exit_intent: '' };
+						const defaults = { page_load: '3000', scroll: '50', click: '', exit_intent: '', element: '', inactivity: '30' };
 						setMeta( { ...meta, _bpafb_popup_trigger_type: value, _bpafb_popup_trigger_value: defaults[ value ] ?? '' } );
 					} }
 				/>
@@ -133,6 +199,29 @@ const PopupSettings = ( { meta, setMeta } ) => {
 					<TextControl
 						label={ __( 'CSS selector', 'blockive-premium-addon-for-block-pro' ) }
 						help={ __( 'Any element matching this selector opens the popup when clicked. Leave blank to use [data-bpafb-popup-trigger].', 'blockive-premium-addon-for-block-pro' ) }
+						value={ triggerValue }
+						onChange={ ( value ) => setMeta( { ...meta, _bpafb_popup_trigger_value: value } ) }
+					/>
+				</PanelRow>
+			) }
+
+			{ 'element' === triggerType && (
+				<PanelRow>
+					<TextControl
+						label={ __( 'Element (CSS selector)', 'blockive-premium-addon-for-block-pro' ) }
+						help={ __( 'Opens when this element scrolls into view, e.g. #pricing or .newsletter.', 'blockive-premium-addon-for-block-pro' ) }
+						value={ triggerValue }
+						onChange={ ( value ) => setMeta( { ...meta, _bpafb_popup_trigger_value: value } ) }
+					/>
+				</PanelRow>
+			) }
+
+			{ 'inactivity' === triggerType && (
+				<PanelRow>
+					<TextControl
+						type="number"
+						label={ __( 'Seconds without activity', 'blockive-premium-addon-for-block-pro' ) }
+						help={ __( 'No mouse, keyboard, touch, or scrolling for this long.', 'blockive-premium-addon-for-block-pro' ) }
 						value={ triggerValue }
 						onChange={ ( value ) => setMeta( { ...meta, _bpafb_popup_trigger_value: value } ) }
 					/>
@@ -606,6 +695,7 @@ const TemplateKindPanel = () => {
 				) }
 
 				{ 'popup' === kind && <PopupSettings meta={ meta } setMeta={ setMeta } /> }
+				{ 'popup' === kind && <PopupRules meta={ meta } setMeta={ setMeta } /> }
 			</PluginDocumentSettingPanel>
 		</>
 	);

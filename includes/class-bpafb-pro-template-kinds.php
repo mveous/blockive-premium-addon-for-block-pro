@@ -536,6 +536,18 @@ class Bpafb_Pro_Template_Kinds
 		$best = null;
 
 		foreach ($templates as $template) {
+			/**
+			 * Whether a template can be used at all right now, before its
+			 * Display Conditions are checked (e.g. a popup outside its
+			 * start / end dates).
+			 *
+			 * @param bool   $available   Default true.
+			 * @param int    $template_id Template ID.
+			 * @param string $kind        Template kind.
+			 */
+			if (!apply_filters('bpafb_pro_template_available', true, $template->ID, $kind)) {
+				continue;
+			}
 			$rules    = self::get_condition_rules($template->ID);
 			$priority = get_post_meta($template->ID, Bpafb_Template_Display_Conditions::META_PRIORITY, true);
 			$priority = ($priority === '' || $priority === false) ? 10 : (int) $priority;

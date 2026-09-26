@@ -46,3 +46,8 @@
 .bpafb-pro-popup-close:hover {
 	color: #000;
 }
+
+/* Focus is moved here when the popup has nothing focusable. */
+.bpafb-pro-popup-content:focus:not(:focus-visible) {
+	outline: none;
+}
