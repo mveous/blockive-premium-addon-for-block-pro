@@ -112,7 +112,17 @@ class Bpafb_Pro_Theme_Locations
 			return;
 		}
 
-		echo '<div class="bpafb-pro-template-render bpafb-pro-' . esc_attr($kind) . '">' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		$classes = ['bpafb-pro-template-render', 'bpafb-pro-' . $kind];
+		$attributes = '';
+		if ('header' === $kind) {
+			$sticky = Bpafb_Pro_Sticky::wrapper($template_id);
+			if ($sticky) {
+				$classes = array_merge($classes, $sticky['classes']);
+				$attributes = $sticky['attributes'];
+			}
+		}
+
+		echo '<div class="' . esc_attr(implode(' ', $classes)) . '"' . $attributes . '>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- attributes escaped in Bpafb_Pro_Sticky::wrapper().
 			. do_blocks($template_post->post_content)
 			. '</div>';
 	}

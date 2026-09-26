@@ -1,9 +1,11 @@
 import { dispatch } from '@wordpress/data';
 import registerTemplateKindPanel from './template-kind-panel';
 import registerKindConflictGuard from './kind-conflict-guard';
+import registerStickyHeaderPanel from './sticky-header-panel';
 
 registerTemplateKindPanel();
 registerKindConflictGuard();
+registerStickyHeaderPanel();
 
 // The free plugin's own "Template Settings" and "Display Conditions" panels
 // (synced verbatim into this build) are fully superseded by the two panels

@@ -86,7 +86,7 @@ Registered in `includes/class-bpafb-pro-template-kinds.php`:
 | Kind | How it's shown |
 |:---|:---|
 | **Single** | Fully replaces a post/page's content. |
-| **Header** | Injected via `wp_body_open`; the theme's matching `core/template-part` is hidden on block themes. |
+| **Header** | Injected via `wp_body_open`; the theme's matching `core/template-part` is hidden on block themes. Optional **Sticky Header** (`class-bpafb-pro-sticky.php`): per device, always visible or hidden on scroll down and shown on scroll up, a scrolled look (background, text color, shadow) after a set distance, and `is-scrolled` / `is-hidden` classes for custom CSS. |
 | **Footer** | Injected via `wp_footer`. |
 | **Archive** | Swapped in via `template_include`. |
 | **Search Results** | Swapped in via `template_include`. |
@@ -181,6 +181,7 @@ Defined in `includes/class-bpafb-pro-events-blocks.php`: Event Title, Event Imag
 - **Backgrounds**: Solid colors, multi-stop linear/radial gradients, and image backgrounds.
 - **Box Shadows & Text Shadows**: Multi-layered shadow effects with customizable blur, spread, and color.
 - **Animations**: Entrance and hover animations with custom speed and delay.
+- **Sticky**: Advanced → Position: Sticky takes a distance from the top (the admin bar is added automatically); the block sticks while its parent, such as a column, is in view.
 - **Custom Attributes**: Add any HTML attributes (e.g. `data-*`, `aria-*`, `role`) to a Blockive block from its Advanced panel, as `name|value` lines. Event handlers, style, id, class, and URL attributes are refused.
 
 ---

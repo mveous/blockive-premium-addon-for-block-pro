@@ -37,6 +37,10 @@ const extraEntry = {
 		__dirname,
 		'src/dynamic-tags/index.js'
 	),
+	'sticky-header/index': path.resolve(
+		__dirname,
+		'src/sticky-header/index.js'
+	),
 	'custom-attributes/index': path.resolve(
 		__dirname,
 		'src/custom-attributes/index.js'

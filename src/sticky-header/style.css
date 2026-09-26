@@ -1,0 +1,72 @@
+/**
+ * Sticky Header (Bpafb_Pro_Sticky): the Header template's wrapper
+ * sticks to the top of the window. index.js adds `is-scrolled` after the
+ * scrolled offset and, for "show on scroll up", `is-hidden` while the
+ * visitor scrolls down.
+ */
+.bpafb-pro-header.bpafb-sticky {
+	--bpafb-sticky-top: 0px;
+	position: sticky;
+	top: var(--bpafb-sticky-top);
+	z-index: var(--bpafb-sticky-z, 100);
+	transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Below the admin bar while it is fixed (it scrolls away under 600px). */
+.admin-bar .bpafb-pro-header.bpafb-sticky {
+	--bpafb-sticky-top: 32px;
+}
+
+@media (max-width: 782px) {
+	.admin-bar .bpafb-pro-header.bpafb-sticky {
+		--bpafb-sticky-top: 46px;
+	}
+}
+
+@media (max-width: 600px) {
+	.admin-bar .bpafb-pro-header.bpafb-sticky {
+		--bpafb-sticky-top: 0px;
+	}
+}
+
+/* Devices it is turned off for. */
+@media (min-width: 1025px) {
+	.bpafb-pro-header.bpafb-sticky--off-desktop {
+		position: relative;
+	}
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+	.bpafb-pro-header.bpafb-sticky--off-tablet {
+		position: relative;
+	}
+}
+
+@media (max-width: 767px) {
+	.bpafb-pro-header.bpafb-sticky--off-mobile {
+		position: relative;
+	}
+}
+
+/* Scrolled look. */
+.bpafb-pro-header.bpafb-sticky.is-scrolled {
+	color: var(--bpafb-sticky-scrolled-color, inherit);
+	background-color: var(--bpafb-sticky-scrolled-bg, transparent);
+}
+
+.bpafb-pro-header.bpafb-sticky--shadow.is-scrolled {
+	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Show on scroll up: slides out of view while scrolling down, but never
+   while something in it has keyboard focus. */
+.bpafb-pro-header.bpafb-sticky.is-hidden:not(:focus-within) {
+	box-shadow: none;
+	transform: translateY(calc(-100% - var(--bpafb-sticky-top)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bpafb-pro-header.bpafb-sticky {
+		transition: none;
+	}
+}
