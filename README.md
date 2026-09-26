@@ -27,7 +27,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Category List** | Styled taxonomy browser for categories and custom taxonomies. | Hierarchy display, grid/list layouts, post-count badges, custom item spacing. |
 | **Blockive Contact Form 7** | Drop-in Contact Form 7 integration with native styling. | Form selection by ID, live preview in editor, custom field and submit button styling. |
 | **Blockive Form** | A native contact / lead form, no other plugin needed. | 12 field types (text, email, textarea, phone, URL, number, date, dropdown, radio, checkboxes, acceptance, hidden) with widths; saves to Form Submissions, emails, redirects, and webhooks; honeypot, timing, and rate-limit spam protection; accessible inline errors; works without JavaScript. |
-| **Blockive Countdown Timer** | Urgency-inducing timers for sales, launches, and events. | Circular & box styles, days/hours/mins/secs labels, expiry actions, styling. |
+| **Blockive Countdown Timer** | Urgency-inducing timers for sales, launches, and events. | Due date (in the site's time zone) or evergreen per-visitor timer; box or inline style, days/hours/mins/secs labels; when it ends: hide, show a message, or go to another page; styling. |
 | **Blockive Drop Caps** | Editorial-style typographic enhancements for standard paragraphs. | First-letter custom padding, custom margins, colored initials, shapes. |
 | **Blockive FAQ** | Schema-ready accordion style FAQ lists. | Structured data auto-generation, schema support toggle, icon styles. |
 | **Blockive Fun Fact** | Animated milestone statistics and counter block. | Prefix/suffix options, animation speed, layouts, icons, typography. |
