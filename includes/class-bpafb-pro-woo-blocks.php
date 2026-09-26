@@ -32,8 +32,6 @@ if (!defined('ABSPATH')) {
 
 class Bpafb_Pro_Woo_Blocks
 {
-	const NAME_PREFIX = 'blockive-premium-addon-for-block/tb-';
-
 	/**
 	 * Normal blocks that only work with WooCommerce (hidden from the
 	 * inserter without it, here and in the editor through
@@ -463,73 +461,20 @@ class Bpafb_Pro_Woo_Blocks
 	}
 
 	/**
-	 * Registers every block above, and marks each one as a Template Block,
-	 * using the same hook the free plugin already fires for this exact
-	 * purpose (see Bpafb_Template_Blocks::fire_registration_hook()).
+	 * Registers every block above as a Template Block.
 	 */
 	public function register_blocks()
 	{
-		foreach ($this->block_defs() as $slug => list($title, $icon, $method)) {
-			$name = self::NAME_PREFIX . $slug;
-
-			register_block_type($name, [
-				'api_version'     => 3,
-				'title'           => $title,
-				'category'        => 'blockive-template',
-				'icon'            => $icon,
-				'uses_context'    => ['postId', 'postType'],
-				'supports'        => ['html' => false],
-				'render_callback' => [$this, $method],
-			]);
-
-			Bpafb_Template_Blocks::register_block_name($name);
-		}
+		Bpafb_Pro_Template_Block_Set::register($this->block_defs(), $this);
 	}
 
 	/**
-	 * Loads the editor file that swaps each block's free-plugin teaser for
-	 * the real one, only on the Template Builder editor screen (the same
-	 * check every other Template Block editor file uses).
+	 * The editor file that swaps the free plugin's teasers for these
+	 * blocks, when WooCommerce is active (see
+	 * Bpafb_Pro_Template_Block_Set::enqueue_editor()).
 	 */
 	public function enqueue_editor_assets()
 	{
-		if (!Bpafb_Screen_Helper::is_template_editor()) {
-			return;
-		}
-
-		$script_path = BPAFB_PRO_PATH . 'build/template-blocks-woo/index.js';
-		if (!file_exists($script_path)) {
-			return;
-		}
-
-		$asset_file = BPAFB_PRO_PATH . 'build/template-blocks-woo/index.asset.php';
-		$asset      = file_exists($asset_file) ? require $asset_file : [
-			'dependencies' => ['bpafb-template-blocks'],
-			'version'      => BPAFB_PRO_VERSION,
-		];
-
-		wp_enqueue_script(
-			'bpafb-pro-template-blocks-woo',
-			BPAFB_PRO_URL . 'build/template-blocks-woo/index.js',
-			// Depends on the free plugin's Template Blocks file (which
-			// registers the locked teasers this file replaces), so this
-			// always runs after it, no matter the load order.
-			array_unique(array_merge($asset['dependencies'], ['bpafb-template-blocks'])),
-			$asset['version'],
-			true
-		);
-
-		// This always removes the free plugin's teaser (Pro never shows a
-		// locked "(Pro)" placeholder for its own included features), but
-		// only adds the real block back when WooCommerce is actually
-		// installed. Otherwise a Product block would sit in the block list
-		// doing nothing, on a site with no products at all. The PHP-side
-		// registration (register_blocks() above) always runs, though, so a
-		// template made while WooCommerce was active still works (showing
-		// empty content, from each render method's own check) even if
-		// WooCommerce is later turned off.
-		wp_localize_script('bpafb-pro-template-blocks-woo', 'bpafbProWooBlocks', [
-			'active' => class_exists('WooCommerce'),
-		]);
+		Bpafb_Pro_Template_Block_Set::enqueue_editor('template-blocks-woo', 'bpafb-pro-template-blocks-woo', 'bpafbProWooBlocks', class_exists('WooCommerce'));
 	}
 }

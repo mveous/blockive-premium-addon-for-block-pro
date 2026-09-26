@@ -66,7 +66,7 @@ class Bpafb_Pro_Sticky
 	{
 		add_action('init', [$this, 'register_meta']);
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_for_page']);
-		add_filter('register_block_type_args', [$this, 'add_attribute'], 10, 2);
+		Bpafb_Pro_Custom_Attributes::share_attribute(self::OFFSET_ATTRIBUTE, ['type' => 'number']);
 		// After Bpafb_Core::bpafb_render_block_container() (10) sets the position.
 		add_filter('render_block', [$this, 'apply_block_offset'], 11, 2);
 	}
@@ -80,19 +80,6 @@ class Bpafb_Pro_Sticky
 		throw new \Exception('Cannot unserialize a singleton.');
 	}
 
-	/**
-	 * @param array  $args       Block type arguments.
-	 * @param string $block_name Block name.
-	 * @return array
-	 */
-	public function add_attribute($args, $block_name)
-	{
-		if (0 === strpos($block_name, self::NAMESPACE_PREFIX)) {
-			$args['attributes'] = isset($args['attributes']) ? $args['attributes'] : [];
-			$args['attributes'][self::OFFSET_ATTRIBUTE] = ['type' => 'number'];
-		}
-		return $args;
-	}
 
 	/**
 	 * Gives a sticky block its top offset, below the admin bar. Without a
@@ -110,19 +97,16 @@ class Bpafb_Pro_Sticky
 		}
 		$offset = isset($block['attrs'][self::OFFSET_ATTRIBUTE]) ? max(0, min(1000, (int) $block['attrs'][self::OFFSET_ATTRIBUTE])) : 0;
 
-		$processor = new WP_HTML_Tag_Processor($content);
-		while ($processor->next_tag()) {
-			if (in_array($processor->get_tag(), ['STYLE', 'SCRIPT', 'LINK'], true)) {
-				continue;
-			}
-			$style = trim((string) $processor->get_attribute('style'));
-			if (preg_match('/(^|;)s*tops*:/i', $style)) {
-				return $content;
-			}
-			$processor->set_attribute('style', ($style ? rtrim($style, ';') . ';' : '') . 'top:calc(' . $offset . 'px + var(--wp-admin--admin-bar--height, 0px));');
-			return $processor->get_updated_html();
+		$processor = Bpafb_Pro_Custom_Attributes::outer_element($content);
+		if (!$processor) {
+			return $content;
 		}
-		return $content;
+		$style = trim((string) $processor->get_attribute('style'));
+		if (preg_match('/(^|;)\s*top\s*:/i', $style)) {
+			return $content;
+		}
+		$processor->set_attribute('style', ($style ? rtrim($style, ';') . ';' : '') . 'top:calc(' . $offset . 'px + var(--wp-admin--admin-bar--height, 0px));');
+		return $processor->get_updated_html();
 	}
 
 	public function register_meta()

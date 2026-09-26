@@ -30,6 +30,16 @@ class Bpafb_Pro_Custom_Attributes
 	const BLOCKED = ['style', 'id', 'class', 'href', 'src', 'srcset', 'srcdoc', 'action', 'formaction', 'xlink:href', 'data', 'poster', 'background', 'codebase', 'dynsrc', 'lowsrc', 'ping'];
 
 	/**
+	 * Attributes added to every Blockive block outside block.json (name =>
+	 * schema): this class's own, and the ones other features share through
+	 * share_attribute() (Bpafb_Pro_Sticky, Bpafb_Pro_Motion). The editor
+	 * gets them from src/custom-attributes.
+	 *
+	 * @var array<string,array>
+	 */
+	private static $shared_attributes = [self::ATTRIBUTE => ['type' => 'string', 'default' => '']];
+
+	/**
 	 * @var Bpafb_Pro_Custom_Attributes|null
 	 */
 	private static $instance = null;
@@ -62,6 +72,18 @@ class Bpafb_Pro_Custom_Attributes
 	}
 
 	/**
+	 * Adds an attribute to every Blockive block (call before blocks are
+	 * registered, e.g. from a constructor).
+	 *
+	 * @param string $name   Attribute name.
+	 * @param array  $schema Attribute schema.
+	 */
+	public static function share_attribute($name, $schema)
+	{
+		self::$shared_attributes[$name] = $schema;
+	}
+
+	/**
 	 * @param array  $args       Block type arguments.
 	 * @param string $block_name Block name.
 	 * @return array
@@ -69,10 +91,28 @@ class Bpafb_Pro_Custom_Attributes
 	public function add_attribute($args, $block_name)
 	{
 		if (0 === strpos($block_name, self::NAMESPACE_PREFIX)) {
-			$args['attributes'] = isset($args['attributes']) ? $args['attributes'] : [];
-			$args['attributes'][self::ATTRIBUTE] = ['type' => 'string', 'default' => ''];
+			$args['attributes'] = array_merge(isset($args['attributes']) ? $args['attributes'] : [], self::$shared_attributes);
 		}
 		return $args;
+	}
+
+	/**
+	 * A tag processor at a rendered block's outer element: the first tag
+	 * that is not a <style>, <script>, or <link> the block prints before
+	 * it (for its scoped CSS, for example). Null when there is none.
+	 *
+	 * @param string $html Rendered block.
+	 * @return WP_HTML_Tag_Processor|null
+	 */
+	public static function outer_element($html)
+	{
+		$processor = new WP_HTML_Tag_Processor($html);
+		while ($processor->next_tag()) {
+			if (!in_array($processor->get_tag(), ['STYLE', 'SCRIPT', 'LINK'], true)) {
+				return $processor;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -118,20 +158,17 @@ class Bpafb_Pro_Custom_Attributes
 			return $content;
 		}
 
-		$processor = new WP_HTML_Tag_Processor($content);
-		while ($processor->next_tag()) {
-			if (in_array($processor->get_tag(), ['STYLE', 'SCRIPT', 'LINK'], true)) {
-				continue;
-			}
-			foreach ($attributes as $name => $value) {
-				if (null === $processor->get_attribute($name)) {
-					// Escaped by the tag processor.
-					$processor->set_attribute($name, '' === $value ? true : $value);
-				}
-			}
-			return $processor->get_updated_html();
+		$processor = self::outer_element($content);
+		if (!$processor) {
+			return $content;
 		}
-		return $content;
+		foreach ($attributes as $name => $value) {
+			if (null === $processor->get_attribute($name)) {
+				// Escaped by the tag processor.
+				$processor->set_attribute($name, '' === $value ? true : $value);
+			}
+		}
+		return $processor->get_updated_html();
 	}
 
 	/**

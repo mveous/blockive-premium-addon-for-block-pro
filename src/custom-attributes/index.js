@@ -9,11 +9,11 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorAdvancedControls } from '@wordpress/block-editor';
 import { TextareaControl } from '@wordpress/components';
 
+import { PREFIX, shareAttribute } from './shared';
 import './sticky-offset';
 import './motion-effects';
 import './hidden-blocks';
 
-const PREFIX = 'blockive-premium-addon-for-block/';
 const BLOCKED = [ 'style', 'id', 'class', 'href', 'src', 'srcset', 'srcdoc', 'action', 'formaction', 'xlink:href', 'data', 'poster', 'background', 'codebase', 'dynsrc', 'lowsrc', 'ping' ];
 
 /**
@@ -61,14 +61,6 @@ const withCustomAttributes = createHigherOrderComponent(
 
 // The attribute, for Blockive blocks. This script loads before them (see
 // Bpafb_Pro_Custom_Attributes::make_dependency()).
-addFilter( 'blocks.registerBlockType', 'blockive-pro/custom-attributes', ( settings, name ) => {
-	if ( ! name.startsWith( PREFIX ) || ( settings.attributes && settings.attributes.bpafbCustomAttributes ) ) {
-		return settings;
-	}
-	return {
-		...settings,
-		attributes: { ...settings.attributes, bpafbCustomAttributes: { type: 'string', default: '' } },
-	};
-} );
+shareAttribute( 'bpafbCustomAttributes', { type: 'string', default: '' } );
 
 addFilter( 'editor.BlockEdit', 'blockive-pro/custom-attributes', withCustomAttributes );

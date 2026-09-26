@@ -56,7 +56,7 @@ class Bpafb_Pro_Motion
 
 	private function __construct()
 	{
-		add_filter('register_block_type_args', [$this, 'add_attribute'], 10, 2);
+		Bpafb_Pro_Custom_Attributes::share_attribute(self::ATTRIBUTE, ['type' => 'object']);
 		add_filter('render_block', [$this, 'apply'], 11, 2);
 	}
 
@@ -69,19 +69,6 @@ class Bpafb_Pro_Motion
 		throw new \Exception('Cannot unserialize a singleton.');
 	}
 
-	/**
-	 * @param array  $args       Block type arguments.
-	 * @param string $block_name Block name.
-	 * @return array
-	 */
-	public function add_attribute($args, $block_name)
-	{
-		if (0 === strpos($block_name, self::NAMESPACE_PREFIX)) {
-			$args['attributes'] = isset($args['attributes']) ? $args['attributes'] : [];
-			$args['attributes'][self::ATTRIBUTE] = ['type' => 'object'];
-		}
-		return $args;
-	}
 
 	/**
 	 * The effects that are on, cleaned, or null when none is.
@@ -147,16 +134,13 @@ class Bpafb_Pro_Motion
 			return $content;
 		}
 
-		$processor = new WP_HTML_Tag_Processor($content);
-		while ($processor->next_tag()) {
-			if (in_array($processor->get_tag(), ['STYLE', 'SCRIPT', 'LINK'], true)) {
-				continue;
-			}
-			$processor->set_attribute('data-bpafb-motion', wp_json_encode($settings));
-			self::enqueue();
-			return $processor->get_updated_html();
+		$processor = Bpafb_Pro_Custom_Attributes::outer_element($content);
+		if (!$processor) {
+			return $content;
 		}
-		return $content;
+		$processor->set_attribute('data-bpafb-motion', wp_json_encode($settings));
+		self::enqueue();
+		return $processor->get_updated_html();
 	}
 
 	private static function enqueue()

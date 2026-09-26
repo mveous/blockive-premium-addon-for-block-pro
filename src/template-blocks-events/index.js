@@ -7,13 +7,10 @@
  * `bpafbProEventsBlocks.active` (localized from
  * `class_exists('Tribe__Events__Main')`) is true.
  */
-import { registerBlockType, unregisterBlockType, getBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { createDynamicBlockEdit } from '../pro-dynamic-blocks-shared/dynamic-block-edit';
+import { replaceTeaserBlocks } from '../pro-dynamic-blocks-shared/dynamic-block-edit';
 
 const EVENTS_CALENDAR_ACTIVE = !! window.bpafbProEventsBlocks?.active;
-
-const NAME_PREFIX = 'blockive-premium-addon-for-block/tb-';
 
 const BLOCKS = [
 	{ slug: 'event-title', title: __( 'Event Title', 'blockive-premium-addon-for-block-pro' ), icon: 'calendar-alt' },
@@ -27,25 +24,4 @@ const BLOCKS = [
 	{ slug: 'event-register-button', title: __( 'Register Button', 'blockive-premium-addon-for-block-pro' ), icon: 'megaphone' },
 ];
 
-BLOCKS.forEach( ( { slug, title, icon } ) => {
-	const name = NAME_PREFIX + slug;
-
-	if ( getBlockType( name ) ) {
-		unregisterBlockType( name );
-	}
-
-	if ( ! EVENTS_CALENDAR_ACTIVE ) {
-		return;
-	}
-
-	registerBlockType( name, {
-		apiVersion: 3,
-		title,
-		category: 'blockive-template',
-		icon,
-		usesContext: [ 'postId', 'postType' ],
-		supports: { html: false, className: false, customClassName: false, reusable: false },
-		edit: createDynamicBlockEdit( title, icon ),
-		save: () => null,
-	} );
-} );
+replaceTeaserBlocks( BLOCKS, EVENTS_CALENDAR_ACTIVE );

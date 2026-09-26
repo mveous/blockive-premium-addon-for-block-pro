@@ -96,12 +96,6 @@ export function cssVars( vars ) {
 	return out;
 }
 
-export const ALIGN_OPTIONS = [
-	{ label: 'Left', value: 'left' },
-	{ label: 'Center', value: 'center' },
-	{ label: 'Right', value: 'right' },
-];
-
 export const TEXT_TAG_OPTIONS = [
 	{ label: 'H1', value: 'h1' },
 	{ label: 'H2', value: 'h2' },

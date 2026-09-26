@@ -21,8 +21,6 @@ if (!defined('ABSPATH')) {
 
 class Bpafb_Pro_Events_Blocks
 {
-	const NAME_PREFIX = 'blockive-premium-addon-for-block/tb-';
-
 	/**
 	 * The one and only instance of this class.
 	 *
@@ -251,69 +249,20 @@ class Bpafb_Pro_Events_Blocks
 	}
 
 	/**
-	 * Registers every block above, and marks each one as a Template Block,
-	 * using the same hook the free plugin already fires for this exact
-	 * purpose (see Bpafb_Template_Blocks::fire_registration_hook()).
+	 * Registers every block above as a Template Block.
 	 */
 	public function register_blocks()
 	{
-		foreach ($this->block_defs() as $slug => list($title, $icon, $method)) {
-			$name = self::NAME_PREFIX . $slug;
-
-			register_block_type($name, [
-				'api_version'     => 3,
-				'title'           => $title,
-				'category'        => 'blockive-template',
-				'icon'            => $icon,
-				'uses_context'    => ['postId', 'postType'],
-				'supports'        => ['html' => false],
-				'render_callback' => [$this, $method],
-			]);
-
-			Bpafb_Template_Blocks::register_block_name($name);
-		}
+		Bpafb_Pro_Template_Block_Set::register($this->block_defs(), $this);
 	}
 
 	/**
-	 * Loads the editor file that swaps each block's free-plugin teaser for
-	 * the real one, only on the Template Builder editor screen.
+	 * The editor file that swaps the free plugin's teasers for these
+	 * blocks, when The Events Calendar is active (see
+	 * Bpafb_Pro_Template_Block_Set::enqueue_editor()).
 	 */
 	public function enqueue_editor_assets()
 	{
-		if (!Bpafb_Screen_Helper::is_template_editor()) {
-			return;
-		}
-
-		$script_path = BPAFB_PRO_PATH . 'build/template-blocks-events/index.js';
-		if (!file_exists($script_path)) {
-			return;
-		}
-
-		$asset_file = BPAFB_PRO_PATH . 'build/template-blocks-events/index.asset.php';
-		$asset      = file_exists($asset_file) ? require $asset_file : [
-			'dependencies' => ['bpafb-template-blocks'],
-			'version'      => BPAFB_PRO_VERSION,
-		];
-
-		wp_enqueue_script(
-			'bpafb-pro-template-blocks-events',
-			BPAFB_PRO_URL . 'build/template-blocks-events/index.js',
-			array_unique(array_merge($asset['dependencies'], ['bpafb-template-blocks'])),
-			$asset['version'],
-			true
-		);
-
-		// This always removes the free plugin's teaser (Pro never shows a
-		// locked "(Pro)" placeholder for its own included features), but
-		// only adds the real block back when The Events Calendar is
-		// actually installed. Otherwise an Event block would sit in the
-		// block list doing nothing, on a site with no events plugin at
-		// all. The PHP-side registration (register_blocks() above) always
-		// runs, though, so a template made while Events Calendar was
-		// active still works (showing empty content, from each render
-		// method's own check) even if Events Calendar is later turned off.
-		wp_localize_script('bpafb-pro-template-blocks-events', 'bpafbProEventsBlocks', [
-			'active' => class_exists('Tribe__Events__Main'),
-		]);
+		Bpafb_Pro_Template_Block_Set::enqueue_editor('template-blocks-events', 'bpafb-pro-template-blocks-events', 'bpafbProEventsBlocks', class_exists('Tribe__Events__Main'));
 	}
 }

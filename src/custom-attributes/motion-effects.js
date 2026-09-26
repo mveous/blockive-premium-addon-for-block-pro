@@ -10,7 +10,7 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl, SelectControl, RangeControl, Notice } from '@wordpress/components';
 
-const PREFIX = 'blockive-premium-addon-for-block/';
+import { PREFIX, shareAttribute } from './shared';
 
 const SHAPES = [
 	{ label: __( 'Fade In', 'blockive-premium-addon-for-block-pro' ), value: 'in' },
@@ -87,15 +87,7 @@ const EFFECTS = [
 	},
 ];
 
-addFilter( 'blocks.registerBlockType', 'blockive-pro/motion-effects', ( settings, name ) => {
-	if ( ! name.startsWith( PREFIX ) || ( settings.attributes && settings.attributes.bpafbMotion ) ) {
-		return settings;
-	}
-	return {
-		...settings,
-		attributes: { ...settings.attributes, bpafbMotion: { type: 'object' } },
-	};
-} );
+shareAttribute( 'bpafbMotion', { type: 'object' } );
 
 function MotionPanel( { attributes, setAttributes } ) {
 	const motion = attributes.bpafbMotion || {};

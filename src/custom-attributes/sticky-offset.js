@@ -10,17 +10,9 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, RangeControl } from '@wordpress/components';
 
-const PREFIX = 'blockive-premium-addon-for-block/';
+import { PREFIX, shareAttribute } from './shared';
 
-addFilter( 'blocks.registerBlockType', 'blockive-pro/sticky-offset', ( settings, name ) => {
-	if ( ! name.startsWith( PREFIX ) || ( settings.attributes && settings.attributes.bpafbStickyOffset ) ) {
-		return settings;
-	}
-	return {
-		...settings,
-		attributes: { ...settings.attributes, bpafbStickyOffset: { type: 'number' } },
-	};
-} );
+shareAttribute( 'bpafbStickyOffset', { type: 'number' } );
 
 const withStickyOffset = createHigherOrderComponent(
 	( BlockEdit ) => ( props ) => {

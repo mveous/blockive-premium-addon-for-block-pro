@@ -11,10 +11,8 @@ import {
 
 import InspectorTabs from '../components/inspector-tabs';
 import AdvancedTab from '../components/advanced-tab';
-import TypographyControls from '../components/typography-controls';
+import { MenuItemsStylePanel, DropdownFrameControls } from '../pro-components/menu/editor';
 import ColorStateControls from '../components/color-state-controls';
-import BorderControls from '../components/border-controls';
-import ShadowControls from '../components/shadow-controls';
 
 /**
  * Builds a parent/child tree from the flat `nav_menu_item` list the REST
@@ -60,32 +58,11 @@ export default function Edit( { attributes, setAttributes } ) {
 		layout,
 		submenuIndicator,
 		mobileBreakpoint,
-		itemColor,
-		itemHoverColor,
-		itemActiveColor,
-		itemFontFamily,
-		itemFontSize,
-		itemFontWeight,
-		itemLineHeight,
-		itemLetterSpacing,
-		itemTextTransform,
-		itemTextDecoration,
-		itemGap,
-		itemPaddingV,
-		itemPaddingH,
 		dropdownBgColor,
 		dropdownItemColor,
 		dropdownItemHoverColor,
 		dropdownItemHoverBgColor,
 		dropdownMinWidth,
-		dropdownBorderType,
-		dropdownBorderWidth,
-		dropdownBorderRadius,
-		dropdownBorderColor,
-		dropdownShadowEnabled,
-		dropdownShadowColor,
-		dropdownShadowBlur,
-		dropdownShadowSpread,
 		toggleIconColor,
 	} = attributes;
 
@@ -162,50 +139,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				}
 				style={
 					<>
-						<PanelBody title={ __( 'Menu Items', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-							<TypographyControls
-								values={ {
-									fontFamily: itemFontFamily,
-									fontSize: itemFontSize,
-									fontWeight: itemFontWeight,
-									lineHeight: itemLineHeight,
-									letterSpacing: itemLetterSpacing,
-									textTransform: itemTextTransform,
-									textDecoration: itemTextDecoration,
-								} }
-								onChange={ ( key, val ) => setAttributes( { [ `item${ key.charAt( 0 ).toUpperCase() }${ key.slice( 1 ) }` ]: val } ) }
-							/>
-							<ColorStateControls
-								normal={ [
-									{ label: __( 'Text Color', 'blockive-premium-addon-for-block-pro' ), value: itemColor, onChange: ( val ) => setAttributes( { itemColor: val } ) },
-									{ label: __( 'Active Color', 'blockive-premium-addon-for-block-pro' ), value: itemActiveColor, onChange: ( val ) => setAttributes( { itemActiveColor: val } ) },
-								] }
-								hover={ [
-									{ label: __( 'Text Color', 'blockive-premium-addon-for-block-pro' ), value: itemHoverColor, onChange: ( val ) => setAttributes( { itemHoverColor: val } ) },
-								] }
-							/>
-							<RangeControl
-								label={ __( 'Space Between Items', 'blockive-premium-addon-for-block-pro' ) }
-								value={ itemGap }
-								onChange={ ( val ) => setAttributes( { itemGap: val } ) }
-								min={ 0 }
-								max={ 80 }
-							/>
-							<RangeControl
-								label={ __( 'Vertical Padding', 'blockive-premium-addon-for-block-pro' ) }
-								value={ itemPaddingV }
-								onChange={ ( val ) => setAttributes( { itemPaddingV: val } ) }
-								min={ 0 }
-								max={ 40 }
-							/>
-							<RangeControl
-								label={ __( 'Horizontal Padding', 'blockive-premium-addon-for-block-pro' ) }
-								value={ itemPaddingH }
-								onChange={ ( val ) => setAttributes( { itemPaddingH: val } ) }
-								min={ 0 }
-								max={ 40 }
-							/>
-						</PanelBody>
+						<MenuItemsStylePanel attributes={ attributes } setAttributes={ setAttributes } />
 
 						<PanelBody title={ __( 'Dropdown', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
 							<ColorStateControls
@@ -225,24 +159,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								min={ 120 }
 								max={ 500 }
 							/>
-							<BorderControls
-								values={ {
-									borderType: dropdownBorderType,
-									borderWidth: dropdownBorderWidth,
-									borderRadius: dropdownBorderRadius,
-									borderColor: dropdownBorderColor,
-								} }
-								onChange={ ( key, val ) => setAttributes( { [ `dropdown${ key.charAt( 0 ).toUpperCase() }${ key.slice( 1 ) }` ]: val } ) }
-							/>
-							<ShadowControls
-								values={ {
-									enabled: dropdownShadowEnabled,
-									color: dropdownShadowColor,
-									blur: dropdownShadowBlur,
-									spread: dropdownShadowSpread,
-								} }
-								onChange={ ( key, val ) => setAttributes( { [ `dropdownShadow${ key.charAt( 0 ).toUpperCase() }${ key.slice( 1 ) }` ]: val } ) }
-							/>
+							<DropdownFrameControls attributes={ attributes } setAttributes={ setAttributes } />
 						</PanelBody>
 
 						<PanelBody title={ __( 'Mobile Toggle', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>

@@ -131,6 +131,52 @@ class Bpafb_Pro_Shared_Assets
 	}
 
 	/**
+	 * CSS variables the Menu and Mega Menu blocks share (item spacing and
+	 * colors, dropdown background, border, and shadow, toggle icon color),
+	 * named under one prefix such as --bpafb-pro-menu. Each block adds its
+	 * own extras.
+	 *
+	 * @param array  $attributes Block attributes.
+	 * @param string $prefix     Variable name prefix.
+	 * @return array<string,string>
+	 */
+	public static function menu_vars($attributes, $prefix)
+	{
+		$px = function ($key, $default) use ($attributes) {
+			return (isset($attributes[$key]) ? absint($attributes[$key]) : $default) . 'px';
+		};
+		$value = function ($key, $default) use ($attributes) {
+			return !empty($attributes[$key]) ? $attributes[$key] : $default;
+		};
+
+		$vars = [
+			$prefix . '-item-gap'             => $px('itemGap', 24),
+			$prefix . '-item-padding-v'       => $px('itemPaddingV', 10),
+			$prefix . '-item-padding-h'       => $px('itemPaddingH', 6),
+			$prefix . '-item-color'           => $value('itemColor', 'inherit'),
+			$prefix . '-item-hover-color'     => $value('itemHoverColor', 'inherit'),
+			$prefix . '-item-active-color'    => $value('itemActiveColor', 'inherit'),
+			$prefix . '-dropdown-bg'          => $value('dropdownBgColor', '#ffffff'),
+			$prefix . '-dropdown-border-width'  => $px('dropdownBorderWidth', 1),
+			$prefix . '-dropdown-border-style'  => $value('dropdownBorderType', 'solid'),
+			$prefix . '-dropdown-border-color'  => $value('dropdownBorderColor', '#e2e8f0'),
+			$prefix . '-dropdown-border-radius' => $px('dropdownBorderRadius', 8),
+			$prefix . '-toggle-color'         => $value('toggleIconColor', 'currentColor'),
+			$prefix . '-dropdown-shadow'      => 'none',
+		];
+
+		if (!empty($attributes['dropdownShadowEnabled'])) {
+			$vars[$prefix . '-dropdown-shadow'] = sprintf(
+				'0 8px %dpx %dpx %s',
+				isset($attributes['dropdownShadowBlur']) ? absint($attributes['dropdownShadowBlur']) : 24,
+				isset($attributes['dropdownShadowSpread']) ? intval($attributes['dropdownShadowSpread']) : 0,
+				$value('dropdownShadowColor', 'rgba(15,23,42,0.12)')
+			);
+		}
+		return $vars;
+	}
+
+	/**
 	 * Translated lightbox labels, for the block wrapper's data-l10n
 	 * attribute (read by src/pro-components/lightbox/lightbox.js).
 	 *

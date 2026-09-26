@@ -82,44 +82,15 @@ echo $bpafb_wrapper_attributes;
 </nav>
 <?php
 
-$bpafb_style_vars = [
-	'--bpafb-pro-mega-menu-item-gap' => (isset($attributes['itemGap']) ? absint($attributes['itemGap']) : 24) . 'px',
-	'--bpafb-pro-mega-menu-item-padding-v' => (isset($attributes['itemPaddingV']) ? absint($attributes['itemPaddingV']) : 10) . 'px',
-	'--bpafb-pro-mega-menu-item-padding-h' => (isset($attributes['itemPaddingH']) ? absint($attributes['itemPaddingH']) : 6) . 'px',
-	'--bpafb-pro-mega-menu-item-color' => !empty($attributes['itemColor']) ? $attributes['itemColor'] : 'inherit',
-	'--bpafb-pro-mega-menu-item-hover-color' => !empty($attributes['itemHoverColor']) ? $attributes['itemHoverColor'] : 'inherit',
-	'--bpafb-pro-mega-menu-item-active-color' => !empty($attributes['itemActiveColor']) ? $attributes['itemActiveColor'] : 'inherit',
-	'--bpafb-pro-mega-menu-dropdown-bg' => !empty($attributes['dropdownBgColor']) ? $attributes['dropdownBgColor'] : '#ffffff',
+// Shared with the other menu block (Bpafb_Pro_Shared_Assets::menu_vars()).
+$bpafb_style_vars = array_merge(Bpafb_Pro_Shared_Assets::menu_vars($attributes, '--bpafb-pro-mega-menu'), [
 	'--bpafb-pro-mega-menu-dropdown-padding' => (isset($attributes['dropdownPadding']) ? absint($attributes['dropdownPadding']) : 32) . 'px',
-	'--bpafb-pro-mega-menu-dropdown-border-width' => (isset($attributes['dropdownBorderWidth']) ? absint($attributes['dropdownBorderWidth']) : 1) . 'px',
-	'--bpafb-pro-mega-menu-dropdown-border-style' => !empty($attributes['dropdownBorderType']) ? $attributes['dropdownBorderType'] : 'solid',
-	'--bpafb-pro-mega-menu-dropdown-border-color' => !empty($attributes['dropdownBorderColor']) ? $attributes['dropdownBorderColor'] : '#e2e8f0',
-	'--bpafb-pro-mega-menu-dropdown-border-radius' => (isset($attributes['dropdownBorderRadius']) ? absint($attributes['dropdownBorderRadius']) : 8) . 'px',
-	'--bpafb-pro-mega-menu-toggle-color' => !empty($attributes['toggleIconColor']) ? $attributes['toggleIconColor'] : 'currentColor',
-];
-
-if (!empty($attributes['dropdownShadowEnabled'])) {
-	$bpafb_shadow_color = !empty($attributes['dropdownShadowColor']) ? $attributes['dropdownShadowColor'] : 'rgba(15,23,42,0.12)';
-	$bpafb_shadow_blur = isset($attributes['dropdownShadowBlur']) ? absint($attributes['dropdownShadowBlur']) : 24;
-	$bpafb_shadow_spread = isset($attributes['dropdownShadowSpread']) ? intval($attributes['dropdownShadowSpread']) : 0;
-	$bpafb_style_vars['--bpafb-pro-mega-menu-dropdown-shadow'] = sprintf('0 8px %dpx %dpx %s', $bpafb_shadow_blur, $bpafb_shadow_spread, $bpafb_shadow_color);
-} else {
-	$bpafb_style_vars['--bpafb-pro-mega-menu-dropdown-shadow'] = 'none';
-}
+]);
 
 $bpafb_mobile_breakpoint = isset($attributes['mobileBreakpoint']) ? absint($attributes['mobileBreakpoint']) : 768;
 
-$bpafb_css_rules = '';
-foreach ($bpafb_style_vars as $bpafb_var_name => $bpafb_var_value) {
-	$bpafb_css_rules .= esc_html($bpafb_var_name) . ':' . esc_html($bpafb_var_value) . ';';
-}
-
-printf(
-	'<style>.bpafb-uid-%1$s{%2$s}</style>',
-	esc_attr($bpafb_uid),
-	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built entirely from esc_html()'d values above.
-	$bpafb_css_rules
-);
+// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside scoped_vars_css().
+echo Bpafb_Pro_Site_Blocks::scoped_vars_css($bpafb_uid, $bpafb_style_vars);
 
 printf(
 	'<style>@media (max-width: %1$dpx){.bpafb-uid-%2$s .bpafb-pro-mega-menu-toggle{display:flex;}.bpafb-uid-%2$s .bpafb-pro-mega-menu-list{display:none;}.bpafb-uid-%2$s.bpafb-pro-mega-menu--open .bpafb-pro-mega-menu-list{display:block;}}</style>',
