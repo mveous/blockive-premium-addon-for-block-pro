@@ -37,6 +37,10 @@ const extraEntry = {
 		__dirname,
 		'src/dynamic-tags/index.js'
 	),
+	'scroll-snap/index': path.resolve(
+		__dirname,
+		'src/scroll-snap/index.js'
+	),
 	'motion-effects/index': path.resolve(
 		__dirname,
 		'src/motion-effects/index.js'

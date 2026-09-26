@@ -131,6 +131,7 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-site-tools.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-custom-fonts.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-role-manager.php';
+		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-scroll-snap.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-archive-loop.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-popup-builder.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-dynamic-tags.php';
@@ -153,6 +154,7 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 		Bpafb_Pro_Site_Tools::get_instance();
 		Bpafb_Pro_Custom_Fonts::get_instance();
 		Bpafb_Pro_Role_Manager::get_instance();
+		Bpafb_Pro_Scroll_Snap::get_instance();
 		Bpafb_Pro_Dynamic_Tags::get_instance();
 		Bpafb_Pro_Admin_Bar::get_instance();
 
