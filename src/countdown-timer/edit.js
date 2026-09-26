@@ -138,19 +138,19 @@ export default function Edit({ attributes, setAttributes }) {
 					<>
 			<PanelBody title={__('Timer Settings', 'blockive-premium-addon-for-block')} initialOpen={true}>
 				<SelectControl
-					label={__('Timer Type', 'blockive-premium-addon-for-block-pro')}
+					label={__('Timer Type', 'blockive-premium-addon-for-block')}
 					value={timerType}
 					options={[
-						{ label: __('Due Date', 'blockive-premium-addon-for-block-pro'), value: 'due' },
-						{ label: __('Evergreen (per visitor)', 'blockive-premium-addon-for-block-pro'), value: 'evergreen' },
+						{ label: __('Due Date', 'blockive-premium-addon-for-block'), value: 'due' },
+						{ label: __('Evergreen (per visitor)', 'blockive-premium-addon-for-block'), value: 'evergreen' },
 					]}
 					onChange={(val) => setAttributes({ timerType: val })}
 				/>
 				{evergreen ? (
 					<>
-						<RangeControl label={__('Hours', 'blockive-premium-addon-for-block-pro')} value={evergreenHours} onChange={(val) => setAttributes({ evergreenHours: val || 0 })} min={0} max={720} />
-						<RangeControl label={__('Minutes', 'blockive-premium-addon-for-block-pro')} value={evergreenMinutes} onChange={(val) => setAttributes({ evergreenMinutes: val || 0 })} min={0} max={59} />
-						<p className="components-base-control__help">{__('Each visitor gets this much time from their first visit (remembered in their browser).', 'blockive-premium-addon-for-block-pro')}</p>
+						<RangeControl label={__('Hours', 'blockive-premium-addon-for-block')} value={evergreenHours} onChange={(val) => setAttributes({ evergreenHours: val || 0 })} min={0} max={720} />
+						<RangeControl label={__('Minutes', 'blockive-premium-addon-for-block')} value={evergreenMinutes} onChange={(val) => setAttributes({ evergreenMinutes: val || 0 })} min={0} max={59} />
+						<p className="components-base-control__help">{__('Each visitor gets this much time from their first visit (remembered in their browser).', 'blockive-premium-addon-for-block')}</p>
 					</>
 				) : (
 					<TextControl
@@ -162,7 +162,7 @@ export default function Edit({ attributes, setAttributes }) {
 							const time = val ? getDate(val).getTime() : NaN;
 							setAttributes({ targetDate: val, targetTimestamp: isNaN(time) ? undefined : time });
 						}}
-						help={__('In the site\'s time zone (Settings → General).', 'blockive-premium-addon-for-block-pro')}
+						help={__('In the site\'s time zone (Settings → General).', 'blockive-premium-addon-for-block')}
 					/>
 				)}
 
@@ -212,23 +212,23 @@ export default function Edit({ attributes, setAttributes }) {
 					<TextControl label={__('Seconds Label', 'blockive-premium-addon-for-block')} value={labelSeconds} onChange={(val) => setAttributes({ labelSeconds: val })} />
 				)}
 			</PanelBody>
-			<PanelBody title={__('When the Timer Ends', 'blockive-premium-addon-for-block-pro')} initialOpen={false}>
+			<PanelBody title={__('When the Timer Ends', 'blockive-premium-addon-for-block')} initialOpen={false}>
 				<SelectControl
-					label={__('Action', 'blockive-premium-addon-for-block-pro')}
+					label={__('Action', 'blockive-premium-addon-for-block')}
 					value={expireAction}
 					options={[
-						{ label: __('Show 00:00', 'blockive-premium-addon-for-block-pro'), value: 'none' },
-						{ label: __('Hide the Timer', 'blockive-premium-addon-for-block-pro'), value: 'hide' },
-						{ label: __('Show a Message', 'blockive-premium-addon-for-block-pro'), value: 'message' },
-						{ label: __('Go to a Page', 'blockive-premium-addon-for-block-pro'), value: 'redirect' },
+						{ label: __('Show 00:00', 'blockive-premium-addon-for-block'), value: 'none' },
+						{ label: __('Hide the Timer', 'blockive-premium-addon-for-block'), value: 'hide' },
+						{ label: __('Show a Message', 'blockive-premium-addon-for-block'), value: 'message' },
+						{ label: __('Go to a Page', 'blockive-premium-addon-for-block'), value: 'redirect' },
 					]}
 					onChange={(val) => setAttributes({ expireAction: val })}
 				/>
 				{expireAction === 'message' && (
-					<TextareaControl label={__('Message', 'blockive-premium-addon-for-block-pro')} value={expireMessage} onChange={(val) => setAttributes({ expireMessage: val })} placeholder={__('This offer has ended.', 'blockive-premium-addon-for-block-pro')} />
+					<TextareaControl label={__('Message', 'blockive-premium-addon-for-block')} value={expireMessage} onChange={(val) => setAttributes({ expireMessage: val })} placeholder={__('This offer has ended.', 'blockive-premium-addon-for-block')} />
 				)}
 				{expireAction === 'redirect' && (
-					<TextControl label={__('Page URL', 'blockive-premium-addon-for-block-pro')} type="url" value={expireRedirect} onChange={(val) => setAttributes({ expireRedirect: val })} help={__('A web address (https://…) or a path on this site.', 'blockive-premium-addon-for-block-pro')} />
+					<TextControl label={__('Page URL', 'blockive-premium-addon-for-block')} type="url" value={expireRedirect} onChange={(val) => setAttributes({ expireRedirect: val })} help={__('A web address (https://…) or a path on this site.', 'blockive-premium-addon-for-block')} />
 				)}
 			</PanelBody>
 					</>
