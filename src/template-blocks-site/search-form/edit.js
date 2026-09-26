@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 import { useBlockProps, BlockControls, AlignmentControl } from '@wordpress/block-editor';
-import { PanelBody, SelectControl, TextControl, RangeControl } from '@wordpress/components';
+import { PanelBody, SelectControl, TextControl, RangeControl, ToggleControl } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
 import AdvancedTab from '../../components/advanced-tab';
@@ -35,6 +35,14 @@ export default function Edit( { attributes, setAttributes } ) {
 		toggleColor,
 		toggleHoverColor,
 		overlayBgColor,
+		liveResults,
+		liveCount,
+		liveMinChars,
+		liveShowImage,
+		liveShowExcerpt,
+		resultsBgColor,
+		resultsTextColor,
+		resultsActiveBgColor,
 	} = attributes;
 
 	const postTypeOptions = useSelect( ( select ) => {
@@ -98,6 +106,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 			<InspectorTabs
 				general={
+					<>
 					<PanelBody title={ __( 'Search Form', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
 						<SelectControl
 							label={ __( 'Skin', 'blockive-premium-addon-for-block-pro' ) }
@@ -141,6 +150,23 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange={ set( 'postType' ) }
 						/>
 					</PanelBody>
+					<PanelBody title={ __( 'Live Results', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
+						<ToggleControl
+							label={ __( 'Show Results While Typing', 'blockive-premium-addon-for-block-pro' ) }
+							checked={ !! liveResults }
+							onChange={ set( 'liveResults' ) }
+							help={ __( 'Matching published content appears under the field; Enter still opens the full results page.', 'blockive-premium-addon-for-block-pro' ) }
+						/>
+						{ liveResults && (
+							<>
+								<RangeControl label={ __( 'Number of Results', 'blockive-premium-addon-for-block-pro' ) } value={ liveCount } onChange={ set( 'liveCount' ) } min={ 1 } max={ 10 } />
+								<RangeControl label={ __( 'Start After (characters)', 'blockive-premium-addon-for-block-pro' ) } value={ liveMinChars } onChange={ set( 'liveMinChars' ) } min={ 1 } max={ 5 } />
+								<ToggleControl label={ __( 'Show Image', 'blockive-premium-addon-for-block-pro' ) } checked={ !! liveShowImage } onChange={ set( 'liveShowImage' ) } />
+								<ToggleControl label={ __( 'Show Excerpt', 'blockive-premium-addon-for-block-pro' ) } checked={ !! liveShowExcerpt } onChange={ set( 'liveShowExcerpt' ) } />
+							</>
+						) }
+					</PanelBody>
+					</>
 				}
 				style={
 					<>
@@ -187,6 +213,19 @@ export default function Edit( { attributes, setAttributes } ) {
 									] }
 									hover={ [
 										{ label: __( 'Icon Color', 'blockive-premium-addon-for-block-pro' ), value: toggleHoverColor, onChange: set( 'toggleHoverColor' ) },
+									] }
+								/>
+							</PanelBody>
+						) }
+						{ liveResults && (
+							<PanelBody title={ __( 'Live Results', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
+								<ColorStateControls
+									normal={ [
+										{ label: __( 'Text Color', 'blockive-premium-addon-for-block-pro' ), value: resultsTextColor, onChange: set( 'resultsTextColor' ) },
+										{ label: __( 'Background', 'blockive-premium-addon-for-block-pro' ), value: resultsBgColor, onChange: set( 'resultsBgColor' ) },
+									] }
+									hover={ [
+										{ label: __( 'Chosen Result Background', 'blockive-premium-addon-for-block-pro' ), value: resultsActiveBgColor, onChange: set( 'resultsActiveBgColor' ) },
 									] }
 								/>
 							</PanelBody>

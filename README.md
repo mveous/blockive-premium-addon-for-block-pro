@@ -132,7 +132,7 @@ Defined in `includes/class-bpafb-pro-site-blocks.php`, source in `src/template-b
 | **Site Title** | Site name from Settings → General. Optional home link, H1–H6/p/div/span tag, and hover color. |
 | **Site Tagline** | Site tagline from Settings → General. |
 | **Page Title** | Context-aware title for the current page, post, archive (prefix optional), search results, or 404 page. |
-| **Search Form** | Classic (field + button), Minimal (field with icon), or Full Screen (icon opens an accessible overlay). Can limit results to one post type. |
+| **Search Form** | Classic (field + button), Minimal (field with icon), or Full Screen (icon opens an accessible overlay). Can limit results to one post type. Optional live results while typing (title, image, type, price, excerpt; arrow keys, Enter, and Escape; announced to screen readers), from published content only. |
 | **Menu Cart** | WooCommerce cart icon with count badge, subtotal, and mini-cart dropdown. Updates live through cart fragments. Only shown in the inserter when WooCommerce is active. |
 | **Login** | Login/logout link with greeting and avatar for headers, or a full login form. Supports login and logout redirects. |
 | **Sitemap** | Columns of pages, posts, custom post types, or taxonomies. Can be nested, sorted, and responsive. |

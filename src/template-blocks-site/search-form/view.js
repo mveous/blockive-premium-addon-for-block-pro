@@ -2,7 +2,10 @@
  * Full Screen skin of the Search Form block: the toggle opens an overlay,
  * which closes on Escape, on the close button, or on a click outside the
  * form. Focus moves into the field on open and back to the toggle on close.
+ * Live results are in live.js.
  */
+import { initLiveSearch } from './live';
+
 const VARS = [
 	'--bpafb-search-overlay-bg',
 	'--bpafb-search-input-color',
@@ -19,6 +22,9 @@ const VARS = [
 	'--bpafb-search-input-letter-spacing',
 	'--bpafb-search-input-text-transform',
 	'--bpafb-search-input-text-decoration',
+	'--bpafb-search-results-bg',
+	'--bpafb-search-results-color',
+	'--bpafb-search-results-active-bg',
 ];
 
 function initSearch( root ) {
@@ -75,6 +81,8 @@ function initSearch( root ) {
 }
 
 function init() {
+	// Before the Full Screen overlay moves to <body>.
+	document.querySelectorAll( '.bpafb-tb-search[data-live]' ).forEach( initLiveSearch );
 	document.querySelectorAll( '.bpafb-tb-search--full_screen' ).forEach( initSearch );
 }
 

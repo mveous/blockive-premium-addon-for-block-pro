@@ -38,6 +38,38 @@
 			"type": "string",
 			"default": ""
 		},
+		"liveResults": {
+			"type": "boolean",
+			"default": false
+		},
+		"liveCount": {
+			"type": "number",
+			"default": 5
+		},
+		"liveMinChars": {
+			"type": "number",
+			"default": 2
+		},
+		"liveShowImage": {
+			"type": "boolean",
+			"default": true
+		},
+		"liveShowExcerpt": {
+			"type": "boolean",
+			"default": false
+		},
+		"resultsBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"resultsTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"resultsActiveBgColor": {
+			"type": "string",
+			"default": ""
+		},
 		"align": {
 			"type": "string",
 			"default": "left"
