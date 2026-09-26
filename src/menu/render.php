@@ -89,11 +89,17 @@ echo $bpafb_wrapper_attributes;
 </nav>
 <?php
 
+// A clean color, or the default (the values go into a <style> tag).
+$bpafb_color = function ($key, $default) use ($attributes) {
+	$color = Bpafb_Template_Block_Render::sanitize_css_color(isset($attributes[$key]) ? $attributes[$key] : '');
+	return '' !== $color ? $color : $default;
+};
+
 // Shared with the other menu block (Bpafb_Pro_Shared_Assets::menu_vars()).
 $bpafb_style_vars = array_merge(Bpafb_Pro_Shared_Assets::menu_vars($attributes, '--bpafb-pro-menu'), [
-	'--bpafb-pro-menu-dropdown-item-color'       => !empty($attributes['dropdownItemColor']) ? $attributes['dropdownItemColor'] : 'inherit',
-	'--bpafb-pro-menu-dropdown-item-hover-color' => !empty($attributes['dropdownItemHoverColor']) ? $attributes['dropdownItemHoverColor'] : 'inherit',
-	'--bpafb-pro-menu-dropdown-item-hover-bg'    => !empty($attributes['dropdownItemHoverBgColor']) ? $attributes['dropdownItemHoverBgColor'] : 'transparent',
+	'--bpafb-pro-menu-dropdown-item-color'       => $bpafb_color('dropdownItemColor', 'inherit'),
+	'--bpafb-pro-menu-dropdown-item-hover-color' => $bpafb_color('dropdownItemHoverColor', 'inherit'),
+	'--bpafb-pro-menu-dropdown-item-hover-bg'    => $bpafb_color('dropdownItemHoverBgColor', 'transparent'),
 	'--bpafb-pro-menu-dropdown-min-width'        => (isset($attributes['dropdownMinWidth']) ? absint($attributes['dropdownMinWidth']) : 220) . 'px',
 ]);
 

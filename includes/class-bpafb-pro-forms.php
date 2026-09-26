@@ -82,6 +82,15 @@ class Bpafb_Pro_Forms
 	 */
 	public function register_post_type()
 	{
+		/**
+		 * The capability needed to see and manage form submissions (they
+		 * hold visitors' personal data). Administrators by default; e.g.
+		 * 'edit_others_posts' also lets Editors in.
+		 *
+		 * @param string $capability Capability.
+		 */
+		$capability = apply_filters('bpafb_form_submissions_capability', 'manage_options');
+
 		register_post_type(self::POST_TYPE, [
 			'labels'          => [
 				'name'          => __('Form Submissions', 'blockive-premium-addon-for-block-pro'),
@@ -99,8 +108,21 @@ class Bpafb_Pro_Forms
 			// Read-only: no title / editor, and the Publish box is swapped for
 			// a details box (see add_meta_box()).
 			'supports'        => false,
+			// Not the post capabilities, which every Contributor has.
 			'capability_type' => 'post',
-			'capabilities'    => ['create_posts' => 'do_not_allow'],
+			'capabilities'    => [
+				'create_posts'           => 'do_not_allow',
+				'publish_posts'          => 'do_not_allow',
+				'edit_posts'             => $capability,
+				'edit_others_posts'      => $capability,
+				'edit_published_posts'   => $capability,
+				'edit_private_posts'     => $capability,
+				'delete_posts'           => $capability,
+				'delete_others_posts'    => $capability,
+				'delete_published_posts' => $capability,
+				'delete_private_posts'   => $capability,
+				'read_private_posts'     => $capability,
+			],
 			'map_meta_cap'    => true,
 		]);
 	}
@@ -275,7 +297,7 @@ class Bpafb_Pro_Forms
 	public static function find_config($form_id, $hint)
 	{
 		$key = self::META_PREFIX . $form_id;
-		if ($hint && 'trash' !== get_post_status($hint)) {
+		if ($hint && self::can_use_form_on($hint)) {
 			$config = get_post_meta($hint, $key, true);
 			if (is_array($config)) {
 				return [$config, (int) $hint];
@@ -287,16 +309,34 @@ class Bpafb_Pro_Forms
 			'post_status'    => ['publish', 'private', 'draft', 'pending', 'future'],
 			'meta_key'       => $key, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 			'fields'         => 'ids',
-			'posts_per_page' => 1,
+			'posts_per_page' => 10,
 			'no_found_rows'  => true,
 		]);
-		if ($ids) {
-			$config = get_post_meta($ids[0], $key, true);
+		foreach ($ids as $id) {
+			$config = self::can_use_form_on($id) ? get_post_meta($id, $key, true) : null;
 			if (is_array($config)) {
-				return [$config, (int) $ids[0]];
+				return [$config, (int) $id];
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Whether a form stored on this post may be used: the post is published,
+	 * or the person submitting can read it (e.g. an editor trying a form in
+	 * a draft's preview). A form in someone's unpublished draft must not
+	 * let anyone make the site send email or call a webhook.
+	 *
+	 * @param int $post_id Post id.
+	 * @return bool
+	 */
+	private static function can_use_form_on($post_id)
+	{
+		$status = get_post_status($post_id);
+		if ('publish' === $status) {
+			return true;
+		}
+		return $status && 'trash' !== $status && current_user_can('read_post', $post_id);
 	}
 
 	/* ------------------------------------------------------------------

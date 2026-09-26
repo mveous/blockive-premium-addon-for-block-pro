@@ -186,8 +186,9 @@ class Bpafb_Pro_Dynamic_Tags
 						// WordPress's own "Custom Fields" panel does. Some
 						// plugins store an array instead of plain text, and
 						// there is no safe way to show that as one string.
+						// Refuse protected fields (names starting with _).
 						'resolve'  => function ($post_id, $param) {
-							if (!$post_id || $param === '') {
+							if (!$post_id || $param === '' || is_protected_meta($param, 'post') || 0 === strpos($param, '_')) {
 								return '';
 							}
 							$value = get_post_meta($post_id, $param, true);
@@ -202,8 +203,9 @@ class Bpafb_Pro_Dynamic_Tags
 						// image: a plain attachment ID, an ACF-style array
 						// (with a 'url', or an 'ID'/'id' handled below), or
 						// a URL that is already complete.
+						// Refuse protected fields (names starting with _).
 						'resolve'  => function ($post_id, $param) {
-							if (!$post_id || $param === '') {
+							if (!$post_id || $param === '' || is_protected_meta($param, 'post') || 0 === strpos($param, '_')) {
 								return '';
 							}
 							$value = get_post_meta($post_id, $param, true);

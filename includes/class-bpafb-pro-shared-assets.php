@@ -145,8 +145,11 @@ class Bpafb_Pro_Shared_Assets
 		$px = function ($key, $default) use ($attributes) {
 			return (isset($attributes[$key]) ? absint($attributes[$key]) : $default) . 'px';
 		};
+		// Colors only (anything else, such as "red;} body{...", falls back
+		// to the default), since the values go into a <style> tag.
 		$value = function ($key, $default) use ($attributes) {
-			return !empty($attributes[$key]) ? $attributes[$key] : $default;
+			$color = Bpafb_Template_Block_Render::sanitize_css_color(isset($attributes[$key]) ? $attributes[$key] : '');
+			return '' !== $color ? $color : $default;
 		};
 
 		$vars = [
@@ -158,7 +161,7 @@ class Bpafb_Pro_Shared_Assets
 			$prefix . '-item-active-color'    => $value('itemActiveColor', 'inherit'),
 			$prefix . '-dropdown-bg'          => $value('dropdownBgColor', '#ffffff'),
 			$prefix . '-dropdown-border-width'  => $px('dropdownBorderWidth', 1),
-			$prefix . '-dropdown-border-style'  => $value('dropdownBorderType', 'solid'),
+			$prefix . '-dropdown-border-style'  => isset($attributes['dropdownBorderType']) && in_array($attributes['dropdownBorderType'], ['solid', 'dashed', 'dotted', 'double', 'none'], true) ? $attributes['dropdownBorderType'] : 'solid',
 			$prefix . '-dropdown-border-color'  => $value('dropdownBorderColor', '#e2e8f0'),
 			$prefix . '-dropdown-border-radius' => $px('dropdownBorderRadius', 8),
 			$prefix . '-toggle-color'         => $value('toggleIconColor', 'currentColor'),
