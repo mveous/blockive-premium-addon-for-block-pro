@@ -17,6 +17,7 @@
 		"postType"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {},
 	"attributes": {
 		"skin": {
 			"type": "string",

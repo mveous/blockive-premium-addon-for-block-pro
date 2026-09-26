@@ -15,6 +15,7 @@
 		"linktree"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {"attributes":{"name":"Alex Morgan","headline":"Designer & Creator","bio":"Sharing my latest work, tips, and favorite tools.","socials":[{"network":"instagram","url":"https://example.com"},{"network":"x","url":"https://example.com"},{"network":"tiktok","url":"https://example.com"}],"links":[{"label":"My Portfolio","url":"https://example.com","icon":""},{"label":"Latest Blog Post","url":"https://example.com","icon":""},{"label":"Shop My Picks","url":"https://example.com","icon":""}]}},
 	"attributes": {
 		"imageId": {
 			"type": "number",

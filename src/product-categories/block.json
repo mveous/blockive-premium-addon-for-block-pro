@@ -13,6 +13,7 @@
 		"shop"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {},
 	"attributes": {
 		"columns": {
 			"type": "number",

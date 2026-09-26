@@ -16,6 +16,7 @@
 		"global"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {},
 	"attributes": {
 		"templateId": {
 			"type": "number",

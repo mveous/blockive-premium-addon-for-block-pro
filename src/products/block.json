@@ -14,6 +14,7 @@
 		"grid"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {},
 	"attributes": {
 		"source": {
 			"type": "string",

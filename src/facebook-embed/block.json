@@ -15,6 +15,7 @@
 		"page"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {},
 	"attributes": {
 		"embedType": {
 			"type": "string",

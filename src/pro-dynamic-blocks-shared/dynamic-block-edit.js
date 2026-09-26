@@ -64,6 +64,8 @@ export function replaceTeaserBlocks( blocks, active ) {
 			icon,
 			usesContext: [ 'postId', 'postType' ],
 			supports: { html: false, className: false, customClassName: false, reusable: false },
+			// Hover preview in the inserter: the placeholder above.
+			example: {},
 			edit: createDynamicBlockEdit( title, icon ),
 			save: () => null,
 		} );

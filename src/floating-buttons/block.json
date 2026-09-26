@@ -15,6 +15,7 @@
 		"call"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {"attributes":{"channels":[{"type":"whatsapp","value":"+15550100","label":"","message":""},{"type":"email","value":"hello@example.com","label":"","message":""}],"mainLabel":"Contact us","showMainLabel":true}},
 	"attributes": {
 		"channels": {
 			"type": "array",

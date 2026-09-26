@@ -16,6 +16,7 @@
 		"subscribe"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {},
 	"attributes": {
 		"formId": {
 			"type": "string",

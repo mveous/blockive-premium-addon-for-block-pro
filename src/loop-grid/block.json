@@ -7,6 +7,7 @@
 	"category": "bpafb-widgets",
 	"icon": "grid-view",
 	"description": "Shows any post type in a grid, with each item rendered from a Blockive Loop Item template. Pro-only.",
+	"example": {},
 	"attributes": {
 		"templateId": {
 			"type": "number",

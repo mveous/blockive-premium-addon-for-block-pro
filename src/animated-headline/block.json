@@ -16,6 +16,7 @@
 		"highlight"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {},
 	"attributes": {
 		"style": {
 			"type": "string",

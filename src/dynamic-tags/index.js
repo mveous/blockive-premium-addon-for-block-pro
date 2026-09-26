@@ -252,6 +252,8 @@ registerBlockType( DYNAMIC_FIELD_BLOCK, {
 		param: { type: 'string', default: '' },
 	},
 	supports: DYNAMIC_FIELD_SUPPORTS,
+	// Hover preview in the inserter: a tag every site has a value for.
+	example: { attributes: { tag: 'site_title' } },
 	edit( { attributes, setAttributes, context } ) {
 		const blockProps = useBlockProps();
 		const preview = useDynamicFieldPreview( attributes.tag, attributes.param, context?.postId );

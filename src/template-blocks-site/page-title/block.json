@@ -18,6 +18,7 @@
 		"postType"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {},
 	"attributes": {
 		"tagName": {
 			"type": "string",

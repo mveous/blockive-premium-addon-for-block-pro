@@ -17,6 +17,7 @@
 		"portfolio"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {},
 	"attributes": {
 		"galleries": {
 			"type": "array",

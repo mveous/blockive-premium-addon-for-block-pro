@@ -16,6 +16,7 @@
 		"pricing"
 	],
 	"textdomain": "blockive-premium-addon-for-block-pro",
+	"example": {},
 	"attributes": {
 		"items": {
 			"type": "array",

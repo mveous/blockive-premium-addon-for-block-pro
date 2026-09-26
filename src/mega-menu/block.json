@@ -7,6 +7,7 @@
 	"category": "bpafb-widgets",
 	"icon": "grid-view",
 	"description": "A menu whose items can open a full-width dropdown built from a Blockive Template, Pro-only.",
+	"example": {},
 	"attributes": {
 		"items": {
 			"type": "array",
