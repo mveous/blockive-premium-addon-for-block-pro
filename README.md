@@ -6,7 +6,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ## Key Highlights
 
-- **59 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
+- **60 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
 - **Full Template Builder**: Build Single, Header, Footer, Archive, Search Results, 404, and Popup templates, each with its own Display Conditions.
 - **WooCommerce & Events Blocks**: 17 WooCommerce product blocks and 9 Events blocks for building fully custom product and event templates.
 - **Dynamic Tags**: `{{tag}}` tokens (e.g. `{{post_title}}`, `{{post_date:F j, Y}}`) work in any text or URL field on any Blockive block.
@@ -17,7 +17,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ---
 
-## Included 59 Blocks
+## Included 60 Blocks
 
 | Block Name | Description | Key Customization Features |
 |:---|:---|:---|
@@ -79,6 +79,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Progress Tracker** | Reading progress for the page, the post content, or any element. | Bar fixed to the top or bottom (below the admin bar), or a circle in a corner; optional percentage; offset for sticky headers; colors. |
 | **Blockive Floating Buttons** | A contact button fixed in a corner of the window. | WhatsApp (with prefilled message), phone, SMS, email, Telegram, Messenger, Viber, or any link; one channel links straight to it, several open a menu; bottom-left or right, brand or custom colors, size and offset. |
 | **Blockive Link in Bio** | A mobile-first profile page: photo, name, headline, bio, social icons, and a stack of link buttons. | 14 social networks (email becomes mailto), links with optional icons (web, tel, mailto, or a bare domain), filled or outline buttons, colors, radius, photo size, width, optional new tab. |
+| **Blockive Facebook Embed** | A Facebook page, post, video, or Like button. | Facebook's own iframe plugins, no SDK script; loads only after the visitor clicks (default, with an editable privacy message; a plain link without JavaScript); page tabs, header, cover, facepile; like layout, action, size, share; only facebook.com / fb.com / fb.watch addresses. |
 | **Blockive Off-Canvas** | Slide-in panel that holds any blocks, e.g. a mobile menu. | Left/right/top/bottom, trigger button or any `#panel-id` link, overlay, focus trap, Esc to close, scroll lock. |
 
 ---
