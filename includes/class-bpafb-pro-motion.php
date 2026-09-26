@@ -1,9 +1,9 @@
 <?php
 /**
- * Scrolling & Mouse Effects for every Blockive block, like Elementor
- * Pro's Motion Effects: while the page scrolls, a block can move up/down
- * or sideways (parallax), fade, blur, rotate, or scale over a chosen part
- * of the window; and it can follow the mouse or tilt in 3D.
+ * Scrolling & Mouse Effects for every Blockive block:
+ * while the page scrolls, a block can move up/down or sideways (parallax),
+ * fade, blur, rotate, or scale over a chosen part of the window; and it
+ * can follow the mouse or tilt in 3D.
  *
  * Settings are one object attribute, bpafbMotion (editor panel in
  * src/custom-attributes/motion-effects.js). render_block adds the cleaned

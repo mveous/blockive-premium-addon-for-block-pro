@@ -1,7 +1,6 @@
 <?php
 /**
- * Site Tools (Blockive Templates → Site Tools), like Elementor Pro's site
- * settings:
+ * Site Tools (Blockive Templates → Site Tools):
  *
  * - Custom Code: snippets printed in <head>, right after <body> opens, and
  *   before </body> on every front-end page. Only users who may post

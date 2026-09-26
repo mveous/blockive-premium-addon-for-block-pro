@@ -4,8 +4,7 @@ if (!defined('ABSPATH')) {
 }
 /**
  * Render function for the Google Maps block. Uses Google's keyless embed
- * URL (the same approach as Elementor's Google Maps widget), so no API key
- * or billing account is needed.
+ * URL, so no API key or billing account is needed.
  *
  * @var array    $attributes Block attributes.
  * @var string   $content    Block default content (unused, dynamic block).

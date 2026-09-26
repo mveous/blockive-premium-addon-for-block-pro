@@ -29,7 +29,7 @@ $bpafb_show_count = !isset($attributes['showCount']) || !empty($attributes['show
 $bpafb_show_subtotal = !isset($attributes['showSubtotal']) || !empty($attributes['showSubtotal']);
 $bpafb_hide_empty = !empty($attributes['hideEmptyCount']);
 
-// Like Elementor's Menu Cart, the dropdown is pointless on the cart and
+// The dropdown is not needed on the cart and
 // checkout pages themselves, so it becomes a plain link there.
 $bpafb_dropdown = (!isset($attributes['behavior']) || 'dropdown' === $attributes['behavior'])
 	&& !(function_exists('is_cart') && is_cart())

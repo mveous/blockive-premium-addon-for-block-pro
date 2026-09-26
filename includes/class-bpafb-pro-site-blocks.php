@@ -2,9 +2,8 @@
 /**
  * Header & Footer ("Site") Template Blocks: Site Logo, Site Title, Site
  * Tagline, Page Title, Search Form, Menu Cart, Login, Sitemap, and
- * Copyright - the site-wide pieces a Header or Footer template needs,
- * modelled on Elementor Pro's "Site" widgets. Navigation, Social Icons and
- * Button already exist as regular Blockive blocks, so they are not
+ * Copyright - the site-wide pieces a Header or Footer template needs.
+ * Navigation, Social Icons and Button already exist as regular Blockive blocks, so they are not
  * repeated here.
  *
  * Also registers Archive Posts and Archive Products (listed under the

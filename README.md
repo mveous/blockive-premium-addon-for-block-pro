@@ -129,7 +129,7 @@ Build the templates above using dynamic content blocks:
 
 ## Header & Footer Template Blocks (9)
 
-Defined in `includes/class-bpafb-pro-site-blocks.php`, source in `src/template-blocks-site/`. They appear under **Blockive Header & Footer** in the Template Builder's inserter. Together with the existing Menu / Mega Menu, Social Icons, and Button blocks, they cover Elementor Pro's "Site" widgets.
+Defined in `includes/class-bpafb-pro-site-blocks.php`, source in `src/template-blocks-site/`. They appear under **Blockive Header & Footer** in the Template Builder's inserter. Together with the existing Menu / Mega Menu, Social Icons, and Button blocks, they provide all essential site-wide navigation and branding components.
 
 | Block | Description |
 |:---|:---|

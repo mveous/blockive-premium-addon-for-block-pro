@@ -2,7 +2,7 @@
 /**
  * Custom Attributes: any HTML attributes on a Blockive block's outer
  * element, entered as `key|value` lines in the block's Advanced panel
- * (src/custom-attributes). Like Elementor Pro's feature of the same name.
+ * (src/custom-attributes).
  *
  * The attribute is added to every Blockive block on the server (the editor
  * picks it up from the server's block definitions), and applied in

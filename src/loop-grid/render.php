@@ -5,8 +5,7 @@ if (!defined('ABSPATH')) {
 /**
  * Render function for the Pro Loop Grid block. Shows any post type in a
  * grid, rendering each item from a "Loop Item" Blockive Template with
- * do_blocks(), the same way Bpafb_Pro_Loop_Builder does it for Post Grid
- * (Elementor Pro calls this same idea "Loop Grid").
+ * do_blocks(), the same way Bpafb_Pro_Loop_Builder does it for Post Grid.
  *
  * @var array    $attributes Block attributes.
  * @var string   $content    Block default content (unused, dynamic block).

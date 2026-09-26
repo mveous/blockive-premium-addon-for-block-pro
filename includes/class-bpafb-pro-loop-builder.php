@@ -2,7 +2,7 @@
 /**
  * Lets the free plugin's Post Grid block show a "loop-item"-kind Blockive
  * Template for each post it lists, instead of its own built-in card
- * layout (Elementor calls this feature "Loop Grid").
+ * layout.
  *
  * Post Grid's own block.json, edit.js, and render.php files are copied
  * over as-is from the free plugin, so this adds to it from the outside

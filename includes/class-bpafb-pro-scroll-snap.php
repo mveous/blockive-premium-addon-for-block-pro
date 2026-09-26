@@ -1,8 +1,7 @@
 <?php
 /**
  * Scroll Snap: a per-page setting (editor panel in src/scroll-snap/) that makes scrolling come to rest
- * at the start of the page's top-level blocks, like Elementor's Scroll
- * Snap. "Gentle" snaps only when scrolling stops near a block; "Strict"
+ * at the start of the page's top-level blocks. "Gentle" snaps only when scrolling stops near a block; "Strict"
  * always lands on one (best when every block fits the window, as a tall
  * block can otherwise be hard to read through).
  *
