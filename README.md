@@ -6,7 +6,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ## Key Highlights
 
-- **50 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
+- **51 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
 - **Full Template Builder**: Build Single, Header, Footer, Archive, Search Results, 404, and Popup templates, each with its own Display Conditions.
 - **WooCommerce & Events Blocks**: 17 WooCommerce product blocks and 9 Events blocks for building fully custom product and event templates.
 - **Dynamic Tags**: `{{tag}}` tokens (e.g. `{{post_title}}`, `{{post_date:F j, Y}}`) work in any text or URL field on any Blockive block.
@@ -17,7 +17,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ---
 
-## Included 50 Blocks
+## Included 51 Blocks
 
 | Block Name | Description | Key Customization Features |
 |:---|:---|:---|
@@ -26,6 +26,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Button** | Customizable button with icon and badge support. | Hover animations, custom badges, icon placement, gradient and solid fills. |
 | **Blockive Category List** | Styled taxonomy browser for categories and custom taxonomies. | Hierarchy display, grid/list layouts, post-count badges, custom item spacing. |
 | **Blockive Contact Form 7** | Drop-in Contact Form 7 integration with native styling. | Form selection by ID, live preview in editor, custom field and submit button styling. |
+| **Blockive Form** | A native contact / lead form, no other plugin needed. | 12 field types (text, email, textarea, phone, URL, number, date, dropdown, radio, checkboxes, acceptance, hidden) with widths; saves to Form Submissions, emails, redirects, and webhooks; honeypot, timing, and rate-limit spam protection; accessible inline errors; works without JavaScript. |
 | **Blockive Countdown Timer** | Urgency-inducing timers for sales, launches, and events. | Circular & box styles, days/hours/mins/secs labels, expiry actions, styling. |
 | **Blockive Drop Caps** | Editorial-style typographic enhancements for standard paragraphs. | First-letter custom padding, custom margins, colored initials, shapes. |
 | **Blockive FAQ** | Schema-ready accordion style FAQ lists. | Structured data auto-generation, schema support toggle, icon styles. |
