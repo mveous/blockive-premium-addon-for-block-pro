@@ -35,6 +35,17 @@ class Bpafb_Pro_Woo_Blocks
 	const NAME_PREFIX = 'blockive-premium-addon-for-block/tb-';
 
 	/**
+	 * Normal blocks that only work with WooCommerce (hidden from the
+	 * inserter without it, here and in the editor through
+	 * Bpafb_Pro_Site_Tools::hidden_blocks()).
+	 */
+	const WOO_ONLY_BLOCKS = [
+		'blockive-premium-addon-for-block/products',
+		'blockive-premium-addon-for-block/product-categories',
+		'blockive-premium-addon-for-block/add-to-cart',
+	];
+
+	/**
 	 * The one and only instance of this class.
 	 *
 	 * @var Bpafb_Pro_Woo_Blocks|null
@@ -80,8 +91,7 @@ class Bpafb_Pro_Woo_Blocks
 	 */
 	public function hide_without_woocommerce($args, $block_name)
 	{
-		$names = ['blockive-premium-addon-for-block/products', 'blockive-premium-addon-for-block/product-categories', 'blockive-premium-addon-for-block/add-to-cart'];
-		if (in_array($block_name, $names, true) && !class_exists('WooCommerce')) {
+		if (in_array($block_name, self::WOO_ONLY_BLOCKS, true) && !class_exists('WooCommerce')) {
 			$args['supports'] = array_merge(isset($args['supports']) ? $args['supports'] : [], ['inserter' => false]);
 		}
 		return $args;

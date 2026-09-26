@@ -128,6 +128,7 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-live-search.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-sticky.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-motion.php';
+		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-site-tools.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-archive-loop.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-popup-builder.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-dynamic-tags.php';
@@ -147,6 +148,7 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 		Bpafb_Pro_Live_Search::get_instance();
 		Bpafb_Pro_Sticky::get_instance();
 		Bpafb_Pro_Motion::get_instance();
+		Bpafb_Pro_Site_Tools::get_instance();
 		Bpafb_Pro_Dynamic_Tags::get_instance();
 		Bpafb_Pro_Admin_Bar::get_instance();
 

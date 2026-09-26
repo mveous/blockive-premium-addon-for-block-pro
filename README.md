@@ -170,6 +170,14 @@ Every render function checks `function_exists()` before calling a WooCommerce AP
 
 Defined in `includes/class-bpafb-pro-events-blocks.php`: Event Title, Event Image, Event Date, Event Time, Venue, Organizer, Event Cost, Event Map, Register Button.
 
+## Site Tools
+
+Blockive Templates → Site Tools (`includes/class-bpafb-pro-site-tools.php`):
+
+- **Custom Code**: snippets printed in `<head>`, right after `<body>` opens, and before `</body>` on every front-end page. Only users who may post unfiltered HTML can see or change them.
+- **Page Transitions**: a fade between pages with the browser's own View Transitions (no script), with a duration; skipped for reduced motion.
+- **Element Manager**: turn Blockive blocks off. They leave the inserter (also in the editor, through the Custom Attributes script), while blocks already on pages keep working.
+
 ## Dynamic Tags
 
 `includes/class-bpafb-pro-dynamic-tags.php` hooks into `render_block` for every `blockive-premium-addon-for-block/*` block, replacing `{{tag}}` / `{{tag:param}}` tokens in text and URL attributes with live content — works on static and dynamic blocks alike, no per-block setup needed.

@@ -11,6 +11,7 @@ import { TextareaControl } from '@wordpress/components';
 
 import './sticky-offset';
 import './motion-effects';
+import './hidden-blocks';
 
 const PREFIX = 'blockive-premium-addon-for-block/';
 const BLOCKED = [ 'style', 'id', 'class', 'href', 'src', 'srcset', 'srcdoc', 'action', 'formaction', 'xlink:href', 'data', 'poster', 'background', 'codebase', 'dynsrc', 'lowsrc', 'ping' ];
