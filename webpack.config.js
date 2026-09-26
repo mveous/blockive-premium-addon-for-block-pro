@@ -37,6 +37,10 @@ const extraEntry = {
 		__dirname,
 		'src/dynamic-tags/index.js'
 	),
+	'custom-attributes/index': path.resolve(
+		__dirname,
+		'src/custom-attributes/index.js'
+	),
 	// Shared stylesheets, registered as style handles by
 	// Bpafb_Pro_Shared_Assets::register_styles().
 	'pro-components/carousel/index': path.resolve(

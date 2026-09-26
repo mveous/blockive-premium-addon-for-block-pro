@@ -6,7 +6,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ## Key Highlights
 
-- **52 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
+- **54 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
 - **Full Template Builder**: Build Single, Header, Footer, Archive, Search Results, 404, and Popup templates, each with its own Display Conditions.
 - **WooCommerce & Events Blocks**: 17 WooCommerce product blocks and 9 Events blocks for building fully custom product and event templates.
 - **Dynamic Tags**: `{{tag}}` tokens (e.g. `{{post_title}}`, `{{post_date:F j, Y}}`) work in any text or URL field on any Blockive block.
@@ -17,7 +17,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ---
 
-## Included 52 Blocks
+## Included 54 Blocks
 
 | Block Name | Description | Key Customization Features |
 |:---|:---|:---|
@@ -44,6 +44,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Post Grid** | Query-driven grid for showcasing posts, articles, or custom post types. | Custom queries, pagination, category/tag filters, responsive column controls. |
 | **Blockive Loop Grid** | Post Grid's query engine paired with a full Blockive Template per card. | Renders a reusable, fully custom card design for every item instead of a built-in layout. |
 | **Blockive Loop Carousel** | Loop Grid's query in a carousel, each card rendered from a Loop Item template. | Same query and taxonomy filters as Loop Grid, responsive slides per view, equal-height cards, autoplay, arrows, dots. |
+| **Blockive Loop Filter** | Taxonomy buttons that filter a Loop Grid, Loop Carousel, or Portfolio on the same page. | Any public taxonomy of the target post type, chosen terms or all, All button, order by name or count; filters a Loop Grid in place without a reload (Back button works), shareable filter URLs, works without JavaScript. |
 | **Blockive Template** | Shows a saved "Section" Blockive Template anywhere. | Pick any published Section template; edit it once and every copy updates; a section can never end up inside itself. |
 | **Blockive Pricing Table** | Fully customizable pricing table with features list and CTA. | Ribbon/badge, features checklist, period toggles, button styling. |
 | **Blockive Progress Bar** | Animated linear progress indicators for skills and goals. | Animated steps, custom bar height, percentage display toggle, stripes. |
@@ -72,6 +73,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Code Highlight** | Code with syntax coloring (Prism). | 19 languages, dark or light theme, line numbers, highlighted lines, copy button (HTTPS), wrap, max height; readable plain code without JavaScript; Prism only loads where the block is used. |
 | **Blockive Hotspot** | An image with pins that open tooltips. | Click-to-place pins in the editor, icon or text label per pin, tooltip text and link, 4 tooltip positions, click or hover, pulse animation, keyboard and screen reader support. |
 | **Blockive Progress Tracker** | Reading progress for the page, the post content, or any element. | Bar fixed to the top or bottom (below the admin bar), or a circle in a corner; optional percentage; offset for sticky headers; colors. |
+| **Blockive Floating Buttons** | A contact button fixed in a corner of the window. | WhatsApp (with prefilled message), phone, SMS, email, Telegram, Messenger, Viber, or any link; one channel links straight to it, several open a menu; bottom-left or right, brand or custom colors, size and offset. |
 | **Blockive Off-Canvas** | Slide-in panel that holds any blocks, e.g. a mobile menu. | Left/right/top/bottom, trigger button or any `#panel-id` link, overlay, focus trap, Esc to close, scroll lock. |
 
 ---
@@ -178,6 +180,7 @@ Defined in `includes/class-bpafb-pro-events-blocks.php`: Event Title, Event Imag
 - **Backgrounds**: Solid colors, multi-stop linear/radial gradients, and image backgrounds.
 - **Box Shadows & Text Shadows**: Multi-layered shadow effects with customizable blur, spread, and color.
 - **Animations**: Entrance and hover animations with custom speed and delay.
+- **Custom Attributes**: Add any HTML attributes (e.g. `data-*`, `aria-*`, `role`) to a Blockive block from its Advanced panel, as `name|value` lines. Event handlers, style, id, class, and URL attributes are refused.
 
 ---
 

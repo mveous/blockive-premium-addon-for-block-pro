@@ -180,7 +180,64 @@ class Bpafb_Pro_Loop_Builder
 			$args['post__not_in'] = [get_the_ID()];
 		}
 
+		// A Loop Filter block pointed at this block (see active_filter()).
+		$filter = self::active_filter($attributes, $post_type);
+		if ($filter) {
+			$args['tax_query'] = isset($args['tax_query']) ? $args['tax_query'] : []; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+			$args['tax_query'][] = [
+				'taxonomy' => $filter['taxonomy'],
+				'field'    => 'term_id',
+				'terms'    => [$filter['term_id']],
+			];
+		}
+
 		return $args;
+	}
+
+	/**
+	 * The URL parameter a Loop Filter block uses for a loop block, e.g.
+	 * `bpafb-filter-abc123=category:news`.
+	 *
+	 * @param string $uid The loop block's bpafbUid.
+	 * @return string
+	 */
+	public static function filter_param($uid)
+	{
+		return 'bpafb-filter-' . sanitize_html_class($uid);
+	}
+
+	/**
+	 * The filter chosen for a loop block through its URL parameter, after
+	 * checking it: a public taxonomy of the block's post type, and a term
+	 * that exists in it. The value comes from the visitor's URL, so
+	 * anything else is ignored.
+	 *
+	 * @param array  $attributes Loop block attributes.
+	 * @param string $post_type  The block's post type.
+	 * @return array{taxonomy: string, term_id: int, slug: string}|null
+	 */
+	public static function active_filter($attributes, $post_type)
+	{
+		$uid = !empty($attributes['bpafbUid']) ? sanitize_html_class($attributes['bpafbUid']) : '';
+		$param = $uid ? self::filter_param($uid) : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- a public, read-only filter.
+		if (!$param || empty($_GET[$param]) || !is_string($_GET[$param])) {
+			return null;
+		}
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$parts = explode(':', sanitize_text_field(wp_unslash($_GET[$param])), 2);
+		if (2 !== count($parts)) {
+			return null;
+		}
+		$taxonomy = sanitize_key($parts[0]);
+		if (!taxonomy_exists($taxonomy) || !is_taxonomy_viewable($taxonomy) || !is_object_in_taxonomy($post_type, $taxonomy)) {
+			return null;
+		}
+		$term = get_term_by('slug', sanitize_title($parts[1]), $taxonomy);
+		if (!$term || is_wp_error($term)) {
+			return null;
+		}
+		return ['taxonomy' => $taxonomy, 'term_id' => (int) $term->term_id, 'slug' => $term->slug];
 	}
 
 	/**

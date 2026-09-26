@@ -124,6 +124,7 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-shared-assets.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-carousel.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-forms.php';
+		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-custom-attributes.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-archive-loop.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-popup-builder.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-dynamic-tags.php';
@@ -139,6 +140,7 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 		add_action('init', ['Bpafb_Pro_Shared_Assets', 'register_styles'], 5);
 		Bpafb_Pro_Popup_Builder::get_instance();
 		Bpafb_Pro_Forms::get_instance();
+		Bpafb_Pro_Custom_Attributes::get_instance();
 		Bpafb_Pro_Dynamic_Tags::get_instance();
 		Bpafb_Pro_Admin_Bar::get_instance();
 
