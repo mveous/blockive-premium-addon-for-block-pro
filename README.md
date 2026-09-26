@@ -6,7 +6,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ## Key Highlights
 
-- **54 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
+- **55 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
 - **Full Template Builder**: Build Single, Header, Footer, Archive, Search Results, 404, and Popup templates, each with its own Display Conditions.
 - **WooCommerce & Events Blocks**: 17 WooCommerce product blocks and 9 Events blocks for building fully custom product and event templates.
 - **Dynamic Tags**: `{{tag}}` tokens (e.g. `{{post_title}}`, `{{post_date:F j, Y}}`) work in any text or URL field on any Blockive block.
@@ -17,7 +17,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ---
 
-## Included 54 Blocks
+## Included 55 Blocks
 
 | Block Name | Description | Key Customization Features |
 |:---|:---|:---|
@@ -45,6 +45,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Loop Grid** | Post Grid's query engine paired with a full Blockive Template per card. | Renders a reusable, fully custom card design for every item instead of a built-in layout. |
 | **Blockive Loop Carousel** | Loop Grid's query in a carousel, each card rendered from a Loop Item template. | Same query and taxonomy filters as Loop Grid, responsive slides per view, equal-height cards, autoplay, arrows, dots. |
 | **Blockive Loop Filter** | Taxonomy buttons that filter a Loop Grid, Loop Carousel, or Portfolio on the same page. | Any public taxonomy of the target post type, chosen terms or all, All button, order by name or count; filters a Loop Grid in place without a reload (Back button works), shareable filter URLs, works without JavaScript. |
+| **Blockive Nested Carousel** | A carousel whose slides hold any blocks. | Add Carousel Slides and fill them with headings, images, buttons, columns, or other blocks; per-slide background (color, gradient, image), padding, minimum height, and vertical alignment; responsive slides per view, equal height, autoplay, arrows, dots. |
 | **Blockive Template** | Shows a saved "Section" Blockive Template anywhere. | Pick any published Section template; edit it once and every copy updates; a section can never end up inside itself. |
 | **Blockive Pricing Table** | Fully customizable pricing table with features list and CTA. | Ribbon/badge, features checklist, period toggles, button styling. |
 | **Blockive Progress Bar** | Animated linear progress indicators for skills and goals. | Animated steps, custom bar height, percentage display toggle, stripes. |

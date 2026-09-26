@@ -1,0 +1,28 @@
+.bpafb-nested-carousel--equal-height > .bpafb-carousel__stage > .bpafb-carousel__viewport > .bpafb-carousel__track > .bpafb-carousel__slide {
+	display: flex;
+}
+
+/* Carousel Slide */
+.bpafb-nested-carousel-slide {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+}
+
+.bpafb-nested-carousel-slide > * {
+	margin-block: 0;
+}
+
+.bpafb-nested-carousel-slide > * + * {
+	margin-block-start: var(--wp--style--block-gap, 1em);
+}
+
+.bpafb-nested-carousel-slide.is-vertically-aligned-center {
+	justify-content: center;
+}
+
+.bpafb-nested-carousel-slide.is-vertically-aligned-bottom {
+	justify-content: flex-end;
+}
