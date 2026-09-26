@@ -27,7 +27,16 @@ const KIND_OPTIONS = [
 	{ label: __( 'Popup', 'blockive-premium-addon-for-block-pro' ), value: 'popup' },
 	{ label: __( 'Loop Item', 'blockive-premium-addon-for-block-pro' ), value: 'loop-item' },
 	{ label: __( 'Mega Menu Item', 'blockive-premium-addon-for-block-pro' ), value: 'mega-menu-item' },
+	{ label: __( 'Section (for the Template block)', 'blockive-premium-addon-for-block-pro' ), value: 'section' },
 ];
+
+// Kinds that blocks place, not Display Conditions (see
+// Bpafb_Pro_Template_Kinds::PLACED_BY_BLOCKS).
+const PLACED_BY_BLOCKS = {
+	'loop-item': __( 'Loop Grid and Loop Carousel blocks show this template for each item.', 'blockive-premium-addon-for-block-pro' ),
+	'mega-menu-item': __( 'The Mega Menu block shows this template as a dropdown panel.', 'blockive-premium-addon-for-block-pro' ),
+	section: __( 'Add a Template block to any page, post, or template and choose this section to show it there.', 'blockive-premium-addon-for-block-pro' ),
+};
 
 // Rule types where the user needs to pick a value. The others (entire_site,
 // date_archive, search, 404, logged_in, logged_out) need nothing else.
@@ -460,7 +469,11 @@ const TemplateKindPanel = () => {
 				title={ __( 'Display Conditions', 'blockive-premium-addon-for-block-pro' ) }
 				className="bpafb-pro-display-conditions-panel"
 			>
-				{ isSingle ? (
+				{ PLACED_BY_BLOCKS[ kind ] ? (
+					<PanelRow>
+						<p className="bpafb-pro-no-conditions-notice">{ PLACED_BY_BLOCKS[ kind ] }</p>
+					</PanelRow>
+				) : isSingle ? (
 					<PanelRow>
 						<Flex align="flex-end">
 							<FlexBlock>
@@ -533,6 +546,7 @@ const TemplateKindPanel = () => {
 					</>
 				) }
 
+				{ ! PLACED_BY_BLOCKS[ kind ] && (
 				<PanelRow>
 					<TextControl
 						type="number"
@@ -545,6 +559,7 @@ const TemplateKindPanel = () => {
 						} }
 					/>
 				</PanelRow>
+				) }
 
 				{ isSingle && (
 					<>

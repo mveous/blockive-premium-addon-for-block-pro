@@ -40,6 +40,19 @@ class Bpafb_Pro_Template_Kinds
 		'popup',
 		'loop-item',
 		'mega-menu-item',
+		'section',
+	];
+
+	/**
+	 * Kinds that blocks place (Loop Grid / Loop Carousel, Mega Menu, the
+	 * Template block), rather than Display Conditions.
+	 *
+	 * @var string[]
+	 */
+	const PLACED_BY_BLOCKS = [
+		'loop-item',
+		'mega-menu-item',
+		'section',
 	];
 
 	/**
@@ -133,6 +146,7 @@ class Bpafb_Pro_Template_Kinds
 		'popup'          => 'Popup',
 		'loop-item'      => 'Loop Item',
 		'mega-menu-item' => 'Mega Menu Item',
+		'section'        => 'Section',
 	];
 
 	/**

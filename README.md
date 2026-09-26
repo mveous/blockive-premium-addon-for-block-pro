@@ -6,7 +6,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ## Key Highlights
 
-- **51 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
+- **52 Premium Blocks**: A complete block library covering content, layout, navigation, and dynamic query blocks.
 - **Full Template Builder**: Build Single, Header, Footer, Archive, Search Results, 404, and Popup templates, each with its own Display Conditions.
 - **WooCommerce & Events Blocks**: 17 WooCommerce product blocks and 9 Events blocks for building fully custom product and event templates.
 - **Dynamic Tags**: `{{tag}}` tokens (e.g. `{{post_title}}`, `{{post_date:F j, Y}}`) work in any text or URL field on any Blockive block.
@@ -17,7 +17,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 
 ---
 
-## Included 51 Blocks
+## Included 52 Blocks
 
 | Block Name | Description | Key Customization Features |
 |:---|:---|:---|
@@ -44,6 +44,7 @@ A standalone, high-performance Gutenberg block library and full-site **Template 
 | **Blockive Post Grid** | Query-driven grid for showcasing posts, articles, or custom post types. | Custom queries, pagination, category/tag filters, responsive column controls. |
 | **Blockive Loop Grid** | Post Grid's query engine paired with a full Blockive Template per card. | Renders a reusable, fully custom card design for every item instead of a built-in layout. |
 | **Blockive Loop Carousel** | Loop Grid's query in a carousel, each card rendered from a Loop Item template. | Same query and taxonomy filters as Loop Grid, responsive slides per view, equal-height cards, autoplay, arrows, dots. |
+| **Blockive Template** | Shows a saved "Section" Blockive Template anywhere. | Pick any published Section template; edit it once and every copy updates; a section can never end up inside itself. |
 | **Blockive Pricing Table** | Fully customizable pricing table with features list and CTA. | Ribbon/badge, features checklist, period toggles, button styling. |
 | **Blockive Progress Bar** | Animated linear progress indicators for skills and goals. | Animated steps, custom bar height, percentage display toggle, stripes. |
 | **Blockive Social Icons** | Links to social profiles with custom shapes and animations. | Shape variants (round/circle/square), custom SVG colors, hover animations. |
@@ -88,6 +89,11 @@ Registered in `includes/class-bpafb-pro-template-kinds.php`:
 | **Search Results** | Swapped in via `template_include`. |
 | **404 Page** | Swapped in via `template_include`. |
 | **Popup** | Rendered on-page with a configurable trigger and display frequency (`class-bpafb-pro-popup-builder.php`). |
+| **Loop Item** | One card, repeated by the Loop Grid, Loop Carousel, Archive Posts / Products, and Post Grid blocks. |
+| **Mega Menu Item** | A Mega Menu dropdown panel. |
+| **Section** | Reusable content shown wherever a **Template** block points to it. |
+
+Loop Item, Mega Menu Item, and Section templates are placed by blocks, so they have no Display Conditions.
 
 The live site's admin bar gets an **Edit Template** item (`class-bpafb-pro-admin-bar.php`) listing every template kind active on the current page, since a Header, Footer, Single/Archive/Search/404 body, and Popup can all be active simultaneously.
 
@@ -138,14 +144,15 @@ Source in `src/template-blocks-site/archive-*`, shared loop code in `includes/cl
 | **Archive Posts** | Shows each result as a Blockive card (image with aspect ratio, categories, title, date, author, comments, excerpt, read more) or as a **Loop Item** template. Responsive columns, numbered or previous/next pagination, and a custom "nothing found" message. Renders nothing on singular pages. |
 | **Archive Products** | Three layouts: Blockive card (image, sale badge, title, rating, price, AJAX add-to-cart), WooCommerce's native loop (`content-product.php`, keeps theme and plugin compatibility), or a Loop Item template. Includes WooCommerce's result count and sorting dropdown. Only renders on product listings, so an Archive template shared with the blog is safe. |
 
-## Single Post Template Blocks (Pro, 2)
+## Single Post Template Blocks (Pro, 3)
 
-Source in `src/template-blocks-site/author-box` and `post-comments`, styles in `src/template-blocks-site/post.css`. They add to the free plugin's post Template Blocks (Author, Author Avatar, Comments Count, and the rest). In the editor they preview the newest post of the template's type through the block's own `render.php`.
+Source in `src/template-blocks-site/author-box`, `post-comments`, and `post-excerpt`, styles in `src/template-blocks-site/post.css`. They add to the free plugin's post Template Blocks (Author, Author Avatar, Comments Count, and the rest). In the editor they preview the newest post of the template's type through the block's own `render.php`.
 
 | Block | Description |
 |:---|:---|
 | **Author Box** | The post author's photo (Gravatar), name, bio, and a button to their posts or website, or a custom person entered in the block. Photo left, top, or right; box, photo, name, bio, and button styling. |
 | **Post Comments** | The post's comments through WordPress's own `wp_list_comments()` and `comment_form()`, so threading (Settings → Discussion), reply links, moderation notices, and comment plugins keep working. Comment count title, order, avatars, closed message, and styling for comments, the form fields, and the submit button. |
+| **Post Excerpt** | The written excerpt, or the start of the content trimmed to a number of words, with an optional Read More link. |
 
 ## WooCommerce Template Blocks (17)
 

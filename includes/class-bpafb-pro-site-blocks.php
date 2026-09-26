@@ -48,6 +48,7 @@ class Bpafb_Pro_Site_Blocks
 		'archive-products',
 		'author-box',
 		'post-comments',
+		'post-excerpt',
 	];
 
 	/**

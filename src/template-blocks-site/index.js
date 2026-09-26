@@ -21,3 +21,4 @@ import './archive-posts';
 import './archive-products';
 import './author-box';
 import './post-comments';
+import './post-excerpt';

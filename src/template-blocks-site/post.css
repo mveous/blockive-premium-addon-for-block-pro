@@ -402,6 +402,37 @@
 	background: var(--bpafb-comments-btn-hover-bg, #374151);
 }
 
+/* ---------- Post Excerpt ---------- */
+.bpafb-post-excerpt {
+	margin: 0;
+	font-family: var(--bpafb-excerpt-font-family, inherit);
+	font-size: var(--bpafb-excerpt-font-size, inherit);
+	font-weight: var(--bpafb-excerpt-font-weight, inherit);
+	line-height: var(--bpafb-excerpt-line-height, inherit);
+	letter-spacing: var(--bpafb-excerpt-letter-spacing, inherit);
+	text-transform: var(--bpafb-excerpt-text-transform, none);
+	color: var(--bpafb-excerpt-color, inherit);
+}
+
+.bpafb-post-excerpt .bpafb-post-excerpt__more {
+	font-weight: 600;
+	color: var(--bpafb-excerpt-link, inherit);
+}
+
+.bpafb-post-excerpt .bpafb-post-excerpt__more:hover,
+.bpafb-post-excerpt .bpafb-post-excerpt__more:focus-visible {
+	color: var(--bpafb-excerpt-link-hover, var(--bpafb-excerpt-link, inherit));
+}
+
+.bpafb-post-excerpt .screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
 /* ---------- Editor-only ---------- */
 .bpafb-tb-editor-note {
 	margin: 0;
