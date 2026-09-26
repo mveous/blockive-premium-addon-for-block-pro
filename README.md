@@ -176,6 +176,7 @@ Blockive Templates → Site Tools (`includes/class-bpafb-pro-site-tools.php`):
 
 - **Custom Code**: snippets printed in `<head>`, right after `<body>` opens, and before `</body>` on every front-end page. Only users who may post unfiltered HTML can see or change them.
 - **Page Transitions**: a fade between pages with the browser's own View Transitions (no script), with a duration; skipped for reduced motion.
+- **Custom Fonts** (`class-bpafb-pro-custom-fonts.php`): upload WOFF2 / WOFF / TTF / OTF files (administrators only), one row per file with family, weight, and style. @font-face rules load on the site and inside the editor, and the families are added to WordPress's own font lists; in Blockive blocks, type the family name.
 - **Element Manager**: turn Blockive blocks off. They leave the inserter (also in the editor, through the Custom Attributes script), while blocks already on pages keep working.
 
 ## Dynamic Tags

@@ -10,6 +10,7 @@
  *   inserter. Blocks already on pages keep working.
  * - Page Transitions: a fade between pages with the browser's own View
  *   Transitions (no script; skipped for reduced motion).
+ * - Custom Fonts: see Bpafb_Pro_Custom_Fonts.
  *
  * @package BlockivePro
  */
@@ -89,6 +90,11 @@ class Bpafb_Pro_Site_Tools
 		register_setting(self::PAGE, self::OPTION_DISABLED, [
 			'type'              => 'array',
 			'sanitize_callback' => [$this, 'sanitize_disabled'],
+			'default'           => [],
+		]);
+		register_setting(self::PAGE, Bpafb_Pro_Custom_Fonts::OPTION, [
+			'type'              => 'array',
+			'sanitize_callback' => ['Bpafb_Pro_Custom_Fonts', 'sanitize'],
 			'default'           => [],
 		]);
 		register_setting(self::PAGE, self::OPTION_TRANSITIONS, [
@@ -313,6 +319,8 @@ class Bpafb_Pro_Site_Tools
 						<td><input id="bpafb-transition-duration" type="number" min="100" max="1500" step="50" class="small-text" name="<?php echo esc_attr(self::OPTION_TRANSITIONS); ?>[duration]" value="<?php echo esc_attr((int) $transitions['duration']); ?>"></td>
 					</tr>
 				</table>
+
+				<?php Bpafb_Pro_Custom_Fonts::render_section(); ?>
 
 				<h2><?php esc_html_e('Element Manager', 'blockive-premium-addon-for-block-pro'); ?></h2>
 				<p><?php esc_html_e('Turned-off blocks are hidden from the block inserter. Blocks already on pages keep working and can still be edited.', 'blockive-premium-addon-for-block-pro'); ?></p>
