@@ -11,6 +11,7 @@
  * - Page Transitions: a fade between pages with the browser's own View
  *   Transitions (no script; skipped for reduced motion).
  * - Custom Fonts: see Bpafb_Pro_Custom_Fonts.
+ * - Template Builder Access: see Bpafb_Pro_Role_Manager.
  *
  * @package BlockivePro
  */
@@ -95,6 +96,11 @@ class Bpafb_Pro_Site_Tools
 		register_setting(self::PAGE, Bpafb_Pro_Custom_Fonts::OPTION, [
 			'type'              => 'array',
 			'sanitize_callback' => ['Bpafb_Pro_Custom_Fonts', 'sanitize'],
+			'default'           => [],
+		]);
+		register_setting(self::PAGE, Bpafb_Pro_Role_Manager::OPTION, [
+			'type'              => 'array',
+			'sanitize_callback' => ['Bpafb_Pro_Role_Manager', 'sanitize'],
 			'default'           => [],
 		]);
 		register_setting(self::PAGE, self::OPTION_TRANSITIONS, [
@@ -321,6 +327,8 @@ class Bpafb_Pro_Site_Tools
 				</table>
 
 				<?php Bpafb_Pro_Custom_Fonts::render_section(); ?>
+
+				<?php Bpafb_Pro_Role_Manager::render_section(); ?>
 
 				<h2><?php esc_html_e('Element Manager', 'blockive-premium-addon-for-block-pro'); ?></h2>
 				<p><?php esc_html_e('Turned-off blocks are hidden from the block inserter. Blocks already on pages keep working and can still be edited.', 'blockive-premium-addon-for-block-pro'); ?></p>
