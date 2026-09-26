@@ -250,73 +250,92 @@ class Bpafb_Pro_Custom_Fonts
 		$weights = ['100', '200', '300', '400', '500', '600', '700', '800', '900'];
 		$name = self::OPTION;
 		?>
-		<h2><?php esc_html_e('Custom Fonts', 'blockive-premium-addon-for-block-pro'); ?></h2>
-		<p><?php esc_html_e('Add one row per font file (WOFF2 is smallest; WOFF, TTF, and OTF work too). Rows with the same family name make up one font. In Blockive blocks, type the family name in Font Family; core blocks list it in their font picker.', 'blockive-premium-addon-for-block-pro'); ?></p>
-		<table class="widefat striped" id="bpafb-fonts" style="max-width: 900px;">
-			<thead>
-				<tr>
-					<th scope="col"><?php esc_html_e('Family', 'blockive-premium-addon-for-block-pro'); ?></th>
-					<th scope="col"><?php esc_html_e('Weight', 'blockive-premium-addon-for-block-pro'); ?></th>
-					<th scope="col"><?php esc_html_e('Style', 'blockive-premium-addon-for-block-pro'); ?></th>
-					<th scope="col"><?php esc_html_e('File', 'blockive-premium-addon-for-block-pro'); ?></th>
-					<th scope="col"><span class="screen-reader-text"><?php esc_html_e('Remove', 'blockive-premium-addon-for-block-pro'); ?></span></th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-				$render_row = function ($index, $row) use ($name, $weights) {
-					$file = !empty($row['id']) ? basename((string) get_attached_file($row['id'])) : '';
-					?>
-					<tr class="bpafb-font-row">
-						<td><input type="text" class="regular-text" aria-label="<?php esc_attr_e('Family', 'blockive-premium-addon-for-block-pro'); ?>" name="<?php echo esc_attr($name . '[' . $index . '][family]'); ?>" value="<?php echo esc_attr(isset($row['family']) ? $row['family'] : ''); ?>" placeholder="Brand Sans"></td>
-						<td>
-							<select aria-label="<?php esc_attr_e('Weight', 'blockive-premium-addon-for-block-pro'); ?>" name="<?php echo esc_attr($name . '[' . $index . '][weight]'); ?>">
-								<?php foreach ($weights as $weight) : ?>
-									<option value="<?php echo esc_attr($weight); ?>" <?php selected(isset($row['weight']) ? $row['weight'] : '400', $weight); ?>><?php echo esc_html($weight); ?></option>
-								<?php endforeach; ?>
-							</select>
-						</td>
-						<td>
-							<select aria-label="<?php esc_attr_e('Style', 'blockive-premium-addon-for-block-pro'); ?>" name="<?php echo esc_attr($name . '[' . $index . '][style]'); ?>">
-								<option value="normal" <?php selected(isset($row['style']) ? $row['style'] : 'normal', 'normal'); ?>><?php esc_html_e('Normal', 'blockive-premium-addon-for-block-pro'); ?></option>
-								<option value="italic" <?php selected(isset($row['style']) ? $row['style'] : 'normal', 'italic'); ?>><?php esc_html_e('Italic', 'blockive-premium-addon-for-block-pro'); ?></option>
-							</select>
-						</td>
-						<td>
-							<input type="hidden" class="bpafb-font-id" name="<?php echo esc_attr($name . '[' . $index . '][id]'); ?>" value="<?php echo esc_attr(isset($row['id']) ? (int) $row['id'] : ''); ?>">
-							<button type="button" class="button bpafb-font-pick"><?php esc_html_e('Choose File', 'blockive-premium-addon-for-block-pro'); ?></button>
-							<span class="bpafb-font-file"><?php echo esc_html($file); ?></span>
-						</td>
-						<td><button type="button" class="button-link button-link-delete bpafb-font-remove"><?php esc_html_e('Remove', 'blockive-premium-addon-for-block-pro'); ?></button></td>
-					</tr>
-					<?php
-				};
-				foreach ($rows as $index => $row) {
-					$render_row($index, $row);
-				}
-				?>
-			</tbody>
-		</table>
-		<p><button type="button" class="button" id="bpafb-font-add"><?php esc_html_e('Add Font File', 'blockive-premium-addon-for-block-pro'); ?></button></p>
-		<template id="bpafb-font-template"><?php $render_row('__i__', []); ?></template>
+		<div class="bpafb-card">
+			<div class="bpafb-card-header">
+				<div class="bpafb-card-header-left">
+					<h2><?php esc_html_e('Custom Fonts Manager', 'blockive-premium-addon-for-block-pro'); ?></h2>
+					<p><?php esc_html_e('Upload local font files (WOFF2, WOFF, TTF, OTF). Registered fonts automatically load in the editor and on the front end.', 'blockive-premium-addon-for-block-pro'); ?></p>
+				</div>
+				<button type="button" class="bpafb-btn-primary" id="bpafb-font-add" style="padding: 8px 16px; font-size: 12px;">
+					<span class="dashicons dashicons-plus-alt2" style="font-size: 16px; width: 16px; height: 16px; line-height: 16px;"></span>
+					<?php esc_html_e('Add Font File', 'blockive-premium-addon-for-block-pro'); ?>
+				</button>
+			</div>
+			<div class="bpafb-card-body">
+				<table class="bpafb-fonts-table" id="bpafb-fonts">
+					<thead>
+						<tr>
+							<th scope="col" style="width: 28%;"><?php esc_html_e('Font Family Name', 'blockive-premium-addon-for-block-pro'); ?></th>
+							<th scope="col" style="width: 18%;"><?php esc_html_e('Weight', 'blockive-premium-addon-for-block-pro'); ?></th>
+							<th scope="col" style="width: 18%;"><?php esc_html_e('Style', 'blockive-premium-addon-for-block-pro'); ?></th>
+							<th scope="col" style="width: 28%;"><?php esc_html_e('Font File', 'blockive-premium-addon-for-block-pro'); ?></th>
+							<th scope="col" style="width: 8%; text-align: right;"><span class="screen-reader-text"><?php esc_html_e('Actions', 'blockive-premium-addon-for-block-pro'); ?></span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						$render_row = function ($index, $row) use ($name, $weights) {
+							$file = !empty($row['id']) ? basename((string) get_attached_file($row['id'])) : '';
+							?>
+							<tr class="bpafb-font-row">
+								<td><input type="text" class="regular-text" style="width: 100%; border-radius: var(--bpafb-radius-sm); border: 1px solid var(--bpafb-slate-300);" aria-label="<?php esc_attr_e('Family', 'blockive-premium-addon-for-block-pro'); ?>" name="<?php echo esc_attr($name . '[' . $index . '][family]'); ?>" value="<?php echo esc_attr(isset($row['family']) ? $row['family'] : ''); ?>" placeholder="e.g. Brand Sans"></td>
+								<td>
+									<select style="width: 100%; border-radius: var(--bpafb-radius-sm); border: 1px solid var(--bpafb-slate-300);" aria-label="<?php esc_attr_e('Weight', 'blockive-premium-addon-for-block-pro'); ?>" name="<?php echo esc_attr($name . '[' . $index . '][weight]'); ?>">
+										<?php foreach ($weights as $weight) : ?>
+											<option value="<?php echo esc_attr($weight); ?>" <?php selected(isset($row['weight']) ? $row['weight'] : '400', $weight); ?>><?php echo esc_html($weight . ('400' === $weight ? ' (Regular)' : ('700' === $weight ? ' (Bold)' : ''))); ?></option>
+										<?php endforeach; ?>
+									</select>
+								</td>
+								<td>
+									<select style="width: 100%; border-radius: var(--bpafb-radius-sm); border: 1px solid var(--bpafb-slate-300);" aria-label="<?php esc_attr_e('Style', 'blockive-premium-addon-for-block-pro'); ?>" name="<?php echo esc_attr($name . '[' . $index . '][style]'); ?>">
+										<option value="normal" <?php selected(isset($row['style']) ? $row['style'] : 'normal', 'normal'); ?>><?php esc_html_e('Normal', 'blockive-premium-addon-for-block-pro'); ?></option>
+										<option value="italic" <?php selected(isset($row['style']) ? $row['style'] : 'normal', 'italic'); ?>><?php esc_html_e('Italic', 'blockive-premium-addon-for-block-pro'); ?></option>
+									</select>
+								</td>
+								<td>
+									<input type="hidden" class="bpafb-font-id" name="<?php echo esc_attr($name . '[' . $index . '][id]'); ?>" value="<?php echo esc_attr(isset($row['id']) ? (int) $row['id'] : ''); ?>">
+									<div style="display: flex; align-items: center; gap: 8px;">
+										<button type="button" class="button bpafb-font-pick" style="border-radius: var(--bpafb-radius-sm);"><?php esc_html_e('Choose File', 'blockive-premium-addon-for-block-pro'); ?></button>
+										<span class="bpafb-font-file bpafb-font-file-badge" style="<?php echo empty($file) ? 'display:none;' : ''; ?>"><?php echo esc_html($file); ?></span>
+									</div>
+								</td>
+								<td style="text-align: right;">
+									<button type="button" class="button-link button-link-delete bpafb-font-remove" style="color: var(--bpafb-danger); text-decoration: none;" title="<?php esc_attr_e('Remove row', 'blockive-premium-addon-for-block-pro'); ?>">
+										<span class="dashicons dashicons-trash" style="font-size: 18px; width: 18px; height: 18px; line-height: 18px;"></span>
+									</button>
+								</td>
+							</tr>
+							<?php
+						};
+						foreach ($rows as $index => $row) {
+							$render_row($index, $row);
+						}
+						?>
+					</tbody>
+				</table>
+				<template id="bpafb-font-template"><?php $render_row('__i__', []); ?></template>
+			</div>
+		</div>
 		<script>
 		( function () {
 			var table = document.querySelector( '#bpafb-fonts tbody' );
+			if ( ! table ) return;
 			var next = <?php echo (int) (count($rows) ? max(array_keys($rows)) + 1 : 0); ?>;
-			document.getElementById( 'bpafb-font-add' ).addEventListener( 'click', function () {
-				var html = document.getElementById( 'bpafb-font-template' ).innerHTML.split( '__i__' ).join( String( next++ ) );
-				table.insertAdjacentHTML( 'beforeend', html );
-				table.lastElementChild.querySelector( 'input[type="text"]' ).focus();
-			} );
+			var addBtn = document.getElementById( 'bpafb-font-add' );
+			if ( addBtn ) {
+				addBtn.addEventListener( 'click', function () {
+					var html = document.getElementById( 'bpafb-font-template' ).innerHTML.split( '__i__' ).join( String( next++ ) );
+					table.insertAdjacentHTML( 'beforeend', html );
+					table.lastElementChild.querySelector( 'input[type="text"]' ).focus();
+				} );
+			}
 			table.addEventListener( 'click', function ( event ) {
 				var row = event.target.closest( '.bpafb-font-row' );
 				if ( ! row ) {
 					return;
 				}
 				if ( event.target.closest( '.bpafb-font-remove' ) ) {
-					var add = document.getElementById( 'bpafb-font-add' );
 					row.remove();
-					add.focus();
 					return;
 				}
 				if ( event.target.closest( '.bpafb-font-pick' ) && window.wp && wp.media ) {
@@ -324,7 +343,9 @@ class Bpafb_Pro_Custom_Fonts
 					frame.on( 'select', function () {
 						var file = frame.state().get( 'selection' ).first().toJSON();
 						row.querySelector( '.bpafb-font-id' ).value = file.id;
-						row.querySelector( '.bpafb-font-file' ).textContent = file.filename;
+						var badge = row.querySelector( '.bpafb-font-file' );
+						badge.textContent = file.filename;
+						badge.style.display = 'inline-flex';
 					} );
 					frame.open();
 				}

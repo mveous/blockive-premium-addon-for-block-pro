@@ -135,22 +135,51 @@ class Bpafb_Pro_Role_Manager
 	{
 		$allowed = self::allowed_roles();
 		?>
-		<h2><?php esc_html_e('Template Builder Access', 'blockive-premium-addon-for-block-pro'); ?></h2>
-		<p><?php esc_html_e('Templates (headers, footers, popups, archives, ...) change the whole site. Choose which roles may create and edit them; they also need permission to edit posts. Leave all unchecked to allow everyone who can edit posts. Administrators always have access.', 'blockive-premium-addon-for-block-pro'); ?></p>
-		<fieldset>
-			<legend class="screen-reader-text"><?php esc_html_e('Roles', 'blockive-premium-addon-for-block-pro'); ?></legend>
-			<?php foreach (wp_roles()->roles as $slug => $role) : ?>
-				<?php
-				if ('administrator' === $slug || empty($role['capabilities']['edit_posts'])) {
-					continue;
-				}
-				?>
-				<label style="display: block; margin: 0 0 8px;">
-					<input type="checkbox" name="<?php echo esc_attr(self::OPTION); ?>[]" value="<?php echo esc_attr($slug); ?>" <?php checked(in_array($slug, $allowed, true)); ?>>
-					<?php echo esc_html(translate_user_role($role['name'])); ?>
-				</label>
-			<?php endforeach; ?>
-		</fieldset>
+		<div class="bpafb-card">
+			<div class="bpafb-card-header">
+				<div class="bpafb-card-header-left">
+					<h2><?php esc_html_e('Template Builder Access Control', 'blockive-premium-addon-for-block-pro'); ?></h2>
+					<p><?php esc_html_e('Select user roles allowed to design and edit site templates (Headers, Footers, Single, Archives, Popups). Administrators always have full access.', 'blockive-premium-addon-for-block-pro'); ?></p>
+				</div>
+			</div>
+			<div class="bpafb-card-body">
+				<fieldset>
+					<legend class="screen-reader-text"><?php esc_html_e('User Roles', 'blockive-premium-addon-for-block-pro'); ?></legend>
+					<div class="bpafb-roles-grid">
+						<div class="bpafb-role-card" style="background: var(--bpafb-slate-50); border-style: dashed;">
+							<div class="bpafb-role-info">
+								<h3><?php esc_html_e('Administrator', 'blockive-premium-addon-for-block-pro'); ?></h3>
+								<p><?php esc_html_e('Full template & site tools access', 'blockive-premium-addon-for-block-pro'); ?></p>
+							</div>
+							<span style="font-size: 11px; font-weight: 700; color: var(--bpafb-primary); background: var(--bpafb-primary-light); padding: 4px 10px; border-radius: var(--bpafb-radius-full);">
+								<?php esc_html_e('Always Enabled', 'blockive-premium-addon-for-block-pro'); ?>
+							</span>
+						</div>
+						<?php foreach (wp_roles()->roles as $slug => $role) : ?>
+							<?php
+							if ('administrator' === $slug || empty($role['capabilities']['edit_posts'])) {
+								continue;
+							}
+							$is_checked = in_array($slug, $allowed, true);
+							?>
+							<div class="bpafb-role-card">
+								<div class="bpafb-role-info">
+									<h3><?php echo esc_html(translate_user_role($role['name'])); ?></h3>
+									<p><?php printf(esc_html__('Role slug: %s', 'blockive-premium-addon-for-block-pro'), esc_html($slug)); ?></p>
+								</div>
+								<label class="bpafb-switch" title="<?php printf(esc_attr__('Toggle access for %s', 'blockive-premium-addon-for-block-pro'), esc_attr($role['name'])); ?>">
+									<input type="checkbox" name="<?php echo esc_attr(self::OPTION); ?>[]" value="<?php echo esc_attr($slug); ?>" <?php checked($is_checked); ?>>
+									<span class="bpafb-slider"></span>
+								</label>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</fieldset>
+				<p class="description" style="margin-top: 16px;">
+					<?php esc_html_e('Note: When no non-admin roles are checked, access defaults to any user who can edit posts.', 'blockive-premium-addon-for-block-pro'); ?>
+				</p>
+			</div>
+		</div>
 		<?php
 	}
 }
