@@ -65,6 +65,26 @@ class Bpafb_Pro_Woo_Blocks
 		// action these blocks register on.
 		add_action('blockive_register_template_block', [$this, 'register_blocks']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets'], 21);
+		add_filter('register_block_type_args', [$this, 'hide_without_woocommerce'], 10, 2);
+	}
+
+	/**
+	 * The Products, Product Categories, and Add to Cart Button blocks
+	 * (src/products, src/product-categories, src/add-to-cart) stay
+	 * registered without WooCommerce, so saved content still parses, but
+	 * are left out of the inserter, where they would do nothing.
+	 *
+	 * @param array  $args       Block type arguments.
+	 * @param string $block_name Block name.
+	 * @return array
+	 */
+	public function hide_without_woocommerce($args, $block_name)
+	{
+		$names = ['blockive-premium-addon-for-block/products', 'blockive-premium-addon-for-block/product-categories', 'blockive-premium-addon-for-block/add-to-cart'];
+		if (in_array($block_name, $names, true) && !class_exists('WooCommerce')) {
+			$args['supports'] = array_merge(isset($args['supports']) ? $args['supports'] : [], ['inserter' => false]);
+		}
+		return $args;
 	}
 
 	/**
@@ -324,6 +344,64 @@ class Bpafb_Pro_Woo_Blocks
 	}
 
 	/**
+	 * WooCommerce's breadcrumb (Home / Shop / Category / Product), on any
+	 * template.
+	 */
+	public function render_breadcrumb($attributes, $content, $block)
+	{
+		if (!function_exists('woocommerce_breadcrumb')) {
+			return '';
+		}
+		ob_start();
+		woocommerce_breadcrumb();
+		return ob_get_clean();
+	}
+
+	/**
+	 * Store notices ("Added to your cart", errors, ...) for templates that
+	 * replace the parts of the page WooCommerce normally prints them in.
+	 */
+	public function render_notices($attributes, $content, $block)
+	{
+		if (!function_exists('wc_print_notices') || !function_exists('WC') || !WC()->session) {
+			return '';
+		}
+		return '<div class="woocommerce bpafb-tb-woo-notices">' . wc_print_notices(true) . '</div>';
+	}
+
+	/**
+	 * The current product category's thumbnail, on a category archive.
+	 */
+	public function render_category_image($attributes, $content, $block)
+	{
+		if (!function_exists('is_product_category') || !is_product_category()) {
+			return '';
+		}
+		$term = get_queried_object();
+		$thumbnail_id = (int) get_term_meta($term->term_id, 'thumbnail_id', true);
+		if (!$thumbnail_id) {
+			return '';
+		}
+		return '<div class="bpafb-tb-category-image">' . wp_get_attachment_image($thumbnail_id, 'large', false, ['alt' => $term->name]) . '</div>';
+	}
+
+	/**
+	 * The shop page's content, or a category or tag's description, the
+	 * way WooCommerce shows it at the top of a product archive.
+	 */
+	public function render_archive_description($attributes, $content, $block)
+	{
+		ob_start();
+		if (function_exists('woocommerce_taxonomy_archive_description')) {
+			woocommerce_taxonomy_archive_description();
+		}
+		if (function_exists('woocommerce_product_archive_description')) {
+			woocommerce_product_archive_description();
+		}
+		return ob_get_clean();
+	}
+
+	/**
 	 * Based on what's in the current cart (WooCommerce's own cross-sell
 	 * feature), not on the product being previewed or shown. This only
 	 * shows something real on a Cart template - it does nothing if the
@@ -367,6 +445,10 @@ class Bpafb_Pro_Woo_Blocks
 			'product-related'           => [__('Related Products', 'blockive-premium-addon-for-block-pro'), 'grid-view', 'render_product_related'],
 			'product-upsells'           => [__('Upsells', 'blockive-premium-addon-for-block-pro'), 'arrow-up-alt', 'render_product_upsells'],
 			'product-cross-sells'       => [__('Cross Sells', 'blockive-premium-addon-for-block-pro'), 'randomize', 'render_product_cross_sells'],
+			'woo-breadcrumb'            => [__('WooCommerce Breadcrumb', 'blockive-premium-addon-for-block-pro'), 'arrow-right-alt2', 'render_breadcrumb'],
+			'woo-notices'               => [__('Store Notices', 'blockive-premium-addon-for-block-pro'), 'info-outline', 'render_notices'],
+			'product-category-image'    => [__('Category Image', 'blockive-premium-addon-for-block-pro'), 'format-image', 'render_category_image'],
+			'shop-archive-description'  => [__('Shop Archive Description', 'blockive-premium-addon-for-block-pro'), 'editor-alignleft', 'render_archive_description'],
 		];
 	}
 

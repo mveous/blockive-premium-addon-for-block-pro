@@ -38,6 +38,10 @@ const BLOCKS = [
 	{ slug: 'product-related', title: __( 'Related Products', 'blockive-premium-addon-for-block-pro' ), icon: 'grid-view' },
 	{ slug: 'product-upsells', title: __( 'Upsells', 'blockive-premium-addon-for-block-pro' ), icon: 'arrow-up-alt' },
 	{ slug: 'product-cross-sells', title: __( 'Cross Sells', 'blockive-premium-addon-for-block-pro' ), icon: 'randomize' },
+	{ slug: 'woo-breadcrumb', title: __( 'WooCommerce Breadcrumb', 'blockive-premium-addon-for-block-pro' ), icon: 'arrow-right-alt2' },
+	{ slug: 'woo-notices', title: __( 'Store Notices', 'blockive-premium-addon-for-block-pro' ), icon: 'info-outline' },
+	{ slug: 'product-category-image', title: __( 'Category Image', 'blockive-premium-addon-for-block-pro' ), icon: 'format-image' },
+	{ slug: 'shop-archive-description', title: __( 'Shop Archive Description', 'blockive-premium-addon-for-block-pro' ), icon: 'editor-alignleft' },
 ];
 
 BLOCKS.forEach( ( { slug, title, icon } ) => {
