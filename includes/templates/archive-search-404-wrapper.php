@@ -7,9 +7,9 @@
  *
  * Still calls get_header()/get_footer() like any normal theme template
  * would, so the theme's <head> assets, nav markup, and (if separately
- * matched) the Header/Footer Blockive Templates injected via wp_body_open/
- * wp_footer all render exactly as they would on any other page - only the
- * theme's own loop/content markup is replaced.
+ * matched) the Header/Footer Blockive Templates (see
+ * Bpafb_Pro_Theme_Locations) all render exactly as they would on any other
+ * page - only the theme's own loop/content markup is replaced.
  *
  * This file is a plain Pro-only addition under includes/templates/ (not
  * one bin/sync-shared-source.js copies from the free plugin), so it is

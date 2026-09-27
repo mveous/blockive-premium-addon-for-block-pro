@@ -3,14 +3,20 @@
  * Shows a matched Header, Footer, Archive, Search, or 404-kind Blockive
  * Template (see Bpafb_Pro_Template_Kinds) on the live site.
  *
- * Header and Footer are added using the `wp_body_open` and `wp_footer`
- * hooks, since every theme fires these, unlike trying to change
- * get_header()/get_footer() for each theme. On a block theme, the theme's
- * own matching `core/template-part` block is hidden. On a classic theme,
- * there is no safe way to hide an unknown theme's own header.php or
- * footer.php file, so the Pro header/footer is simply added alongside it.
- * A site owner can use their theme's own "disable header/footer for this
- * page" setting, if it has one, to fully replace it.
+ * Header and Footer replace the theme's own, in its place, inside a real
+ * <header> / <footer> element:
+ *
+ * - Block themes: the theme's header / footer template part is swapped
+ *   for the Pro one where it stands (see replace_template_part()).
+ * - Classic themes listed in THEMES (Astra, GeneratePress, OceanWP,
+ *   Kadence, Neve, Blocksy): the theme's own header / footer is taken off
+ *   the hook that prints it, and the Pro one is added to that hook, the
+ *   same way these themes support Elementor Pro and Beaver Themer. The
+ *   theme's page wrappers, styles, and scripts stay as they are.
+ * - Any other classic theme: header.php / footer.php are replaced as a
+ *   whole (see take_over_header() / take_over_footer()), the way Elementor
+ *   Pro handles themes it does not know. The theme's header.php is still
+ *   run, with its output thrown away, so nothing it sets up is lost.
  *
  * Archive, Search, and 404 pages are swapped in through `template_include`.
  * The theme's own template file is replaced with a short wrapper file that
@@ -26,6 +32,51 @@ if (!defined('ABSPATH')) {
 
 class Bpafb_Pro_Theme_Locations
 {
+	/**
+	 * Classic themes with their own header / footer hooks (parent theme
+	 * slug => settings), for header and footer:
+	 * - hook:    where the Pro header / footer is printed.
+	 * - remove:  hook => '*' (everything on it) or the callbacks to take
+	 *            off ('function' or 'Class::method'), which together print
+	 *            the theme's own header / footer.
+	 * - disable: a filter that turns the theme's own one off.
+	 */
+	const THEMES = [
+		'astra'         => [
+			'header' => ['hook' => 'astra_header', 'remove' => ['astra_header' => '*']],
+			// astra_footer also holds the header's mobile menu popup, so
+			// only the footer markup itself comes off.
+			'footer' => ['hook' => 'astra_footer', 'remove' => ['astra_footer' => ['astra_footer_markup', 'Astra_Builder_Footer::footer_markup']]],
+		],
+		'generatepress' => [
+			'header' => [
+				'hook'   => 'generate_header',
+				'remove' => [
+					'generate_header'        => '*',
+					'generate_before_header' => ['generate_top_bar', 'generate_add_navigation_before_header'],
+					'generate_after_header'  => ['generate_add_navigation_after_header'],
+				],
+			],
+			'footer' => ['hook' => 'generate_footer', 'remove' => ['generate_footer' => '*']],
+		],
+		'oceanwp'       => [
+			'header' => ['hook' => 'ocean_header', 'remove' => ['ocean_header' => '*', 'ocean_top_bar' => '*']],
+			'footer' => ['hook' => 'ocean_footer', 'remove' => ['ocean_footer' => '*']],
+		],
+		'kadence'       => [
+			'header' => ['hook' => 'kadence_header', 'remove' => ['kadence_header' => '*']],
+			'footer' => ['hook' => 'kadence_footer', 'remove' => ['kadence_footer' => '*']],
+		],
+		'neve'          => [
+			'header' => ['hook' => 'neve_do_header', 'remove' => ['neve_do_header' => '*']],
+			'footer' => ['hook' => 'neve_do_footer', 'remove' => ['neve_do_footer' => '*']],
+		],
+		'blocksy'       => [
+			'header' => ['hook' => 'blocksy:header:before', 'disable' => 'blocksy:builder:header:enabled'],
+			'footer' => ['hook' => 'blocksy:footer:before', 'disable' => 'blocksy:builder:footer:enabled'],
+		],
+	];
+
 	/**
 	 * Template post ID chosen for the current page by
 	 * maybe_swap_archive_search_404_template(). Read back by the wrapper
@@ -69,9 +120,10 @@ class Bpafb_Pro_Theme_Locations
 	 */
 	private function __construct()
 	{
-		add_action('wp_body_open', [$this, 'render_header'], 5);
-		add_action('wp_footer', [$this, 'render_footer'], 20);
-		add_filter('pre_render_block', [$this, 'suppress_theme_template_part'], 10, 2);
+		// Late, once the query is known (templates match by page) and the
+		// theme has added its own header / footer callbacks.
+		add_action('template_redirect', [$this, 'set_up_header_footer'], PHP_INT_MAX);
+		add_filter('pre_render_block', [$this, 'replace_template_part'], 10, 2);
 		add_filter('template_include', [$this, 'maybe_swap_archive_search_404_template'], PHP_INT_MAX);
 	}
 
@@ -91,28 +143,24 @@ class Bpafb_Pro_Theme_Locations
 	}
 
 	/**
-	 * Shows a matched template's content for a given kind, wrapped the
-	 * same way Bpafb_Template_Frontend_Render wraps a single-post override.
+	 * The matched Header or Footer template for this page, wrapped in
+	 * <header> / <footer> (or $tag), or '' when none matches.
 	 *
-	 * @param string $kind Bpafb_Pro_Template_Kinds::KINDS entry.
+	 * @param string $kind    'header' or 'footer'.
+	 * @param string $tag     Wrapper element.
+	 * @param array  $classes Extra classes.
+	 * @return string
 	 */
-	private function render_kind($kind)
+	private static function markup($kind, $tag = '', array $classes = [])
 	{
-		if (is_admin()) {
-			return;
-		}
-
 		$template_id = Bpafb_Pro_Template_Kinds::get_matching_template_id($kind);
-		if (!$template_id) {
-			return;
+		$template_post = $template_id ? get_post($template_id) : null;
+		if (!$template_post || '' === trim($template_post->post_content)) {
+			return '';
 		}
 
-		$template_post = get_post($template_id);
-		if (!$template_post || empty($template_post->post_content)) {
-			return;
-		}
-
-		$classes = ['bpafb-pro-template-render', 'bpafb-pro-' . $kind];
+		$tag = in_array($tag, ['header', 'footer', 'div', 'section'], true) ? $tag : $kind;
+		$classes = array_merge($classes, ['bpafb-pro-template-render', 'bpafb-pro-' . $kind]);
 		$attributes = '';
 		if ('header' === $kind) {
 			$sticky = Bpafb_Pro_Sticky::wrapper($template_id);
@@ -122,58 +170,185 @@ class Bpafb_Pro_Theme_Locations
 			}
 		}
 
-		echo '<div class="' . esc_attr(implode(' ', $classes)) . '"' . $attributes . '>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- attributes escaped in Bpafb_Pro_Sticky::wrapper().
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- attributes escaped in Bpafb_Pro_Sticky::wrapper().
+		return '<' . $tag . ' class="' . esc_attr(implode(' ', $classes)) . '"' . $attributes . '>'
 			. do_blocks($template_post->post_content)
-			. '</div>';
+			. '</' . $tag . '>';
 	}
 
 	/**
-	 * Fires on `wp_body_open`, right after `<body>` opens on every theme,
-	 * so a matched Header-kind template always shows above the theme's own
-	 * header, no matter how the theme's HTML is structured.
+	 * Hooks the matched Header / Footer into a classic theme (block themes
+	 * are handled block by block in replace_template_part()).
 	 */
-	public function render_header()
+	public function set_up_header_footer()
 	{
-		$this->render_kind('header');
+		if (is_admin() || wp_is_block_theme()) {
+			return;
+		}
+
+		/**
+		 * Theme settings for placing the Header / Footer in a classic theme
+		 * (see THEMES), so another theme can be added.
+		 *
+		 * @param array  $settings THEMES entry for this theme, or [].
+		 * @param string $theme    Parent theme slug.
+		 */
+		$settings = apply_filters('bpafb_pro_theme_location_hooks', self::THEMES[get_template()] ?? [], get_template());
+
+		foreach (['header', 'footer'] as $kind) {
+			if (!Bpafb_Pro_Template_Kinds::get_matching_template_id($kind)) {
+				continue;
+			}
+			if (!empty($settings[$kind]['hook'])) {
+				$this->use_theme_hook($kind, $settings[$kind]);
+			} else {
+				add_action('get_' . $kind, [$this, 'take_over_' . $kind], PHP_INT_MAX);
+			}
+		}
 	}
 
 	/**
-	 * Fires on `wp_footer`. Priority 20, which is after WordPress's usual
-	 * default of 10, so a matched Footer-kind template shows after most
-	 * other wp_footer output (the admin bar always shows last, though).
+	 * Takes a known theme's own header / footer off and puts the Pro one on
+	 * the same hook.
+	 *
+	 * @param string $kind     'header' or 'footer'.
+	 * @param array  $settings THEMES entry for $kind.
 	 */
-	public function render_footer()
+	private function use_theme_hook($kind, array $settings)
 	{
-		$this->render_kind('footer');
+		foreach ($settings['remove'] ?? [] as $hook => $callbacks) {
+			self::remove_callbacks($hook, $callbacks);
+		}
+		if (!empty($settings['disable'])) {
+			add_filter($settings['disable'], '__return_false', PHP_INT_MAX);
+		}
+		add_action($settings['hook'], function () use ($kind) {
+			echo self::markup($kind); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built by markup().
+		});
 	}
 
 	/**
-	 * Hides a block theme's own Header/Footer template parts when a Pro
-	 * Header/Footer template matches the current page.
+	 * @param string          $hook      Action name.
+	 * @param string|string[] $callbacks '*' or 'function' / 'Class::method' names.
+	 */
+	private static function remove_callbacks($hook, $callbacks)
+	{
+		global $wp_filter;
+		if ('*' === $callbacks) {
+			remove_all_actions($hook);
+			return;
+		}
+		if (empty($wp_filter[$hook])) {
+			return;
+		}
+		foreach ($wp_filter[$hook]->callbacks as $priority => $list) {
+			foreach ($list as $callback) {
+				$function = $callback['function'];
+				if (is_array($function) && 2 === count($function)) {
+					$name = (is_object($function[0]) ? get_class($function[0]) : (string) $function[0]) . '::' . $function[1];
+				} else {
+					$name = is_string($function) ? $function : '';
+				}
+				if (in_array($name, (array) $callbacks, true)) {
+					remove_action($hook, $function, $priority);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Replaces an unknown classic theme's header.php (on `get_header`):
+	 * prints the page head and the Pro header, then runs the theme's
+	 * header.php with its output thrown away and its <head> hooks
+	 * already done.
+	 *
+	 * @param string|null $name Header name passed to get_header().
+	 */
+	public function take_over_header($name)
+	{
+		?>
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+<head>
+	<meta charset="<?php bloginfo('charset'); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?>>
+		<?php
+		wp_body_open();
+		echo self::markup('header'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built by markup().
+
+		remove_all_actions('wp_head');
+		remove_all_actions('wp_body_open');
+		self::discard_theme_file('header', $name);
+	}
+
+	/**
+	 * Replaces an unknown classic theme's footer.php (on `get_footer`):
+	 * prints the Pro footer and closes the page, then runs the theme's
+	 * footer.php with its output thrown away.
+	 *
+	 * @param string|null $name Footer name passed to get_footer().
+	 */
+	public function take_over_footer($name)
+	{
+		echo self::markup('footer'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built by markup().
+		wp_footer();
+		echo "\n</body>\n</html>\n";
+
+		remove_all_actions('wp_footer');
+		self::discard_theme_file('footer', $name);
+	}
+
+	/**
+	 * Runs the theme's header.php / footer.php without printing it (what
+	 * get_header() / get_footer() would load next).
+	 *
+	 * @param string      $kind 'header' or 'footer'.
+	 * @param string|null $name Name passed to get_header() / get_footer().
+	 */
+	private static function discard_theme_file($kind, $name)
+	{
+		$templates = [];
+		$name = (string) $name;
+		if ('' !== $name) {
+			$templates[] = $kind . '-' . $name . '.php';
+		}
+		$templates[] = $kind . '.php';
+
+		ob_start();
+		locate_template($templates, true);
+		ob_end_clean();
+	}
+
+	/**
+	 * On a block theme, shows the matched Header / Footer in place of the
+	 * theme's own header / footer template part, in the same element.
 	 *
 	 * @param string|null $pre_render   Short-circuit value; non-null skips this block entirely.
 	 * @param array       $parsed_block The block about to render.
 	 * @return string|null
 	 */
-	public function suppress_theme_template_part($pre_render, $parsed_block)
+	public function replace_template_part($pre_render, $parsed_block)
 	{
-		if (null !== $pre_render || is_admin()) {
+		if (null !== $pre_render || is_admin() || 'core/template-part' !== ($parsed_block['blockName'] ?? '')) {
 			return $pre_render;
 		}
 
-		if ('core/template-part' !== ($parsed_block['blockName'] ?? '')) {
-			return $pre_render;
-		}
-
-		$slug = $parsed_block['attrs']['slug'] ?? '';
-		$area = $parsed_block['attrs']['area'] ?? '';
-
-		if (('header' === $slug || 'header' === $area) && Bpafb_Pro_Template_Kinds::get_matching_template_id('header')) {
-			return '';
-		}
-
-		if (('footer' === $slug || 'footer' === $area) && Bpafb_Pro_Template_Kinds::get_matching_template_id('footer')) {
-			return '';
+		$attrs = $parsed_block['attrs'] ?? [];
+		foreach (['header', 'footer'] as $kind) {
+			if ($kind !== ($attrs['slug'] ?? '') && $kind !== ($attrs['area'] ?? '')) {
+				continue;
+			}
+			if (!Bpafb_Pro_Template_Kinds::get_matching_template_id($kind)) {
+				return $pre_render;
+			}
+			$classes = ['wp-block-template-part'];
+			if (!empty($attrs['className'])) {
+				$classes[] = $attrs['className'];
+			}
+			return self::markup($kind, $attrs['tagName'] ?? $kind, $classes);
 		}
 
 		return $pre_render;

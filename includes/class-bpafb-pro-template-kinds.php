@@ -427,8 +427,8 @@ class Bpafb_Pro_Template_Kinds
 	/**
 	 * Remembers the result of get_matching_template_id() for this page
 	 * load, by kind, so we don't run the same database lookup twice.
-	 * Header and Footer are each resolved once per page (from
-	 * wp_body_open / wp_footer), and an Archive/Search/404 swap looks up
+	 * Header and Footer are each looked up several times per page (see
+	 * Bpafb_Pro_Theme_Locations), and an Archive/Search/404 swap looks up
 	 * its kind from both template_include and the wrapper template it
 	 * points at. Without this, that could mean up to twice as many
 	 * database lookups per page.
