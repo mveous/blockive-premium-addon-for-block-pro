@@ -251,7 +251,9 @@ class Bpafb_Pro_Theme_Locations
 				. $wrapper . '>p:empty{display:none}';
 			$max_width = self::max_width($template_id);
 			if ($max_width) {
-				$css .= $wrapper . '{max-width:' . $max_width . ';margin-left:auto;margin-right:auto}';
+				// width:100% too, or in a flex column (Astra's #page) the
+				// auto margins shrink it to its content's width.
+				$css .= $wrapper . '{box-sizing:border-box;width:100%;max-width:' . $max_width . ';margin-left:auto;margin-right:auto}';
 			}
 		}
 		if ('' === $css) {
