@@ -78,6 +78,16 @@ class Bpafb_Pro_Theme_Locations
 	];
 
 	/**
+	 * Header / Footer template meta: how wide it is on the page (full
+	 * width, the theme's content or wide width, or a width in px).
+	 */
+	const LAYOUT_META = '_bpafb_header_footer_layout';
+	const LAYOUT_DEFAULTS = [
+		'width'       => 'full',
+		'customWidth' => 1200,
+	];
+
+	/**
 	 * Template post ID chosen for the current page by
 	 * maybe_swap_archive_search_404_template(). Read back by the wrapper
 	 * template it points to (templates/archive-search-404-wrapper.php).
@@ -123,6 +133,8 @@ class Bpafb_Pro_Theme_Locations
 		// Late, once the query is known (templates match by page) and the
 		// theme has added its own header / footer callbacks.
 		add_action('template_redirect', [$this, 'set_up_header_footer'], PHP_INT_MAX);
+		add_action('init', [$this, 'register_layout_meta']);
+		add_action('wp_enqueue_scripts', [$this, 'enqueue_layout_css']);
 		add_filter('pre_render_block', [$this, 'replace_template_part'], 10, 2);
 		add_filter('template_include', [$this, 'maybe_swap_archive_search_404_template'], PHP_INT_MAX);
 	}
@@ -174,6 +186,80 @@ class Bpafb_Pro_Theme_Locations
 		return '<' . $tag . ' class="' . esc_attr(implode(' ', $classes)) . '"' . $attributes . '>'
 			. do_blocks($template_post->post_content)
 			. '</' . $tag . '>';
+	}
+
+	public function register_layout_meta()
+	{
+		register_post_meta(Bpafb_Template_Post_Type::POST_TYPE, self::LAYOUT_META, [
+			'type'          => 'object',
+			'single'        => true,
+			'default'       => self::LAYOUT_DEFAULTS,
+			'show_in_rest'  => [
+				'schema' => [
+					'type'                 => 'object',
+					'properties'           => [
+						'width'       => ['type' => 'string', 'enum' => ['full', 'content', 'wide', 'custom']],
+						'customWidth' => ['type' => 'integer'],
+					],
+					'additionalProperties' => false,
+				],
+			],
+			'auth_callback' => function ($allowed, $meta_key, $post_id) {
+				return current_user_can('edit_post', $post_id);
+			},
+		]);
+	}
+
+	/**
+	 * The CSS max-width for a Header / Footer template, or '' for full
+	 * width.
+	 *
+	 * @param int $template_id Template ID.
+	 * @return string
+	 */
+	private static function max_width($template_id)
+	{
+		$saved = get_post_meta($template_id, self::LAYOUT_META, true);
+		$layout = array_merge(self::LAYOUT_DEFAULTS, is_array($saved) ? $saved : []);
+		switch ($layout['width']) {
+			case 'content':
+				return 'var(--wp--style--global--content-size, 1200px)';
+			case 'wide':
+				return 'var(--wp--style--global--wide-size, 1340px)';
+			case 'custom':
+				return max(320, min(3840, (int) $layout['customWidth'])) . 'px';
+		}
+		return '';
+	}
+
+	/**
+	 * Styles for this page's Header / Footer: its width, and no stray
+	 * space from the first / last block's margin or an empty paragraph
+	 * (which a sticky header's scrolled background would show as a band).
+	 */
+	public function enqueue_layout_css()
+	{
+		$css = '';
+		foreach (['header', 'footer'] as $kind) {
+			$template_id = Bpafb_Pro_Template_Kinds::get_matching_template_id($kind);
+			if (!$template_id) {
+				continue;
+			}
+			$wrapper = '.bpafb-pro-template-render.bpafb-pro-' . $kind;
+			$css .= $wrapper . '>:first-child{margin-top:0}'
+				. $wrapper . '>:last-child{margin-bottom:0}'
+				. $wrapper . '>p:empty{display:none}';
+			$max_width = self::max_width($template_id);
+			if ($max_width) {
+				$css .= $wrapper . '{max-width:' . $max_width . ';margin-left:auto;margin-right:auto}';
+			}
+		}
+		if ('' === $css) {
+			return;
+		}
+		wp_register_style('bpafb-pro-header-footer', false, [], BPAFB_PRO_VERSION);
+		wp_enqueue_style('bpafb-pro-header-footer');
+		wp_add_inline_style('bpafb-pro-header-footer', $css);
 	}
 
 	/**
