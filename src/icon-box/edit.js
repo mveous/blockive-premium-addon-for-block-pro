@@ -261,7 +261,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		</>
 	);
 
-	const ContentElement = () => (
+	const content = (
 		<>
 			{ icon && (
 				<div className="bpafb-icon-box-icon-wrapper">
@@ -300,10 +300,10 @@ export default function Edit( { attributes, setAttributes } ) {
 			<div { ...blockProps }>
 				{ url ? (
 					<div className="bpafb-icon-box-link">
-						<ContentElement />
+						{ content }
 					</div>
 				) : (
-					<ContentElement />
+					content
 				) }
 			</div>
 		</>
