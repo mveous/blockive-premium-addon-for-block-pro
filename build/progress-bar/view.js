@@ -1,1 +1,72 @@
-document.addEventListener("DOMContentLoaded",()=>{(()=>{const t=document.querySelectorAll(".bpafb-progress-bar-wrapper[data-blockive-progress]:not(.bpafb-pb-initialized)");if(!t.length)return;const e=new IntersectionObserver((t,e)=>{t.forEach(t=>{if(t.isIntersecting){const n=t.target,r=n.querySelector(".bpafb-pb-fill"),o=n.querySelectorAll(".bpafb-pb-number"),a=parseFloat(n.getAttribute("data-percentage"))||0,i=parseInt(n.getAttribute("data-duration"),10)||1500;if(r&&(r.style.transition="none",r.style.width="0%",r.offsetHeight,r.style.transition=`width ${i}ms cubic-bezier(0.165, 0.84, 0.44, 1)`,r.style.width=`${a}%`),o.length>0){let t=null;const e=n=>{t||(t=n);const r=Math.min((n-t)/i,1),s=1-Math.pow(1-r,4),l=Math.floor(s*a);o.forEach(t=>{t.textContent=l}),r<1?window.requestAnimationFrame(e):o.forEach(t=>{t.textContent=a})};window.requestAnimationFrame(e)}n.classList.add("bpafb-pb-initialized"),e.unobserve(n)}})},{rootMargin:"0px 0px -50px 0px",threshold:.1});t.forEach(t=>{e.observe(t)})})()});
+/******/ (() => { // webpackBootstrap
+/*!**********************************!*\
+  !*** ./src/progress-bar/view.js ***!
+  \**********************************/
+/**
+ * Animates Progress Bar blocks' fill width and number count-up when they
+ * scroll into view, via IntersectionObserver.
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const initProgressBars = () => {
+    const progressBars = document.querySelectorAll('.bpafb-progress-bar-wrapper[data-blockive-progress]:not(.bpafb-pb-initialized)');
+    if (!progressBars.length) return;
+    const observer = new IntersectionObserver((entries, observerInstance) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const wrapper = entry.target;
+          const fillArea = wrapper.querySelector('.bpafb-pb-fill');
+          const numberElements = wrapper.querySelectorAll('.bpafb-pb-number');
+          const targetPercentage = parseFloat(wrapper.getAttribute('data-percentage')) || 0;
+          const duration = parseInt(wrapper.getAttribute('data-duration'), 10) || 1500;
+
+          // The bar starts at its real width, so visitors without
+          // JavaScript still see the right value. We set it to 0%
+          // here, then force the browser to redraw, so visitors
+          // with JavaScript see it grow from 0.
+          if (fillArea) {
+            fillArea.style.transition = 'none';
+            fillArea.style.width = '0%';
+            fillArea.offsetHeight; // eslint-disable-line no-unused-expressions -- force reflow
+            fillArea.style.transition = `width ${duration}ms cubic-bezier(0.165, 0.84, 0.44, 1)`;
+            fillArea.style.width = `${targetPercentage}%`;
+          }
+          if (numberElements.length > 0) {
+            let startTimestamp = null;
+            const step = timestamp => {
+              if (!startTimestamp) startTimestamp = timestamp;
+              const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+              // Makes the count-up start fast and slow down near the end.
+              const easeOut = 1 - Math.pow(1 - progress, 4);
+              const currentVal = Math.floor(easeOut * targetPercentage);
+              numberElements.forEach(el => {
+                el.textContent = currentVal;
+              });
+              if (progress < 1) {
+                window.requestAnimationFrame(step);
+              } else {
+                numberElements.forEach(el => {
+                  el.textContent = targetPercentage;
+                });
+              }
+            };
+            window.requestAnimationFrame(step);
+          }
+          wrapper.classList.add('bpafb-pb-initialized');
+          observerInstance.unobserve(wrapper);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.1
+    });
+    progressBars.forEach(bar => {
+      observer.observe(bar);
+    });
+  };
+  initProgressBars();
+});
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

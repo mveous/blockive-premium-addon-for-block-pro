@@ -1,1 +1,1843 @@
-(()=>{"use strict";const e={n:o=>{const a=o&&o.__esModule?()=>o.default:()=>o;return e.d(a,{a}),a},d:(o,a)=>{for(var n in a)e.o(a,n)&&!e.o(o,n)&&Object.defineProperty(o,n,{enumerable:!0,get:a[n]})},o:(e,o)=>Object.hasOwn(e,o)},o=window.wp.blocks,a=window.wp.i18n,n=window.wp.blockEditor,l=window.wp.serverSideRender;var r=e.n(l);const t=window.wp.components,i=window.ReactJSXRuntime;function b({general:e,style:o,advanced:a}){return(0,i.jsxs)(i.Fragment,{children:[e&&(0,i.jsx)(n.InspectorControls,{group:"settings",children:e}),o&&(0,i.jsx)(n.InspectorControls,{group:"styles",children:o}),a]})}const d=window.wp.element,p=["top","right","bottom","left"],s={top:(0,a.__)("Top","blockive-premium-addon-for-block"),right:(0,a.__)("Right","blockive-premium-addon-for-block"),bottom:(0,a.__)("Bottom","blockive-premium-addon-for-block"),left:(0,a.__)("Left","blockive-premium-addon-for-block")};function m({label:e,value:o={},onChange:a,min:n=-100,max:l=200}){return(0,i.jsxs)("div",{className:"bpafb-spacing-controls",children:[e&&(0,i.jsx)("p",{className:"bpafb-spacing-controls__label",children:e}),(0,i.jsx)("div",{className:"bpafb-spacing-controls__grid",children:p.map(e=>(0,i.jsx)(t.RangeControl,{label:s[e],value:o[e],onChange:n=>a({...o,[e]:n}),min:n,max:l},e))})]})}const c=[{name:"desktop",label:(0,a.__)("Desktop","blockive-premium-addon-for-block")},{name:"tablet",label:(0,a.__)("Tablet","blockive-premium-addon-for-block")},{name:"mobile",label:(0,a.__)("Mobile","blockive-premium-addon-for-block")}];function u({children:e}){const[o,a]=(0,d.useState)("desktop");return(0,i.jsxs)("div",{className:"bpafb-responsive-controls",children:[(0,i.jsx)(t.ButtonGroup,{className:"bpafb-responsive-controls__switch",children:c.map(e=>(0,i.jsx)(t.Button,{variant:o===e.name?"primary":"secondary",isPressed:o===e.name,onClick:()=>a(e.name),children:e.label},e.name))}),(0,i.jsx)("div",{className:"bpafb-responsive-controls__panel",children:e(o)})]})}const f=[{label:(0,a.__)("None","blockive-premium-addon-for-block"),value:"none"},{label:(0,a.__)("Solid","blockive-premium-addon-for-block"),value:"solid"},{label:(0,a.__)("Dashed","blockive-premium-addon-for-block"),value:"dashed"},{label:(0,a.__)("Dotted","blockive-premium-addon-for-block"),value:"dotted"},{label:(0,a.__)("Double","blockive-premium-addon-for-block"),value:"double"}];function g({values:e={},onChange:o,showRadius:n=!0}){const{borderType:l="none",borderWidth:r,borderRadius:b,borderColor:d=""}=e;return(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Border Type","blockive-premium-addon-for-block"),value:l,options:f,onChange:e=>o("borderType",e)}),"none"!==l&&(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Border Width (px)","blockive-premium-addon-for-block"),value:r,onChange:e=>o("borderWidth",e),min:0,max:20}),(0,i.jsx)(t.BaseControl,{label:(0,a.__)("Border Color","blockive-premium-addon-for-block"),children:(0,i.jsx)(t.ColorPalette,{value:d,onChange:e=>o("borderColor",e)})})]}),n&&(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Border Radius (px)","blockive-premium-addon-for-block"),value:b,onChange:e=>o("borderRadius",e),min:0,max:150})]})}function v({values:e={},onChange:o}){const{enabled:n=!1,color:l="rgba(0,0,0,0.15)",blur:r=15,spread:b=0}=e;return(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(t.ToggleControl,{label:(0,a.__)("Enable Box Shadow","blockive-premium-addon-for-block"),checked:!!n,onChange:e=>o("enabled",e)}),n&&(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(t.BaseControl,{label:(0,a.__)("Shadow Color","blockive-premium-addon-for-block"),children:(0,i.jsx)(t.ColorPalette,{value:l,onChange:e=>o("color",e)})}),(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Shadow Blur","blockive-premium-addon-for-block"),value:r,onChange:e=>o("blur",e),min:0,max:100}),(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Shadow Spread","blockive-premium-addon-for-block"),value:b,onChange:e=>o("spread",e),min:-50,max:50})]})]})}function k({normalValues:e,onNormalChange:o,hoverValues:n,onHoverChange:l,hasHover:r=!0}){return r?(0,i.jsx)(t.TabPanel,{className:"bpafb-color-tabs",activeClass:"is-active",tabs:[{name:"normal",title:(0,a.__)("Normal","blockive-premium-addon-for-block")},{name:"hover",title:(0,a.__)("Hover","blockive-premium-addon-for-block")}],children:a=>"normal"===a.name?(0,i.jsx)(v,{values:e,onChange:o}):(0,i.jsx)(v,{values:n,onChange:l})}):(0,i.jsx)(v,{values:e,onChange:o})}const C=[{label:(0,a.__)("Solid Color","blockive-premium-addon-for-block"),value:"color"},{label:(0,a.__)("Gradient","blockive-premium-addon-for-block"),value:"gradient"},{label:(0,a.__)("Image","blockive-premium-addon-for-block"),value:"image"}],_=[{label:(0,a.__)("Cover","blockive-premium-addon-for-block"),value:"cover"},{label:(0,a.__)("Contain","blockive-premium-addon-for-block"),value:"contain"},{label:(0,a.__)("Auto","blockive-premium-addon-for-block"),value:"auto"}];function h({values:e={},onChange:o}){const{bgType:l="color",bgColor:r="",bgGradient:b="",bgImageUrl:d="",bgImageSize:p="cover",overlayColor:s=""}=e;return(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Background Type","blockive-premium-addon-for-block"),value:l,options:C,onChange:e=>o("bgType",e)}),"color"===l&&(0,i.jsx)(t.BaseControl,{label:(0,a.__)("Background Color","blockive-premium-addon-for-block"),children:(0,i.jsx)(t.ColorPalette,{value:r,onChange:e=>o("bgColor",e)})}),"gradient"===l&&(0,i.jsx)(t.BaseControl,{label:(0,a.__)("Background Gradient","blockive-premium-addon-for-block"),children:(0,i.jsx)(t.GradientPicker,{value:b||void 0,onChange:e=>o("bgGradient",e)})}),"image"===l&&(0,i.jsxs)(i.Fragment,{children:[(0,i.jsxs)(t.BaseControl,{label:(0,a.__)("Background Image","blockive-premium-addon-for-block"),children:[(0,i.jsx)(n.MediaUploadCheck,{children:(0,i.jsx)(n.MediaUpload,{onSelect:e=>{o("bgImageUrl",e.url),o("bgImageId",e.id)},allowedTypes:["image"],value:e.bgImageId,render:({open:e})=>(0,i.jsx)(t.Button,{variant:"secondary",onClick:e,children:d?(0,a.__)("Replace Image","blockive-premium-addon-for-block"):(0,a.__)("Select Image","blockive-premium-addon-for-block")})})}),d&&(0,i.jsx)(t.Button,{variant:"link",isDestructive:!0,onClick:()=>{o("bgImageUrl",""),o("bgImageId",0)},children:(0,a.__)("Remove Image","blockive-premium-addon-for-block")})]}),(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Image Fit","blockive-premium-addon-for-block"),value:p,options:_,onChange:e=>o("bgImageSize",e)}),(0,i.jsx)(t.BaseControl,{label:(0,a.__)("Overlay Color","blockive-premium-addon-for-block"),children:(0,i.jsx)(t.ColorPalette,{value:s,onChange:e=>o("overlayColor",e)})})]})]})}const x=[{label:(0,a.__)("None","blockive-premium-addon-for-block"),value:"none"},{label:(0,a.__)("Fade In","blockive-premium-addon-for-block"),value:"fadeIn"},{label:(0,a.__)("Fade In Up","blockive-premium-addon-for-block"),value:"fadeInUp"},{label:(0,a.__)("Fade In Down","blockive-premium-addon-for-block"),value:"fadeInDown"},{label:(0,a.__)("Fade In Left","blockive-premium-addon-for-block"),value:"fadeInLeft"},{label:(0,a.__)("Fade In Right","blockive-premium-addon-for-block"),value:"fadeInRight"},{label:(0,a.__)("Zoom In","blockive-premium-addon-for-block"),value:"zoomIn"},{label:(0,a.__)("Zoom Out","blockive-premium-addon-for-block"),value:"zoomOut"},{label:(0,a.__)("Bounce","blockive-premium-addon-for-block"),value:"bounce"},{label:(0,a.__)("Slide In Up","blockive-premium-addon-for-block"),value:"slideInUp"}],y=[{label:(0,a.__)("Ease","blockive-premium-addon-for-block"),value:"ease"},{label:(0,a.__)("Linear","blockive-premium-addon-for-block"),value:"linear"},{label:(0,a.__)("Ease In","blockive-premium-addon-for-block"),value:"ease-in"},{label:(0,a.__)("Ease Out","blockive-premium-addon-for-block"),value:"ease-out"},{label:(0,a.__)("Ease In Out","blockive-premium-addon-for-block"),value:"ease-in-out"}];function j({values:e={},onChange:o}){const{animationType:n="none",animationDuration:l=800,animationDelay:r=0,animationEasing:b="ease"}=e;return(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Animation Type","blockive-premium-addon-for-block"),value:n,options:x,onChange:e=>o("animationType",e)}),"none"!==n&&(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Duration (ms)","blockive-premium-addon-for-block"),value:l,onChange:e=>o("animationDuration",e),min:100,max:3e3,step:50}),(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Delay (ms)","blockive-premium-addon-for-block"),value:r,onChange:e=>o("animationDelay",e),min:0,max:3e3,step:50}),(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Easing","blockive-premium-addon-for-block"),value:b,options:y,onChange:e=>o("animationEasing",e)})]})]})}const T=[{label:(0,a.__)("Default","blockive-premium-addon-for-block"),value:""},{label:"Block",value:"block"},{label:"Inline Block",value:"inline-block"},{label:"Flex",value:"flex"},{label:"Inline Flex",value:"inline-flex"},{label:"None",value:"none"}],S=[{label:(0,a.__)("Default","blockive-premium-addon-for-block"),value:""},{label:"Visible",value:"visible"},{label:"Hidden",value:"hidden"},{label:"Auto",value:"auto"},{label:"Scroll",value:"scroll"}],w=[{label:(0,a.__)("Default","blockive-premium-addon-for-block"),value:""},{label:"Static",value:"static"},{label:"Relative",value:"relative"},{label:"Absolute",value:"absolute"},{label:"Fixed",value:"fixed"},{label:"Sticky",value:"sticky"}],B=[{label:(0,a.__)("None","blockive-premium-addon-for-block"),value:"none"},{label:(0,a.__)("Grow","blockive-premium-addon-for-block"),value:"grow"},{label:(0,a.__)("Shrink","blockive-premium-addon-for-block"),value:"shrink"},{label:(0,a.__)("Float Up","blockive-premium-addon-for-block"),value:"float-up"},{label:(0,a.__)("Sink Down","blockive-premium-addon-for-block"),value:"sink-down"}],I={desktop:["bpafbContainerPaddingTop","bpafbContainerPaddingRight","bpafbContainerPaddingBottom","bpafbContainerPaddingLeft"],tablet:["bpafbContainerPaddingTopTablet","bpafbContainerPaddingRightTablet","bpafbContainerPaddingBottomTablet","bpafbContainerPaddingLeftTablet"],mobile:["bpafbContainerPaddingTopMobile","bpafbContainerPaddingRightMobile","bpafbContainerPaddingBottomMobile","bpafbContainerPaddingLeftMobile"]},M={desktop:["bpafbContainerMarginTop","bpafbContainerMarginRight","bpafbContainerMarginBottom","bpafbContainerMarginLeft"],tablet:["bpafbContainerMarginTopTablet","bpafbContainerMarginRightTablet","bpafbContainerMarginBottomTablet","bpafbContainerMarginLeftTablet"],mobile:["bpafbContainerMarginTopMobile","bpafbContainerMarginRightMobile","bpafbContainerMarginBottomMobile","bpafbContainerMarginLeftMobile"]};function P(e,o){const[a,n,l,r]=o;return{top:e[a],right:e[n],bottom:e[l],left:e[r]}}const R=new Set;function H({attributes:e,setAttributes:o}){const{bpafbUid:l,bpafbDisplay:r="",bpafbOverflow:b="",bpafbPosition:p="",bpafbContainerWidth:s,bpafbContainerWidthUnit:c="px",bpafbContainerMinHeight:f,bpafbContainerMaxHeight:v,bpafbContainerBgType:C="color",bpafbContainerBgColor:_="",bpafbContainerBgGradient:x="",bpafbContainerBgImageUrl:y="",bpafbContainerBgImageId:H=0,bpafbContainerBgImageSize:D="cover",bpafbContainerOverlayColor:A="",bpafbContainerBorderStyle:F="none",bpafbContainerBorderWidth:O,bpafbContainerBorderRadius:L,bpafbContainerBorderColor:E="",bpafbContainerBoxShadow:N=!1,bpafbContainerShadowColor:G,bpafbContainerShadowBlur:U,bpafbContainerShadowSpread:W,bpafbContainerHoverBoxShadow:z=!1,bpafbContainerHoverShadowColor:V,bpafbContainerHoverShadowBlur:Z,bpafbContainerHoverShadowSpread:q,bpafbHideDesktop:X=!1,bpafbHideTablet:Y=!1,bpafbHideMobile:$=!1,bpafbAnimationType:J="none",bpafbAnimationDuration:Q=800,bpafbAnimationDelay:K=0,bpafbAnimationEasing:ee="ease",bpafbTransformRotate:oe=0,bpafbTransformScale:ae=100,bpafbTransformTranslateX:ne=0,bpafbTransformTranslateY:le=0,bpafbHoverAnimation:re="none",bpafbFloatingEffect:te=!1,bpafbZIndex:ie,bpafbHtmlId:be="",bpafbHtmlClasses:de="",bpafbCustomCss:pe=""}=e,se=!("undefined"==typeof window||!window.bpafbEditorSettings||!window.bpafbEditorSettings.canUseCustomCss);return(0,d.useEffect)(()=>{if(!l||R.has(l)){const e=Math.random().toString(36).slice(2,10);R.add(e),o({bpafbUid:e})}else R.add(l)},[]),(0,i.jsxs)(i.Fragment,{children:[(0,i.jsxs)(n.InspectorControls,{group:"settings",children:[(0,i.jsxs)(t.PanelBody,{title:(0,a.__)("Layout","blockive-premium-addon-for-block"),initialOpen:!0,children:[(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Display","blockive-premium-addon-for-block"),value:r,options:T,onChange:e=>o({bpafbDisplay:e})}),(0,i.jsxs)("div",{style:{display:"flex",gap:"10px",alignItems:"flex-end"},children:[(0,i.jsx)("div",{style:{flexGrow:1},children:(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Max Width","blockive-premium-addon-for-block"),value:s,onChange:e=>o({bpafbContainerWidth:e}),min:10,max:2e3})}),(0,i.jsx)("div",{style:{width:"80px",marginBottom:"16px"},children:(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Unit","blockive-premium-addon-for-block"),value:c,options:[{label:"px",value:"px"},{label:"%",value:"%"},{label:"rem",value:"rem"}],onChange:e=>o({bpafbContainerWidthUnit:e})})})]}),(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Min Height (px)","blockive-premium-addon-for-block"),value:f,onChange:e=>o({bpafbContainerMinHeight:e}),min:0,max:1200}),(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Max Height (px)","blockive-premium-addon-for-block"),value:v,onChange:e=>o({bpafbContainerMaxHeight:e}),min:0,max:2e3}),(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Overflow","blockive-premium-addon-for-block"),value:b,options:S,onChange:e=>o({bpafbOverflow:e})}),(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Position","blockive-premium-addon-for-block"),value:p,options:w,onChange:e=>o({bpafbPosition:e})})]}),(0,i.jsxs)(t.PanelBody,{title:(0,a.__)("Visibility","blockive-premium-addon-for-block"),initialOpen:!1,children:[(0,i.jsx)(t.ToggleControl,{label:(0,a.__)("Hide On Desktop","blockive-premium-addon-for-block"),checked:!!X,onChange:e=>o({bpafbHideDesktop:e})}),(0,i.jsx)(t.ToggleControl,{label:(0,a.__)("Hide On Tablet","blockive-premium-addon-for-block"),checked:!!Y,onChange:e=>o({bpafbHideTablet:e})}),(0,i.jsx)(t.ToggleControl,{label:(0,a.__)("Hide On Mobile","blockive-premium-addon-for-block"),checked:!!$,onChange:e=>o({bpafbHideMobile:e})})]}),(0,i.jsx)(t.PanelBody,{title:(0,a.__)("Z-Index","blockive-premium-addon-for-block"),initialOpen:!1,children:(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Z-Index","blockive-premium-addon-for-block"),value:ie,onChange:e=>o({bpafbZIndex:e}),min:-10,max:999})}),(0,i.jsxs)(t.PanelBody,{title:(0,a.__)("Custom Attributes","blockive-premium-addon-for-block"),initialOpen:!1,children:[(0,i.jsx)(t.TextControl,{label:(0,a.__)("HTML ID","blockive-premium-addon-for-block"),value:be,onChange:e=>o({bpafbHtmlId:e}),help:(0,a.__)("Sets a custom id on this block’s wrapper element. Ignored if the block already has an id (e.g. from the native HTML Anchor field below).","blockive-premium-addon-for-block")}),(0,i.jsx)(t.TextControl,{label:(0,a.__)("HTML Classes","blockive-premium-addon-for-block"),value:de,onChange:e=>o({bpafbHtmlClasses:e}),help:(0,a.__)("Space-separated custom classes added to this block’s wrapper element, alongside any native Additional CSS Class(es).","blockive-premium-addon-for-block")}),se?(0,i.jsx)(t.TextareaControl,{label:(0,a.__)("Custom CSS (Blockive)","blockive-premium-addon-for-block"),value:pe,onChange:e=>o({bpafbCustomCss:e}),help:(0,a.__)('Scoped to this block instance only -- use the word "selector" to target its wrapper, e.g. "selector { color: red; }". This is separate from the native Gutenberg Additional CSS field: that one applies as inline styles on this block only and isn’t scoped the same way.',"blockive-premium-addon-for-block")}):(0,i.jsx)("p",{className:"bpafb-custom-css-restricted",children:(0,a.__)('Custom CSS requires the "unfiltered_html" capability on your account. Ask an administrator if you need this enabled.',"blockive-premium-addon-for-block")})]})]}),(0,i.jsxs)(n.InspectorControls,{group:"styles",children:[(0,i.jsx)(t.PanelBody,{title:(0,a.__)("Spacing","blockive-premium-addon-for-block"),initialOpen:!1,children:(0,i.jsx)(u,{children:n=>(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(m,{label:(0,a.__)("Padding (px)","blockive-premium-addon-for-block"),value:P(e,I[n]),onChange:e=>{const[a,l,r,t]=I[n];o({[a]:e.top,[l]:e.right,[r]:e.bottom,[t]:e.left})},min:0}),(0,i.jsx)(m,{label:(0,a.__)("Margin (px)","blockive-premium-addon-for-block"),value:P(e,M[n]),onChange:e=>{const[a,l,r,t]=M[n];o({[a]:e.top,[l]:e.right,[r]:e.bottom,[t]:e.left})}})]})})}),(0,i.jsx)(t.PanelBody,{title:(0,a.__)("Background","blockive-premium-addon-for-block"),initialOpen:!1,children:(0,i.jsx)(h,{values:{bgType:C,bgColor:_,bgGradient:x,bgImageUrl:y,bgImageId:H,bgImageSize:D,overlayColor:A},onChange:(e,a)=>{o({[{bgType:"bpafbContainerBgType",bgColor:"bpafbContainerBgColor",bgGradient:"bpafbContainerBgGradient",bgImageUrl:"bpafbContainerBgImageUrl",bgImageId:"bpafbContainerBgImageId",bgImageSize:"bpafbContainerBgImageSize",overlayColor:"bpafbContainerOverlayColor"}[e]]:a})}})}),(0,i.jsx)(t.PanelBody,{title:(0,a.__)("Border","blockive-premium-addon-for-block"),initialOpen:!1,children:(0,i.jsx)(g,{values:{borderType:F,borderWidth:O,borderRadius:L,borderColor:E},onChange:(e,a)=>{o({[{borderType:"bpafbContainerBorderStyle",borderWidth:"bpafbContainerBorderWidth",borderRadius:"bpafbContainerBorderRadius",borderColor:"bpafbContainerBorderColor"}[e]]:a})}})}),(0,i.jsx)(t.PanelBody,{title:(0,a.__)("Shadow","blockive-premium-addon-for-block"),initialOpen:!1,children:(0,i.jsx)(k,{normalValues:{enabled:N,color:G,blur:U,spread:W},onNormalChange:(e,a)=>{o({[{enabled:"bpafbContainerBoxShadow",color:"bpafbContainerShadowColor",blur:"bpafbContainerShadowBlur",spread:"bpafbContainerShadowSpread"}[e]]:a})},hoverValues:{enabled:z,color:V,blur:Z,spread:q},onHoverChange:(e,a)=>{o({[{enabled:"bpafbContainerHoverBoxShadow",color:"bpafbContainerHoverShadowColor",blur:"bpafbContainerHoverShadowBlur",spread:"bpafbContainerHoverShadowSpread"}[e]]:a})}})}),(0,i.jsx)(t.PanelBody,{title:(0,a.__)("Animation","blockive-premium-addon-for-block"),initialOpen:!1,children:(0,i.jsx)(j,{values:{animationType:J,animationDuration:Q,animationDelay:K,animationEasing:ee},onChange:(e,a)=>{o({[{animationType:"bpafbAnimationType",animationDuration:"bpafbAnimationDuration",animationDelay:"bpafbAnimationDelay",animationEasing:"bpafbAnimationEasing"}[e]]:a})}})}),(0,i.jsxs)(t.PanelBody,{title:(0,a.__)("Transform","blockive-premium-addon-for-block"),initialOpen:!1,children:[(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Rotate (deg)","blockive-premium-addon-for-block"),value:oe,onChange:e=>o({bpafbTransformRotate:e}),min:-360,max:360}),(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Scale (%)","blockive-premium-addon-for-block"),value:ae,onChange:e=>o({bpafbTransformScale:e}),min:10,max:300}),(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Translate X (px)","blockive-premium-addon-for-block"),value:ne,onChange:e=>o({bpafbTransformTranslateX:e}),min:-300,max:300}),(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Translate Y (px)","blockive-premium-addon-for-block"),value:le,onChange:e=>o({bpafbTransformTranslateY:e}),min:-300,max:300})]}),(0,i.jsxs)(t.PanelBody,{title:(0,a.__)("Motion Effects","blockive-premium-addon-for-block"),initialOpen:!1,children:[(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Hover Animation","blockive-premium-addon-for-block"),value:re,options:B,onChange:e=>o({bpafbHoverAnimation:e})}),(0,i.jsx)(t.ToggleControl,{label:(0,a.__)("Floating Effect","blockive-premium-addon-for-block"),checked:!!te,onChange:e=>o({bpafbFloatingEffect:e})})]})]})]})}const D=window.wp.data,A=[{label:(0,a.__)("Date","blockive-premium-addon-for-block-pro"),value:"date"},{label:(0,a.__)("Title","blockive-premium-addon-for-block-pro"),value:"title"},{label:(0,a.__)("Menu Order","blockive-premium-addon-for-block-pro"),value:"menu_order"},{label:(0,a.__)("Random","blockive-premium-addon-for-block-pro"),value:"rand"},{label:(0,a.__)("ID","blockive-premium-addon-for-block-pro"),value:"id"}];function F({attributes:e,setAttributes:o}){const{templateId:n}=e,l=(r="loop-item",(0,D.useSelect)(e=>{const o=(e("core").getEntityRecords("postType","blockive_template",{status:"publish",per_page:-1,context:"view"})||[]).filter(e=>e.meta?._bpafb_template_kind===r);return[{label:(0,a.__)("Select a template…","blockive-premium-addon-for-block-pro"),value:0},...o.map(e=>({label:e.title?.rendered||`#${e.id}`,value:e.id}))]},[r,b]));var r,b;const d=window.location.href.split("/wp-admin/")[0]+"/wp-admin/"+"post-new.php?post_type=blockive_template";return(0,i.jsxs)(t.PanelBody,{title:(0,a.__)("Template","blockive-premium-addon-for-block-pro"),initialOpen:!0,children:[!n&&(0,i.jsx)(t.Notice,{status:"warning",isDismissible:!1,children:(0,a.__)("Choose a Loop Item template to show items.","blockive-premium-addon-for-block-pro")}),(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Loop Item Template","blockive-premium-addon-for-block-pro"),value:n||0,options:l,onChange:e=>o({templateId:Number(e)})}),(0,i.jsx)(t.Button,{variant:"link",href:d,target:"_blank",rel:"noopener noreferrer",children:(0,a.__)("+ Create a new Loop Item template","blockive-premium-addon-for-block-pro")})]})}function O({attributes:e,setAttributes:o,countLabel:n}){const{postType:l,taxonomy:r,termIds:b,postsPerPage:d,orderBy:p,order:s,excludeCurrentPost:m}=e,c=(0,D.useSelect)(e=>(e("core").getPostTypes({per_page:-1})||[]).filter(e=>e.viewable).map(e=>({label:e.name,value:e.slug})),[]),u=(0,D.useSelect)(e=>{const o=(e("core").getTaxonomies({per_page:-1})||[]).filter(e=>e.types?.includes(l));return[{label:(0,a.__)("None","blockive-premium-addon-for-block-pro"),value:""},...o.map(e=>({label:e.name,value:e.slug}))]},[l]),f=(0,D.useSelect)(e=>r&&e("core").getEntityRecords("taxonomy",r,{per_page:-1,context:"view"})||[],[r]),g={};f.forEach(e=>{g[e.id]=e.name});const v=b.map(e=>g[e]||`#${e}`);return(0,i.jsxs)(t.PanelBody,{title:(0,a.__)("Query","blockive-premium-addon-for-block-pro"),initialOpen:!0,children:[(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Post Type","blockive-premium-addon-for-block-pro"),value:l,options:c,onChange:e=>o({postType:e,taxonomy:"",termIds:[]})}),(0,i.jsx)(t.RangeControl,{label:n||(0,a.__)("Items Per Page","blockive-premium-addon-for-block-pro"),value:d,onChange:e=>o({postsPerPage:e}),min:1,max:50}),(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Order By","blockive-premium-addon-for-block-pro"),value:p,options:A,onChange:e=>o({orderBy:e})}),(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Order","blockive-premium-addon-for-block-pro"),value:s,options:[{label:(0,a.__)("Descending","blockive-premium-addon-for-block-pro"),value:"desc"},{label:(0,a.__)("Ascending","blockive-premium-addon-for-block-pro"),value:"asc"}],onChange:e=>o({order:e})}),(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Filter by Taxonomy","blockive-premium-addon-for-block-pro"),value:r,options:u,onChange:e=>o({taxonomy:e,termIds:[]})}),r&&(0,i.jsx)(t.FormTokenField,{label:(0,a.__)("Terms","blockive-premium-addon-for-block-pro"),value:v,suggestions:f.map(e=>e.name),onChange:e=>{const a=e.map(e=>{if("number"==typeof e)return e;const o=f.find(o=>o.name===e);return o?o.id:null}).filter(e=>null!==e);o({termIds:a})}}),(0,i.jsx)(t.ToggleControl,{label:(0,a.__)("Exclude Current Post","blockive-premium-addon-for-block-pro"),help:(0,a.__)("Leaves the post currently being viewed out of the list.","blockive-premium-addon-for-block-pro"),checked:!!m,onChange:e=>o({excludeCurrentPost:e})})]})}const L={desktop:"",tablet:"Tablet",mobile:"Mobile"},E=JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"blockive-premium-addon-for-block/loop-grid","version":"0.1.0","title":"Loop Grid","category":"bpafb-widgets","icon":"grid-view","description":"Shows any post type in a grid, with each item rendered from a Blockive Loop Item template. Pro-only.","example":{},"attributes":{"templateId":{"type":"number","default":0},"postType":{"type":"string","default":"post"},"taxonomy":{"type":"string","default":""},"termIds":{"type":"array","items":{"type":"number"},"default":[]},"postsPerPage":{"type":"number","default":6},"orderBy":{"type":"string","default":"date"},"order":{"type":"string","default":"desc"},"excludeCurrentPost":{"type":"boolean","default":false},"columns":{"type":"number","default":3},"columnsTablet":{"type":"number","default":2},"columnsMobile":{"type":"number","default":1},"columnGap":{"type":"number","default":24},"rowGap":{"type":"number","default":24},"masonry":{"type":"boolean","default":false},"equalHeight":{"type":"boolean","default":true},"enableNothingFound":{"type":"boolean","default":true},"nothingFoundText":{"type":"string","default":"No items found."},"paginationType":{"type":"string","default":"none"},"paginationAlign":{"type":"string","default":"center"},"bpafbUid":{"type":"string","default":""},"bpafbDisplay":{"type":"string","default":""},"bpafbOverflow":{"type":"string","default":""},"bpafbPosition":{"type":"string","default":""},"bpafbContainerWidth":{"type":"number"},"bpafbContainerWidthUnit":{"type":"string","default":"px"},"bpafbContainerMinHeight":{"type":"number"},"bpafbContainerMaxHeight":{"type":"number"},"bpafbContainerBgType":{"type":"string","default":"color"},"bpafbContainerBgColor":{"type":"string","default":""},"bpafbContainerBgGradient":{"type":"string","default":""},"bpafbContainerBgImageUrl":{"type":"string","default":""},"bpafbContainerBgImageId":{"type":"number","default":0},"bpafbContainerBgImageSize":{"type":"string","default":"cover"},"bpafbContainerOverlayColor":{"type":"string","default":""},"bpafbContainerBorderStyle":{"type":"string","default":"none"},"bpafbContainerBorderWidth":{"type":"number"},"bpafbContainerBorderRadius":{"type":"number"},"bpafbContainerBorderColor":{"type":"string","default":""},"bpafbContainerBoxShadow":{"type":"boolean","default":false},"bpafbContainerShadowColor":{"type":"string","default":"rgba(0,0,0,0.15)"},"bpafbContainerShadowBlur":{"type":"number","default":15},"bpafbContainerShadowSpread":{"type":"number","default":0},"bpafbContainerHoverBoxShadow":{"type":"boolean","default":false},"bpafbContainerHoverShadowColor":{"type":"string","default":"rgba(0,0,0,0.15)"},"bpafbContainerHoverShadowBlur":{"type":"number","default":15},"bpafbContainerHoverShadowSpread":{"type":"number","default":0},"bpafbHideDesktop":{"type":"boolean","default":false},"bpafbHideTablet":{"type":"boolean","default":false},"bpafbHideMobile":{"type":"boolean","default":false},"bpafbAnimationType":{"type":"string","default":"none"},"bpafbAnimationDuration":{"type":"number","default":800},"bpafbAnimationDelay":{"type":"number","default":0},"bpafbAnimationEasing":{"type":"string","default":"ease"},"bpafbTransformRotate":{"type":"number","default":0},"bpafbTransformScale":{"type":"number","default":100},"bpafbTransformTranslateX":{"type":"number","default":0},"bpafbTransformTranslateY":{"type":"number","default":0},"bpafbHoverAnimation":{"type":"string","default":"none"},"bpafbFloatingEffect":{"type":"boolean","default":false},"bpafbZIndex":{"type":"number"},"bpafbHtmlId":{"type":"string","default":""},"bpafbHtmlClasses":{"type":"string","default":""},"bpafbCustomCss":{"type":"string","default":""},"bpafbContainerAlign":{"type":"string","default":""},"bpafbContainerPaddingTop":{"type":"number"},"bpafbContainerMarginTop":{"type":"number"},"bpafbContainerPaddingRight":{"type":"number"},"bpafbContainerMarginRight":{"type":"number"},"bpafbContainerPaddingBottom":{"type":"number"},"bpafbContainerMarginBottom":{"type":"number"},"bpafbContainerPaddingLeft":{"type":"number"},"bpafbContainerMarginLeft":{"type":"number"},"bpafbContainerPaddingTopTablet":{"type":"number"},"bpafbContainerMarginTopTablet":{"type":"number"},"bpafbContainerPaddingRightTablet":{"type":"number"},"bpafbContainerMarginRightTablet":{"type":"number"},"bpafbContainerPaddingBottomTablet":{"type":"number"},"bpafbContainerMarginBottomTablet":{"type":"number"},"bpafbContainerPaddingLeftTablet":{"type":"number"},"bpafbContainerMarginLeftTablet":{"type":"number"},"bpafbContainerPaddingTopMobile":{"type":"number"},"bpafbContainerMarginTopMobile":{"type":"number"},"bpafbContainerPaddingRightMobile":{"type":"number"},"bpafbContainerMarginRightMobile":{"type":"number"},"bpafbContainerPaddingBottomMobile":{"type":"number"},"bpafbContainerMarginBottomMobile":{"type":"number"},"bpafbContainerPaddingLeftMobile":{"type":"number"},"bpafbContainerMarginLeftMobile":{"type":"number"}},"supports":{"align":["wide","full"],"html":false,"anchor":true},"textdomain":"blockive-premium-addon-for-block-pro","render":"file:./render.php","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./index.css"}');(0,o.registerBlockType)(E.name,{...E,edit:function({attributes:e,setAttributes:o}){const{templateId:l,columns:d,columnsTablet:p,columnsMobile:s,columnGap:m,rowGap:c,masonry:f,equalHeight:g,enableNothingFound:v,nothingFoundText:k,paginationType:C,paginationAlign:_}=e,h=(0,n.useBlockProps)();return(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(b,{general:(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(F,{attributes:e,setAttributes:o}),(0,i.jsx)(O,{attributes:e,setAttributes:o}),(0,i.jsxs)(t.PanelBody,{title:(0,a.__)("Pagination","blockive-premium-addon-for-block-pro"),initialOpen:!1,children:[(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Type","blockive-premium-addon-for-block-pro"),value:C,options:[{label:(0,a.__)("None","blockive-premium-addon-for-block-pro"),value:"none"},{label:(0,a.__)("Numbers","blockive-premium-addon-for-block-pro"),value:"numbers"},{label:(0,a.__)("Previous / Next","blockive-premium-addon-for-block-pro"),value:"prev_next"}],onChange:e=>o({paginationType:e})}),"none"!==C&&(0,i.jsx)(t.SelectControl,{label:(0,a.__)("Alignment","blockive-premium-addon-for-block-pro"),value:_,options:[{label:(0,a.__)("Start","blockive-premium-addon-for-block-pro"),value:"start"},{label:(0,a.__)("Center","blockive-premium-addon-for-block-pro"),value:"center"},{label:(0,a.__)("End","blockive-premium-addon-for-block-pro"),value:"end"}],onChange:e=>o({paginationAlign:e})})]})]}),style:(0,i.jsxs)(i.Fragment,{children:[(0,i.jsxs)(t.PanelBody,{title:(0,a.__)("Layout","blockive-premium-addon-for-block-pro"),initialOpen:!0,children:[(0,i.jsx)(u,{children:e=>{const n=`columns${L[e]}`,l={columns:d,columnsTablet:p,columnsMobile:s}[n]??d;return(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Columns","blockive-premium-addon-for-block-pro"),value:l,onChange:e=>o({[n]:e}),min:1,max:6})}}),(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Column Gap","blockive-premium-addon-for-block-pro"),value:m,onChange:e=>o({columnGap:e}),min:0,max:100}),(0,i.jsx)(t.RangeControl,{label:(0,a.__)("Row Gap","blockive-premium-addon-for-block-pro"),value:c,onChange:e=>o({rowGap:e}),min:0,max:100}),(0,i.jsx)(t.ToggleControl,{label:(0,a.__)("Masonry","blockive-premium-addon-for-block-pro"),help:(0,a.__)("Stacks items in even columns instead of even rows.","blockive-premium-addon-for-block-pro"),checked:!!f,onChange:e=>o({masonry:e})}),!f&&(0,i.jsx)(t.ToggleControl,{label:(0,a.__)("Equal Height","blockive-premium-addon-for-block-pro"),checked:!!g,onChange:e=>o({equalHeight:e})})]}),(0,i.jsxs)(t.PanelBody,{title:(0,a.__)("Nothing Found","blockive-premium-addon-for-block-pro"),initialOpen:!1,children:[(0,i.jsx)(t.ToggleControl,{label:(0,a.__)("Show Message","blockive-premium-addon-for-block-pro"),checked:!!v,onChange:e=>o({enableNothingFound:e})}),v&&(0,i.jsx)(t.TextControl,{label:(0,a.__)("Message","blockive-premium-addon-for-block-pro"),value:k,onChange:e=>o({nothingFoundText:e})})]})]}),advanced:(0,i.jsx)(H,{attributes:e,setAttributes:o})}),(0,i.jsx)("div",{...h,children:l?(0,i.jsx)(r(),{block:"blockive-premium-addon-for-block/loop-grid",attributes:e}):(0,i.jsx)("p",{className:"bpafb-pro-loop-grid-placeholder",children:(0,a.__)("Choose a Loop Item template in the block settings to preview this grid.","blockive-premium-addon-for-block-pro")})})]})},save:()=>null})})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/components/advanced-tab/index.js"
+/*!**********************************************!*\
+  !*** ./src/components/advanced-tab/index.js ***!
+  \**********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AdvancedTab)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _spacing_controls__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../spacing-controls */ "./src/components/spacing-controls/index.js");
+/* harmony import */ var _responsive_controls__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../responsive-controls */ "./src/components/responsive-controls/index.js");
+/* harmony import */ var _border_controls__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../border-controls */ "./src/components/border-controls/index.js");
+/* harmony import */ var _shadow_controls__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shadow-controls */ "./src/components/shadow-controls/index.js");
+/* harmony import */ var _background_controls__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../background-controls */ "./src/components/background-controls/index.js");
+/* harmony import */ var _animation_controls__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../animation-controls */ "./src/components/animation-controls/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__);
+
+
+
+
+
+
+
+
+
+
+
+const DISPLAY_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default', 'blockive-premium-addon-for-block'),
+  value: ''
+}, {
+  label: 'Block',
+  value: 'block'
+}, {
+  label: 'Inline Block',
+  value: 'inline-block'
+}, {
+  label: 'Flex',
+  value: 'flex'
+}, {
+  label: 'Inline Flex',
+  value: 'inline-flex'
+}, {
+  label: 'None',
+  value: 'none'
+}];
+const OVERFLOW_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default', 'blockive-premium-addon-for-block'),
+  value: ''
+}, {
+  label: 'Visible',
+  value: 'visible'
+}, {
+  label: 'Hidden',
+  value: 'hidden'
+}, {
+  label: 'Auto',
+  value: 'auto'
+}, {
+  label: 'Scroll',
+  value: 'scroll'
+}];
+const POSITION_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default', 'blockive-premium-addon-for-block'),
+  value: ''
+}, {
+  label: 'Static',
+  value: 'static'
+}, {
+  label: 'Relative',
+  value: 'relative'
+}, {
+  label: 'Absolute',
+  value: 'absolute'
+}, {
+  label: 'Fixed',
+  value: 'fixed'
+}, {
+  label: 'Sticky',
+  value: 'sticky'
+}];
+const HOVER_ANIMATION_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'blockive-premium-addon-for-block'),
+  value: 'none'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Grow', 'blockive-premium-addon-for-block'),
+  value: 'grow'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Shrink', 'blockive-premium-addon-for-block'),
+  value: 'shrink'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Float Up', 'blockive-premium-addon-for-block'),
+  value: 'float-up'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sink Down', 'blockive-premium-addon-for-block'),
+  value: 'sink-down'
+}];
+const PADDING_ATTR = {
+  desktop: ['bpafbContainerPaddingTop', 'bpafbContainerPaddingRight', 'bpafbContainerPaddingBottom', 'bpafbContainerPaddingLeft'],
+  tablet: ['bpafbContainerPaddingTopTablet', 'bpafbContainerPaddingRightTablet', 'bpafbContainerPaddingBottomTablet', 'bpafbContainerPaddingLeftTablet'],
+  mobile: ['bpafbContainerPaddingTopMobile', 'bpafbContainerPaddingRightMobile', 'bpafbContainerPaddingBottomMobile', 'bpafbContainerPaddingLeftMobile']
+};
+const MARGIN_ATTR = {
+  desktop: ['bpafbContainerMarginTop', 'bpafbContainerMarginRight', 'bpafbContainerMarginBottom', 'bpafbContainerMarginLeft'],
+  tablet: ['bpafbContainerMarginTopTablet', 'bpafbContainerMarginRightTablet', 'bpafbContainerMarginBottomTablet', 'bpafbContainerMarginLeftTablet'],
+  mobile: ['bpafbContainerMarginTopMobile', 'bpafbContainerMarginRightMobile', 'bpafbContainerMarginBottomMobile', 'bpafbContainerMarginLeftMobile']
+};
+function boxValueFromAttrs(attributes, attrNames) {
+  const [top, right, bottom, left] = attrNames;
+  return {
+    top: attributes[top],
+    right: attributes[right],
+    bottom: attributes[bottom],
+    left: attributes[left]
+  };
+}
+function generateUid() {
+  return Math.random().toString(36).slice(2, 10);
+}
+
+// Tracks which bpafbUid values are already claimed by a mounted block
+// instance in this editor session, so a duplicated block (which starts out
+// with a copy of the original's uid) can detect the collision and get a
+// fresh one instead of silently sharing CSS scope with the original.
+const claimedUids = new Set();
+
+/**
+ * The single shared "Advanced" control set rendered identically by every
+ * Blockive block. Its panels are split across the block's two native
+ * inspector tabs (no custom tab navigation of its own): layout/visibility/
+ * z-index are functional settings and land in the native Settings tab,
+ * while spacing/background/border/shadow/animation/transform/motion are
+ * visual and land in the native Styles tab, next to the rest of the
+ * block's style controls.
+ */
+function AdvancedTab({
+  attributes,
+  setAttributes
+}) {
+  const {
+    bpafbUid,
+    bpafbDisplay = '',
+    bpafbOverflow = '',
+    bpafbPosition = '',
+    bpafbContainerWidth,
+    bpafbContainerWidthUnit = 'px',
+    bpafbContainerMinHeight,
+    bpafbContainerMaxHeight,
+    bpafbContainerBgType = 'color',
+    bpafbContainerBgColor = '',
+    bpafbContainerBgGradient = '',
+    bpafbContainerBgImageUrl = '',
+    bpafbContainerBgImageId = 0,
+    bpafbContainerBgImageSize = 'cover',
+    bpafbContainerOverlayColor = '',
+    bpafbContainerBorderStyle = 'none',
+    bpafbContainerBorderWidth,
+    bpafbContainerBorderRadius,
+    bpafbContainerBorderColor = '',
+    bpafbContainerBoxShadow = false,
+    bpafbContainerShadowColor,
+    bpafbContainerShadowBlur,
+    bpafbContainerShadowSpread,
+    bpafbContainerHoverBoxShadow = false,
+    bpafbContainerHoverShadowColor,
+    bpafbContainerHoverShadowBlur,
+    bpafbContainerHoverShadowSpread,
+    bpafbHideDesktop = false,
+    bpafbHideTablet = false,
+    bpafbHideMobile = false,
+    bpafbAnimationType = 'none',
+    bpafbAnimationDuration = 800,
+    bpafbAnimationDelay = 0,
+    bpafbAnimationEasing = 'ease',
+    bpafbTransformRotate = 0,
+    bpafbTransformScale = 100,
+    bpafbTransformTranslateX = 0,
+    bpafbTransformTranslateY = 0,
+    bpafbHoverAnimation = 'none',
+    bpafbFloatingEffect = false,
+    bpafbZIndex,
+    bpafbHtmlId = '',
+    bpafbHtmlClasses = '',
+    bpafbCustomCss = ''
+  } = attributes;
+
+  // Custom CSS output requires the same capability WordPress uses to gate
+  // unfiltered/raw markup in post content (see bpafb_strip_unauthorized_custom_css()
+  // in the main plugin file, which enforces this server-side at save time --
+  // this flag only controls whether the field is shown, it is not the
+  // security boundary itself).
+  const canUseCustomCss = typeof window !== 'undefined' && window.bpafbEditorSettings ? !!window.bpafbEditorSettings.canUseCustomCss : false;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (!bpafbUid || claimedUids.has(bpafbUid)) {
+      const newUid = generateUid();
+      claimedUids.add(newUid);
+      setAttributes({
+        bpafbUid: newUid
+      });
+    } else {
+      claimedUids.add(bpafbUid);
+    }
+    // Intentionally run only on mount: this is a one-time claim check per
+    // block instance, not a reaction to bpafbUid changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+      group: "settings",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout', 'blockive-premium-addon-for-block'),
+        initialOpen: true,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display', 'blockive-premium-addon-for-block'),
+          value: bpafbDisplay,
+          options: DISPLAY_OPTIONS,
+          onChange: val => setAttributes({
+            bpafbDisplay: val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+          style: {
+            display: 'flex',
+            gap: '10px',
+            alignItems: 'flex-end'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+            style: {
+              flexGrow: 1
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Max Width', 'blockive-premium-addon-for-block'),
+              value: bpafbContainerWidth,
+              onChange: val => setAttributes({
+                bpafbContainerWidth: val
+              }),
+              min: 10,
+              max: 2000
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+            style: {
+              width: '80px',
+              marginBottom: '16px'
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Unit', 'blockive-premium-addon-for-block'),
+              value: bpafbContainerWidthUnit,
+              options: [{
+                label: 'px',
+                value: 'px'
+              }, {
+                label: '%',
+                value: '%'
+              }, {
+                label: 'rem',
+                value: 'rem'
+              }],
+              onChange: val => setAttributes({
+                bpafbContainerWidthUnit: val
+              })
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Min Height (px)', 'blockive-premium-addon-for-block'),
+          value: bpafbContainerMinHeight,
+          onChange: val => setAttributes({
+            bpafbContainerMinHeight: val
+          }),
+          min: 0,
+          max: 1200
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Max Height (px)', 'blockive-premium-addon-for-block'),
+          value: bpafbContainerMaxHeight,
+          onChange: val => setAttributes({
+            bpafbContainerMaxHeight: val
+          }),
+          min: 0,
+          max: 2000
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Overflow', 'blockive-premium-addon-for-block'),
+          value: bpafbOverflow,
+          options: OVERFLOW_OPTIONS,
+          onChange: val => setAttributes({
+            bpafbOverflow: val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Position', 'blockive-premium-addon-for-block'),
+          value: bpafbPosition,
+          options: POSITION_OPTIONS,
+          onChange: val => setAttributes({
+            bpafbPosition: val
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Visibility', 'blockive-premium-addon-for-block'),
+        initialOpen: false,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hide On Desktop', 'blockive-premium-addon-for-block'),
+          checked: !!bpafbHideDesktop,
+          onChange: val => setAttributes({
+            bpafbHideDesktop: val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hide On Tablet', 'blockive-premium-addon-for-block'),
+          checked: !!bpafbHideTablet,
+          onChange: val => setAttributes({
+            bpafbHideTablet: val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hide On Mobile', 'blockive-premium-addon-for-block'),
+          checked: !!bpafbHideMobile,
+          onChange: val => setAttributes({
+            bpafbHideMobile: val
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Z-Index', 'blockive-premium-addon-for-block'),
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Z-Index', 'blockive-premium-addon-for-block'),
+          value: bpafbZIndex,
+          onChange: val => setAttributes({
+            bpafbZIndex: val
+          }),
+          min: -10,
+          max: 999
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Custom Attributes', 'blockive-premium-addon-for-block'),
+        initialOpen: false,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('HTML ID', 'blockive-premium-addon-for-block'),
+          value: bpafbHtmlId,
+          onChange: val => setAttributes({
+            bpafbHtmlId: val
+          }),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sets a custom id on this block’s wrapper element. Ignored if the block already has an id (e.g. from the native HTML Anchor field below).', 'blockive-premium-addon-for-block')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('HTML Classes', 'blockive-premium-addon-for-block'),
+          value: bpafbHtmlClasses,
+          onChange: val => setAttributes({
+            bpafbHtmlClasses: val
+          }),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Space-separated custom classes added to this block’s wrapper element, alongside any native Additional CSS Class(es).', 'blockive-premium-addon-for-block')
+        }), canUseCustomCss ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextareaControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Custom CSS (Blockive)', 'blockive-premium-addon-for-block'),
+          value: bpafbCustomCss,
+          onChange: val => setAttributes({
+            bpafbCustomCss: val
+          }),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Scoped to this block instance only -- use the word "selector" to target its wrapper, e.g. "selector { color: red; }". This is separate from the native Gutenberg Additional CSS field: that one applies as inline styles on this block only and isn’t scoped the same way.', 'blockive-premium-addon-for-block')
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+          className: "bpafb-custom-css-restricted",
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Custom CSS requires the "unfiltered_html" capability on your account. Ask an administrator if you need this enabled.', 'blockive-premium-addon-for-block')
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+      group: "styles",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Spacing', 'blockive-premium-addon-for-block'),
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_responsive_controls__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          children: device => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_spacing_controls__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Padding (px)', 'blockive-premium-addon-for-block'),
+              value: boxValueFromAttrs(attributes, PADDING_ATTR[device]),
+              onChange: box => {
+                const [top, right, bottom, left] = PADDING_ATTR[device];
+                setAttributes({
+                  [top]: box.top,
+                  [right]: box.right,
+                  [bottom]: box.bottom,
+                  [left]: box.left
+                });
+              },
+              min: 0
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_spacing_controls__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Margin (px)', 'blockive-premium-addon-for-block'),
+              value: boxValueFromAttrs(attributes, MARGIN_ATTR[device]),
+              onChange: box => {
+                const [top, right, bottom, left] = MARGIN_ATTR[device];
+                setAttributes({
+                  [top]: box.top,
+                  [right]: box.right,
+                  [bottom]: box.bottom,
+                  [left]: box.left
+                });
+              }
+            })]
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background', 'blockive-premium-addon-for-block'),
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_background_controls__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          values: {
+            bgType: bpafbContainerBgType,
+            bgColor: bpafbContainerBgColor,
+            bgGradient: bpafbContainerBgGradient,
+            bgImageUrl: bpafbContainerBgImageUrl,
+            bgImageId: bpafbContainerBgImageId,
+            bgImageSize: bpafbContainerBgImageSize,
+            overlayColor: bpafbContainerOverlayColor
+          },
+          onChange: (key, val) => {
+            const map = {
+              bgType: 'bpafbContainerBgType',
+              bgColor: 'bpafbContainerBgColor',
+              bgGradient: 'bpafbContainerBgGradient',
+              bgImageUrl: 'bpafbContainerBgImageUrl',
+              bgImageId: 'bpafbContainerBgImageId',
+              bgImageSize: 'bpafbContainerBgImageSize',
+              overlayColor: 'bpafbContainerOverlayColor'
+            };
+            setAttributes({
+              [map[key]]: val
+            });
+          }
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'blockive-premium-addon-for-block'),
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_border_controls__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          values: {
+            borderType: bpafbContainerBorderStyle,
+            borderWidth: bpafbContainerBorderWidth,
+            borderRadius: bpafbContainerBorderRadius,
+            borderColor: bpafbContainerBorderColor
+          },
+          onChange: (key, val) => {
+            const map = {
+              borderType: 'bpafbContainerBorderStyle',
+              borderWidth: 'bpafbContainerBorderWidth',
+              borderRadius: 'bpafbContainerBorderRadius',
+              borderColor: 'bpafbContainerBorderColor'
+            };
+            setAttributes({
+              [map[key]]: val
+            });
+          }
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Shadow', 'blockive-premium-addon-for-block'),
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_shadow_controls__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          normalValues: {
+            enabled: bpafbContainerBoxShadow,
+            color: bpafbContainerShadowColor,
+            blur: bpafbContainerShadowBlur,
+            spread: bpafbContainerShadowSpread
+          },
+          onNormalChange: (key, val) => {
+            const map = {
+              enabled: 'bpafbContainerBoxShadow',
+              color: 'bpafbContainerShadowColor',
+              blur: 'bpafbContainerShadowBlur',
+              spread: 'bpafbContainerShadowSpread'
+            };
+            setAttributes({
+              [map[key]]: val
+            });
+          },
+          hoverValues: {
+            enabled: bpafbContainerHoverBoxShadow,
+            color: bpafbContainerHoverShadowColor,
+            blur: bpafbContainerHoverShadowBlur,
+            spread: bpafbContainerHoverShadowSpread
+          },
+          onHoverChange: (key, val) => {
+            const map = {
+              enabled: 'bpafbContainerHoverBoxShadow',
+              color: 'bpafbContainerHoverShadowColor',
+              blur: 'bpafbContainerHoverShadowBlur',
+              spread: 'bpafbContainerHoverShadowSpread'
+            };
+            setAttributes({
+              [map[key]]: val
+            });
+          }
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Animation', 'blockive-premium-addon-for-block'),
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_animation_controls__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          values: {
+            animationType: bpafbAnimationType,
+            animationDuration: bpafbAnimationDuration,
+            animationDelay: bpafbAnimationDelay,
+            animationEasing: bpafbAnimationEasing
+          },
+          onChange: (key, val) => {
+            const map = {
+              animationType: 'bpafbAnimationType',
+              animationDuration: 'bpafbAnimationDuration',
+              animationDelay: 'bpafbAnimationDelay',
+              animationEasing: 'bpafbAnimationEasing'
+            };
+            setAttributes({
+              [map[key]]: val
+            });
+          }
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Transform', 'blockive-premium-addon-for-block'),
+        initialOpen: false,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate (deg)', 'blockive-premium-addon-for-block'),
+          value: bpafbTransformRotate,
+          onChange: val => setAttributes({
+            bpafbTransformRotate: val
+          }),
+          min: -360,
+          max: 360
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Scale (%)', 'blockive-premium-addon-for-block'),
+          value: bpafbTransformScale,
+          onChange: val => setAttributes({
+            bpafbTransformScale: val
+          }),
+          min: 10,
+          max: 300
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Translate X (px)', 'blockive-premium-addon-for-block'),
+          value: bpafbTransformTranslateX,
+          onChange: val => setAttributes({
+            bpafbTransformTranslateX: val
+          }),
+          min: -300,
+          max: 300
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Translate Y (px)', 'blockive-premium-addon-for-block'),
+          value: bpafbTransformTranslateY,
+          onChange: val => setAttributes({
+            bpafbTransformTranslateY: val
+          }),
+          min: -300,
+          max: 300
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Motion Effects', 'blockive-premium-addon-for-block'),
+        initialOpen: false,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hover Animation', 'blockive-premium-addon-for-block'),
+          value: bpafbHoverAnimation,
+          options: HOVER_ANIMATION_OPTIONS,
+          onChange: val => setAttributes({
+            bpafbHoverAnimation: val
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Floating Effect', 'blockive-premium-addon-for-block'),
+          checked: !!bpafbFloatingEffect,
+          onChange: val => setAttributes({
+            bpafbFloatingEffect: val
+          })
+        })]
+      })]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/animation-controls/index.js"
+/*!****************************************************!*\
+  !*** ./src/components/animation-controls/index.js ***!
+  \****************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ANIMATION_OPTIONS: () => (/* binding */ ANIMATION_OPTIONS),
+/* harmony export */   "default": () => (/* binding */ AnimationControls)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const ANIMATION_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'blockive-premium-addon-for-block'),
+  value: 'none'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In', 'blockive-premium-addon-for-block'),
+  value: 'fadeIn'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Up', 'blockive-premium-addon-for-block'),
+  value: 'fadeInUp'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Down', 'blockive-premium-addon-for-block'),
+  value: 'fadeInDown'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Left', 'blockive-premium-addon-for-block'),
+  value: 'fadeInLeft'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Right', 'blockive-premium-addon-for-block'),
+  value: 'fadeInRight'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In', 'blockive-premium-addon-for-block'),
+  value: 'zoomIn'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom Out', 'blockive-premium-addon-for-block'),
+  value: 'zoomOut'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce', 'blockive-premium-addon-for-block'),
+  value: 'bounce'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide In Up', 'blockive-premium-addon-for-block'),
+  value: 'slideInUp'
+}];
+const EASING_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Ease', 'blockive-premium-addon-for-block'),
+  value: 'ease'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Linear', 'blockive-premium-addon-for-block'),
+  value: 'linear'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Ease In', 'blockive-premium-addon-for-block'),
+  value: 'ease-in'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Ease Out', 'blockive-premium-addon-for-block'),
+  value: 'ease-out'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Ease In Out', 'blockive-premium-addon-for-block'),
+  value: 'ease-in-out'
+}];
+
+/**
+ * values: { animationType, animationDuration, animationDelay, animationEasing }
+ * onChange( key, value )
+ */
+function AnimationControls({
+  values = {},
+  onChange
+}) {
+  const {
+    animationType = 'none',
+    animationDuration = 800,
+    animationDelay = 0,
+    animationEasing = 'ease'
+  } = values;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Animation Type', 'blockive-premium-addon-for-block'),
+      value: animationType,
+      options: ANIMATION_OPTIONS,
+      onChange: val => onChange('animationType', val)
+    }), animationType !== 'none' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Duration (ms)', 'blockive-premium-addon-for-block'),
+        value: animationDuration,
+        onChange: val => onChange('animationDuration', val),
+        min: 100,
+        max: 3000,
+        step: 50
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Delay (ms)', 'blockive-premium-addon-for-block'),
+        value: animationDelay,
+        onChange: val => onChange('animationDelay', val),
+        min: 0,
+        max: 3000,
+        step: 50
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Easing', 'blockive-premium-addon-for-block'),
+        value: animationEasing,
+        options: EASING_OPTIONS,
+        onChange: val => onChange('animationEasing', val)
+      })]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/background-controls/index.js"
+/*!*****************************************************!*\
+  !*** ./src/components/background-controls/index.js ***!
+  \*****************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ BackgroundControls)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+const TYPE_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Solid Color', 'blockive-premium-addon-for-block'),
+  value: 'color'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Gradient', 'blockive-premium-addon-for-block'),
+  value: 'gradient'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Image', 'blockive-premium-addon-for-block'),
+  value: 'image'
+}];
+const SIZE_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Cover', 'blockive-premium-addon-for-block'),
+  value: 'cover'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Contain', 'blockive-premium-addon-for-block'),
+  value: 'contain'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Auto', 'blockive-premium-addon-for-block'),
+  value: 'auto'
+}];
+
+/**
+ * values: { bgType, bgColor, bgGradient, bgImageUrl, bgImageId, bgImageSize, overlayColor }
+ * onChange( key, value )
+ */
+function BackgroundControls({
+  values = {},
+  onChange
+}) {
+  const {
+    bgType = 'color',
+    bgColor = '',
+    bgGradient = '',
+    bgImageUrl = '',
+    bgImageSize = 'cover',
+    overlayColor = ''
+  } = values;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Type', 'blockive-premium-addon-for-block'),
+      value: bgType,
+      options: TYPE_OPTIONS,
+      onChange: val => onChange('bgType', val)
+    }), bgType === 'color' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Color', 'blockive-premium-addon-for-block'),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+        value: bgColor,
+        onChange: val => onChange('bgColor', val)
+      })
+    }), bgType === 'gradient' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Gradient', 'blockive-premium-addon-for-block'),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
+        value: bgGradient || undefined,
+        onChange: val => onChange('bgGradient', val)
+      })
+    }), bgType === 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Image', 'blockive-premium-addon-for-block'),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+            onSelect: media => {
+              onChange('bgImageUrl', media.url);
+              onChange('bgImageId', media.id);
+            },
+            allowedTypes: ['image'],
+            value: values.bgImageId,
+            render: ({
+              open
+            }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+              variant: "secondary",
+              onClick: open,
+              children: bgImageUrl ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Replace Image', 'blockive-premium-addon-for-block') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Image', 'blockive-premium-addon-for-block')
+            })
+          })
+        }), bgImageUrl && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          variant: "link",
+          isDestructive: true,
+          onClick: () => {
+            onChange('bgImageUrl', '');
+            onChange('bgImageId', 0);
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Remove Image', 'blockive-premium-addon-for-block')
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Image Fit', 'blockive-premium-addon-for-block'),
+        value: bgImageSize,
+        options: SIZE_OPTIONS,
+        onChange: val => onChange('bgImageSize', val)
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Overlay Color', 'blockive-premium-addon-for-block'),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+          value: overlayColor,
+          onChange: val => onChange('overlayColor', val)
+        })
+      })]
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/border-controls/index.js"
+/*!*************************************************!*\
+  !*** ./src/components/border-controls/index.js ***!
+  \*************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ BorderControls),
+/* harmony export */   getBorderStyles: () => (/* binding */ getBorderStyles)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const TYPE_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'blockive-premium-addon-for-block'),
+  value: 'none'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Solid', 'blockive-premium-addon-for-block'),
+  value: 'solid'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Dashed', 'blockive-premium-addon-for-block'),
+  value: 'dashed'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Dotted', 'blockive-premium-addon-for-block'),
+  value: 'dotted'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Double', 'blockive-premium-addon-for-block'),
+  value: 'double'
+}];
+
+/**
+ * values: { borderType, borderWidth, borderRadius, borderColor }
+ * onChange( key, value )
+ */
+function BorderControls({
+  values = {},
+  onChange,
+  showRadius = true
+}) {
+  const {
+    borderType = 'none',
+    borderWidth,
+    borderRadius,
+    borderColor = ''
+  } = values;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Type', 'blockive-premium-addon-for-block'),
+      value: borderType,
+      options: TYPE_OPTIONS,
+      onChange: val => onChange('borderType', val)
+    }), borderType !== 'none' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Width (px)', 'blockive-premium-addon-for-block'),
+        value: borderWidth,
+        onChange: val => onChange('borderWidth', val),
+        min: 0,
+        max: 20
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Color', 'blockive-premium-addon-for-block'),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+          value: borderColor,
+          onChange: val => onChange('borderColor', val)
+        })
+      })]
+    }), showRadius && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border Radius (px)', 'blockive-premium-addon-for-block'),
+      value: borderRadius,
+      onChange: val => onChange('borderRadius', val),
+      min: 0,
+      max: 150
+    })]
+  });
+}
+function getBorderStyles(values = {}, prefix) {
+  const {
+    borderType = 'none',
+    borderWidth,
+    borderRadius,
+    borderColor
+  } = values;
+  const styles = {};
+  if (borderType && borderType !== 'none') {
+    styles[`${prefix}-border-style`] = borderType;
+    if (borderWidth !== undefined && borderWidth !== null) styles[`${prefix}-border-width`] = `${borderWidth}px`;
+    if (borderColor) styles[`${prefix}-border-color`] = borderColor;
+  } else {
+    styles[`${prefix}-border-style`] = 'none';
+  }
+  if (borderRadius !== undefined && borderRadius !== null) styles[`${prefix}-border-radius`] = `${borderRadius}px`;
+  return styles;
+}
+
+/***/ },
+
+/***/ "./src/components/inspector-tabs/index.js"
+/*!************************************************!*\
+  !*** ./src/components/inspector-tabs/index.js ***!
+  \************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ InspectorTabs)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * Shared inspector wiring used by every Blockive block. There is no custom
+ * tab navigation here — `general` renders as plain PanelBody sections in
+ * the block's native Settings tab, `style` in the block's native Styles
+ * tab, and `advanced` (the shared <AdvancedTab />) places its own panels
+ * across both native tabs itself. This keeps every existing setting
+ * available, just as ordinary collapsible panels instead of behind a
+ * second layer of tab navigation.
+ */
+
+function InspectorTabs({
+  general,
+  style,
+  advanced
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [general && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      group: "settings",
+      children: general
+    }), style && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
+      group: "styles",
+      children: style
+    }), advanced]
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/responsive-controls/index.js"
+/*!*****************************************************!*\
+  !*** ./src/components/responsive-controls/index.js ***!
+  \*****************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ResponsiveControls)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+const BREAKPOINTS = [{
+  name: 'desktop',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Desktop', 'blockive-premium-addon-for-block')
+}, {
+  name: 'tablet',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Tablet', 'blockive-premium-addon-for-block')
+}, {
+  name: 'mobile',
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Mobile', 'blockive-premium-addon-for-block')
+}];
+
+/**
+ * Desktop / Tablet / Mobile switcher. Renders `children(device)` for the
+ * currently active breakpoint so the caller decides which attribute suffix
+ * (e.g. 'PaddingTop' vs 'PaddingTopTablet') to read/write.
+ */
+function ResponsiveControls({
+  children
+}) {
+  const [device, setDevice] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)('desktop');
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "bpafb-responsive-controls",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ButtonGroup, {
+      className: "bpafb-responsive-controls__switch",
+      children: BREAKPOINTS.map(bp => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+        variant: device === bp.name ? 'primary' : 'secondary',
+        isPressed: device === bp.name,
+        onClick: () => setDevice(bp.name),
+        children: bp.label
+      }, bp.name))
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "bpafb-responsive-controls__panel",
+      children: children(device)
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/shadow-controls/index.js"
+/*!*************************************************!*\
+  !*** ./src/components/shadow-controls/index.js ***!
+  \*************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ShadowControls),
+/* harmony export */   getShadowStyle: () => (/* binding */ getShadowStyle)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+function ShadowFields({
+  values = {},
+  onChange
+}) {
+  const {
+    enabled = false,
+    color = 'rgba(0,0,0,0.15)',
+    blur = 15,
+    spread = 0
+  } = values;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Box Shadow', 'blockive-premium-addon-for-block'),
+      checked: !!enabled,
+      onChange: val => onChange('enabled', val)
+    }), enabled && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Shadow Color', 'blockive-premium-addon-for-block'),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+          value: color,
+          onChange: val => onChange('color', val)
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Shadow Blur', 'blockive-premium-addon-for-block'),
+        value: blur,
+        onChange: val => onChange('blur', val),
+        min: 0,
+        max: 100
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Shadow Spread', 'blockive-premium-addon-for-block'),
+        value: spread,
+        onChange: val => onChange('spread', val),
+        min: -50,
+        max: 50
+      })]
+    })]
+  });
+}
+
+/**
+ * normalValues / hoverValues: { enabled, color, blur, spread }
+ * onNormalChange( key, value ) / onHoverChange( key, value )
+ * Pass hasHover=false to render a single (Normal-only) shadow control.
+ */
+function ShadowControls({
+  normalValues,
+  onNormalChange,
+  hoverValues,
+  onHoverChange,
+  hasHover = true
+}) {
+  if (!hasHover) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(ShadowFields, {
+      values: normalValues,
+      onChange: onNormalChange
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
+    className: "bpafb-color-tabs",
+    activeClass: "is-active",
+    tabs: [{
+      name: 'normal',
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Normal', 'blockive-premium-addon-for-block')
+    }, {
+      name: 'hover',
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hover', 'blockive-premium-addon-for-block')
+    }],
+    children: tab => tab.name === 'normal' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(ShadowFields, {
+      values: normalValues,
+      onChange: onNormalChange
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(ShadowFields, {
+      values: hoverValues,
+      onChange: onHoverChange
+    })
+  });
+}
+function getShadowStyle(values = {}) {
+  const {
+    enabled,
+    color = 'rgba(0,0,0,0.15)',
+    blur = 15,
+    spread = 0
+  } = values;
+  if (!enabled) return 'none';
+  return `0 4px ${blur}px ${spread}px ${color}`;
+}
+
+/***/ },
+
+/***/ "./src/components/spacing-controls/index.js"
+/*!**************************************************!*\
+  !*** ./src/components/spacing-controls/index.js ***!
+  \**************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SpacingControls)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const SIDES = ['top', 'right', 'bottom', 'left'];
+const SIDE_LABELS = {
+  top: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Top', 'blockive-premium-addon-for-block'),
+  right: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Right', 'blockive-premium-addon-for-block'),
+  bottom: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bottom', 'blockive-premium-addon-for-block'),
+  left: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Left', 'blockive-premium-addon-for-block')
+};
+
+/**
+ * Reusable box-model (Top/Right/Bottom/Left) control for Padding, Margin,
+ * Gap, Icon Spacing, etc.
+ *
+ * value: { top, right, bottom, left }
+ * onChange( { top, right, bottom, left } )
+ */
+function SpacingControls({
+  label,
+  value = {},
+  onChange,
+  min = -100,
+  max = 200
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "bpafb-spacing-controls",
+    children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+      className: "bpafb-spacing-controls__label",
+      children: label
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "bpafb-spacing-controls__grid",
+      children: SIDES.map(side => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
+        label: SIDE_LABELS[side],
+        value: value[side],
+        onChange: val => onChange({
+          ...value,
+          [side]: val
+        }),
+        min: min,
+        max: max
+      }, side))
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/components/use-template-options/index.js"
+/*!******************************************************!*\
+  !*** ./src/components/use-template-options/index.js ***!
+  \******************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ useTemplateOptions)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+/**
+ * Fetches every published `blockive_template` of one Template Kind
+ * (`_bpafb_template_kind` meta), as a `{label,value}` options list ready
+ * for a `SelectControl`, with a leading placeholder option (`value: 0`).
+ * Shared by every block that lets an item pick a Blockive Template of a
+ * specific kind: Mega Menu, Loop Grid, and Post Grid Pro's Loop Template
+ * control.
+ *
+ * @param {string} kind             One of Bpafb_Pro_Template_Kinds::KINDS (PHP side).
+ * @param {string} [placeholderLabel] Label for the `value: 0` option. Post
+ *                                    Grid Pro has a real fallback layout for
+ *                                    "none picked", so it passes its own
+ *                                    wording instead of the default.
+ * @return {Array<{label: string, value: number}>}
+ */
+function useTemplateOptions(kind, placeholderLabel) {
+  return (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(select => {
+    const records = select('core').getEntityRecords('postType', 'blockive_template', {
+      status: 'publish',
+      per_page: -1,
+      context: 'view'
+    });
+    const matching = (records || []).filter(record => record.meta?._bpafb_template_kind === kind);
+    return [{
+      label: placeholderLabel || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select a template…', 'blockive-premium-addon-for-block-pro'),
+      value: 0
+    }, ...matching.map(record => ({
+      label: record.title?.rendered || `#${record.id}`,
+      value: record.id
+    }))];
+  }, [kind, placeholderLabel]);
+}
+
+/***/ },
+
+/***/ "./src/loop-grid/edit.js"
+/*!*******************************!*\
+  !*** ./src/loop-grid/edit.js ***!
+  \*******************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/server-side-render */ "@wordpress/server-side-render");
+/* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_inspector_tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/inspector-tabs */ "./src/components/inspector-tabs/index.js");
+/* harmony import */ var _components_advanced_tab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/advanced-tab */ "./src/components/advanced-tab/index.js");
+/* harmony import */ var _components_responsive_controls__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/responsive-controls */ "./src/components/responsive-controls/index.js");
+/* harmony import */ var _query_panels__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./query-panels */ "./src/loop-grid/query-panels.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+
+
+
+
+
+
+const COLUMN_ATTR_SUFFIX = {
+  desktop: '',
+  tablet: 'Tablet',
+  mobile: 'Mobile'
+};
+function Edit({
+  attributes,
+  setAttributes
+}) {
+  const {
+    templateId,
+    columns,
+    columnsTablet,
+    columnsMobile,
+    columnGap,
+    rowGap,
+    masonry,
+    equalHeight,
+    enableNothingFound,
+    nothingFoundText,
+    paginationType,
+    paginationAlign
+  } = attributes;
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_inspector_tabs__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      general: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_query_panels__WEBPACK_IMPORTED_MODULE_7__.LoopTemplatePanel, {
+          attributes: attributes,
+          setAttributes: setAttributes
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_query_panels__WEBPACK_IMPORTED_MODULE_7__.LoopQueryPanel, {
+          attributes: attributes,
+          setAttributes: setAttributes
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Pagination', 'blockive-premium-addon-for-block-pro'),
+          initialOpen: false,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Type', 'blockive-premium-addon-for-block-pro'),
+            value: paginationType,
+            options: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'blockive-premium-addon-for-block-pro'),
+              value: 'none'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Numbers', 'blockive-premium-addon-for-block-pro'),
+              value: 'numbers'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Previous / Next', 'blockive-premium-addon-for-block-pro'),
+              value: 'prev_next'
+            }],
+            onChange: value => setAttributes({
+              paginationType: value
+            })
+          }), paginationType !== 'none' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Alignment', 'blockive-premium-addon-for-block-pro'),
+            value: paginationAlign,
+            options: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Start', 'blockive-premium-addon-for-block-pro'),
+              value: 'start'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Center', 'blockive-premium-addon-for-block-pro'),
+              value: 'center'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('End', 'blockive-premium-addon-for-block-pro'),
+              value: 'end'
+            }],
+            onChange: value => setAttributes({
+              paginationAlign: value
+            })
+          })]
+        })]
+      }),
+      style: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout', 'blockive-premium-addon-for-block-pro'),
+          initialOpen: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_responsive_controls__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            children: device => {
+              const suffix = COLUMN_ATTR_SUFFIX[device];
+              const attrName = `columns${suffix}`;
+              const value = {
+                columns,
+                columnsTablet,
+                columnsMobile
+              }[attrName] ?? columns;
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+                label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Columns', 'blockive-premium-addon-for-block-pro'),
+                value: value,
+                onChange: val => setAttributes({
+                  [attrName]: val
+                }),
+                min: 1,
+                max: 6
+              });
+            }
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Column Gap', 'blockive-premium-addon-for-block-pro'),
+            value: columnGap,
+            onChange: value => setAttributes({
+              columnGap: value
+            }),
+            min: 0,
+            max: 100
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Row Gap', 'blockive-premium-addon-for-block-pro'),
+            value: rowGap,
+            onChange: value => setAttributes({
+              rowGap: value
+            }),
+            min: 0,
+            max: 100
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Masonry', 'blockive-premium-addon-for-block-pro'),
+            help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Stacks items in even columns instead of even rows.', 'blockive-premium-addon-for-block-pro'),
+            checked: !!masonry,
+            onChange: value => setAttributes({
+              masonry: value
+            })
+          }), !masonry && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Equal Height', 'blockive-premium-addon-for-block-pro'),
+            checked: !!equalHeight,
+            onChange: value => setAttributes({
+              equalHeight: value
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Nothing Found', 'blockive-premium-addon-for-block-pro'),
+          initialOpen: false,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Message', 'blockive-premium-addon-for-block-pro'),
+            checked: !!enableNothingFound,
+            onChange: value => setAttributes({
+              enableNothingFound: value
+            })
+          }), enableNothingFound && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Message', 'blockive-premium-addon-for-block-pro'),
+            value: nothingFoundText,
+            onChange: value => setAttributes({
+              nothingFoundText: value
+            })
+          })]
+        })]
+      }),
+      advanced: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_advanced_tab__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+      ...blockProps,
+      children: templateId ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_2___default()), {
+        block: "blockive-premium-addon-for-block/loop-grid",
+        attributes: attributes
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+        className: "bpafb-pro-loop-grid-placeholder",
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Choose a Loop Item template in the block settings to preview this grid.', 'blockive-premium-addon-for-block-pro')
+      })
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/loop-grid/query-panels.js"
+/*!***************************************!*\
+  !*** ./src/loop-grid/query-panels.js ***!
+  \***************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LoopQueryPanel: () => (/* binding */ LoopQueryPanel),
+/* harmony export */   LoopTemplatePanel: () => (/* binding */ LoopTemplatePanel)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_use_template_options__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/use-template-options */ "./src/components/use-template-options/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+/**
+ * Template and Query panels shared by Loop Grid and Loop Carousel. The PHP
+ * side of the query is Bpafb_Pro_Loop_Builder::block_query_args().
+ */
+
+const TEMPLATE_KIND = 'loop-item';
+const ORDERBY_OPTIONS = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Date', 'blockive-premium-addon-for-block-pro'),
+  value: 'date'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Title', 'blockive-premium-addon-for-block-pro'),
+  value: 'title'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Menu Order', 'blockive-premium-addon-for-block-pro'),
+  value: 'menu_order'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Random', 'blockive-premium-addon-for-block-pro'),
+  value: 'rand'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('ID', 'blockive-premium-addon-for-block-pro'),
+  value: 'id'
+}];
+function LoopTemplatePanel({
+  attributes,
+  setAttributes
+}) {
+  const {
+    templateId
+  } = attributes;
+  const templateOptions = (0,_components_use_template_options__WEBPACK_IMPORTED_MODULE_3__["default"])(TEMPLATE_KIND);
+
+  // Derived from the current URL rather than a new localized value, since
+  // the block editor always runs under /wp-admin/ (post.php, post-new.php,
+  // or the site editor), on single sites and multisite alike.
+  const adminBase = window.location.href.split('/wp-admin/')[0] + '/wp-admin/';
+  const newTemplateUrl = `${adminBase}post-new.php?post_type=blockive_template`;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Template', 'blockive-premium-addon-for-block-pro'),
+    initialOpen: true,
+    children: [!templateId && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Notice, {
+      status: "warning",
+      isDismissible: false,
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Choose a Loop Item template to show items.', 'blockive-premium-addon-for-block-pro')
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Loop Item Template', 'blockive-premium-addon-for-block-pro'),
+      value: templateId || 0,
+      options: templateOptions,
+      onChange: value => setAttributes({
+        templateId: Number(value)
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+      variant: "link",
+      href: newTemplateUrl,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('+ Create a new Loop Item template', 'blockive-premium-addon-for-block-pro')
+    })]
+  });
+}
+function LoopQueryPanel({
+  attributes,
+  setAttributes,
+  countLabel
+}) {
+  const {
+    postType,
+    taxonomy,
+    termIds,
+    postsPerPage,
+    orderBy,
+    order,
+    excludeCurrentPost
+  } = attributes;
+  const postTypeOptions = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(select => {
+    const types = select('core').getPostTypes({
+      per_page: -1
+    });
+    return (types || []).filter(type => type.viewable).map(type => ({
+      label: type.name,
+      value: type.slug
+    }));
+  }, []);
+  const taxonomyOptions = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(select => {
+    const taxonomies = select('core').getTaxonomies({
+      per_page: -1
+    });
+    const matching = (taxonomies || []).filter(tax => tax.types?.includes(postType));
+    return [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'blockive-premium-addon-for-block-pro'),
+      value: ''
+    }, ...matching.map(tax => ({
+      label: tax.name,
+      value: tax.slug
+    }))];
+  }, [postType]);
+  const termRecords = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(select => {
+    if (!taxonomy) {
+      return [];
+    }
+    return select('core').getEntityRecords('taxonomy', taxonomy, {
+      per_page: -1,
+      context: 'view'
+    }) || [];
+  }, [taxonomy]);
+  const termById = {};
+  termRecords.forEach(term => {
+    termById[term.id] = term.name;
+  });
+  const selectedTermTokens = termIds.map(id => termById[id] || `#${id}`);
+  const handleTermsChange = tokens => {
+    const nextIds = tokens.map(token => {
+      if (typeof token === 'number') {
+        return token;
+      }
+      const match = termRecords.find(term => term.name === token);
+      return match ? match.id : null;
+    }).filter(id => id !== null);
+    setAttributes({
+      termIds: nextIds
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Query', 'blockive-premium-addon-for-block-pro'),
+    initialOpen: true,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Post Type', 'blockive-premium-addon-for-block-pro'),
+      value: postType,
+      options: postTypeOptions,
+      onChange: value => setAttributes({
+        postType: value,
+        taxonomy: '',
+        termIds: []
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: countLabel || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Items Per Page', 'blockive-premium-addon-for-block-pro'),
+      value: postsPerPage,
+      onChange: value => setAttributes({
+        postsPerPage: value
+      }),
+      min: 1,
+      max: 50
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Order By', 'blockive-premium-addon-for-block-pro'),
+      value: orderBy,
+      options: ORDERBY_OPTIONS,
+      onChange: value => setAttributes({
+        orderBy: value
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Order', 'blockive-premium-addon-for-block-pro'),
+      value: order,
+      options: [{
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Descending', 'blockive-premium-addon-for-block-pro'),
+        value: 'desc'
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Ascending', 'blockive-premium-addon-for-block-pro'),
+        value: 'asc'
+      }],
+      onChange: value => setAttributes({
+        order: value
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Filter by Taxonomy', 'blockive-premium-addon-for-block-pro'),
+      value: taxonomy,
+      options: taxonomyOptions,
+      onChange: value => setAttributes({
+        taxonomy: value,
+        termIds: []
+      })
+    }), taxonomy && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FormTokenField, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Terms', 'blockive-premium-addon-for-block-pro'),
+      value: selectedTermTokens,
+      suggestions: termRecords.map(term => term.name),
+      onChange: handleTermsChange
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Exclude Current Post', 'blockive-premium-addon-for-block-pro'),
+      help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Leaves the post currently being viewed out of the list.', 'blockive-premium-addon-for-block-pro'),
+      checked: !!excludeCurrentPost,
+      onChange: value => setAttributes({
+        excludeCurrentPost: value
+      })
+    })]
+  });
+}
+
+/***/ },
+
+/***/ "./src/loop-grid/style-index.css"
+/*!***************************************!*\
+  !*** ./src/loop-grid/style-index.css ***!
+  \***************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ },
+
+/***/ "react/jsx-runtime"
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+(module) {
+
+module.exports = window["ReactJSXRuntime"];
+
+/***/ },
+
+/***/ "@wordpress/block-editor"
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+(module) {
+
+module.exports = window["wp"]["blockEditor"];
+
+/***/ },
+
+/***/ "@wordpress/blocks"
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+(module) {
+
+module.exports = window["wp"]["blocks"];
+
+/***/ },
+
+/***/ "@wordpress/components"
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+(module) {
+
+module.exports = window["wp"]["components"];
+
+/***/ },
+
+/***/ "@wordpress/data"
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+(module) {
+
+module.exports = window["wp"]["data"];
+
+/***/ },
+
+/***/ "@wordpress/element"
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+(module) {
+
+module.exports = window["wp"]["element"];
+
+/***/ },
+
+/***/ "@wordpress/i18n"
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+(module) {
+
+module.exports = window["wp"]["i18n"];
+
+/***/ },
+
+/***/ "@wordpress/server-side-render"
+/*!******************************************!*\
+  !*** external ["wp","serverSideRender"] ***!
+  \******************************************/
+(module) {
+
+module.exports = window["wp"]["serverSideRender"];
+
+/***/ },
+
+/***/ "./src/loop-grid/block.json"
+/*!**********************************!*\
+  !*** ./src/loop-grid/block.json ***!
+  \**********************************/
+(module) {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"blockive-premium-addon-for-block/loop-grid","version":"0.1.0","title":"Loop Grid","category":"bpafb-widgets","icon":"grid-view","description":"Shows any post type in a grid, with each item rendered from a Blockive Loop Item template. Pro-only.","example":{},"attributes":{"templateId":{"type":"number","default":0},"postType":{"type":"string","default":"post"},"taxonomy":{"type":"string","default":""},"termIds":{"type":"array","items":{"type":"number"},"default":[]},"postsPerPage":{"type":"number","default":6},"orderBy":{"type":"string","default":"date"},"order":{"type":"string","default":"desc"},"excludeCurrentPost":{"type":"boolean","default":false},"columns":{"type":"number","default":3},"columnsTablet":{"type":"number","default":2},"columnsMobile":{"type":"number","default":1},"columnGap":{"type":"number","default":24},"rowGap":{"type":"number","default":24},"masonry":{"type":"boolean","default":false},"equalHeight":{"type":"boolean","default":true},"enableNothingFound":{"type":"boolean","default":true},"nothingFoundText":{"type":"string","default":"No items found."},"paginationType":{"type":"string","default":"none"},"paginationAlign":{"type":"string","default":"center"},"bpafbUid":{"type":"string","default":""},"bpafbDisplay":{"type":"string","default":""},"bpafbOverflow":{"type":"string","default":""},"bpafbPosition":{"type":"string","default":""},"bpafbContainerWidth":{"type":"number"},"bpafbContainerWidthUnit":{"type":"string","default":"px"},"bpafbContainerMinHeight":{"type":"number"},"bpafbContainerMaxHeight":{"type":"number"},"bpafbContainerBgType":{"type":"string","default":"color"},"bpafbContainerBgColor":{"type":"string","default":""},"bpafbContainerBgGradient":{"type":"string","default":""},"bpafbContainerBgImageUrl":{"type":"string","default":""},"bpafbContainerBgImageId":{"type":"number","default":0},"bpafbContainerBgImageSize":{"type":"string","default":"cover"},"bpafbContainerOverlayColor":{"type":"string","default":""},"bpafbContainerBorderStyle":{"type":"string","default":"none"},"bpafbContainerBorderWidth":{"type":"number"},"bpafbContainerBorderRadius":{"type":"number"},"bpafbContainerBorderColor":{"type":"string","default":""},"bpafbContainerBoxShadow":{"type":"boolean","default":false},"bpafbContainerShadowColor":{"type":"string","default":"rgba(0,0,0,0.15)"},"bpafbContainerShadowBlur":{"type":"number","default":15},"bpafbContainerShadowSpread":{"type":"number","default":0},"bpafbContainerHoverBoxShadow":{"type":"boolean","default":false},"bpafbContainerHoverShadowColor":{"type":"string","default":"rgba(0,0,0,0.15)"},"bpafbContainerHoverShadowBlur":{"type":"number","default":15},"bpafbContainerHoverShadowSpread":{"type":"number","default":0},"bpafbHideDesktop":{"type":"boolean","default":false},"bpafbHideTablet":{"type":"boolean","default":false},"bpafbHideMobile":{"type":"boolean","default":false},"bpafbAnimationType":{"type":"string","default":"none"},"bpafbAnimationDuration":{"type":"number","default":800},"bpafbAnimationDelay":{"type":"number","default":0},"bpafbAnimationEasing":{"type":"string","default":"ease"},"bpafbTransformRotate":{"type":"number","default":0},"bpafbTransformScale":{"type":"number","default":100},"bpafbTransformTranslateX":{"type":"number","default":0},"bpafbTransformTranslateY":{"type":"number","default":0},"bpafbHoverAnimation":{"type":"string","default":"none"},"bpafbFloatingEffect":{"type":"boolean","default":false},"bpafbZIndex":{"type":"number"},"bpafbHtmlId":{"type":"string","default":""},"bpafbHtmlClasses":{"type":"string","default":""},"bpafbCustomCss":{"type":"string","default":""},"bpafbContainerAlign":{"type":"string","default":""},"bpafbContainerPaddingTop":{"type":"number"},"bpafbContainerMarginTop":{"type":"number"},"bpafbContainerPaddingRight":{"type":"number"},"bpafbContainerMarginRight":{"type":"number"},"bpafbContainerPaddingBottom":{"type":"number"},"bpafbContainerMarginBottom":{"type":"number"},"bpafbContainerPaddingLeft":{"type":"number"},"bpafbContainerMarginLeft":{"type":"number"},"bpafbContainerPaddingTopTablet":{"type":"number"},"bpafbContainerMarginTopTablet":{"type":"number"},"bpafbContainerPaddingRightTablet":{"type":"number"},"bpafbContainerMarginRightTablet":{"type":"number"},"bpafbContainerPaddingBottomTablet":{"type":"number"},"bpafbContainerMarginBottomTablet":{"type":"number"},"bpafbContainerPaddingLeftTablet":{"type":"number"},"bpafbContainerMarginLeftTablet":{"type":"number"},"bpafbContainerPaddingTopMobile":{"type":"number"},"bpafbContainerMarginTopMobile":{"type":"number"},"bpafbContainerPaddingRightMobile":{"type":"number"},"bpafbContainerMarginRightMobile":{"type":"number"},"bpafbContainerPaddingBottomMobile":{"type":"number"},"bpafbContainerMarginBottomMobile":{"type":"number"},"bpafbContainerPaddingLeftMobile":{"type":"number"},"bpafbContainerMarginLeftMobile":{"type":"number"}},"supports":{"align":["wide","full"],"html":false,"anchor":true},"textdomain":"blockive-premium-addon-for-block-pro","render":"file:./render.php","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./index.css"}');
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	const __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		const cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		const module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			const e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = (module) => {
+/******/ 		const getter = module && module.__esModule ?
+/******/ 			() => (module['default']) :
+/******/ 			() => (module);
+/******/ 		__webpack_require__.d(getter, { a: getter });
+/******/ 		return getter;
+/******/ 	};
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	// define getter/value functions for harmony exports
+/******/ 	__webpack_require__.d = (exports, definition) => {
+/******/ 		for(var key in definition) {
+/******/ 			if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 			}
+/******/ 		}
+/******/ 	};
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	__webpack_require__.o = (obj, prop) => (Object.hasOwn(obj, prop));
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = (exports) => {
+/******/ 		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/ 	
+/************************************************************************/
+let __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!********************************!*\
+  !*** ./src/loop-grid/index.js ***!
+  \********************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style_index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style-index.css */ "./src/loop-grid/style-index.css");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/loop-grid/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./src/loop-grid/block.json");
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_3__.name, {
+  ..._block_json__WEBPACK_IMPORTED_MODULE_3__,
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: () => null
+});
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=index.js.map

@@ -1,1 +1,45 @@
-.bpafb-google-map{border-radius:var(--bpafb-map-radius,0);line-height:0;overflow:hidden}.bpafb-google-map__frame{border:0;display:block;filter:grayscale(var(--bpafb-map-grayscale,0));height:var(--bpafb-map-height,400px);margin:0;transition:filter .3s ease;width:100%}.bpafb-google-map:hover .bpafb-google-map__frame{filter:grayscale(var(--bpafb-map-hover-grayscale,var(--bpafb-map-grayscale,0)))}.bpafb-google-map__empty{background:#f3f4f6;line-height:1.5;margin:0;padding:40px 16px;text-align:center}@media (max-width:1024px){.bpafb-google-map__frame{height:var(--bpafb-map-height-tablet,var(--bpafb-map-height,400px))}}@media (max-width:767px){.bpafb-google-map__frame{height:var(--bpafb-map-height-mobile,var(--bpafb-map-height-tablet,var(--bpafb-map-height,400px)))}}
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/google-maps/style.css ***!
+  \*******************************************************************************************************************************************************************************/
+.bpafb-google-map {
+	overflow: hidden;
+	line-height: 0;
+	border-radius: var(--bpafb-map-radius, 0);
+}
+
+.bpafb-google-map__frame {
+	display: block;
+	width: 100%;
+	height: var(--bpafb-map-height, 400px);
+	margin: 0;
+	border: 0;
+	filter: grayscale(var(--bpafb-map-grayscale, 0%));
+	transition: filter 0.3s ease;
+}
+
+.bpafb-google-map:hover .bpafb-google-map__frame {
+	filter: grayscale(var(--bpafb-map-hover-grayscale, var(--bpafb-map-grayscale, 0%)));
+}
+
+.bpafb-google-map__empty {
+	margin: 0;
+	padding: 40px 16px;
+	line-height: 1.5;
+	text-align: center;
+	background: #f3f4f6;
+}
+
+@media (max-width: 1024px) {
+	.bpafb-google-map__frame {
+		height: var(--bpafb-map-height-tablet, var(--bpafb-map-height, 400px));
+	}
+}
+
+@media (max-width: 767px) {
+	.bpafb-google-map__frame {
+		height: var(--bpafb-map-height-mobile, var(--bpafb-map-height-tablet, var(--bpafb-map-height, 400px)));
+	}
+}
+
+
+/*# sourceMappingURL=style-index.css.map*/

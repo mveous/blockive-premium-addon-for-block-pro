@@ -1,1 +1,30 @@
-document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(".bpafb-image-accordion").forEach(e=>{const t=e.querySelectorAll(".bpafb-image-accordion-item");t.forEach(e=>{const a=()=>{t.forEach(e=>{e.classList.remove("active"),e.setAttribute("aria-current","false")}),e.classList.add("active"),e.setAttribute("aria-current","true")};e.addEventListener("click",a),e.addEventListener("keydown",e=>{"Enter"!==e.key&&" "!==e.key||(e.preventDefault(),a())})})})});
+/******/ (() => { // webpackBootstrap
+/*!*************************************!*\
+  !*** ./src/image-accordion/view.js ***!
+  \*************************************/
+document.addEventListener('DOMContentLoaded', () => {
+  const accordions = document.querySelectorAll('.bpafb-image-accordion');
+  accordions.forEach(accordion => {
+    const items = accordion.querySelectorAll('.bpafb-image-accordion-item');
+    items.forEach(item => {
+      const activateItem = () => {
+        items.forEach(i => {
+          i.classList.remove('active');
+          i.setAttribute('aria-current', 'false');
+        });
+        item.classList.add('active');
+        item.setAttribute('aria-current', 'true');
+      };
+      item.addEventListener('click', activateItem);
+      item.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          activateItem();
+        }
+      });
+    });
+  });
+});
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

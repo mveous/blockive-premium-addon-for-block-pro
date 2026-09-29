@@ -1,1 +1,45 @@
-.wp-block-blockive-premium-addon-for-block-drop-caps{position:relative}.wp-block-blockive-premium-addon-for-block-drop-caps.has-drop-cap:not(:focus):first-letter{background-color:var(--bpafb-dc-bg,transparent);border-color:var(--bpafb-dc-border-color,transparent);border-radius:var(--bpafb-dc-radius,0);border-style:var(--bpafb-dc-border-style,solid);border-width:var(--bpafb-dc-border-width,0);box-shadow:var(--bpafb-dc-shadow,none);color:var(--bpafb-dc-color,inherit);float:left;font-family:var(--bpafb-dc-letter-font-family,inherit);font-size:var(--bpafb-dc-letter-font-size,50px);font-weight:var(--bpafb-dc-letter-font-weight,inherit);letter-spacing:var(--bpafb-dc-letter-letter-spacing,normal);line-height:1;line-height:var(--bpafb-dc-letter-line-height,1);margin-bottom:calc(var(--bpafb-dc-space, 10px)/4);margin-right:var(--bpafb-dc-space,10px);padding:var(--bpafb-dc-pd,10px);-webkit-text-decoration:var(--bpafb-dc-letter-text-decoration,none);text-decoration:var(--bpafb-dc-letter-text-decoration,none);text-transform:var(--bpafb-dc-letter-text-transform,uppercase);transition:all .3s ease}.wp-block-blockive-premium-addon-for-block-drop-caps.has-drop-cap:empty:first-letter{display:none}.wp-block-blockive-premium-addon-for-block-drop-caps.has-drop-cap:not(:focus):hover:first-letter{box-shadow:var(--bpafb-dc-shadow-hover,none)}
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/drop-caps/index.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+.wp-block-blockive-premium-addon-for-block-drop-caps {
+  position: relative;
+  /*
+   * Drop Cap styling via ::first-letter.
+   * :not(:focus) is necessary for the editor to avoid breaking typing when active,
+   * and we use it here everywhere to keep consistency.
+   */
+}
+.wp-block-blockive-premium-addon-for-block-drop-caps.has-drop-cap:not(:focus)::first-letter {
+  float: left;
+  line-height: 1;
+  margin-right: var(--bpafb-dc-space, 10px);
+  margin-bottom: calc(var(--bpafb-dc-space, 10px) / 4);
+  padding: var(--bpafb-dc-pd, 10px);
+  color: var(--bpafb-dc-color, inherit);
+  background-color: var(--bpafb-dc-bg, transparent);
+  border-width: var(--bpafb-dc-border-width, 0px);
+  border-style: var(--bpafb-dc-border-style, solid);
+  border-color: var(--bpafb-dc-border-color, transparent);
+  border-radius: var(--bpafb-dc-radius, 0px);
+  box-shadow: var(--bpafb-dc-shadow, none);
+  font-family: var(--bpafb-dc-letter-font-family, inherit);
+  font-size: var(--bpafb-dc-letter-font-size, 50px);
+  font-weight: var(--bpafb-dc-letter-font-weight, inherit);
+  line-height: var(--bpafb-dc-letter-line-height, 1);
+  letter-spacing: var(--bpafb-dc-letter-letter-spacing, normal);
+  text-transform: var(--bpafb-dc-letter-text-transform, uppercase);
+  -webkit-text-decoration: var(--bpafb-dc-letter-text-decoration, none);
+          text-decoration: var(--bpafb-dc-letter-text-decoration, none);
+  transition: all 0.3s ease;
+}
+.wp-block-blockive-premium-addon-for-block-drop-caps {
+  /* Hide if empty */
+}
+.wp-block-blockive-premium-addon-for-block-drop-caps.has-drop-cap:empty::first-letter {
+  display: none;
+}
+.wp-block-blockive-premium-addon-for-block-drop-caps.has-drop-cap:not(:focus):hover::first-letter {
+  box-shadow: var(--bpafb-dc-shadow-hover, none);
+}
+
+/*# sourceMappingURL=index.css.map*/

@@ -1,1 +1,30 @@
-.bpafb-lottie-wrapper{margin:20px 0;width:100%}.bpafb-lottie-container{display:inline-block;margin:0 auto}.bpafb-lottie-wrapper[style*="text-align: center"] .bpafb-lottie-container{display:flex;justify-content:center;width:100%}.bpafb-lottie-wrapper[style*="text-align: right"] .bpafb-lottie-container{display:flex;justify-content:flex-end}.bpafb-lottie-wrapper[style*="text-align: left"] .bpafb-lottie-container{display:flex;justify-content:flex-start}
+/*!********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/lottie/style-index.css ***!
+  \********************************************************************************************************************************************************************************/
+.bpafb-lottie-wrapper {
+	width: 100%;
+	margin: 20px 0;
+}
+
+.bpafb-lottie-container {
+	display: inline-block;
+	margin: 0 auto;
+}
+
+.bpafb-lottie-wrapper[style*="text-align: center"] .bpafb-lottie-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.bpafb-lottie-wrapper[style*="text-align: right"] .bpafb-lottie-container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.bpafb-lottie-wrapper[style*="text-align: left"] .bpafb-lottie-container {
+	display: flex;
+	justify-content: flex-start;
+}
+
+/*# sourceMappingURL=index.css.map*/

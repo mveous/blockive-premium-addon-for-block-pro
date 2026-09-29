@@ -1,1 +1,186 @@
-(()=>{const e=window.matchMedia("(prefers-reduced-motion: reduce)");function t(t){if(t.dataset.bpafbReady)return;const a=[...t.querySelectorAll(".bpafb-slides__slide")];if(a.length<2)return;t.dataset.bpafbReady="1";const n=t.querySelector(".bpafb-slides__track"),s=[...t.querySelectorAll(".bpafb-slides__dot")],r=t.querySelector(".bpafb-slides__arrow--prev"),i=t.querySelector(".bpafb-slides__arrow--next"),l=t.querySelector(".bpafb-slides__pause"),d="1"===t.dataset.loop,o=parseInt(t.dataset.interval,10)||5e3,c=t.classList.contains("bpafb-slides--slide");let u=0,b=null,f=e.matches,p=!1,v=!1;const y="1"===t.dataset.autoplay;function m(e){const t=a.length-1;let l=e;l<0?l=d?t:0:l>t&&(l=d?0:t),u=l,a.forEach((e,t)=>{const a=t===u;e.classList.toggle("is-active",a),e.toggleAttribute("inert",!a),e.setAttribute("aria-hidden",a?"false":"true")}),s.forEach((e,t)=>{e.classList.toggle("is-active",t===u),t===u?e.setAttribute("aria-current","true"):e.removeAttribute("aria-current")}),c&&(n.style.transform=`translateX(${-100*u}%)`),r&&(r.disabled=!d&&0===u),i&&(i.disabled=!d&&u===t)}function L(){window.clearTimeout(b),b=null,!y||f||p||v||document.hidden||(b=window.setTimeout(()=>{(d||u!==a.length-1)&&(m(u+1),L())},o))}function E(){if(!l)return;l.setAttribute("aria-label",f?l.dataset.labelPlay:l.dataset.labelPause);const e=l.querySelector("i");e&&(e.className=f?"fa-solid fa-play":"fa-solid fa-pause")}const h=e=>{m(u+e),L()};r&&r.addEventListener("click",()=>h(-1)),i&&i.addEventListener("click",()=>h(1)),s.forEach((e,t)=>e.addEventListener("click",()=>{m(t),L()})),l&&l.addEventListener("click",()=>{f=!f,E(),L()}),"1"===t.dataset.pauseHover&&(t.addEventListener("mouseenter",()=>{p=!0,L()}),t.addEventListener("mouseleave",()=>{p=!1,L()})),t.addEventListener("focusin",()=>{v=!0,L()}),t.addEventListener("focusout",e=>{t.contains(e.relatedTarget)||(v=!1,L())}),document.addEventListener("visibilitychange",L),t.addEventListener("keydown",e=>{e.target.closest("input, textarea, select")||("ArrowLeft"===e.key?h("rtl"===document.dir?1:-1):"ArrowRight"===e.key&&h("rtl"===document.dir?-1:1))});let g=null,w=null;t.addEventListener("pointerdown",e=>{"mouse"!==e.pointerType&&(g=e.clientX,w=e.clientY)},{passive:!0}),t.addEventListener("pointerup",e=>{if(null===g)return;const t=e.clientX-g,a=e.clientY-w;g=null,Math.abs(t)>50&&Math.abs(t)>Math.abs(a)&&h(t<0?1:-1)},{passive:!0}),E(),m(0),L()}function a(){document.querySelectorAll(".bpafb-slides").forEach(t)}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",a):a()})();
+/******/ (() => { // webpackBootstrap
+/*!****************************!*\
+  !*** ./src/slides/view.js ***!
+  \****************************/
+/**
+ * Slides block: a dependency-free slider following the WAI-ARIA carousel
+ * pattern - arrows, dots, a pause button, keyboard arrows, touch swipe,
+ * autoplay that pauses on hover / focus / hidden tab, and no autoplay for
+ * visitors who prefer reduced motion.
+ */
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+function initSlides(root) {
+  if (root.dataset.bpafbReady) {
+    return;
+  }
+  const slides = [...root.querySelectorAll('.bpafb-slides__slide')];
+  if (slides.length < 2) {
+    return;
+  }
+  root.dataset.bpafbReady = '1';
+  const track = root.querySelector('.bpafb-slides__track');
+  const dots = [...root.querySelectorAll('.bpafb-slides__dot')];
+  const prev = root.querySelector('.bpafb-slides__arrow--prev');
+  const next = root.querySelector('.bpafb-slides__arrow--next');
+  const pauseBtn = root.querySelector('.bpafb-slides__pause');
+  const loop = root.dataset.loop === '1';
+  const interval = parseInt(root.dataset.interval, 10) || 5000;
+  const isSlide = root.classList.contains('bpafb-slides--slide');
+  let index = 0;
+  let timer = null;
+  let userPaused = reducedMotion.matches;
+  let hoverPaused = false;
+  let focusPaused = false;
+  const autoplay = root.dataset.autoplay === '1';
+  function goTo(target) {
+    const last = slides.length - 1;
+    let n = target;
+    if (n < 0) {
+      n = loop ? last : 0;
+    } else if (n > last) {
+      n = loop ? 0 : last;
+    }
+    index = n;
+    slides.forEach((slide, i) => {
+      const active = i === index;
+      slide.classList.toggle('is-active', active);
+      slide.toggleAttribute('inert', !active);
+      slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === index);
+      if (i === index) {
+        dot.setAttribute('aria-current', 'true');
+      } else {
+        dot.removeAttribute('aria-current');
+      }
+    });
+    if (isSlide) {
+      track.style.transform = `translateX(${-100 * index}%)`;
+    }
+    if (prev) {
+      prev.disabled = !loop && index === 0;
+    }
+    if (next) {
+      next.disabled = !loop && index === last;
+    }
+  }
+  function schedule() {
+    window.clearTimeout(timer);
+    timer = null;
+    if (!autoplay || userPaused || hoverPaused || focusPaused || document.hidden) {
+      return;
+    }
+    timer = window.setTimeout(() => {
+      if (!loop && index === slides.length - 1) {
+        return;
+      }
+      goTo(index + 1);
+      schedule();
+    }, interval);
+  }
+  function updatePauseButton() {
+    if (!pauseBtn) {
+      return;
+    }
+    pauseBtn.setAttribute('aria-label', userPaused ? pauseBtn.dataset.labelPlay : pauseBtn.dataset.labelPause);
+    const icon = pauseBtn.querySelector('i');
+    if (icon) {
+      icon.className = userPaused ? 'fa-solid fa-play' : 'fa-solid fa-pause';
+    }
+  }
+  const step = delta => {
+    goTo(index + delta);
+    schedule();
+  };
+  if (prev) {
+    prev.addEventListener('click', () => step(-1));
+  }
+  if (next) {
+    next.addEventListener('click', () => step(1));
+  }
+  dots.forEach((dot, i) => dot.addEventListener('click', () => {
+    goTo(i);
+    schedule();
+  }));
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', () => {
+      userPaused = !userPaused;
+      updatePauseButton();
+      schedule();
+    });
+  }
+  if (root.dataset.pauseHover === '1') {
+    root.addEventListener('mouseenter', () => {
+      hoverPaused = true;
+      schedule();
+    });
+    root.addEventListener('mouseleave', () => {
+      hoverPaused = false;
+      schedule();
+    });
+  }
+
+  // Autoplay must stop while a keyboard user is inside the carousel.
+  root.addEventListener('focusin', () => {
+    focusPaused = true;
+    schedule();
+  });
+  root.addEventListener('focusout', event => {
+    if (!root.contains(event.relatedTarget)) {
+      focusPaused = false;
+      schedule();
+    }
+  });
+  document.addEventListener('visibilitychange', schedule);
+  root.addEventListener('keydown', event => {
+    if (event.target.closest('input, textarea, select')) {
+      return;
+    }
+    if (event.key === 'ArrowLeft') {
+      step(document.dir === 'rtl' ? 1 : -1);
+    } else if (event.key === 'ArrowRight') {
+      step(document.dir === 'rtl' ? -1 : 1);
+    }
+  });
+
+  // Touch / pen swipe.
+  let startX = null;
+  let startY = null;
+  root.addEventListener('pointerdown', event => {
+    if (event.pointerType === 'mouse') {
+      return;
+    }
+    startX = event.clientX;
+    startY = event.clientY;
+  }, {
+    passive: true
+  });
+  root.addEventListener('pointerup', event => {
+    if (startX === null) {
+      return;
+    }
+    const dx = event.clientX - startX;
+    const dy = event.clientY - startY;
+    startX = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      step(dx < 0 ? 1 : -1);
+    }
+  }, {
+    passive: true
+  });
+  updatePauseButton();
+  goTo(0);
+  schedule();
+}
+function init() {
+  document.querySelectorAll('.bpafb-slides').forEach(initSlides);
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

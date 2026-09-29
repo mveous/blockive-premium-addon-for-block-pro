@@ -1,1 +1,301 @@
-(()=>{"use strict";const e=window.matchMedia("(prefers-reduced-motion: reduce)"),t=window.matchMedia("(max-width: 767px)");function l(l){if(l.dataset.bpafbReady)return;l.dataset.bpafbReady="1";const n=l.querySelector(".bpafb-toc__body"),a=l.querySelector(".bpafb-toc__empty"),r=l.querySelector(".bpafb-toc__toggle"),o=parseInt(l.dataset.offset,10)||0,c=l.classList.contains("bpafb-toc--marker-numbers"),s=function(e){const t=(e.dataset.headings||"h2,h3,h4").split(",").filter(e=>/^h[1-6]$/.test(e));if(!t.length)return[];const l=e.dataset.container&&function(e,t=!1){try{return t?[...document.querySelectorAll(e)]:document.querySelector(e)}catch(e){return t?[]:null}}(e.dataset.container)||document.querySelector('main, [role="main"], .wp-site-blocks')||document.body,n=e.dataset.exclude||"";return[...l.querySelectorAll(t.join(","))].filter(e=>!e.closest(".bpafb-toc")&&!e.closest(".bpafb-toc-exclude")&&!e.closest(".bpafb-carousel")&&!(n&&function(e,t){try{return!!e.closest(t)}catch(e){return!1}}(e,n))&&""!==e.textContent.trim()&&e.getClientRects().length>0)}(l);if(s.length){const e=s.map(e=>{var t;return e.id||(e.id=function(e){let t=e,l=2;for(;document.getElementById(t);)t=`${e}-${l++}`;return t}(e.textContent.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"").replace(/[^\p{L}\p{N}\s-]/gu,"").trim().replace(/[\s-]+/g,"-")||"section")),o&&(e.style.scrollMarginTop=`${o}px`),{level:(t=e.tagName,parseInt(String(t).replace(/\D/g,""),10)||2),text:e.textContent.trim(),id:e.id}});n.append(function(e,t,{ordered:l,hierarchical:n}){const a=()=>{const t=e.createElement(l?"ol":"ul");return t.className="bpafb-toc__list",t},r=a(),o=[{level:null,list:r}];return t.forEach(t=>{if(n){for(;o.length>1&&o[o.length-1].level>t.level;)o.pop();const e=o[o.length-1];if(null!==e.level&&t.level>e.level&&e.list.lastElementChild){const l=a();e.list.lastElementChild.append(l),o.push({level:t.level,list:l})}}const l=o[o.length-1];null===l.level&&(l.level=t.level);const r=e.createElement("li");r.className="bpafb-toc__item";const c=e.createElement("a");c.className="bpafb-toc__link",c.href=`#${t.id}`,c.textContent=t.text,r.append(c),o[o.length-1].list.append(r)}),r}(document,e,{ordered:c,hierarchical:"1"===l.dataset.hierarchical}))}else a.hidden=!1;const i=[...l.querySelectorAll(".bpafb-toc__link")];i.forEach(t=>t.addEventListener("click",l=>{const n=document.getElementById(t.hash.slice(1));n&&(l.preventDefault(),n.scrollIntoView({behavior:e.matches?"auto":"smooth",block:"start"}),n.hasAttribute("tabindex")||n.setAttribute("tabindex","-1"),n.focus({preventScroll:!0}),window.history.pushState(null,"",t.hash))}));let d=!1;const u=()=>{d=!1;let e=-1;s.forEach((t,l)=>{t.getBoundingClientRect().top<=o+12&&(e=l)}),i.forEach((t,l)=>{t.classList.toggle("is-active",l===e),l===e?t.setAttribute("aria-current","location"):t.removeAttribute("aria-current")})};if(i.length&&(window.addEventListener("scroll",()=>{d||(d=!0,window.requestAnimationFrame(u))},{passive:!0}),u()),r){const e=e=>{r.setAttribute("aria-expanded",e?"true":"false"),n.hidden=!e,l.classList.toggle("is-collapsed",!e)};r.addEventListener("click",()=>e("true"!==r.getAttribute("aria-expanded")));const a="1"===l.dataset.collapsed||"1"===l.dataset.collapsedMobile&&t.matches;e(!a)}}function n(){document.querySelectorAll(".bpafb-toc").forEach(l)}"complete"===document.readyState?n():window.addEventListener("load",n)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/table-of-contents/toc-list.js"
+/*!*******************************************!*\
+  !*** ./src/table-of-contents/toc-list.js ***!
+  \*******************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   buildTocList: () => (/* binding */ buildTocList),
+/* harmony export */   headingLevel: () => (/* binding */ headingLevel)
+/* harmony export */ });
+/**
+ * Builds the Table of Contents list from `{ level, text, id }` items.
+ * Shared by view.js (front end) and edit.js (editor preview), so both
+ * nest the same way.
+ */
+
+const headingLevel = tagName => parseInt(String(tagName).replace(/\D/g, ''), 10) || 2;
+
+/**
+ * @param {Document} doc                    Document to create nodes in.
+ * @param {Array}    items                  `{ level, text, id }` in page order.
+ * @param {Object}   options
+ * @param {boolean}  options.ordered        <ol> instead of <ul>.
+ * @param {boolean}  options.hierarchical   Nest lower headings under higher ones.
+ * @return {HTMLElement} The list.
+ */
+function buildTocList(doc, items, {
+  ordered,
+  hierarchical
+}) {
+  const newList = () => {
+    const list = doc.createElement(ordered ? 'ol' : 'ul');
+    list.className = 'bpafb-toc__list';
+    return list;
+  };
+  const rootList = newList();
+  // Each open list, with the heading level of the items in it (set by
+  // its first item).
+  const stack = [{
+    level: null,
+    list: rootList
+  }];
+  items.forEach(item => {
+    if (hierarchical) {
+      // Close lists deeper than this heading.
+      while (stack.length > 1 && stack[stack.length - 1].level > item.level) {
+        stack.pop();
+      }
+      // A lower heading opens a list inside the previous item.
+      const current = stack[stack.length - 1];
+      if (current.level !== null && item.level > current.level && current.list.lastElementChild) {
+        const list = newList();
+        current.list.lastElementChild.append(list);
+        stack.push({
+          level: item.level,
+          list
+        });
+      }
+    }
+    const current = stack[stack.length - 1];
+    if (current.level === null) {
+      current.level = item.level;
+    }
+    const li = doc.createElement('li');
+    li.className = 'bpafb-toc__item';
+    const link = doc.createElement('a');
+    link.className = 'bpafb-toc__link';
+    link.href = `#${item.id}`;
+    link.textContent = item.text;
+    li.append(link);
+    stack[stack.length - 1].list.append(li);
+  });
+  return rootList;
+}
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	const __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		const cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		const module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			const e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	// define getter/value functions for harmony exports
+/******/ 	__webpack_require__.d = (exports, definition) => {
+/******/ 		for(var key in definition) {
+/******/ 			if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 			}
+/******/ 		}
+/******/ 	};
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	__webpack_require__.o = (obj, prop) => (Object.hasOwn(obj, prop));
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = (exports) => {
+/******/ 		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/ 	
+/************************************************************************/
+let __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!***************************************!*\
+  !*** ./src/table-of-contents/view.js ***!
+  \***************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _toc_list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toc-list */ "./src/table-of-contents/toc-list.js");
+/**
+ * Table of Contents: finds the page's headings, gives each an id, builds
+ * the (optionally nested) list of links, highlights the section being
+ * read, and handles the collapse toggle. Markup from render.php.
+ */
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const mobile = window.matchMedia('(max-width: 767px)');
+function slugify(text) {
+  return text.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^\p{L}\p{N}\s-]/gu, '').trim().replace(/[\s-]+/g, '-') || 'section';
+}
+function uniqueId(base) {
+  let id = base;
+  let n = 2;
+  while (document.getElementById(id)) {
+    id = `${base}-${n++}`;
+  }
+  return id;
+}
+function safeQuery(selector, all = false) {
+  try {
+    return all ? [...document.querySelectorAll(selector)] : document.querySelector(selector);
+  } catch (e) {
+    return all ? [] : null; // Invalid selector typed in the block settings.
+  }
+}
+function safeMatches(node, selector) {
+  try {
+    return !!node.closest(selector);
+  } catch (e) {
+    return false;
+  }
+}
+function findHeadings(root) {
+  const tags = (root.dataset.headings || 'h2,h3,h4').split(',').filter(t => /^h[1-6]$/.test(t));
+  if (!tags.length) {
+    return [];
+  }
+  const container = root.dataset.container && safeQuery(root.dataset.container) || document.querySelector('main, [role="main"], .wp-site-blocks') || document.body;
+  const exclude = root.dataset.exclude || '';
+  return [...container.querySelectorAll(tags.join(','))].filter(heading => !heading.closest('.bpafb-toc') && !heading.closest('.bpafb-toc-exclude') &&
+  // Card titles in a carousel (e.g. Loop Carousel) are not page sections.
+  !heading.closest('.bpafb-carousel') && !(exclude && safeMatches(heading, exclude)) && heading.textContent.trim() !== '' && heading.getClientRects().length > 0);
+}
+function initToc(root) {
+  if (root.dataset.bpafbReady) {
+    return;
+  }
+  root.dataset.bpafbReady = '1';
+  const body = root.querySelector('.bpafb-toc__body');
+  const empty = root.querySelector('.bpafb-toc__empty');
+  const toggle = root.querySelector('.bpafb-toc__toggle');
+  const offset = parseInt(root.dataset.offset, 10) || 0;
+  const ordered = root.classList.contains('bpafb-toc--marker-numbers');
+  const headings = findHeadings(root);
+  if (!headings.length) {
+    empty.hidden = false;
+  } else {
+    const items = headings.map(heading => {
+      if (!heading.id) {
+        heading.id = uniqueId(slugify(heading.textContent));
+      }
+      if (offset) {
+        heading.style.scrollMarginTop = `${offset}px`;
+      }
+      return {
+        level: (0,_toc_list__WEBPACK_IMPORTED_MODULE_0__.headingLevel)(heading.tagName),
+        text: heading.textContent.trim(),
+        id: heading.id
+      };
+    });
+    body.append((0,_toc_list__WEBPACK_IMPORTED_MODULE_0__.buildTocList)(document, items, {
+      ordered,
+      hierarchical: root.dataset.hierarchical === '1'
+    }));
+  }
+  const links = [...root.querySelectorAll('.bpafb-toc__link')];
+
+  // Smooth scroll, then move focus to the heading so keyboard and screen
+  // reader users continue reading from there.
+  links.forEach(link => link.addEventListener('click', event => {
+    const target = document.getElementById(link.hash.slice(1));
+    if (!target) {
+      return;
+    }
+    event.preventDefault();
+    target.scrollIntoView({
+      behavior: reducedMotion.matches ? 'auto' : 'smooth',
+      block: 'start'
+    });
+    if (!target.hasAttribute('tabindex')) {
+      target.setAttribute('tabindex', '-1');
+    }
+    target.focus({
+      preventScroll: true
+    });
+    window.history.pushState(null, '', link.hash);
+  }));
+
+  // Highlight the link of the section being read: the last heading
+  // that has scrolled past the top (plus the offset).
+  let ticking = false;
+  const spy = () => {
+    ticking = false;
+    let active = -1;
+    headings.forEach((heading, i) => {
+      if (heading.getBoundingClientRect().top <= offset + 12) {
+        active = i;
+      }
+    });
+    links.forEach((link, i) => {
+      link.classList.toggle('is-active', i === active);
+      if (i === active) {
+        link.setAttribute('aria-current', 'location');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+  if (links.length) {
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(spy);
+      }
+    }, {
+      passive: true
+    });
+    spy();
+  }
+  if (toggle) {
+    const setOpen = open => {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      body.hidden = !open;
+      root.classList.toggle('is-collapsed', !open);
+    };
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    const collapsed = root.dataset.collapsed === '1' || root.dataset.collapsedMobile === '1' && mobile.matches;
+    setOpen(!collapsed);
+  }
+}
+function init() {
+  document.querySelectorAll('.bpafb-toc').forEach(initToc);
+}
+
+// Run after the rest of the page's scripts have had a chance to add
+// content, so late-rendered headings are included.
+if (document.readyState === 'complete') {
+  init();
+} else {
+  window.addEventListener('load', init);
+}
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

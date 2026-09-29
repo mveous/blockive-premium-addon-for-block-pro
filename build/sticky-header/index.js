@@ -1,1 +1,226 @@
-(()=>{"use strict";var e={6844(){function e(){const e=document.querySelector(".bpafb-pro-header.bpafb-sticky");if(!e)return;const s=Math.max(0,parseInt(e.dataset.scrolledOffset,10)||0),t="scroll-up"===e.dataset.behavior;let o=window.scrollY,i=!1;const n=()=>{i=!1;const n=window.scrollY;if("sticky"!==window.getComputedStyle(e).position)return e.classList.remove("is-scrolled","is-hidden"),void(o=n);e.classList.toggle("is-scrolled",n>s),t&&(n<=e.offsetHeight?e.classList.remove("is-hidden"):n>o+6?e.classList.add("is-hidden"):n<o-6&&e.classList.remove("is-hidden")),(Math.abs(n-o)>6||n<=s)&&(o=n)},r=()=>{i||(i=!0,window.requestAnimationFrame(n))};window.addEventListener("scroll",r,{passive:!0}),window.addEventListener("resize",r,{passive:!0}),n()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e):e()}};const s={};function t(o){const i=s[o];if(void 0!==i)return i.exports;const n=s[o]={exports:{}};return e[o](n,n.exports,t),n.exports}t.m=e,(()=>{const e=[];t.O=(s,o,i)=>{if(!o){for(var n=0;n<e.length;n++){let[o,i]=e[n],d=!0;for(var r=0;r<o.length;r++)t.O.j(o[r])?o.splice(r--,1):d=!1;if(d){e.splice(n--,1);const t=i();void 0!==t&&(s=t)}}return s}e.push([o,i])}})(),t.o=(e,s)=>Object.hasOwn(e,s),(()=>{const e={6553:0,9293:0};t.O.j=s=>0===e[s];const s=(s,o)=>{let[i,n,r]=o;var d,a,l=0;if(i.some(s=>0!==e[s])){for(d in n)t.o(n,d)&&(t.m[d]=n[d]);if(r)var c=r(t)}for(s&&s(o);l<i.length;l++)a=i[l],t.o(e,a)&&e[a]&&e[a][0](),e[a]=0;return t.O(c)},o=globalThis.webpackChunkblockive_premium_addon_for_block_pro||=[];o.forEach(s.bind(null,0)),o.push=s.bind(null,o.push.bind(o))})();let o=t.O(void 0,[9293],()=>t(6844));o=t.O(o)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/sticky-header/index.js"
+/*!************************************!*\
+  !*** ./src/sticky-header/index.js ***!
+  \************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/sticky-header/style.css");
+/**
+ * Sticky Header (Bpafb_Pro_Sticky): adds `is-scrolled` to the sticky
+ * Header template once the page has scrolled past the scrolled offset, and
+ * for "show on scroll up" adds `is-hidden` while scrolling down. Nothing
+ * happens on devices where the header is not sticky.
+ */
+
+
+// Ignore tiny scroll changes (trackpad jitter) when deciding direction.
+const THRESHOLD = 6;
+function init() {
+  const header = document.querySelector('.bpafb-pro-header.bpafb-sticky');
+  if (!header) {
+    return;
+  }
+  const offset = Math.max(0, parseInt(header.dataset.scrolledOffset, 10) || 0);
+  const hideOnDown = header.dataset.behavior === 'scroll-up';
+  let lastY = window.scrollY;
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const y = window.scrollY;
+    if (window.getComputedStyle(header).position !== 'sticky') {
+      header.classList.remove('is-scrolled', 'is-hidden');
+      lastY = y;
+      return;
+    }
+    header.classList.toggle('is-scrolled', y > offset);
+    if (hideOnDown) {
+      if (y <= header.offsetHeight) {
+        header.classList.remove('is-hidden');
+      } else if (y > lastY + THRESHOLD) {
+        header.classList.add('is-hidden');
+      } else if (y < lastY - THRESHOLD) {
+        header.classList.remove('is-hidden');
+      }
+    }
+    if (Math.abs(y - lastY) > THRESHOLD || y <= offset) {
+      lastY = y;
+    }
+  };
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+  };
+  window.addEventListener('scroll', onScroll, {
+    passive: true
+  });
+  window.addEventListener('resize', onScroll, {
+    passive: true
+  });
+  update();
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+
+/***/ },
+
+/***/ "./src/sticky-header/style.css"
+/*!*************************************!*\
+  !*** ./src/sticky-header/style.css ***!
+  \*************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	const __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		const cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		const module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			const e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		const deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn) => {
+/******/ 			if(chunkIds) {
+/******/ 				deferred.push([chunkIds, fn]);
+/******/ 				return;
+/******/ 			}
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				let [chunkIds, fn] = deferred[i];
+/******/ 				let fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if (__webpack_require__.O.j(chunkIds[j])) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					const r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	__webpack_require__.o = (obj, prop) => (Object.hasOwn(obj, prop));
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = (exports) => {
+/******/ 		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		const installedChunks = {
+/******/ 			"sticky-header/index": 0,
+/******/ 			"sticky-header/style-index": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		const webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			let [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		const chunkLoadingGlobal = globalThis["webpackChunkblockive_premium_addon_for_block_pro"] ||= [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	let __webpack_exports__ = __webpack_require__.O(undefined, ["sticky-header/style-index"], () => (__webpack_require__("./src/sticky-header/index.js")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;
+//# sourceMappingURL=index.js.map

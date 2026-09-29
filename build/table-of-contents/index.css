@@ -1,1 +1,30 @@
-.bpafb-toc-editor__tags{display:grid;gap:4px 8px;grid-template-columns:repeat(3,1fr)}.bpafb-toc-editor__tags .components-base-control{margin-bottom:0}.bpafb-toc-editor__collapse{background:none;border:0;color:inherit;cursor:pointer;padding:4px}.bpafb-toc-editor__note{font-size:12px;font-style:italic;margin:0 0 10px;opacity:.7}
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/table-of-contents/editor.css ***!
+  \**************************************************************************************************************************************************************************************/
+.bpafb-toc-editor__tags {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 4px 8px;
+}
+
+.bpafb-toc-editor__tags .components-base-control {
+	margin-bottom: 0;
+}
+
+.bpafb-toc-editor__collapse {
+	padding: 4px;
+	color: inherit;
+	background: none;
+	border: 0;
+	cursor: pointer;
+}
+
+.bpafb-toc-editor__note {
+	margin: 0 0 10px;
+	font-size: 12px;
+	font-style: italic;
+	opacity: 0.7;
+}
+
+
+/*# sourceMappingURL=index.css.map*/

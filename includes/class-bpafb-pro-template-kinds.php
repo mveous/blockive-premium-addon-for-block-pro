@@ -108,11 +108,11 @@ class Bpafb_Pro_Template_Kinds
 		add_action('init', [$this, 'register_meta']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_assets']);
 
-		// The free plugin's own admin-list columns only show
-		// _bpafb_template_type and _bpafb_display_condition_scope, which
-		// mean nothing for a non-"single" template. We add a column that
-		// shows the real answer instead.
-		add_filter('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_columns', [$this, 'add_admin_column']);
+		// Override the free plugin's admin-list columns so "Template Type"
+		// and "Display Condition" accurately reflect the template's kind
+		// (e.g. Header, Footer, Archive) and condition rules instead of
+		// defaulting to single-post override values.
+		remove_action('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_custom_column', [Bpafb_Template_Post_Type::get_instance(), 'render_admin_column'], 10);
 		add_action('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_custom_column', [$this, 'render_admin_column'], 10, 2);
 	}
 
@@ -170,78 +170,131 @@ class Bpafb_Pro_Template_Kinds
 	];
 
 	/**
-	 * Adds the "Location (Pro)" column, right after the free plugin's own
-	 * two columns.
-	 *
-	 * @param array $columns Existing column list.
-	 * @return array
-	 */
-	public function add_admin_column($columns)
-	{
-		$columns['bpafb_pro_location'] = __('Location (Pro)', 'blockive-premium-addon-for-block-pro');
-		return $columns;
-	}
-
-	/**
-	 * Fills in the "Location (Pro)" column. Blank for a "single" kind
-	 * template, since the free plugin's own two columns already describe
-	 * it well. For every other kind, shows the kind plus a short summary
-	 * of its condition rules.
+	 * Renders the "Template Type" and "Display Condition" columns,
+	 * accounting for both Pro kinds (Header, Footer, Archive, 404, etc.)
+	 * and single-post override templates.
 	 *
 	 * @param string $column  Column key.
 	 * @param int    $post_id Post ID.
 	 */
 	public function render_admin_column($column, $post_id)
 	{
-		if ('bpafb_pro_location' !== $column) {
+		if ('bpafb_template_type' !== $column && 'bpafb_display_condition' !== $column) {
 			return;
 		}
 
 		$kind = self::get_kind($post_id);
-		if ('single' === $kind) {
-			echo '&#8212;';
-			return;
-		}
 
-		$kind_label = self::KIND_LABELS[$kind] ?? $kind;
-		$rules      = self::get_condition_rules($post_id);
+		if ('bpafb_template_type' === $column) {
+			if ('single' === $kind) {
+				$post_type_slug = get_post_meta($post_id, '_bpafb_template_type', true) ?: 'post';
+				$post_type_obj  = get_post_type_object($post_type_slug);
+				$type_label     = $post_type_obj ? $post_type_obj->labels->singular_name : $post_type_slug;
 
-		if (empty($rules)) {
-			printf(
-				/* translators: %s: template kind, e.g. "Header". */
-				esc_html__('%s (no conditions - matches nowhere)', 'blockive-premium-addon-for-block-pro'),
-				esc_html($kind_label)
-			);
-			return;
-		}
-
-		$rule_summaries = array_map(function ($rule) {
-			$type  = isset($rule['type']) ? $rule['type'] : '';
-			$value = isset($rule['value']) ? $rule['value'] : '';
-
-			if ('singular' === $type) {
-				$post_type_slug   = isset($rule['postType']) ? (string) $rule['postType'] : '';
-				$post_type_object = $post_type_slug !== '' ? get_post_type_object($post_type_slug) : null;
-				$type_label       = $post_type_object
-					? $post_type_object->labels->name
-					: __('Singular', 'blockive-premium-addon-for-block-pro');
-
-				if ($value === '') {
-					return $post_type_slug !== ''
-						/* translators: %s: post type name, e.g. "Products". */
-						? sprintf(__('All %s', 'blockive-premium-addon-for-block-pro'), $type_label)
-						: __('All Singular', 'blockive-premium-addon-for-block-pro');
+				if (!Bpafb_Template_Post_Type::is_free_template_type($post_type_slug)) {
+					$type_label = sprintf(
+						/* translators: %s: post type name, e.g. "Product". */
+						__('%s (Pro)', 'blockive-premium-addon-for-block-pro'),
+						$type_label
+					);
 				}
 
-				$title = get_the_title((int) $value);
-				return $type_label . ': ' . ($title !== '' ? $title : '#' . $value);
+				echo esc_html($type_label);
+			} else {
+				$kind_label = self::KIND_LABELS[$kind] ?? ucfirst($kind);
+				echo esc_html($kind_label);
+			}
+			return;
+		}
+
+		if ('bpafb_display_condition' === $column) {
+			if ('single' === $kind) {
+				$post_type_slug = get_post_meta($post_id, '_bpafb_template_type', true) ?: 'post';
+				$post_type_obj  = get_post_type_object($post_type_slug);
+				$post_type_name = $post_type_obj ? $post_type_obj->labels->name : $post_type_slug;
+				$scope          = get_post_meta($post_id, Bpafb_Template_Display_Conditions::META_SCOPE, true) ?: 'all';
+
+				if ('all' === $scope) {
+					echo esc_html(
+						sprintf(
+							/* translators: %s: post type name, e.g. "Posts". */
+							__('All %s', 'blockive-premium-addon-for-block-pro'),
+							$post_type_name
+						)
+					);
+				} else {
+					$ids = get_post_meta($post_id, Bpafb_Template_Display_Conditions::META_SPECIFIC_IDS, true);
+					$first_id = is_array($ids) && !empty($ids) ? reset($ids) : 0;
+					$title = $first_id ? get_the_title((int) $first_id) : '';
+					if ($title) {
+						echo esc_html(
+							sprintf(
+								/* translators: 1: post type name, 2: post title */
+								__('Specific %1$s: %2$s', 'blockive-premium-addon-for-block-pro'),
+								$post_type_name,
+								$title
+							)
+						);
+					} else {
+						echo esc_html(
+							sprintf(
+								/* translators: %s: post type name */
+								__('Specific %s', 'blockive-premium-addon-for-block-pro'),
+								$post_type_name
+							)
+						);
+					}
+				}
+				return;
 			}
 
-			$label = self::RULE_TYPE_LABELS[$type] ?? $type;
-			return $value !== '' ? $label . ': ' . $value : $label;
-		}, $rules);
+			if (in_array($kind, self::PLACED_BY_BLOCKS, true)) {
+				if ('loop-item' === $kind) {
+					esc_html_e('Loop Grid / Carousel', 'blockive-premium-addon-for-block-pro');
+				} elseif ('mega-menu-item' === $kind) {
+					esc_html_e('Mega Menu', 'blockive-premium-addon-for-block-pro');
+				} elseif ('section' === $kind) {
+					esc_html_e('Template Block', 'blockive-premium-addon-for-block-pro');
+				} else {
+					echo '&#8212;';
+				}
+				return;
+			}
 
-		echo esc_html($kind_label . ' - ' . implode(', ', $rule_summaries));
+			$rules = self::get_condition_rules($post_id);
+			if (empty($rules)) {
+				esc_html_e('No conditions - matches nowhere', 'blockive-premium-addon-for-block-pro');
+				return;
+			}
+
+			$rule_summaries = array_map(function ($rule) {
+				$type  = isset($rule['type']) ? $rule['type'] : '';
+				$value = isset($rule['value']) ? $rule['value'] : '';
+
+				if ('singular' === $type) {
+					$post_type_slug   = isset($rule['postType']) ? (string) $rule['postType'] : '';
+					$post_type_object = $post_type_slug !== '' ? get_post_type_object($post_type_slug) : null;
+					$type_label       = $post_type_object
+						? $post_type_object->labels->name
+						: __('Singular', 'blockive-premium-addon-for-block-pro');
+
+					if ($value === '') {
+						return $post_type_slug !== ''
+							/* translators: %s: post type name, e.g. "Products". */
+							? sprintf(__('All %s', 'blockive-premium-addon-for-block-pro'), $type_label)
+							: __('All Singular', 'blockive-premium-addon-for-block-pro');
+					}
+
+					$title = get_the_title((int) $value);
+					return $type_label . ': ' . ($title !== '' ? $title : '#' . $value);
+				}
+
+				$label = self::RULE_TYPE_LABELS[$type] ?? $type;
+				return $value !== '' ? $label . ': ' . $value : $label;
+			}, $rules);
+
+			echo esc_html(implode(', ', $rule_summaries));
+		}
 	}
 
 	/**

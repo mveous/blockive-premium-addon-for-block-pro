@@ -6,13 +6,19 @@
 
 .bpafb-template-conflict-modal.components-modal__frame,
 .components-modal__frame.bpafb-template-conflict-modal,
-.bpafb-template-conflict-modal {
-	max-width: 480px;
+.bpafb-template-conflict-modal,
+.bpafb-pro-kind-conflict-modal.components-modal__frame,
+.components-modal__frame.bpafb-pro-kind-conflict-modal,
+.bpafb-pro-kind-conflict-modal {
+	max-width: 520px;
+	width: 100%;
 }
 
-.bpafb-template-conflict-modal__actions {
+.bpafb-template-conflict-modal__actions,
+.bpafb-pro-kind-conflict-modal__actions {
 	display: flex;
 	justify-content: flex-end;
+	flex-wrap: wrap;
 	gap: 8px;
 	margin-top: 20px;
 }

@@ -1,1 +1,29 @@
-.bpafb-display-conditions-panel p,.bpafb-template-settings-panel p{color:#757575;font-style:italic}.bpafb-template-conflict-modal,.bpafb-template-conflict-modal.components-modal__frame,.components-modal__frame.bpafb-template-conflict-modal{max-width:480px}.bpafb-template-conflict-modal__actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+/*!************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/template-builder/style.css ***!
+  \************************************************************************************************************************************************************************************/
+.bpafb-template-settings-panel p,
+.bpafb-display-conditions-panel p {
+	color: #757575;
+	font-style: italic;
+}
+
+.bpafb-template-conflict-modal.components-modal__frame,
+.components-modal__frame.bpafb-template-conflict-modal,
+.bpafb-template-conflict-modal,
+.bpafb-pro-kind-conflict-modal.components-modal__frame,
+.components-modal__frame.bpafb-pro-kind-conflict-modal,
+.bpafb-pro-kind-conflict-modal {
+	max-width: 520px;
+	width: 100%;
+}
+
+.bpafb-template-conflict-modal__actions,
+.bpafb-pro-kind-conflict-modal__actions {
+	display: flex;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 20px;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

@@ -1,1 +1,44 @@
-document.addEventListener("click",function(t){const e=t.target.closest(".bpafb-fb__load");if(!e)return;let a;try{a=new URL(e.dataset.src)}catch(t){return}if("https:"!==a.protocol||"www.facebook.com"!==a.hostname||!a.pathname.startsWith("/plugins/"))return;t.preventDefault();const r=document.createElement("iframe");r.className="bpafb-fb__frame",r.src=a.href,r.width=e.dataset.width,r.height=e.dataset.height,r.title=e.dataset.title||"Facebook",r.style.border="none",r.style.overflow="hidden",r.setAttribute("scrolling","no"),r.setAttribute("allowfullscreen","true"),r.setAttribute("allow","autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"),r.tabIndex=-1,e.closest(".bpafb-fb__consent").replaceWith(r),r.focus()});
+/******/ (() => { // webpackBootstrap
+/*!************************************!*\
+  !*** ./src/facebook-embed/view.js ***!
+  \************************************/
+/**
+ * Facebook Embed: "Show Facebook content" swaps the placeholder for
+ * Facebook's iframe (only a facebook.com plugin address is accepted), and
+ * moves focus to it. Without this script the button is a plain link to
+ * the content on Facebook.
+ */
+function load(event) {
+  const link = event.target.closest('.bpafb-fb__load');
+  if (!link) {
+    return;
+  }
+  let src;
+  try {
+    src = new URL(link.dataset.src);
+  } catch (e) {
+    return;
+  }
+  if (src.protocol !== 'https:' || src.hostname !== 'www.facebook.com' || !src.pathname.startsWith('/plugins/')) {
+    return;
+  }
+  event.preventDefault();
+  const iframe = document.createElement('iframe');
+  iframe.className = 'bpafb-fb__frame';
+  iframe.src = src.href;
+  iframe.width = link.dataset.width;
+  iframe.height = link.dataset.height;
+  iframe.title = link.dataset.title || 'Facebook';
+  iframe.style.border = 'none';
+  iframe.style.overflow = 'hidden';
+  iframe.setAttribute('scrolling', 'no');
+  iframe.setAttribute('allowfullscreen', 'true');
+  iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share');
+  iframe.tabIndex = -1;
+  link.closest('.bpafb-fb__consent').replaceWith(iframe);
+  iframe.focus();
+}
+document.addEventListener('click', load);
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

@@ -1,1 +1,80 @@
-.bpafb-pro-dynamic-switcher-row{align-items:center;display:flex;gap:8px;justify-content:space-between;padding:8px 0}.bpafb-pro-dynamic-switcher-row+.bpafb-pro-dynamic-switcher-row{border-top:1px solid #e0e0e0}.bpafb-pro-dynamic-switcher-row__label{color:#1e1e1e;font-size:12px;font-weight:500}.bpafb-pro-dynamic-cover,.bpafb-pro-dynamic-switcher{align-items:center;display:flex}.bpafb-pro-dynamic-cover{background:#f0f0f0;border-radius:2px;gap:2px;padding-inline-start:8px}.bpafb-pro-dynamic-cover__title{font-size:12px;font-style:italic;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bpafb-pro-tags-list{max-height:300px;overflow:auto;padding-block-end:4px;width:240px}.bpafb-pro-tags-list--empty{font-size:12px;padding:12px;text-align:center}.bpafb-pro-tags-list__group-title{color:#757575;font-size:11px;font-weight:600;padding:10px 12px 4px;text-transform:uppercase}.bpafb-pro-tags-list__item{cursor:pointer;font-size:13px;padding:6px 12px}.bpafb-pro-tags-list__item:focus,.bpafb-pro-tags-list__item:hover{background-color:#f0f0f0;outline:none}.bpafb-pro-tag-settings-popup{display:flex;flex-direction:column;gap:8px;padding:12px;width:240px}
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/dynamic-tags/editor.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+.bpafb-pro-dynamic-switcher-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+}
+.bpafb-pro-dynamic-switcher-row + .bpafb-pro-dynamic-switcher-row {
+  border-top: 1px solid #e0e0e0;
+}
+
+.bpafb-pro-dynamic-switcher-row__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #1e1e1e;
+}
+
+.bpafb-pro-dynamic-switcher,
+.bpafb-pro-dynamic-cover {
+  display: flex;
+  align-items: center;
+}
+
+.bpafb-pro-dynamic-cover {
+  gap: 2px;
+  background: #f0f0f0;
+  border-radius: 2px;
+  padding-inline-start: 8px;
+}
+
+.bpafb-pro-dynamic-cover__title {
+  font-size: 12px;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+.bpafb-pro-tags-list {
+  width: 240px;
+  max-height: 300px;
+  overflow: auto;
+  padding-block-end: 4px;
+}
+
+.bpafb-pro-tags-list--empty {
+  padding: 12px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.bpafb-pro-tags-list__group-title {
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 10px 12px 4px;
+  color: #757575;
+}
+
+.bpafb-pro-tags-list__item {
+  font-size: 13px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.bpafb-pro-tags-list__item:hover, .bpafb-pro-tags-list__item:focus {
+  background-color: #f0f0f0;
+  outline: none;
+}
+
+.bpafb-pro-tag-settings-popup {
+  width: 240px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
