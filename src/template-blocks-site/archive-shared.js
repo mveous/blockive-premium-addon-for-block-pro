@@ -67,7 +67,7 @@ export function LayoutPanel( { attributes, setAttributes, layoutOptions, childre
 							{ __( 'Create a Blockive Template with the "Loop Item" kind to design each item.', 'blockive-premium-addon-for-block-pro' ) }
 						</Notice>
 					) }
-					<Button variant="link" href={ `${ adminBase }post-new.php?post_type=blockive_template` } target="_blank">
+					<Button variant="link" href={ `${ adminBase }post-new.php?post_type=blockive_template&bpafb_kind=loop-item` } target="_blank">
 						{ __( 'Create a Loop Item template', 'blockive-premium-addon-for-block-pro' ) }
 					</Button>
 				</>

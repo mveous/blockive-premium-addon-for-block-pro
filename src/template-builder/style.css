@@ -22,3 +22,18 @@
 	gap: 8px;
 	margin-top: 20px;
 }
+
+.bpafb-pro-template-kind-picker-modal.components-modal__frame,
+.components-modal__frame.bpafb-pro-template-kind-picker-modal,
+.bpafb-pro-template-kind-picker-modal {
+	max-width: 480px;
+	width: 100%;
+}
+
+.bpafb-pro-template-kind-picker-modal__actions {
+	display: flex;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 20px;
+}

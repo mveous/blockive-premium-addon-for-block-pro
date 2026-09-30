@@ -17,7 +17,7 @@ const TEMPLATE_POST_TYPE = window.bpafbTemplateBuilder?.postType || 'blockive_te
 // Products" or "Specific Product".
 const POST_TYPE_SINGULAR_NAMES = window.bpafbTemplateBuilder?.postTypeSingularNames || {};
 
-const KIND_OPTIONS = [
+export const KIND_OPTIONS = [
 	{ label: __( 'Single Post/Page', 'blockive-premium-addon-for-block-pro' ), value: 'single' },
 	{ label: __( 'Header', 'blockive-premium-addon-for-block-pro' ), value: 'header' },
 	{ label: __( 'Footer', 'blockive-premium-addon-for-block-pro' ), value: 'footer' },

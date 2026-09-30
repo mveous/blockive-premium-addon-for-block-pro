@@ -27,7 +27,7 @@ export function LoopTemplatePanel( { attributes, setAttributes } ) {
 	// the block editor always runs under /wp-admin/ (post.php, post-new.php,
 	// or the site editor), on single sites and multisite alike.
 	const adminBase = window.location.href.split( '/wp-admin/' )[ 0 ] + '/wp-admin/';
-	const newTemplateUrl = `${ adminBase }post-new.php?post_type=blockive_template`;
+	const newTemplateUrl = `${ adminBase }post-new.php?post_type=blockive_template&bpafb_kind=${ TEMPLATE_KIND }`;
 
 	return (
 		<PanelBody title={ __( 'Template', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>

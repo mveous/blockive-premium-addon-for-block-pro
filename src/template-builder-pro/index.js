@@ -1,10 +1,12 @@
 import { dispatch } from '@wordpress/data';
 import registerTemplateKindPanel from './template-kind-panel';
+import registerTemplateKindPickerModal from './template-kind-picker-modal';
 import registerKindConflictGuard from './kind-conflict-guard';
 import registerStickyHeaderPanel from './sticky-header-panel';
 import registerHeaderFooterLayoutPanel from './header-footer-layout-panel';
 
 registerTemplateKindPanel();
+registerTemplateKindPickerModal();
 registerKindConflictGuard();
 registerHeaderFooterLayoutPanel();
 registerStickyHeaderPanel();

@@ -35,7 +35,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					{ __( 'Edit this section', 'blockive-premium-addon-for-block-pro' ) }
 				</Button>
 			) }{ ' ' }
-			<Button variant="link" href={ `${ adminBase }post-new.php?post_type=blockive_template` } target="_blank" rel="noopener noreferrer">
+			<Button variant="link" href={ `${ adminBase }post-new.php?post_type=blockive_template&bpafb_kind=section` } target="_blank" rel="noopener noreferrer">
 				{ __( '+ Create a new section', 'blockive-premium-addon-for-block-pro' ) }
 			</Button>
 		</>
