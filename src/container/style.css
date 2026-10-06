@@ -1,0 +1,6 @@
+/* `.editor-styles-wrapper` only exists inside the block editor's canvas
+iframe, never on the live site - this just keeps an empty container tall
+enough to hold its own "+" appender button while editing. */
+.editor-styles-wrapper .bpafb-container {
+	min-height: 60px;
+}
