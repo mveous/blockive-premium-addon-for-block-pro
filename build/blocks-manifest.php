@@ -168,6 +168,14 @@ return array(
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -461,6 +469,14 @@ return array(
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -884,6 +900,14 @@ Faster'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -1300,6 +1324,14 @@ Faster'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -1778,6 +1810,14 @@ Faster'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -2192,6 +2232,14 @@ Faster'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -2680,6 +2728,14 @@ Faster'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -3045,6 +3101,14 @@ Faster'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -3374,6 +3438,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -3674,6 +3746,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -3986,6 +4066,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -4375,6 +4463,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -4760,6 +4856,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -5106,6 +5210,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -5534,6 +5646,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -6019,6 +6139,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -6370,6 +6498,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -6853,6 +6989,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -7166,6 +7310,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -7605,6 +7757,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -7932,6 +8092,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -8249,6 +8417,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -8679,6 +8855,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -9030,6 +9214,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -9498,6 +9690,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -9886,6 +10086,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -10205,6 +10413,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -10564,6 +10780,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -10889,6 +11113,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -11288,6 +11520,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -11696,6 +11936,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -12067,6 +12315,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -12420,6 +12676,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -12714,6 +12978,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -13072,6 +13344,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -13520,6 +13800,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -13931,6 +14219,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -14330,6 +14626,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -14693,6 +14997,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -15160,6 +15472,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -15474,6 +15794,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -15946,6 +16274,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -16303,6 +16639,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -16755,6 +17099,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -17150,6 +17502,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -17465,6 +17825,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -17797,6 +18165,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -18125,6 +18501,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -18462,6 +18846,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -19023,6 +19415,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -19411,6 +19811,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -19904,6 +20312,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -20237,6 +20653,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -20681,6 +21105,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -21000,6 +21432,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -21392,6 +21832,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -21843,6 +22291,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -22357,6 +22813,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -22655,6 +23119,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -23026,6 +23498,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -23504,6 +23984,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -23979,6 +24467,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -24451,6 +24947,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -24745,6 +25249,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -25182,6 +25694,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -25564,6 +26084,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -25867,6 +26395,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -26340,6 +26876,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -26671,6 +27215,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -27101,6 +27653,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -27436,6 +27996,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -27721,6 +28289,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -28040,6 +28616,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -28480,6 +29064,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -28768,6 +29360,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -29097,6 +29697,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -29385,6 +29993,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -29691,6 +30307,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -29987,6 +30611,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -30334,6 +30966,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -30656,6 +31296,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -30936,6 +31584,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -31236,6 +31892,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -31574,6 +32238,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -31876,6 +32548,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -32197,6 +32877,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -32492,6 +33180,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -32794,6 +33490,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -33227,6 +33931,14 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -33512,6 +34224,14 @@ greet( \'World\' );'
 				'type' => 'number'
 			),
 			'bpafbContainerWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerPaddingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerMarginUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
