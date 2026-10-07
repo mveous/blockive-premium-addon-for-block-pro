@@ -30,10 +30,18 @@
 	width: 100%;
 }
 
+.bpafb-pro-template-kind-picker-modal .components-base-control {
+	margin-bottom: 20px;
+}
+
+.bpafb-pro-template-kind-picker-modal .components-base-control__help {
+	margin-top: 6px;
+}
+
 .bpafb-pro-template-kind-picker-modal__actions {
 	display: flex;
 	justify-content: flex-end;
 	flex-wrap: wrap;
 	gap: 8px;
-	margin-top: 20px;
+	margin-top: 24px;
 }
