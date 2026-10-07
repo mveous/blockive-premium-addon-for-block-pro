@@ -146,7 +146,7 @@
     },
     "bpafbContainerBorderColor": {
       "type": "string",
-      "default": ""
+      "default": "#000000"
     },
     "bpafbContainerBoxShadow": {
       "type": "boolean",

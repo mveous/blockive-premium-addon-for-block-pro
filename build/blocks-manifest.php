@@ -222,7 +222,7 @@ return array(
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -526,7 +526,7 @@ return array(
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -954,7 +954,7 @@ Faster'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -1381,7 +1381,7 @@ Faster'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -1864,7 +1864,7 @@ Faster'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -2289,7 +2289,7 @@ Faster'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -2782,7 +2782,7 @@ Faster'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -3155,7 +3155,7 @@ Faster'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -3492,7 +3492,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -3803,7 +3803,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -4123,7 +4123,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -4517,7 +4517,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -4910,7 +4910,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -5267,7 +5267,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -5703,7 +5703,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -6193,7 +6193,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -6555,7 +6555,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -7043,7 +7043,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -7367,7 +7367,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -7811,7 +7811,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -8146,7 +8146,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -8474,7 +8474,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -8909,7 +8909,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -9271,7 +9271,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -9744,7 +9744,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -10140,7 +10140,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -10470,7 +10470,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -10834,7 +10834,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -11170,7 +11170,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -11577,7 +11577,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -11990,7 +11990,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -12369,7 +12369,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -12730,7 +12730,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -13035,7 +13035,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -13401,7 +13401,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -13854,7 +13854,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -14273,7 +14273,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -14680,7 +14680,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -15054,7 +15054,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -15526,7 +15526,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -15851,7 +15851,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -16328,7 +16328,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -16696,7 +16696,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -17153,7 +17153,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -17556,7 +17556,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -17882,7 +17882,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -18219,7 +18219,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -18558,7 +18558,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -18903,7 +18903,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -19469,7 +19469,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -19868,7 +19868,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -20366,7 +20366,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -20710,7 +20710,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -21159,7 +21159,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -21489,7 +21489,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -21889,7 +21889,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -22348,7 +22348,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -22867,7 +22867,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -23176,7 +23176,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -23555,7 +23555,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -24038,7 +24038,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -24521,7 +24521,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -25001,7 +25001,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -25306,7 +25306,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -25748,7 +25748,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -26138,7 +26138,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -26452,7 +26452,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -26930,7 +26930,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -27272,7 +27272,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -27707,7 +27707,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -28050,7 +28050,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -28346,7 +28346,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -28673,7 +28673,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -29118,7 +29118,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -29417,7 +29417,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -29751,7 +29751,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -30050,7 +30050,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -30361,7 +30361,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -30668,7 +30668,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -31020,7 +31020,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -31350,7 +31350,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -31641,7 +31641,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -31949,7 +31949,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -32292,7 +32292,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -32605,7 +32605,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -32931,7 +32931,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -33237,7 +33237,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -33547,7 +33547,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -33985,7 +33985,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',
@@ -34281,7 +34281,7 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '#000000'
 			),
 			'bpafbContainerBoxShadow' => array(
 				'type' => 'boolean',

@@ -412,11 +412,12 @@ class Blockive_Premium_Addon_For_Block
 		$allowed_border_styles = ['solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset'];
 		if (!empty($attrs['bpafbContainerBorderStyle']) && in_array($attrs['bpafbContainerBorderStyle'], $allowed_border_styles, true)) {
 			$styles[] = 'border-style: ' . esc_attr($attrs['bpafbContainerBorderStyle']) . ';';
-			if (!empty($attrs['bpafbContainerBorderColor'])) {
-				$border_color = Bpafb_Template_Block_Render::sanitize_css_color($attrs['bpafbContainerBorderColor']);
-				if ($border_color) {
-					$styles[] = 'border-color: ' . esc_attr($border_color) . ';';
-				}
+			// Falls back to black, not just omitted, so turning a border on is
+			// visible immediately instead of silently inheriting currentColor.
+			$border_color_raw = !empty($attrs['bpafbContainerBorderColor']) ? $attrs['bpafbContainerBorderColor'] : '#000000';
+			$border_color = Bpafb_Template_Block_Render::sanitize_css_color($border_color_raw);
+			if ($border_color) {
+				$styles[] = 'border-color: ' . esc_attr($border_color) . ';';
 			}
 			if (isset($attrs['bpafbContainerBorderWidth'])) {
 				$styles[] = 'border-width: ' . intval($attrs['bpafbContainerBorderWidth']) . 'px;';

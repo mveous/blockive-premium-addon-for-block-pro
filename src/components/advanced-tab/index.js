@@ -114,7 +114,7 @@ export default function AdvancedTab( { attributes, setAttributes } ) {
 		bpafbContainerBorderStyle = 'none',
 		bpafbContainerBorderWidth,
 		bpafbContainerBorderRadius,
-		bpafbContainerBorderColor = '',
+		bpafbContainerBorderColor = '#000000',
 		bpafbContainerBoxShadow = false,
 		bpafbContainerShadowColor,
 		bpafbContainerShadowBlur,
