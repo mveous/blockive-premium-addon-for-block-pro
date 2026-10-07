@@ -5,7 +5,7 @@ import { select as selectData } from '@wordpress/data';
 import { useEntityProp } from '@wordpress/core-data';
 import { useState, useEffect } from '@wordpress/element';
 import { getQueryArg } from '@wordpress/url';
-import { KIND_OPTIONS } from './template-kind-panel';
+import { KIND_OPTIONS, PLACED_BY_BLOCKS } from './template-kind-panel';
 
 const TEMPLATE_POST_TYPE = window.bpafbTemplateBuilder?.postType || 'blockive_template';
 
@@ -18,6 +18,12 @@ const PRESET_KIND = ( () => {
 	const raw = getQueryArg( window.location.href, 'bpafb_kind' );
 	return typeof raw === 'string' && KIND_OPTIONS.some( ( option ) => option.value === raw ) ? raw : '';
 } )();
+
+// Every kind except "single" and the ones blocks place - same list, and
+// same reason, as template-kind-panel.js's copy of this constant.
+const KINDS_DEFAULTING_TO_ENTIRE_SITE = KIND_OPTIONS
+	.map( ( option ) => option.value )
+	.filter( ( value ) => 'single' !== value && ! ( value in PLACED_BY_BLOCKS ) );
 
 // Short blurbs shown under the Template Type select, keyed by KIND_OPTIONS'
 // own values.
@@ -76,7 +82,13 @@ const TemplateKindPickerModal = () => {
 		}
 		const editor = selectData( 'core/editor' );
 		if ( editor.getCurrentPostType() === TEMPLATE_POST_TYPE && editor.isCleanNewPost() ) {
-			setMeta( { ...meta, _bpafb_template_kind: PRESET_KIND } );
+			setMeta( {
+				...meta,
+				_bpafb_template_kind: PRESET_KIND,
+				...( KINDS_DEFAULTING_TO_ENTIRE_SITE.includes( PRESET_KIND )
+					? { _bpafb_display_condition_rules: [ { type: 'entire_site', value: '' } ] }
+					: {} ),
+			} );
 		}
 		// Runs once, right after the new template's entity data is ready -
 		// see the note above on why this can't depend on a reactive selector.
@@ -89,7 +101,13 @@ const TemplateKindPickerModal = () => {
 
 	const handleCreate = () => {
 		setEntityTitle( title );
-		setMeta( { ...meta, _bpafb_template_kind: kind } );
+		setMeta( {
+			...meta,
+			_bpafb_template_kind: kind,
+			...( KINDS_DEFAULTING_TO_ENTIRE_SITE.includes( kind )
+				? { _bpafb_display_condition_rules: [ { type: 'entire_site', value: '' } ] }
+				: {} ),
+		} );
 		setIsDismissed( true );
 	};
 

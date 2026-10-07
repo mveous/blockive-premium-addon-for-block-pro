@@ -31,12 +31,26 @@ export const KIND_OPTIONS = [
 ];
 
 // Kinds that blocks place, not Display Conditions (see
-// Bpafb_Pro_Template_Kinds::PLACED_BY_BLOCKS).
-const PLACED_BY_BLOCKS = {
+// Bpafb_Pro_Template_Kinds::PLACED_BY_BLOCKS). Exported so
+// template-kind-picker-modal.js can derive which kinds need a default
+// Display Conditions rule from this same list, instead of keeping a second
+// one in sync by hand.
+export const PLACED_BY_BLOCKS = {
 	'loop-item': __( 'Loop Grid and Loop Carousel blocks show this template for each item.', 'blockive-premium-addon-for-block-pro' ),
 	'mega-menu-item': __( 'The Mega Menu block shows this template as a dropdown panel.', 'blockive-premium-addon-for-block-pro' ),
 	section: __( 'Add a Template block to any page, post, or template and choose this section to show it there.', 'blockive-premium-addon-for-block-pro' ),
 };
+
+// Every kind except "single" (which has its own All/Specific condition,
+// not this rule list) and the ones blocks place (which don't use Display
+// Conditions at all). Without a default, a brand-new Header, Footer,
+// Archive, Search, 404, or Popup template has no condition rules and
+// silently matches nowhere (see
+// Bpafb_Pro_Template_Kinds::get_matching_template_id()) until the site
+// owner notices and adds "Entire Site" themselves.
+const KINDS_DEFAULTING_TO_ENTIRE_SITE = KIND_OPTIONS
+	.map( ( option ) => option.value )
+	.filter( ( value ) => 'single' !== value && ! ( value in PLACED_BY_BLOCKS ) );
 
 // Rule types where the user needs to pick a value. The others (entire_site,
 // date_archive, search, 404, logged_in, logged_out) need nothing else.
@@ -531,7 +545,18 @@ const TemplateKindPanel = () => {
 						label={ __( 'Template Type', 'blockive-premium-addon-for-block-pro' ) }
 						value={ kind }
 						options={ KIND_OPTIONS }
-						onChange={ ( value ) => setMeta( { ...meta, _bpafb_template_kind: value } ) }
+						onChange={ ( value ) => {
+							// Header/Footer default to "Entire Site" the first
+							// time they're picked, same as the "Create a New
+							// Template" modal - but never overwrites
+							// conditions already set.
+							const needsDefaultRule = KINDS_DEFAULTING_TO_ENTIRE_SITE.includes( value ) && rules.length === 0;
+							setMeta( {
+								...meta,
+								_bpafb_template_kind: value,
+								...( needsDefaultRule ? { _bpafb_display_condition_rules: [ { type: 'entire_site', value: '' } ] } : {} ),
+							} );
+						} }
 					/>
 				</PanelRow>
 
