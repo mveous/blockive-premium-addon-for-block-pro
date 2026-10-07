@@ -311,7 +311,7 @@
     },
     "bpafbAnimationDelay": {
       "type": "number",
-      "default": 0
+      "default": 100
     },
     "bpafbAnimationEasing": {
       "type": "string",

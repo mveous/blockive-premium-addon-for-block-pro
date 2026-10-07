@@ -278,7 +278,7 @@ return array(
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -582,7 +582,7 @@ return array(
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -1010,7 +1010,7 @@ Faster'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -1437,7 +1437,7 @@ Faster'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -1920,7 +1920,7 @@ Faster'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -2345,7 +2345,7 @@ Faster'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -2838,7 +2838,7 @@ Faster'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -3211,7 +3211,7 @@ Faster'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -3548,7 +3548,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -3859,7 +3859,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -4179,7 +4179,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -4573,7 +4573,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -4966,7 +4966,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -5323,7 +5323,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -5759,7 +5759,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -6249,7 +6249,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -6611,7 +6611,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -7099,7 +7099,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -7423,7 +7423,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -7867,7 +7867,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -8202,7 +8202,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -8530,7 +8530,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -8965,7 +8965,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -9327,7 +9327,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -9800,7 +9800,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -10196,7 +10196,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -10526,7 +10526,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -10890,7 +10890,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -11226,7 +11226,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -11633,7 +11633,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -12046,7 +12046,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -12425,7 +12425,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -12786,7 +12786,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -13091,7 +13091,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -13457,7 +13457,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -13910,7 +13910,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -14329,7 +14329,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -14736,7 +14736,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -15110,7 +15110,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -15582,7 +15582,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -15907,7 +15907,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -16384,7 +16384,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -16752,7 +16752,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -17209,7 +17209,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -17612,7 +17612,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -17938,7 +17938,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -18275,7 +18275,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -18614,7 +18614,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -18959,7 +18959,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -19525,7 +19525,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -19924,7 +19924,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -20422,7 +20422,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -20766,7 +20766,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -21215,7 +21215,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -21545,7 +21545,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -21945,7 +21945,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -22404,7 +22404,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -22923,7 +22923,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -23232,7 +23232,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -23611,7 +23611,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -24094,7 +24094,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -24577,7 +24577,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -25057,7 +25057,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -25362,7 +25362,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -25804,7 +25804,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -26194,7 +26194,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -26508,7 +26508,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -26986,7 +26986,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -27328,7 +27328,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -27763,7 +27763,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -28106,7 +28106,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -28402,7 +28402,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -28729,7 +28729,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -29174,7 +29174,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -29473,7 +29473,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -29807,7 +29807,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -30106,7 +30106,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -30417,7 +30417,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -30724,7 +30724,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -31076,7 +31076,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -31406,7 +31406,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -31697,7 +31697,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -32005,7 +32005,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -32348,7 +32348,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -32661,7 +32661,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -32987,7 +32987,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -33293,7 +33293,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -33603,7 +33603,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -34041,7 +34041,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',
@@ -34337,7 +34337,7 @@ greet( \'World\' );'
 			),
 			'bpafbAnimationDelay' => array(
 				'type' => 'number',
-				'default' => 0
+				'default' => 100
 			),
 			'bpafbAnimationEasing' => array(
 				'type' => 'string',

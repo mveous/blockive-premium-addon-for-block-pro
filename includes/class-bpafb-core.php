@@ -517,7 +517,7 @@ class Blockive_Premium_Addon_For_Block
 		$data_attrs = [];
 		if (!empty($attrs['bpafbAnimationType']) && $attrs['bpafbAnimationType'] !== 'none') {
 			$duration = isset($attrs['bpafbAnimationDuration']) ? intval($attrs['bpafbAnimationDuration']) : 800;
-			$delay = isset($attrs['bpafbAnimationDelay']) ? intval($attrs['bpafbAnimationDelay']) : 0;
+			$delay = isset($attrs['bpafbAnimationDelay']) ? intval($attrs['bpafbAnimationDelay']) : 100;
 			$easing = !empty($attrs['bpafbAnimationEasing']) && in_array($attrs['bpafbAnimationEasing'], ['ease', 'linear', 'ease-in', 'ease-out', 'ease-in-out'], true) ? $attrs['bpafbAnimationEasing'] : 'ease';
 			$classes[] = 'bpafb-animate';
 			$data_attrs['data-bpafb-animation'] = sanitize_html_class($attrs['bpafbAnimationType']);
