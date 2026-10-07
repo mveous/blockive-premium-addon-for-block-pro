@@ -67,15 +67,17 @@ export function useItemList( items, key, setAttributes, blank ) {
  */
 export function ItemActions( { list, count, addLabel, onAdd, min = 1 } ) {
 	return (
-		<ButtonGroup className="bpafb-item-list__actions">
-			<Button size="small" icon="arrow-up-alt2" label={ __( 'Move earlier', 'blockive-premium-addon-for-block-pro' ) } disabled={ list.index === 0 } onClick={ () => list.move( -1 ) } />
-			<Button size="small" icon="arrow-down-alt2" label={ __( 'Move later', 'blockive-premium-addon-for-block-pro' ) } disabled={ list.index >= count - 1 } onClick={ () => list.move( 1 ) } />
-			<Button size="small" icon="admin-page" label={ __( 'Duplicate', 'blockive-premium-addon-for-block-pro' ) } disabled={ ! count } onClick={ list.duplicate } />
-			<Button size="small" icon="trash" isDestructive label={ __( 'Remove', 'blockive-premium-addon-for-block-pro' ) } disabled={ count <= min } onClick={ list.remove } />
+		<div className="bpafb-item-list__actions">
+			<ButtonGroup className="bpafb-item-list__actions-group">
+				<Button size="small" icon="arrow-up-alt2" label={ __( 'Move earlier', 'blockive-premium-addon-for-block-pro' ) } disabled={ list.index === 0 } onClick={ () => list.move( -1 ) } />
+				<Button size="small" icon="arrow-down-alt2" label={ __( 'Move later', 'blockive-premium-addon-for-block-pro' ) } disabled={ list.index >= count - 1 } onClick={ () => list.move( 1 ) } />
+				<Button size="small" icon="admin-page" label={ __( 'Duplicate', 'blockive-premium-addon-for-block-pro' ) } disabled={ ! count } onClick={ list.duplicate } />
+				<Button size="small" icon="trash" isDestructive label={ __( 'Remove', 'blockive-premium-addon-for-block-pro' ) } disabled={ count <= min } onClick={ list.remove } />
+			</ButtonGroup>
 			<Button size="small" variant="secondary" onClick={ () => ( onAdd ? onAdd() : list.add() ) }>
 				{ addLabel }
 			</Button>
-		</ButtonGroup>
+		</div>
 	);
 }
 

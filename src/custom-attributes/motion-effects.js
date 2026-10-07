@@ -101,7 +101,7 @@ function MotionPanel( { attributes, setAttributes } ) {
 			{ EFFECTS.map( ( effect ) => {
 				const on = !! motion[ `${ effect.key }On` ];
 				return (
-					<div key={ effect.key } style={ { marginBottom: on ? 16 : 0 } }>
+					<div key={ effect.key } style={ { marginBottom: on ? 16 : 10 } }>
 						<ToggleControl label={ effect.label } checked={ on } onChange={ set( `${ effect.key }On` ) } __nextHasNoMarginBottom />
 						{ on && (
 							<div style={ { margin: '12px 0 0 12px' } }>
