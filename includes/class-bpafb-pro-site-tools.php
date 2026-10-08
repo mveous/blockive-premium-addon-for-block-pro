@@ -386,6 +386,16 @@ class Bpafb_Pro_Site_Tools
 				</div>
 			</div>
 
+			<?php
+			// WordPress's admin JS relocates `.notice` elements (like the
+			// "Settings saved." box from settings_errors() below) to sit
+			// right after the page's first <h1> when it finds no
+			// `.wp-header-end` marker - which, on this page, is the one
+			// inside the dark gradient header banner above. This marker
+			// tells it to anchor notices here instead, after the banner.
+			?>
+			<hr class="wp-header-end">
+
 			<?php settings_errors(); ?>
 
 			<form method="post" action="options.php" id="bpafb-site-tools-form">
