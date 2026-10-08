@@ -149,6 +149,26 @@ class Bpafb_Pro_Site_Tools
 	 */
 	public function sanitize_disabled($value)
 	{
+		// When this option's current value equals its registered 'default'
+		// ([], i.e. nothing disabled - the common state right after Enable
+		// All, or on a fresh install), WordPress's update_option() detects
+		// that and delegates to add_option() instead of writing directly
+		// (see update_option()'s `default_option_{$option}` check in
+		// wp-includes/option.php). add_option() then re-runs this same
+		// sanitize_option_{$option} filter on the value update_option()
+		// already sanitized. Since this function's transform is a
+		// complement (disabled = all_names - enabled) and complements are
+		// involutive, that unwanted second pass turns the correct disabled
+		// list back into the raw enabled list - which then gets saved
+		// under the "disabled" option, disabling almost every block.
+		// Skipping every call after the first within a request sidesteps
+		// that WP-core double-sanitize without changing the stored format.
+		static $already_sanitized = false;
+		if ($already_sanitized) {
+			return (array) $value;
+		}
+		$already_sanitized = true;
+
 		$all_names = wp_list_pluck(self::manageable_blocks(), 'name');
 		$enabled = [];
 		foreach ((array) $value as $name) {

@@ -24,6 +24,12 @@ class Bpafb_Pro_Template_Kinds
 	const META_CONDITION_RULES = '_bpafb_display_condition_rules';
 
 	/**
+	 * The `$_GET` key the admin-list Kind tabs (see print_kind_tabs()) use
+	 * to say which kind is selected, e.g. `?bpafb_kind=header`.
+	 */
+	const QUERY_VAR_KIND = 'bpafb_kind';
+
+	/**
 	 * Every kind except "single", which is the free plugin's only kind (a
 	 * single-post override). "single" is left out here on purpose: it is
 	 * not a Pro feature, and Bpafb_Template_Display_Conditions::
@@ -53,6 +59,23 @@ class Bpafb_Pro_Template_Kinds
 		'loop-item',
 		'mega-menu-item',
 		'section',
+	];
+
+	/**
+	 * For each kind in PLACED_BY_BLOCKS, the block(s) that can actually
+	 * place it (full namespaced block name, as stored in Bpafb_Pro_Site_
+	 * Tools::OPTION_DISABLED). A kind is only offered as an admin-list
+	 * filter tab (see print_kind_tabs()) while at least one of its blocks
+	 * is still enabled in Site Tools → Element Manager - disabling a block
+	 * there only hides it from the inserter, so existing templates of that
+	 * kind keep working, but there would be no way left to place a new one.
+	 *
+	 * @var array<string,string[]>
+	 */
+	const KIND_BLOCKS = [
+		'loop-item'      => ['loop-grid', 'loop-carousel'],
+		'mega-menu-item' => ['mega-menu'],
+		'section'        => ['template'],
 	];
 
 	/**
@@ -114,6 +137,12 @@ class Bpafb_Pro_Template_Kinds
 		// defaulting to single-post override values.
 		remove_action('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_custom_column', [Bpafb_Template_Post_Type::get_instance(), 'render_admin_column'], 10);
 		add_action('manage_' . Bpafb_Template_Post_Type::POST_TYPE . '_posts_custom_column', [$this, 'render_admin_column'], 10, 2);
+
+		// Kind filter tabs (All / Single / Header / Footer / ...) above the
+		// Blockive Templates list table, the same way Elementor's "Saved
+		// Templates" screen filters by template type.
+		add_filter('views_edit-' . Bpafb_Template_Post_Type::POST_TYPE, [$this, 'print_kind_tabs']);
+		add_action('pre_get_posts', [$this, 'filter_by_kind']);
 	}
 
 	/**
@@ -298,6 +327,115 @@ class Bpafb_Pro_Template_Kinds
 	}
 
 	/**
+	 * Prints the Kind filter tabs (All Templates / Single / Header /
+	 * Footer / ...) above the Blockive Templates list table, the same way
+	 * Elementor's "Saved Templates" screen lets you filter by template
+	 * type. Each tab links to `edit.php?post_type=blockive_template&bpafb_kind=<kind>`;
+	 * filter_by_kind() does the actual filtering.
+	 *
+	 * Fired by `views_edit-blockive_template`.
+	 *
+	 * @param array $views Existing list table views (status links), passed through unchanged.
+	 * @return array
+	 */
+	public function print_kind_tabs($views)
+	{
+		$screen = get_current_screen();
+		if (!$screen || 'edit-' . Bpafb_Template_Post_Type::POST_TYPE !== $screen->id) {
+			return $views;
+		}
+
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only filter link, nothing is changed.
+		$current_kind = isset($_GET[self::QUERY_VAR_KIND]) ? sanitize_key(wp_unslash($_GET[self::QUERY_VAR_KIND])) : '';
+
+		$base_url = admin_url('edit.php?post_type=' . Bpafb_Template_Post_Type::POST_TYPE);
+
+		$tabs = ['single' => __('Single', 'blockive-premium-addon-for-block-pro')];
+		foreach (self::KINDS as $kind) {
+			if (!self::is_kind_available($kind)) {
+				continue;
+			}
+			$tabs[$kind] = self::KIND_LABELS[$kind] ?? ucfirst($kind);
+		}
+
+		echo '<div class="nav-tab-wrapper bpafb-template-kind-tabs">';
+
+		printf(
+			'<a href="%1$s" class="nav-tab%2$s">%3$s</a>',
+			esc_url($base_url),
+			'' === $current_kind ? ' nav-tab-active' : '',
+			esc_html__('All Templates', 'blockive-premium-addon-for-block-pro')
+		);
+
+		foreach ($tabs as $kind => $label) {
+			printf(
+				'<a href="%1$s" class="nav-tab%2$s">%3$s</a>',
+				esc_url(add_query_arg(self::QUERY_VAR_KIND, $kind, $base_url)),
+				$current_kind === $kind ? ' nav-tab-active' : '',
+				esc_html($label)
+			);
+		}
+
+		echo '</div>';
+
+		return $views;
+	}
+
+	/**
+	 * Filters the Blockive Templates list table down to one Kind when a
+	 * tab from print_kind_tabs() is selected. Templates saved before the
+	 * Kind control existed have no META_KIND value at all, so "Single" (the
+	 * default kind) also matches posts missing the meta entirely.
+	 *
+	 * Fired by `pre_get_posts`.
+	 *
+	 * @param WP_Query $query Current query.
+	 */
+	public function filter_by_kind($query)
+	{
+		if (!is_admin() || !$query->is_main_query()) {
+			return;
+		}
+
+		if (Bpafb_Template_Post_Type::POST_TYPE !== $query->get('post_type')) {
+			return;
+		}
+
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only filter link, nothing is changed.
+		if (empty($_GET[self::QUERY_VAR_KIND])) {
+			return;
+		}
+
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only filter link, nothing is changed.
+		$kind = sanitize_key(wp_unslash($_GET[self::QUERY_VAR_KIND]));
+		if (!in_array($kind, array_merge(['single'], self::KINDS), true)) {
+			return;
+		}
+
+		if ('single' === $kind) {
+			$query->set('meta_query', [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				'relation' => 'OR',
+				[
+					'key'   => self::META_KIND,
+					'value' => 'single',
+				],
+				[
+					'key'     => self::META_KIND,
+					'compare' => 'NOT EXISTS',
+				],
+			]);
+			return;
+		}
+
+		$query->set('meta_query', [ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			[
+				'key'   => self::META_KIND,
+				'value' => $kind,
+			],
+		]);
+	}
+
+	/**
 	 * Loads the "Location (Pro)" panel's files, only on the Template
 	 * Builder editor screen. Uses the same checks as the free plugin's own
 	 * Bpafb_Template_Builder::enqueue_assets(), since this loads alongside
@@ -389,6 +527,41 @@ class Bpafb_Pro_Template_Kinds
 	{
 		$kind = get_post_meta($template_id, self::META_KIND, true);
 		return $kind ?: 'single';
+	}
+
+	/**
+	 * Whether a kind can still actually be placed on the site right now.
+	 * "single", "header", "footer", "archive", "search", "404", and "popup"
+	 * work through Display Conditions / theme locations and are always
+	 * available. A kind in PLACED_BY_BLOCKS instead needs at least one of
+	 * its KIND_BLOCKS blocks to still be enabled in Site Tools → Element
+	 * Manager - disabling a block there only hides it from the inserter
+	 * (existing templates keep working), so there would be no way left to
+	 * place a newly created template of that kind.
+	 *
+	 * @param string $kind One of self::KINDS.
+	 * @return bool
+	 */
+	public static function is_kind_available($kind)
+	{
+		if (!isset(self::KIND_BLOCKS[$kind])) {
+			return true;
+		}
+
+		if (!class_exists('Bpafb_Pro_Site_Tools')) {
+			return true;
+		}
+
+		$disabled = array_flip((array) get_option(Bpafb_Pro_Site_Tools::OPTION_DISABLED, []));
+
+		foreach (self::KIND_BLOCKS[$kind] as $block_slug) {
+			$block_name = Bpafb_Pro_Site_Tools::NAMESPACE_PREFIX . $block_slug;
+			if (!isset($disabled[$block_name])) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
