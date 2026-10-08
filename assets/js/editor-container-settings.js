@@ -104,7 +104,7 @@
 		// Animation
 		bpafbAnimationType: { type: 'string', default: 'none' },
 		bpafbAnimationDuration: { type: 'number', default: 800 },
-		bpafbAnimationDelay: { type: 'number', default: 0 },
+		bpafbAnimationDelay: { type: 'number', default: 100 },
 		bpafbAnimationEasing: { type: 'string', default: 'ease' },
 
 		// Transform

@@ -3,7 +3,7 @@
  * Plugin Name:       Blockive Pro
  * Description:       The complete Blockive experience - every free block and Template Builder feature plus header/footer/archive/search/404/popup templates, WooCommerce & Events blocks, Loop Builder, and Dynamic Tags. Standalone: Blockive - Premium Addon For Block is not required.
  * Plugin URI:        https://mveous.com
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.8
  * Requires PHP:      7.4
  * Author:            Mveous
@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
 // file - this one included - having already fully executed by the time
 // `plugins_loaded` fires, regardless of which plugin WordPress loaded first.
 define('BPAFB_PRO_ACTIVE', true);
-define('BPAFB_PRO_VERSION', '1.0.0');
+define('BPAFB_PRO_VERSION', '1.0.1');
 
 // Deliberately NOT the same constant names the free plugin defines
 // (BPAFB_PATH/BPAFB_URL/BPAFB_VERSION): during Pro's own activation request,
