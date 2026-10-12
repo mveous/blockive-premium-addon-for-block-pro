@@ -169,7 +169,7 @@ class Bpafb_Pro_Site_Blocks
 			[
 				[
 					'slug'  => self::CATEGORY_SLUG,
-					'title' => esc_html__('Blockive Header & Footer', 'blockive-premium-addon-for-block-pro'),
+					'title' => esc_html__('Blockive Header and Footer', 'blockive-premium-addon-for-block-pro'),
 				],
 			],
 			$categories
