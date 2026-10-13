@@ -136,7 +136,9 @@ class Bpafb_Pro_Loop_Builder
 	/**
 	 * WP_Query arguments for the Loop Grid and Loop Carousel blocks, from
 	 * their shared query attributes (postType, postsPerPage, orderBy,
-	 * order, taxonomy, termIds, excludeCurrentPost).
+	 * order, taxonomy, termIds, excludeCurrentPost, authorIds,
+	 * dateQueryType/dateFrom/dateTo, selectionMode/manualPostIds,
+	 * additionalTaxQueries/taxRelation).
 	 *
 	 * @param array $attributes Block attributes.
 	 * @param int   $defaults_per_page Items when postsPerPage is not set.
@@ -165,14 +167,83 @@ class Bpafb_Pro_Loop_Builder
 			'post_status'    => 'publish',
 		];
 
+		// Manual selection bypasses the rule-based query entirely, except
+		// for ordering (so "Order By" still lets the author sort the
+		// hand-picked set, e.g. by title).
+		if (isset($attributes['selectionMode']) && 'manual' === $attributes['selectionMode']) {
+			$manual_ids = isset($attributes['manualPostIds']) && is_array($attributes['manualPostIds'])
+				? array_values(array_filter(array_map('absint', $attributes['manualPostIds'])))
+				: [];
+			if (empty($manual_ids)) {
+				// Nothing picked yet: match nothing rather than falling
+				// back to every post of the type.
+				$args['post__in'] = [0];
+			} else {
+				$args['post__in']      = $manual_ids;
+				$args['posts_per_page'] = count($manual_ids);
+				if ('menu_order' !== $orderby) {
+					$args['orderby'] = 'post__in';
+				}
+			}
+			return $args;
+		}
+
+		$tax_queries = [];
+
 		$taxonomy = isset($attributes['taxonomy']) ? sanitize_key($attributes['taxonomy']) : '';
 		$term_ids = isset($attributes['termIds']) && is_array($attributes['termIds']) ? array_map('absint', $attributes['termIds']) : [];
-
 		if ($taxonomy && !empty($term_ids) && taxonomy_exists($taxonomy)) {
-			$args['tax_query'] = [[ // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+			$tax_queries[] = [
 				'taxonomy' => $taxonomy,
 				'field'    => 'term_id',
 				'terms'    => $term_ids,
+			];
+		}
+
+		$additional_tax_queries = isset($attributes['additionalTaxQueries']) && is_array($attributes['additionalTaxQueries'])
+			? $attributes['additionalTaxQueries']
+			: [];
+		foreach ($additional_tax_queries as $row) {
+			$row_taxonomy = isset($row['taxonomy']) ? sanitize_key($row['taxonomy']) : '';
+			$row_term_ids = isset($row['termIds']) && is_array($row['termIds']) ? array_map('absint', $row['termIds']) : [];
+			if ($row_taxonomy && !empty($row_term_ids) && taxonomy_exists($row_taxonomy)) {
+				$tax_queries[] = [
+					'taxonomy' => $row_taxonomy,
+					'field'    => 'term_id',
+					'terms'    => $row_term_ids,
+				];
+			}
+		}
+
+		if (!empty($tax_queries)) {
+			if (count($tax_queries) > 1) {
+				$relation = isset($attributes['taxRelation']) && 'OR' === $attributes['taxRelation'] ? 'OR' : 'AND';
+				$tax_queries = array_merge(['relation' => $relation], $tax_queries);
+			}
+			$args['tax_query'] = $tax_queries; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+		}
+
+		$author_ids = isset($attributes['authorIds']) && is_array($attributes['authorIds'])
+			? array_values(array_filter(array_map('absint', $attributes['authorIds'])))
+			: [];
+		if (!empty($author_ids)) {
+			$args['author__in'] = $author_ids;
+		}
+
+		$date_query_type = isset($attributes['dateQueryType']) && in_array($attributes['dateQueryType'], ['before', 'after', 'between'], true)
+			? $attributes['dateQueryType']
+			: 'any';
+		$date_from = isset($attributes['dateFrom']) ? sanitize_text_field($attributes['dateFrom']) : '';
+		$date_to   = isset($attributes['dateTo']) ? sanitize_text_field($attributes['dateTo']) : '';
+		if ('before' === $date_query_type && $date_to) {
+			$args['date_query'] = [['before' => $date_to, 'inclusive' => true]];
+		} elseif ('after' === $date_query_type && $date_from) {
+			$args['date_query'] = [['after' => $date_from, 'inclusive' => true]];
+		} elseif ('between' === $date_query_type && $date_from && $date_to) {
+			$args['date_query'] = [[
+				'after'     => $date_from,
+				'before'    => $date_to,
+				'inclusive' => true,
 			]];
 		}
 

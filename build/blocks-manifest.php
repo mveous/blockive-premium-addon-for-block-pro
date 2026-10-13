@@ -11825,6 +11825,50 @@ greet( \'World\' );'
 				'type' => 'boolean',
 				'default' => false
 			),
+			'authorIds' => array(
+				'type' => 'array',
+				'items' => array(
+					'type' => 'number'
+				),
+				'default' => array(
+					
+				)
+			),
+			'dateQueryType' => array(
+				'type' => 'string',
+				'default' => 'any'
+			),
+			'dateFrom' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'dateTo' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'selectionMode' => array(
+				'type' => 'string',
+				'default' => 'query'
+			),
+			'manualPostIds' => array(
+				'type' => 'array',
+				'items' => array(
+					'type' => 'number'
+				),
+				'default' => array(
+					
+				)
+			),
+			'additionalTaxQueries' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'taxRelation' => array(
+				'type' => 'string',
+				'default' => 'AND'
+			),
 			'enableNothingFound' => array(
 				'type' => 'boolean',
 				'default' => true
@@ -12608,6 +12652,50 @@ greet( \'World\' );'
 			'excludeCurrentPost' => array(
 				'type' => 'boolean',
 				'default' => false
+			),
+			'authorIds' => array(
+				'type' => 'array',
+				'items' => array(
+					'type' => 'number'
+				),
+				'default' => array(
+					
+				)
+			),
+			'dateQueryType' => array(
+				'type' => 'string',
+				'default' => 'any'
+			),
+			'dateFrom' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'dateTo' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'selectionMode' => array(
+				'type' => 'string',
+				'default' => 'query'
+			),
+			'manualPostIds' => array(
+				'type' => 'array',
+				'items' => array(
+					'type' => 'number'
+				),
+				'default' => array(
+					
+				)
+			),
+			'additionalTaxQueries' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'taxRelation' => array(
+				'type' => 'string',
+				'default' => 'AND'
 			),
 			'columns' => array(
 				'type' => 'number',
@@ -32210,6 +32298,18 @@ greet( \'World\' );'
 			'showIcons' => array(
 				'type' => 'boolean',
 				'default' => true
+			),
+			'badgeStyle' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'badgeBgColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'badgeTextColor' => array(
+				'type' => 'string',
+				'default' => ''
 			),
 			'linkHoverColor' => array(
 				'type' => 'string',

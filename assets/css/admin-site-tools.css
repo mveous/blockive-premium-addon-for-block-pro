@@ -1,5 +1,5 @@
 /**
- * Blockive Pro — Site Tools Dashboard Modern Styles
+ * Blockive — Site Tools Dashboard Modern Styles
  */
 
 :root {
@@ -540,6 +540,15 @@
 	opacity: 0.75;
 }
 
+.bpafb-block-card.is-locked {
+	background: var(--bpafb-slate-50);
+	border-style: dashed;
+}
+
+.bpafb-block-card.is-locked .bpafb-block-title {
+	color: var(--bpafb-slate-500);
+}
+
 .bpafb-block-info {
 	display: flex;
 	flex-direction: column;
@@ -730,4 +739,43 @@
 	color: var(--bpafb-slate-700);
 	min-width: 60px;
 	text-align: center;
+}
+
+/* Pro badge on a sidebar tab (free plugin only) */
+.bpafb-tab-btn .bpafb-badge-pro {
+	margin-left: auto;
+	color: var(--bpafb-primary);
+	background: var(--bpafb-primary-light);
+	border-color: #bfdbfe;
+}
+
+/* Locked section teaser (Custom Code, Custom Fonts, Page Transitions,
+   Role Access in the free plugin - see Bpafb_Site_Tools::render_locked_section()) */
+.bpafb-locked-section {
+	text-align: center;
+	padding: 48px 24px;
+}
+
+.bpafb-locked-section .dashicons-lock {
+	font-size: 28px;
+	width: 28px;
+	height: 28px;
+	color: var(--bpafb-slate-400);
+}
+
+.bpafb-locked-section h2 {
+	margin: 12px 0 8px;
+	font-size: 16px;
+}
+
+.bpafb-locked-section > p {
+	max-width: 480px;
+	margin: 0 auto 4px;
+	color: var(--bpafb-slate-500);
+	font-size: 13px;
+}
+
+.bpafb-locked-section-note {
+	font-weight: 600;
+	color: var(--bpafb-slate-600) !important;
 }

@@ -52,6 +52,44 @@
 			"type": "boolean",
 			"default": false
 		},
+		"authorIds": {
+			"type": "array",
+			"items": {
+				"type": "number"
+			},
+			"default": []
+		},
+		"dateQueryType": {
+			"type": "string",
+			"default": "any"
+		},
+		"dateFrom": {
+			"type": "string",
+			"default": ""
+		},
+		"dateTo": {
+			"type": "string",
+			"default": ""
+		},
+		"selectionMode": {
+			"type": "string",
+			"default": "query"
+		},
+		"manualPostIds": {
+			"type": "array",
+			"items": {
+				"type": "number"
+			},
+			"default": []
+		},
+		"additionalTaxQueries": {
+			"type": "array",
+			"default": []
+		},
+		"taxRelation": {
+			"type": "string",
+			"default": "AND"
+		},
 		"enableNothingFound": {
 			"type": "boolean",
 			"default": true
