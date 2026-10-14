@@ -4,7 +4,6 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, RangeControl, ToggleControl, Disabled } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
 import { ProductPicker } from '../pro-components/woo/editor';
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -31,7 +30,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 			<div { ...useBlockProps() }>
 				<Disabled>

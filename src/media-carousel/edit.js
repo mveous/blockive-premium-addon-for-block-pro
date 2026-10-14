@@ -3,7 +3,7 @@ import { useBlockProps, MediaPlaceholder, MediaUpload, MediaUploadCheck } from '
 import { PanelBody, SelectControl, RangeControl, TextControl, ToggleControl } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ResponsiveControls from '../components/responsive-controls';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
@@ -138,7 +138,7 @@ export default function Edit( { attributes, setAttributes } ) {
 									<>
 										<PanelBody title={ itemLabel } initialOpen={ true }>
 											<ItemActions list={ list } count={ items.length } onAdd={ open } addLabel={ __( 'Add Images', 'blockive-premium-addon-for-block-pro' ) } />
-											<SelectControl
+											<SegmentedControl
 												label={ __( 'Type', 'blockive-premium-addon-for-block-pro' ) }
 												value={ item.type || 'image' }
 												options={ [
@@ -173,7 +173,7 @@ export default function Edit( { attributes, setAttributes } ) {
 											) }
 										</PanelBody>
 										<PanelBody title={ __( 'Layout', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-											<SelectControl
+											<SegmentedControl
 												label={ __( 'Skin', 'blockive-premium-addon-for-block-pro' ) }
 												value={ skin }
 												options={ [
@@ -195,7 +195,7 @@ export default function Edit( { attributes, setAttributes } ) {
 												onChange={ set( 'onClick' ) }
 												help={ __( 'Videos always play in the lightbox.', 'blockive-premium-addon-for-block-pro' ) }
 											/>
-											<SelectControl
+											<SegmentedControl
 												label={ __( 'Captions', 'blockive-premium-addon-for-block-pro' ) }
 												value={ captions }
 												options={ [
@@ -227,7 +227,7 @@ export default function Edit( { attributes, setAttributes } ) {
 													);
 												} }
 											</ResponsiveControls>
-											<SelectControl
+											<SegmentedControl
 												label={ __( 'Image Fit', 'blockive-premium-addon-for-block-pro' ) }
 												value={ imageFit }
 												options={ [
@@ -237,7 +237,7 @@ export default function Edit( { attributes, setAttributes } ) {
 												onChange={ set( 'imageFit' ) }
 											/>
 											<RangeControl label={ __( 'Border Radius (px)', 'blockive-premium-addon-for-block-pro' ) } value={ borderRadius } onChange={ set( 'borderRadius' ) } min={ 0 } max={ 60 } />
-											<SelectControl
+											<SegmentedControl
 												label={ __( 'Hover Effect', 'blockive-premium-addon-for-block-pro' ) }
 												value={ hoverEffect }
 												options={ [
@@ -269,7 +269,8 @@ export default function Edit( { attributes, setAttributes } ) {
 										<CarouselNavigationStylePanel attributes={ attributes } setAttributes={ setAttributes } />
 									</>
 								}
-								advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
 							/>
 						</>
 					) }

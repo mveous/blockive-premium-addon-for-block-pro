@@ -1,18 +1,47 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
-import { PanelBody, SelectControl, ToggleControl, RangeControl, TextControl } from '@wordpress/components';
+import { PanelBody, ToggleControl, RangeControl, TextControl } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
 import ResponsiveControls from '../components/responsive-controls';
+import SegmentedControl from '../components/segmented-control';
+import StepperControl from '../components/stepper-control';
+import StyleTilePicker from '../components/style-tile-picker';
 import { LoopTemplatePanel, LoopQueryPanel } from './query-panels';
+import SetupCard from './setup-card';
 
 const COLUMN_ATTR_SUFFIX = {
 	desktop: '',
 	tablet: 'Tablet',
 	mobile: 'Mobile',
 };
+
+const LAYOUT_OPTIONS = [
+	{
+		value: 'grid',
+		label: __( 'Grid', 'blockive-premium-addon-for-block-pro' ),
+		preview: () => (
+			<svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
+				<rect x="2" y="2" width="20" height="13" rx="2" fill="currentColor" />
+				<rect x="26" y="2" width="20" height="13" rx="2" fill="currentColor" />
+				<rect x="2" y="17" width="20" height="13" rx="2" fill="currentColor" />
+				<rect x="26" y="17" width="20" height="13" rx="2" fill="currentColor" />
+			</svg>
+		),
+	},
+	{
+		value: 'masonry',
+		label: __( 'Masonry', 'blockive-premium-addon-for-block-pro' ),
+		preview: () => (
+			<svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
+				<rect x="2" y="2" width="13" height="28" rx="2" fill="currentColor" />
+				<rect x="17.5" y="2" width="13" height="18" rx="2" fill="currentColor" />
+				<rect x="33" y="2" width="13" height="23" rx="2" fill="currentColor" />
+			</svg>
+		),
+	},
+];
 
 export default function Edit( { attributes, setAttributes } ) {
 	const {
@@ -28,6 +57,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		nothingFoundText,
 		paginationType,
 		paginationAlign,
+		loadMoreText,
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -41,18 +71,27 @@ export default function Edit( { attributes, setAttributes } ) {
 						<LoopQueryPanel attributes={ attributes } setAttributes={ setAttributes } />
 
 						<PanelBody title={ __( 'Pagination', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Type', 'blockive-premium-addon-for-block-pro' ) }
 								value={ paginationType }
 								options={ [
 									{ label: __( 'None', 'blockive-premium-addon-for-block-pro' ), value: 'none' },
 									{ label: __( 'Numbers', 'blockive-premium-addon-for-block-pro' ), value: 'numbers' },
-									{ label: __( 'Previous / Next', 'blockive-premium-addon-for-block-pro' ), value: 'prev_next' },
+									{ label: __( 'Prev / Next', 'blockive-premium-addon-for-block-pro' ), value: 'prev_next' },
+									{ label: __( 'Load More', 'blockive-premium-addon-for-block-pro' ), value: 'load_more' },
 								] }
 								onChange={ ( value ) => setAttributes( { paginationType: value } ) }
 							/>
+							{ paginationType === 'load_more' && (
+								<TextControl
+									label={ __( 'Button Text', 'blockive-premium-addon-for-block-pro' ) }
+									value={ loadMoreText }
+									placeholder={ __( 'Load More', 'blockive-premium-addon-for-block-pro' ) }
+									onChange={ ( value ) => setAttributes( { loadMoreText: value } ) }
+								/>
+							) }
 							{ paginationType !== 'none' && (
-								<SelectControl
+								<SegmentedControl
 									label={ __( 'Alignment', 'blockive-premium-addon-for-block-pro' ) }
 									value={ paginationAlign }
 									options={ [
@@ -69,13 +108,18 @@ export default function Edit( { attributes, setAttributes } ) {
 				style={
 					<>
 						<PanelBody title={ __( 'Layout', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
+							<StyleTilePicker
+								value={ masonry ? 'masonry' : 'grid' }
+								options={ LAYOUT_OPTIONS }
+								onChange={ ( value ) => setAttributes( { masonry: value === 'masonry' } ) }
+							/>
 							<ResponsiveControls>
 								{ ( device ) => {
 									const suffix = COLUMN_ATTR_SUFFIX[ device ];
 									const attrName = `columns${ suffix }`;
 									const value = { columns, columnsTablet, columnsMobile }[ attrName ] ?? columns;
 									return (
-										<RangeControl
+										<StepperControl
 											label={ __( 'Columns', 'blockive-premium-addon-for-block-pro' ) }
 											value={ value }
 											onChange={ ( val ) => setAttributes( { [ attrName ]: val } ) }
@@ -98,12 +142,6 @@ export default function Edit( { attributes, setAttributes } ) {
 								onChange={ ( value ) => setAttributes( { rowGap: value } ) }
 								min={ 0 }
 								max={ 100 }
-							/>
-							<ToggleControl
-								label={ __( 'Masonry', 'blockive-premium-addon-for-block-pro' ) }
-								help={ __( 'Stacks items in even columns instead of even rows.', 'blockive-premium-addon-for-block-pro' ) }
-								checked={ !! masonry }
-								onChange={ ( value ) => setAttributes( { masonry: value } ) }
 							/>
 							{ ! masonry && (
 								<ToggleControl
@@ -130,16 +168,15 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>
 				{ templateId ? (
 					<ServerSideRender block="blockive-premium-addon-for-block/loop-grid" attributes={ attributes } />
 				) : (
-					<p className="bpafb-pro-loop-grid-placeholder">
-						{ __( 'Choose a Loop Item template in the block settings to preview this grid.', 'blockive-premium-addon-for-block-pro' ) }
-					</p>
+					<SetupCard attributes={ attributes } setAttributes={ setAttributes } layoutOptions={ LAYOUT_OPTIONS } />
 				) }
 			</div>
 		</>

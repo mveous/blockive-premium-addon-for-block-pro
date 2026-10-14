@@ -3,7 +3,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl, TextControl, RangeControl, Notice } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
+import SegmentedControl from '../../components/segmented-control';
 import ColorStateControls from '../../components/color-state-controls';
 import {
 	LayoutPanel,
@@ -78,7 +78,7 @@ export default function Edit( { attributes, setAttributes, name } ) {
 						<GridPanel attributes={ attributes } setAttributes={ setAttributes } />
 						{ isCard && (
 							<PanelBody title={ __( 'Card Content', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-								<SelectControl
+								<SegmentedControl
 									label={ __( 'Content Alignment', 'blockive-premium-addon-for-block-pro' ) }
 									value={ contentAlign }
 									options={ [
@@ -143,7 +143,8 @@ export default function Edit( { attributes, setAttributes, name } ) {
 						<PaginationStylePanel attributes={ attributes } setAttributes={ setAttributes } />
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<ArchivePreview

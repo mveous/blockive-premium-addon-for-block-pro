@@ -5,7 +5,8 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, SelectControl, RangeControl, TextControl, ToggleControl, Disabled } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
+import StepperControl from '../components/stepper-control';
 import ResponsiveControls from '../components/responsive-controls';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
@@ -69,7 +70,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 						</FilterBarSettingsPanel>
 						<PanelBody title={ __( 'Layout', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Layout', 'blockive-premium-addon-for-block-pro' ) }
 								value={ layout }
 								options={ [
@@ -81,7 +82,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<ResponsiveControls>
 								{ ( device ) => {
 									const key = { desktop: 'columns', tablet: 'columnsTablet', mobile: 'columnsMobile' }[ device ] || 'columns';
-									return <RangeControl label={ __( 'Columns', 'blockive-premium-addon-for-block-pro' ) } value={ attributes[ key ] } onChange={ ( val ) => setAttributes( { [ key ]: val } ) } min={ 1 } max={ 8 } />;
+									return <StepperControl label={ __( 'Columns', 'blockive-premium-addon-for-block-pro' ) } value={ attributes[ key ] } onChange={ ( val ) => setAttributes( { [ key ]: val } ) } min={ 1 } max={ 8 } />;
 								} }
 							</ResponsiveControls>
 							<SelectControl
@@ -94,7 +95,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								onChange={ set( 'aspectRatio' ) }
 							/>
 							<SelectControl label={ __( 'Image Size', 'blockive-premium-addon-for-block-pro' ) } value={ imageSize } options={ IMAGE_SIZES } onChange={ set( 'imageSize' ) } />
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Title', 'blockive-premium-addon-for-block-pro' ) }
 								value={ titlePosition }
 								options={ [
@@ -124,7 +125,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<PanelBody title={ __( 'Items', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
 							<RangeControl label={ __( 'Gap (px)', 'blockive-premium-addon-for-block-pro' ) } value={ gap } onChange={ set( 'gap' ) } min={ 0 } max={ 60 } />
 							<RangeControl label={ __( 'Border Radius (px)', 'blockive-premium-addon-for-block-pro' ) } value={ borderRadius } onChange={ set( 'borderRadius' ) } min={ 0 } max={ 40 } />
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Hover Effect', 'blockive-premium-addon-for-block-pro' ) }
 								value={ hoverEffect }
 								options={ [
@@ -149,7 +150,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						<FilterBarStylePanel attributes={ attributes } setAttributes={ setAttributes } />
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...useBlockProps() }>

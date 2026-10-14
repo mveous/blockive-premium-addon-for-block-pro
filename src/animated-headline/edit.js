@@ -4,7 +4,7 @@ import { useBlockProps, RichText, BlockControls, AlignmentControl } from '@wordp
 import { PanelBody, SelectControl, RangeControl, TextControl, TextareaControl, ToggleControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
 import { typoValues, typoOnChange, typoVars, cssVars } from '../template-blocks-site/shared';
@@ -93,7 +93,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				general={
 					<>
 						<PanelBody title={ __( 'Headline', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Style', 'blockive-premium-addon-for-block-pro' ) }
 								value={ style }
 								options={ [
@@ -175,7 +175,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

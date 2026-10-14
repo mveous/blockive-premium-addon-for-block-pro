@@ -12,7 +12,7 @@ import {
 } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
 import IconPicker from '../pro-components/icon-picker';
@@ -108,7 +108,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				general={
 					<>
 						<PanelBody title={ __( 'Front', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true } onToggle={ () => setSide( 'front' ) }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Graphic', 'blockive-premium-addon-for-block-pro' ) }
 								value={ frontGraphic }
 								options={ [
@@ -139,7 +139,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<TextControl label={ __( 'Link', 'blockive-premium-addon-for-block-pro' ) } type="url" value={ link } onChange={ set( 'link' ) } />
 							{ !! link && (
 								<>
-									<SelectControl
+									<SegmentedControl
 										label={ __( 'Link Applies To', 'blockive-premium-addon-for-block-pro' ) }
 										value={ linkType }
 										options={ [
@@ -173,7 +173,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								onChange={ set( 'effect' ) }
 							/>
 							{ [ 'flip', 'slide', 'push' ].includes( effect ) && (
-								<SelectControl
+								<SegmentedControl
 									label={ __( 'Direction', 'blockive-premium-addon-for-block-pro' ) }
 									value={ direction }
 									options={ [
@@ -199,7 +199,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<RangeControl label={ __( 'Mobile Height (px)', 'blockive-premium-addon-for-block-pro' ) } value={ heightMobile } onChange={ set( 'heightMobile' ) } min={ 120 } max={ 900 } allowReset />
 							<RangeControl label={ __( 'Border Radius (px)', 'blockive-premium-addon-for-block-pro' ) } value={ radius } onChange={ set( 'radius' ) } min={ 0 } max={ 60 } />
 							<RangeControl label={ __( 'Padding (px)', 'blockive-premium-addon-for-block-pro' ) } value={ padding } onChange={ set( 'padding' ) } min={ 0 } max={ 100 } />
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Vertical Alignment', 'blockive-premium-addon-for-block-pro' ) }
 								value={ verticalAlign }
 								options={ [
@@ -247,7 +247,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

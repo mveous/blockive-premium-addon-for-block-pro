@@ -4,7 +4,6 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, ToggleControl, TextControl } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
 import { LoopTemplatePanel, LoopQueryPanel } from '../loop-grid/query-panels';
 import { CarouselSettingsPanel, CarouselNavigationStylePanel } from '../pro-components/carousel/editor';
 
@@ -39,7 +38,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						<CarouselNavigationStylePanel attributes={ attributes } setAttributes={ setAttributes } />
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...useBlockProps() }>

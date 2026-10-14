@@ -5,7 +5,7 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, SelectControl, TextControl, ToggleControl, FormTokenField, Notice, Disabled, Placeholder } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import { FilterBarStylePanel } from '../pro-components/filter-bar/editor';
 
 const TARGETS = {
@@ -100,7 +100,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								__experimentalShowHowTo={ false }
 							/>
 							<p className="components-base-control__help">{ __( 'Leave empty to show every term.', 'blockive-premium-addon-for-block-pro' ) }</p>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Order', 'blockive-premium-addon-for-block-pro' ) }
 								value={ orderBy }
 								options={ [
@@ -112,7 +112,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<ToggleControl label={ __( 'Hide Empty Terms', 'blockive-premium-addon-for-block-pro' ) } checked={ !! hideEmpty } onChange={ set( 'hideEmpty' ) } />
 							<ToggleControl label={ __( 'Show "All" Button', 'blockive-premium-addon-for-block-pro' ) } checked={ !! showAll } onChange={ set( 'showAll' ) } />
 							{ showAll && <TextControl label={ __( '"All" Label', 'blockive-premium-addon-for-block-pro' ) } value={ allLabel } onChange={ set( 'allLabel' ) } /> }
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Alignment', 'blockive-premium-addon-for-block-pro' ) }
 								value={ filterAlign }
 								options={ [
@@ -126,7 +126,8 @@ export default function Edit( { attributes, setAttributes } ) {
 					</>
 				}
 				style={ <FilterBarStylePanel attributes={ attributes } setAttributes={ setAttributes } /> }
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...useBlockProps() }>

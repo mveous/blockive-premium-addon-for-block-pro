@@ -13,7 +13,8 @@ import {
 import ServerSideRender from '@wordpress/server-side-render';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
+import SegmentedControl from '../../components/segmented-control';
+import StepperControl from '../../components/stepper-control';
 import ResponsiveControls from '../../components/responsive-controls';
 import ColorStateControls from '../../components/color-state-controls';
 import TypographyControls from '../../components/typography-controls';
@@ -102,7 +103,7 @@ export default function Edit( { attributes, setAttributes, name } ) {
 							</Button>
 						</PanelBody>
 						<PanelBody title={ __( 'Query', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Order By', 'blockive-premium-addon-for-block-pro' ) }
 								value={ orderBy }
 								options={ [
@@ -113,7 +114,7 @@ export default function Edit( { attributes, setAttributes, name } ) {
 								] }
 								onChange={ set( 'orderBy' ) }
 							/>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Order', 'blockive-premium-addon-for-block-pro' ) }
 								value={ order }
 								options={ [
@@ -144,7 +145,7 @@ export default function Edit( { attributes, setAttributes, name } ) {
 								{ ( device ) => {
 									const key = { desktop: 'columns', tablet: 'columnsTablet', mobile: 'columnsMobile' }[ device ] || 'columns';
 									return (
-										<RangeControl
+										<StepperControl
 											label={ __( 'Columns', 'blockive-premium-addon-for-block-pro' ) }
 											value={ attributes[ key ] }
 											onChange={ ( val ) => setAttributes( { [ key ]: val } ) }
@@ -185,7 +186,7 @@ export default function Edit( { attributes, setAttributes, name } ) {
 								] }
 								hover={ [ { label: __( 'Link Color', 'blockive-premium-addon-for-block-pro' ), value: linkHoverColor, onChange: set( 'linkHoverColor' ) } ] }
 							/>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Bullet Style', 'blockive-premium-addon-for-block-pro' ) }
 								value={ listStyle }
 								options={ [
@@ -199,7 +200,8 @@ export default function Edit( { attributes, setAttributes, name } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

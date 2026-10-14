@@ -4,7 +4,7 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, SelectControl, RangeControl, TextControl, TextareaControl, ToggleControl, CheckboxControl, Disabled } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 
 const PLACEHOLDERS = {
 	page: 'https://www.facebook.com/YourPage',
@@ -28,7 +28,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				general={
 					<>
 						<PanelBody title={ __( 'Facebook', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Show', 'blockive-premium-addon-for-block-pro' ) }
 								value={ embedType }
 								options={ [
@@ -56,7 +56,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							{ ( embedType === 'post' || embedType === 'video' ) && <ToggleControl label={ __( 'Show Post Text', 'blockive-premium-addon-for-block-pro' ) } checked={ !! showText } onChange={ set( 'showText' ) } /> }
 							{ embedType === 'like' && (
 								<>
-									<SelectControl
+									<SegmentedControl
 										label={ __( 'Layout', 'blockive-premium-addon-for-block-pro' ) }
 										value={ likeLayout }
 										options={ [
@@ -67,7 +67,7 @@ export default function Edit( { attributes, setAttributes } ) {
 										] }
 										onChange={ set( 'likeLayout' ) }
 									/>
-									<SelectControl
+									<SegmentedControl
 										label={ __( 'Button Says', 'blockive-premium-addon-for-block-pro' ) }
 										value={ likeAction }
 										options={ [
@@ -76,7 +76,7 @@ export default function Edit( { attributes, setAttributes } ) {
 										] }
 										onChange={ set( 'likeAction' ) }
 									/>
-									<SelectControl
+									<SegmentedControl
 										label={ __( 'Size', 'blockive-premium-addon-for-block-pro' ) }
 										value={ likeSize }
 										options={ [
@@ -100,7 +100,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 			<div { ...useBlockProps() }>
 				<Disabled>

@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
 import { getBlockType } from '@wordpress/blocks';
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { InspectorControls } from '@wordpress/block-editor';
+import { AdvancedExtraFill } from '../components/inspector-tabs/slots';
 import { PanelBody, ToggleControl, SelectControl, RangeControl, Notice } from '@wordpress/components';
 
 import { PREFIX, shareAttribute } from './shared';
@@ -162,9 +162,11 @@ const withMotionEffects = createHigherOrderComponent(
 		return (
 			<>
 				<BlockEdit { ...props } />
-				<InspectorControls group="styles">
-					<MotionPanel attributes={ props.attributes } setAttributes={ props.setAttributes } />
-				</InspectorControls>
+				{ props.isSelected && (
+					<AdvancedExtraFill>
+						<MotionPanel attributes={ props.attributes } setAttributes={ props.setAttributes } />
+					</AdvancedExtraFill>
+				) }
 			</>
 		);
 	},

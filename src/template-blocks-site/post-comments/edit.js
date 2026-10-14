@@ -3,7 +3,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl, TextControl, RangeControl } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
+import SegmentedControl from '../../components/segmented-control';
 import ColorStateControls from '../../components/color-state-controls';
 import TypographyControls from '../../components/typography-controls';
 import { typoValues, typoOnChange } from '../shared';
@@ -59,7 +59,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								onChange={ set( 'titleTag' ) }
 								help={ __( 'Also used for the reply form title.', 'blockive-premium-addon-for-block-pro' ) }
 							/>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Order', 'blockive-premium-addon-for-block-pro' ) }
 								value={ order }
 								options={ [
@@ -141,7 +141,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...useBlockProps() }>

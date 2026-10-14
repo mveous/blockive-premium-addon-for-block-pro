@@ -5,7 +5,8 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, SelectControl, RangeControl, ToggleControl, Disabled } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
+import StepperControl from '../components/stepper-control';
 import { TermTokens } from '../pro-components/woo/editor';
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -32,11 +33,11 @@ export default function Edit( { attributes, setAttributes } ) {
 									] }
 									onChange={ set( 'parent' ) }
 								/>
-								<RangeControl label={ __( 'Number (0 = all)', 'blockive-premium-addon-for-block-pro' ) } value={ number } onChange={ set( 'number' ) } min={ 0 } max={ 48 } />
+								<StepperControl label={ __( 'Number (0 = all)', 'blockive-premium-addon-for-block-pro' ) } value={ number } onChange={ set( 'number' ) } min={ 0 } max={ 48 } />
 							</>
 						) }
-						<RangeControl label={ __( 'Columns', 'blockive-premium-addon-for-block-pro' ) } value={ columns } onChange={ set( 'columns' ) } min={ 1 } max={ 6 } />
-						<SelectControl
+						<StepperControl label={ __( 'Columns', 'blockive-premium-addon-for-block-pro' ) } value={ columns } onChange={ set( 'columns' ) } min={ 1 } max={ 6 } />
+						<SegmentedControl
 							label={ __( 'Order By', 'blockive-premium-addon-for-block-pro' ) }
 							value={ orderBy }
 							options={ [
@@ -47,7 +48,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							] }
 							onChange={ set( 'orderBy' ) }
 						/>
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Order', 'blockive-premium-addon-for-block-pro' ) }
 							value={ order }
 							options={ [
@@ -59,7 +60,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						<ToggleControl label={ __( 'Hide Empty Categories', 'blockive-premium-addon-for-block-pro' ) } checked={ !! hideEmpty } onChange={ set( 'hideEmpty' ) } />
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 			<div { ...useBlockProps() }>
 				<Disabled>

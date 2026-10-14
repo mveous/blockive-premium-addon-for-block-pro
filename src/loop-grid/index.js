@@ -1,5 +1,5 @@
 import { registerBlockType } from '@wordpress/blocks';
-import './style-index.css';
+import './style.css';
 import Edit from './edit';
 import metadata from './block.json';
 

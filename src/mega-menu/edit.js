@@ -12,7 +12,7 @@ import {
 import { plus, trash, chevronUp, chevronDown } from '@wordpress/icons';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import { MenuItemsStylePanel, DropdownFrameControls } from '../pro-components/menu/editor';
 import ColorStateControls from '../components/color-state-controls';
 import useTemplateOptions from '../components/use-template-options';
@@ -141,7 +141,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<MenuItemsStylePanel attributes={ attributes } setAttributes={ setAttributes } />
 
 						<PanelBody title={ __( 'Dropdown', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Width', 'blockive-premium-addon-for-block-pro' ) }
 								value={ dropdownWidth }
 								options={ [
@@ -181,7 +181,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

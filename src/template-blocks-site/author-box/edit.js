@@ -3,7 +3,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl, TextControl, TextareaControl, RangeControl } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
+import SegmentedControl from '../../components/segmented-control';
 import ColorStateControls from '../../components/color-state-controls';
 import TypographyControls from '../../components/typography-controls';
 import ImageControl from '../../pro-components/image-control';
@@ -113,7 +113,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							) }
 						</PanelBody>
 						<PanelBody title={ __( 'Layout', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Photo Position', 'blockive-premium-addon-for-block-pro' ) }
 								value={ layout }
 								options={ [
@@ -124,7 +124,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								onChange={ set( 'layout' ) }
 							/>
 							{ layout === 'above' && (
-								<SelectControl
+								<SegmentedControl
 									label={ __( 'Alignment', 'blockive-premium-addon-for-block-pro' ) }
 									value={ align }
 									options={ [
@@ -170,7 +170,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: bioColor, onChange: set( 'bioColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Button', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Style', 'blockive-premium-addon-for-block-pro' ) }
 								value={ buttonStyle }
 								options={ [
@@ -195,7 +195,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...useBlockProps() }>

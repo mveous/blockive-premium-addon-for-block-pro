@@ -3,7 +3,6 @@ import { useBlockProps, BlockControls, AlignmentControl } from '@wordpress/block
 import { PanelBody, RangeControl, TextControl, ToggleControl } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
 import ColorStateControls from '../../components/color-state-controls';
 import TypographyControls from '../../components/typography-controls';
 import { typoValues, typoOnChange } from '../shared';
@@ -44,7 +43,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 			<div { ...useBlockProps() }>
 				<PostPreview name="blockive-premium-addon-for-block/tb-post-excerpt" attributes={ attributes } emptyText={ __( 'The previewed post has no excerpt or content.', 'blockive-premium-addon-for-block-pro' ) } />

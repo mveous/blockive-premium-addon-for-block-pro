@@ -4,7 +4,7 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, SelectControl, RangeControl, TextControl, TextareaControl, ToggleControl, Button, Disabled } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 
 const NETWORKS = [
@@ -122,7 +122,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<PanelBody title={ __( 'Link in Bio', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
 						<RangeControl label={ __( 'Photo Size (px)', 'blockive-premium-addon-for-block-pro' ) } value={ imageSize } onChange={ set( 'imageSize' ) } min={ 48 } max={ 240 } />
 						<RangeControl label={ __( 'Content Width (px)', 'blockive-premium-addon-for-block-pro' ) } value={ maxWidth } onChange={ set( 'maxWidth' ) } min={ 280 } max={ 800 } />
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Button Style', 'blockive-premium-addon-for-block-pro' ) }
 							value={ buttonStyle }
 							options={ [
@@ -147,7 +147,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 			<div { ...useBlockProps() }>
 				{ empty ? (

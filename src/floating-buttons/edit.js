@@ -4,7 +4,7 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, SelectControl, RangeControl, TextControl, TextareaControl, ToggleControl, Button, Disabled, Placeholder } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 
 const TYPES = {
@@ -67,7 +67,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							</Button>
 						</PanelBody>
 						<PanelBody title={ __( 'Button', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Position', 'blockive-premium-addon-for-block-pro' ) }
 								value={ position }
 								options={ [
@@ -94,7 +94,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<RangeControl label={ __( 'Size (px)', 'blockive-premium-addon-for-block-pro' ) } value={ size } onChange={ set( 'size' ) } min={ 36 } max={ 90 } />
 						<RangeControl label={ __( 'Side Offset (px)', 'blockive-premium-addon-for-block-pro' ) } value={ offsetX } onChange={ set( 'offsetX' ) } min={ 0 } max={ 200 } />
 						<RangeControl label={ __( 'Bottom Offset (px)', 'blockive-premium-addon-for-block-pro' ) } value={ offsetY } onChange={ set( 'offsetY' ) } min={ 0 } max={ 200 } />
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Channel Colors', 'blockive-premium-addon-for-block-pro' ) }
 							value={ colorMode }
 							options={ [
@@ -112,7 +112,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...useBlockProps( { className: 'bpafb-fab-preview' } ) }>

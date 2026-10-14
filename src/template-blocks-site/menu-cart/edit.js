@@ -3,7 +3,7 @@ import { useBlockProps, BlockControls, AlignmentControl } from '@wordpress/block
 import { PanelBody, SelectControl, ToggleControl, RangeControl, Notice } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
+import SegmentedControl from '../../components/segmented-control';
 import ColorStateControls from '../../components/color-state-controls';
 import TypographyControls from '../../components/typography-controls';
 import { typoValues, typoOnChange, typoVars, cssVars, SvgIcon } from '../shared';
@@ -64,7 +64,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								{ __( 'WooCommerce is not active, so this block will not show on the site.', 'blockive-premium-addon-for-block-pro' ) }
 							</Notice>
 						) }
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Icon', 'blockive-premium-addon-for-block-pro' ) }
 							value={ icon }
 							options={ [
@@ -74,7 +74,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							] }
 							onChange={ set( 'icon' ) }
 						/>
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'On Click', 'blockive-premium-addon-for-block-pro' ) }
 							value={ behavior }
 							options={ [
@@ -84,7 +84,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange={ set( 'behavior' ) }
 						/>
 						{ behavior === 'dropdown' && (
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Dropdown Position', 'blockive-premium-addon-for-block-pro' ) }
 								value={ dropdownAlign }
 								options={ [
@@ -139,7 +139,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

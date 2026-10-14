@@ -3,7 +3,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, TextControl, ToggleControl } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 import { cssVars } from '../template-blocks-site/shared';
 
@@ -37,7 +37,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<InspectorTabs
 				general={
 					<PanelBody title={ __( 'Progress Tracker', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Type', 'blockive-premium-addon-for-block-pro' ) }
 							value={ type }
 							options={ [
@@ -60,7 +60,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								help={ __( 'Many themes put a scroll-to-top button in the bottom right corner.', 'blockive-premium-addon-for-block-pro' ) }
 							/>
 						) : (
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Position', 'blockive-premium-addon-for-block-pro' ) }
 								value={ position }
 								options={ [
@@ -70,7 +70,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								onChange={ set( 'position' ) }
 							/>
 						) }
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Track Progress Through', 'blockive-premium-addon-for-block-pro' ) }
 							value={ relativeTo }
 							options={ [
@@ -111,7 +111,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

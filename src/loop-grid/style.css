@@ -102,3 +102,8 @@
 .bpafb-pro-loop-grid-pagination .dots {
 	border: none;
 }
+
+.bpafb-pro-loop-grid-load-more.is-loading {
+	opacity: 0.6;
+	cursor: progress;
+}

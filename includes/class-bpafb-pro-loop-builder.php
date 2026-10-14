@@ -22,6 +22,25 @@ class Bpafb_Pro_Loop_Builder
 {
 	const POST_GRID_BLOCK = 'blockive-premium-addon-for-block/post-grid';
 
+	const REST_NAMESPACE = 'bpafb-pro/v1';
+
+	/**
+	 * Post ID to treat as "the current post" while rendering a later Load
+	 * More page over REST, where is_singular() is false. Null outside that.
+	 *
+	 * @var int|null
+	 */
+	private static $current_post_override = null;
+
+	/**
+	 * Loop Filter value ("taxonomy:slug") to use while rendering a later
+	 * Load More page, since the REST request has no page URL to read it
+	 * from. Null outside that.
+	 *
+	 * @var string|null
+	 */
+	private static $filter_override = null;
+
 	/**
 	 * The one and only instance of this class.
 	 *
@@ -49,6 +68,132 @@ class Bpafb_Pro_Loop_Builder
 	{
 		add_filter('render_block_' . self::POST_GRID_BLOCK, [$this, 'maybe_render_loop_template'], 10, 2);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
+		add_action('rest_api_init', [$this, 'register_rest_routes']);
+	}
+
+	/**
+	 * GET/POST bpafb-pro/v1/loop-items: the next page of a Loop Grid's items,
+	 * for its "Load More" button. Public, like the ?bpafb-page= links it
+	 * replaces -- it only ever returns published posts through a published
+	 * Loop Item template.
+	 */
+	public function register_rest_routes()
+	{
+		register_rest_route(self::REST_NAMESPACE, '/loop-items', [
+			'methods'             => ['GET', 'POST'],
+			'callback'            => [$this, 'rest_loop_items'],
+			'permission_callback' => '__return_true',
+			'args'                => [
+				'attrs' => ['type' => 'string', 'required' => true],
+				'sig'   => ['type' => 'string', 'required' => true],
+				'page'  => ['type' => 'integer', 'required' => true, 'minimum' => 1],
+			],
+		]);
+	}
+
+	/**
+	 * The signed settings a Loop Grid's Load More button sends back, so the
+	 * REST request renders exactly the query the page did, and a visitor
+	 * can't swap in a different post type, template, or query.
+	 *
+	 * @param array $attributes Loop Grid block attributes.
+	 * @return array{attrs: string, sig: string}
+	 */
+	public static function load_more_payload($attributes)
+	{
+		$uid    = !empty($attributes['bpafbUid']) ? sanitize_html_class($attributes['bpafbUid']) : '';
+		$param  = $uid ? self::filter_param($uid) : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- a public, read-only filter; checked again in active_filter().
+		$filter = ($param && isset($_GET[$param]) && is_string($_GET[$param])) ? sanitize_text_field(wp_unslash($_GET[$param])) : '';
+
+		$json = wp_json_encode([
+			'attributes'    => $attributes,
+			'currentPostId' => self::current_post_id(),
+			'filter'        => $filter,
+		]);
+
+		return [
+			'attrs' => $json,
+			'sig'   => wp_hash($json),
+		];
+	}
+
+	/**
+	 * REST callback for loop-items. Verifies the signature from
+	 * load_more_payload(), then renders that page of items.
+	 *
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function rest_loop_items($request)
+	{
+		$json = (string) $request->get_param('attrs');
+		$sig  = (string) $request->get_param('sig');
+		if ('' === $json || !hash_equals(wp_hash($json), $sig)) {
+			return new WP_Error('bpafb_invalid_loop_request', __('Invalid request.', 'blockive-premium-addon-for-block-pro'), ['status' => 400]);
+		}
+
+		$payload = json_decode($json, true);
+		if (!is_array($payload) || empty($payload['attributes']) || !is_array($payload['attributes'])) {
+			return new WP_Error('bpafb_invalid_loop_request', __('Invalid request.', 'blockive-premium-addon-for-block-pro'), ['status' => 400]);
+		}
+		$attributes = $payload['attributes'];
+
+		$template_id   = isset($attributes['templateId']) ? absint($attributes['templateId']) : 0;
+		$template_post = Bpafb_Pro_Template_Kinds::get_renderable_template($template_id, 'loop-item');
+		if (!$template_post) {
+			return new WP_Error('bpafb_loop_template_missing', __('This loop has no template.', 'blockive-premium-addon-for-block-pro'), ['status' => 404]);
+		}
+
+		self::$current_post_override = isset($payload['currentPostId']) ? absint($payload['currentPostId']) : 0;
+		self::$filter_override       = isset($payload['filter']) ? (string) $payload['filter'] : '';
+
+		$args          = self::block_query_args($attributes, 6);
+		$args['paged'] = max(1, absint($request->get_param('page')));
+		$query         = new WP_Query($args);
+		$html          = self::render_items($template_post, $query);
+
+		self::$current_post_override = null;
+		self::$filter_override       = null;
+
+		return rest_ensure_response([
+			'html'     => $html,
+			'page'     => (int) $args['paged'],
+			'maxPages' => (int) $query->max_num_pages,
+		]);
+	}
+
+	/**
+	 * One `.bpafb-pro-loop-grid-item` per post in $query, each rendered from
+	 * the Loop Item template. Resets post data afterwards.
+	 *
+	 * @param WP_Post  $template_post Loop Item template.
+	 * @param WP_Query $query         Items to render.
+	 * @return string
+	 */
+	public static function render_items($template_post, $query)
+	{
+		$html = '';
+		while ($query->have_posts()) {
+			$query->the_post();
+			$html .= '<div class="bpafb-pro-loop-grid-item">' . do_blocks($template_post->post_content) . '</div>';
+		}
+		wp_reset_postdata();
+		return $html;
+	}
+
+	/**
+	 * The post being viewed, for "Exclude Current Post": the REST override
+	 * while rendering a Load More page, otherwise the singular post (if any).
+	 *
+	 * @return int
+	 */
+	public static function current_post_id()
+	{
+		if (null !== self::$current_post_override) {
+			return self::$current_post_override;
+		}
+		return is_singular() ? (int) get_the_ID() : 0;
 	}
 
 	/**
@@ -247,8 +392,9 @@ class Bpafb_Pro_Loop_Builder
 			]];
 		}
 
-		if (!empty($attributes['excludeCurrentPost']) && is_singular()) {
-			$args['post__not_in'] = [get_the_ID()];
+		$current_post_id = self::current_post_id();
+		if (!empty($attributes['excludeCurrentPost']) && $current_post_id) {
+			$args['post__not_in'] = [$current_post_id];
 		}
 
 		// A Loop Filter block pointed at this block (see active_filter()).
@@ -291,12 +437,16 @@ class Bpafb_Pro_Loop_Builder
 	{
 		$uid = !empty($attributes['bpafbUid']) ? sanitize_html_class($attributes['bpafbUid']) : '';
 		$param = $uid ? self::filter_param($uid) : '';
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- a public, read-only filter.
-		if (!$param || empty($_GET[$param]) || !is_string($_GET[$param])) {
+		if (null !== self::$filter_override) {
+			$raw = self::$filter_override;
+		} else {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- a public, read-only filter.
+			$raw = ($param && !empty($_GET[$param]) && is_string($_GET[$param])) ? wp_unslash($_GET[$param]) : '';
+		}
+		if (!$param || '' === $raw) {
 			return null;
 		}
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$parts = explode(':', sanitize_text_field(wp_unslash($_GET[$param])), 2);
+		$parts = explode(':', sanitize_text_field($raw), 2);
 		if (2 !== count($parts)) {
 			return null;
 		}

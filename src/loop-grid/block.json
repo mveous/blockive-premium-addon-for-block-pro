@@ -126,6 +126,10 @@
 			"type": "string",
 			"default": "center"
 		},
+		"loadMoreText": {
+			"type": "string",
+			"default": ""
+		},
 		"bpafbUid": {
 			"type": "string",
 			"default": ""
@@ -389,6 +393,7 @@
 	"textdomain": "blockive-premium-addon-for-block-pro",
 	"render": "file:./render.php",
 	"editorScript": "file:./index.js",
+	"viewScript": "file:./view.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./index.css"
+	"style": "file:./style-index.css"
 }

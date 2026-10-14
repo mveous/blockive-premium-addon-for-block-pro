@@ -18,7 +18,7 @@ import {
 } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
+import SegmentedControl from '../../components/segmented-control';
 import ResponsiveControls from '../../components/responsive-controls';
 import { useSiteInfo, cssVars } from '../shared';
 
@@ -86,7 +86,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				general={
 					<>
 						<PanelBody title={ __( 'Logo', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Source', 'blockive-premium-addon-for-block-pro' ) }
 								value={ source }
 								options={ [
@@ -215,7 +215,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

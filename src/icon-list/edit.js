@@ -11,7 +11,7 @@ import {
 } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
 import IconPicker from '../pro-components/icon-picker';
@@ -126,7 +126,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							</Button>
 						</PanelBody>
 						<PanelBody title={ __( 'Layout', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Layout', 'blockive-premium-addon-for-block-pro' ) }
 								value={ layout }
 								options={ [
@@ -135,7 +135,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								] }
 								onChange={ set( 'layout' ) }
 							/>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Mobile Alignment', 'blockive-premium-addon-for-block-pro' ) }
 								value={ alignMobile }
 								options={ [
@@ -174,7 +174,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 							<RangeControl label={ __( 'Size (px)', 'blockive-premium-addon-for-block-pro' ) } value={ iconSize } onChange={ set( 'iconSize' ) } min={ 6 } max={ 100 } />
 							<RangeControl label={ __( 'Gap to Text (px)', 'blockive-premium-addon-for-block-pro' ) } value={ iconGap } onChange={ set( 'iconGap' ) } min={ 0 } max={ 50 } />
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Vertical Alignment', 'blockive-premium-addon-for-block-pro' ) }
 								value={ iconVAlign }
 								options={ [
@@ -193,7 +193,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

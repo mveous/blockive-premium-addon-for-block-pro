@@ -3,7 +3,7 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, TextControl, ToggleControl } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
 import ImageControl from '../pro-components/image-control';
@@ -239,7 +239,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 						{ showIcon && (
 							<PanelBody title={ __( 'Source Icon', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-								<SelectControl
+								<SegmentedControl
 									label={ __( 'Color', 'blockive-premium-addon-for-block-pro' ) }
 									value={ iconColorMode }
 									options={ [
@@ -255,7 +255,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						<CarouselNavigationStylePanel attributes={ attributes } setAttributes={ setAttributes } />
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

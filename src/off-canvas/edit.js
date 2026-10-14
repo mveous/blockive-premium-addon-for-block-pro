@@ -11,7 +11,7 @@ import {
 } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 import IconPicker from '../pro-components/icon-picker';
 import { cssVars } from '../template-blocks-site/shared';
@@ -100,7 +100,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				general={
 					<>
 						<PanelBody title={ __( 'Panel', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Slide In From', 'blockive-premium-addon-for-block-pro' ) }
 								value={ position }
 								options={ [
@@ -134,7 +134,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							) }
 							{ showTrigger && (
 								<>
-									<SelectControl
+									<SegmentedControl
 										label={ __( 'Content', 'blockive-premium-addon-for-block-pro' ) }
 										value={ triggerType }
 										options={ [
@@ -152,7 +152,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										value={ triggerLabel }
 										onChange={ set( 'triggerLabel' ) }
 									/>
-									<SelectControl
+									<SegmentedControl
 										label={ __( 'Alignment', 'blockive-premium-addon-for-block-pro' ) }
 										value={ triggerAlign }
 										options={ [
@@ -225,7 +225,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						) }
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

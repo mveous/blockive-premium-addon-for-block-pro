@@ -14,7 +14,7 @@ import {
 } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ResponsiveControls from '../components/responsive-controls';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
@@ -166,7 +166,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							{ !! slide.url && (
 								<ToggleControl label={ __( 'Open in New Tab', 'blockive-premium-addon-for-block-pro' ) } checked={ !! slide.newTab } onChange={ ( val ) => updateSlide( { newTab: val } ) } />
 							) }
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Content Alignment (this slide)', 'blockive-premium-addon-for-block-pro' ) }
 								value={ slide.align || '' }
 								options={ [
@@ -179,7 +179,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 						</PanelBody>
 						<PanelBody title={ __( 'Slider Settings', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Transition', 'blockive-premium-addon-for-block-pro' ) }
 								value={ effect }
 								options={ [
@@ -189,7 +189,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								onChange={ set( 'effect' ) }
 							/>
 							<RangeControl label={ __( 'Transition Speed (ms)', 'blockive-premium-addon-for-block-pro' ) } value={ speed } onChange={ set( 'speed' ) } min={ 100 } max={ 2000 } step={ 50 } />
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Navigation', 'blockive-premium-addon-for-block-pro' ) }
 								value={ navigation }
 								options={ [
@@ -240,7 +240,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<RangeControl label={ __( 'Content Max Width (px)', 'blockive-premium-addon-for-block-pro' ) } value={ contentWidth } onChange={ set( 'contentWidth' ) } min={ 200 } max={ 1400 } />
 							<RangeControl label={ __( 'Padding (px)', 'blockive-premium-addon-for-block-pro' ) } value={ padding } onChange={ set( 'padding' ) } min={ 0 } max={ 150 } />
 							<RangeControl label={ __( 'Border Radius (px)', 'blockive-premium-addon-for-block-pro' ) } value={ borderRadius } onChange={ set( 'borderRadius' ) } min={ 0 } max={ 60 } />
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Content Alignment', 'blockive-premium-addon-for-block-pro' ) }
 								value={ contentAlign }
 								options={ [
@@ -250,7 +250,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								] }
 								onChange={ set( 'contentAlign' ) }
 							/>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Vertical Position', 'blockive-premium-addon-for-block-pro' ) }
 								value={ verticalAlign }
 								options={ [
@@ -270,7 +270,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: descColor, onChange: set( 'descColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Button', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Style', 'blockive-premium-addon-for-block-pro' ) }
 								value={ buttonStyle }
 								options={ [
@@ -304,7 +304,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

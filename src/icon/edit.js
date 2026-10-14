@@ -3,7 +3,7 @@ import { useBlockProps, BlockControls, AlignmentControl } from '@wordpress/block
 import { PanelBody, SelectControl, RangeControl, TextControl, ToggleControl } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ResponsiveControls from '../components/responsive-controls';
 import ColorStateControls from '../components/color-state-controls';
 import IconPicker from '../pro-components/icon-picker';
@@ -69,7 +69,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				general={
 					<PanelBody title={ __( 'Icon', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
 						<IconPicker value={ icon } onChange={ set( 'icon' ) } />
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'View', 'blockive-premium-addon-for-block-pro' ) }
 							value={ view }
 							options={ [
@@ -80,7 +80,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange={ set( 'view' ) }
 						/>
 						{ hasShape && (
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Shape', 'blockive-premium-addon-for-block-pro' ) }
 								value={ shape }
 								options={ [
@@ -145,7 +145,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						<RangeControl label={ __( 'Rotate (deg)', 'blockive-premium-addon-for-block-pro' ) } value={ rotate } onChange={ set( 'rotate' ) } min={ 0 } max={ 360 } />
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

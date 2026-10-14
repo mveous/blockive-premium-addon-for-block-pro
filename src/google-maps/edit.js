@@ -4,7 +4,8 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, TextControl, ToggleControl } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
+import StepperControl from '../components/stepper-control';
 import ResponsiveControls from '../components/responsive-controls';
 import { cssVars } from '../template-blocks-site/shared';
 
@@ -59,8 +60,8 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 							value={ address }
 							onChange={ set( 'address' ) }
 						/>
-						<RangeControl label={ __( 'Zoom', 'blockive-premium-addon-for-block-pro' ) } value={ zoom } onChange={ set( 'zoom' ) } min={ 1 } max={ 21 } />
-						<SelectControl
+						<StepperControl label={ __( 'Zoom', 'blockive-premium-addon-for-block-pro' ) } value={ zoom } onChange={ set( 'zoom' ) } min={ 1 } max={ 21 } />
+						<SegmentedControl
 							label={ __( 'Map Type', 'blockive-premium-addon-for-block-pro' ) }
 							value={ mapType }
 							options={ [
@@ -105,7 +106,8 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 						<RangeControl label={ __( 'Hover Grayscale (%)', 'blockive-premium-addon-for-block-pro' ) } value={ hoverGrayscale } onChange={ set( 'hoverGrayscale' ) } min={ 0 } max={ 100 } allowReset />
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

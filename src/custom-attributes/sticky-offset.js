@@ -7,7 +7,7 @@
 import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { InspectorControls } from '@wordpress/block-editor';
+import { AdvancedExtraFill } from '../components/inspector-tabs/slots';
 import { PanelBody, RangeControl } from '@wordpress/components';
 
 import { PREFIX, shareAttribute } from './shared';
@@ -22,7 +22,8 @@ const withStickyOffset = createHigherOrderComponent(
 		return (
 			<>
 				<BlockEdit { ...props } />
-				<InspectorControls>
+				{ props.isSelected && (
+				<AdvancedExtraFill>
 					<PanelBody title={ __( 'Sticky', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
 						<RangeControl
 							label={ __( 'Distance From Top (px)', 'blockive-premium-addon-for-block-pro' ) }
@@ -34,7 +35,8 @@ const withStickyOffset = createHigherOrderComponent(
 							help={ __( 'Sticks this far below the top of the window (the admin bar is added automatically), and only while its parent, such as a column, is in view. It does not stick inside a parent with overflow hidden.', 'blockive-premium-addon-for-block-pro' ) }
 						/>
 					</PanelBody>
-				</InspectorControls>
+				</AdvancedExtraFill>
+				) }
 			</>
 		);
 	},

@@ -4,7 +4,8 @@ import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, SelectControl, RangeControl, ToggleControl, Disabled } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
+import StepperControl from '../components/stepper-control';
 import { TermTokens, ProductTokens } from '../pro-components/woo/editor';
 
 const SOURCES = [
@@ -43,12 +44,12 @@ export default function Edit( { attributes, setAttributes } ) {
 							<>
 								<TermTokens label={ __( 'Only These Categories', 'blockive-premium-addon-for-block-pro' ) } taxonomy="product_cat" value={ categories } onChange={ set( 'categories' ) } />
 								<TermTokens label={ __( 'Only These Tags', 'blockive-premium-addon-for-block-pro' ) } taxonomy="product_tag" value={ tags } onChange={ set( 'tags' ) } />
-								<RangeControl label={ __( 'Number of Products', 'blockive-premium-addon-for-block-pro' ) } value={ limit } onChange={ set( 'limit' ) } min={ 1 } max={ 48 } />
+								<StepperControl label={ __( 'Number of Products', 'blockive-premium-addon-for-block-pro' ) } value={ limit } onChange={ set( 'limit' ) } min={ 1 } max={ 48 } />
 							</>
 						) }
-						<RangeControl label={ __( 'Columns', 'blockive-premium-addon-for-block-pro' ) } value={ columns } onChange={ set( 'columns' ) } min={ 1 } max={ 6 } />
+						<StepperControl label={ __( 'Columns', 'blockive-premium-addon-for-block-pro' ) } value={ columns } onChange={ set( 'columns' ) } min={ 1 } max={ 6 } />
 						<SelectControl label={ __( 'Order By', 'blockive-premium-addon-for-block-pro' ) } value={ orderBy } options={ ORDER_BY } onChange={ set( 'orderBy' ) } help={ manual && orderBy === 'date' ? __( 'Hand-picked products keep the order above while this is Date.', 'blockive-premium-addon-for-block-pro' ) : undefined } />
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Order', 'blockive-premium-addon-for-block-pro' ) }
 							value={ order }
 							options={ [
@@ -60,7 +61,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						{ ! manual && <ToggleControl label={ __( 'Pagination', 'blockive-premium-addon-for-block-pro' ) } checked={ !! paginate } onChange={ set( 'paginate' ) } help={ __( 'Shows page links and the result count when there are more products.', 'blockive-premium-addon-for-block-pro' ) } /> }
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 			<div { ...useBlockProps() }>
 				<Disabled>

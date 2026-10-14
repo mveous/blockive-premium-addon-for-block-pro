@@ -3,7 +3,6 @@ import { useBlockProps, useInnerBlocksProps, InnerBlocks } from '@wordpress/bloc
 import { PanelBody, SelectControl, RangeControl } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
 import ResponsiveControls from '../components/responsive-controls';
 
 const TAG_OPTIONS = [
@@ -174,7 +173,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						</ResponsiveControls>
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			{ responsiveCss && <style>{ responsiveCss }</style> }

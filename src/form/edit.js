@@ -5,7 +5,8 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, TextControl, TextareaControl, ToggleControl, Notice } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
+import StepperControl from '../components/stepper-control';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
 import { useItemList, ItemActions, ItemToolbar } from '../pro-components/item-list';
@@ -277,12 +278,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									/>
 								</>
 							) }
-							{ item.type === 'textarea' && <RangeControl label={ __( 'Rows', 'blockive-premium-addon-for-block-pro' ) } value={ item.rows || 5 } onChange={ ( val ) => list.update( { rows: val } ) } min={ 2 } max={ 20 } /> }
+							{ item.type === 'textarea' && <StepperControl label={ __( 'Rows', 'blockive-premium-addon-for-block-pro' ) } value={ item.rows || 5 } onChange={ ( val ) => list.update( { rows: val } ) } min={ 2 } max={ 20 } /> }
 						</PanelBody>
 						<PanelBody title={ __( 'Form', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
 							<TextControl label={ __( 'Form Name', 'blockive-premium-addon-for-block-pro' ) } value={ formName } onChange={ set( 'formName' ) } help={ __( 'Shown in Form Submissions and the email subject.', 'blockive-premium-addon-for-block-pro' ) } />
 							<TextControl label={ __( 'Submit Button Text', 'blockive-premium-addon-for-block-pro' ) } value={ submitText } onChange={ set( 'submitText' ) } />
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Button Alignment', 'blockive-premium-addon-for-block-pro' ) }
 								value={ buttonAlign }
 								options={ [
@@ -361,7 +362,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

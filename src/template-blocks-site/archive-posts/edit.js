@@ -3,7 +3,6 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl, RangeControl, TextControl } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
 import ColorStateControls from '../../components/color-state-controls';
 import {
 	LayoutPanel,
@@ -113,7 +112,8 @@ export default function Edit( { attributes, setAttributes, name } ) {
 						<PaginationStylePanel attributes={ attributes } setAttributes={ setAttributes } />
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<ArchivePreview

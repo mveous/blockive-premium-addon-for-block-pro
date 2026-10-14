@@ -3,7 +3,6 @@ import { useBlockProps, BlockControls, AlignmentControl } from '@wordpress/block
 import { PanelBody, SelectControl } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
 import ColorStateControls from '../../components/color-state-controls';
 import { useSiteInfo, TEXT_TAG_OPTIONS } from '../shared';
 
@@ -50,7 +49,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<TagName { ...blockProps }>{ text }</TagName>

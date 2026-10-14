@@ -3,7 +3,7 @@ import { useBlockProps, RichText, BlockControls, AlignmentControl } from '@wordp
 import { PanelBody, SelectControl, RangeControl, TextControl, ToggleControl } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
 import IconPicker from '../pro-components/icon-picker';
@@ -104,7 +104,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				general={
 					<>
 						<PanelBody title={ __( 'Layout & Image', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Skin', 'blockive-premium-addon-for-block-pro' ) }
 								value={ skin }
 								options={ [
@@ -123,7 +123,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								<TextControl label={ __( 'Image Alt Text', 'blockive-premium-addon-for-block-pro' ) } value={ imageAlt } onChange={ set( 'imageAlt' ) } />
 							) }
 							{ skin === 'classic' && (
-								<SelectControl
+								<SegmentedControl
 									label={ __( 'Image Position', 'blockive-premium-addon-for-block-pro' ) }
 									value={ imagePosition }
 									options={ [
@@ -134,7 +134,7 @@ export default function Edit( { attributes, setAttributes } ) {
 									onChange={ set( 'imagePosition' ) }
 								/>
 							) }
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Graphic Element', 'blockive-premium-addon-for-block-pro' ) }
 								value={ graphic }
 								options={ [
@@ -159,7 +159,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<PanelBody title={ __( 'Ribbon', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
 							<TextControl label={ __( 'Ribbon Text', 'blockive-premium-addon-for-block-pro' ) } value={ ribbonText } onChange={ set( 'ribbonText' ) } help={ __( 'e.g. "New" or "-20%". Leave empty for no ribbon.', 'blockive-premium-addon-for-block-pro' ) } />
 							{ !! ribbonText && (
-								<SelectControl
+								<SegmentedControl
 									label={ __( 'Ribbon Corner', 'blockive-premium-addon-for-block-pro' ) }
 									value={ ribbonPosition }
 									options={ [
@@ -175,7 +175,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				style={
 					<>
 						<PanelBody title={ __( 'Box', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Vertical Alignment', 'blockive-premium-addon-for-block-pro' ) }
 								value={ verticalAlign }
 								options={ [
@@ -229,7 +229,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: descColor, onChange: set( 'descColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Button & Ribbon', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Button Style', 'blockive-premium-addon-for-block-pro' ) }
 								value={ buttonStyle }
 								options={ [
@@ -254,7 +254,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

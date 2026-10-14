@@ -3,7 +3,7 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, TextControl, ToggleControl } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
 import ImageControl from '../pro-components/image-control';
@@ -86,7 +86,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								options={ [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div' ].map( ( t ) => ( { label: t.toUpperCase(), value: t } ) ) }
 								onChange={ set( 'titleTag' ) }
 							/>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Photo Position', 'blockive-premium-addon-for-block-pro' ) }
 								value={ imagePosition }
 								options={ [
@@ -95,7 +95,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								] }
 								onChange={ set( 'imagePosition' ) }
 							/>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Vertical Alignment', 'blockive-premium-addon-for-block-pro' ) }
 								value={ verticalAlign }
 								options={ [
@@ -155,7 +155,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<ul { ...blockProps }>

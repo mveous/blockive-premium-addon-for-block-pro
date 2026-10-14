@@ -4,7 +4,7 @@ import { useBlockProps, PlainText, BlockControls } from '@wordpress/block-editor
 import { PanelBody, SelectControl, RangeControl, TextControl, ToggleControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import ColorStateControls from '../components/color-state-controls';
 import { cssVars } from '../template-blocks-site/shared';
 import { LANGUAGES } from './languages';
@@ -52,7 +52,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 				}
 				style={
 					<PanelBody title={ __( 'Appearance', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Theme', 'blockive-premium-addon-for-block-pro' ) }
 							value={ theme }
 							options={ [
@@ -75,7 +75,8 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 						<ColorStateControls normal={ [ { label: __( 'Highlighted Line', 'blockive-premium-addon-for-block-pro' ), value: highlightColor, onChange: set( 'highlightColor' ) } ] } />
 					</PanelBody>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

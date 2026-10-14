@@ -1,9 +1,12 @@
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
-import { PanelBody, SelectControl, ToggleControl, RangeControl, FormTokenField, Button, Notice, BaseControl } from '@wordpress/components';
+import { PanelBody, SelectControl, ToggleControl, FormTokenField, Button, Notice, BaseControl } from '@wordpress/components';
 
 import useTemplateOptions from '../components/use-template-options';
+import SegmentedControl from '../components/segmented-control';
+import StepperControl from '../components/stepper-control';
+import TermPillPicker from '../pro-components/term-pill-picker';
 
 /**
  * Template and Query panels shared by Loop Grid and Loop Carousel. The PHP
@@ -21,7 +24,7 @@ const ORDERBY_OPTIONS = [
 ];
 
 const DATE_QUERY_TYPE_OPTIONS = [
-	{ label: __( 'Any date', 'blockive-premium-addon-for-block-pro' ), value: 'any' },
+	{ label: __( 'Any', 'blockive-premium-addon-for-block-pro' ), value: 'any' },
 	{ label: __( 'Before', 'blockive-premium-addon-for-block-pro' ), value: 'before' },
 	{ label: __( 'After', 'blockive-premium-addon-for-block-pro' ), value: 'after' },
 	{ label: __( 'Between', 'blockive-premium-addon-for-block-pro' ), value: 'between' },
@@ -79,25 +82,8 @@ function TaxonomyRow( { taxonomy, termIds, taxonomyOptions, onChange, onRemove }
 		[ taxonomy ]
 	);
 
-	const termById = {};
-	termRecords.forEach( ( term ) => {
-		termById[ term.id ] = term.name;
-	} );
-
-	const selectedTermTokens = termIds.map( ( id ) => termById[ id ] || `#${ id }` );
-
-	const handleTermsChange = ( tokens ) => {
-		const nextIds = tokens
-			.map( ( token ) => {
-				if ( typeof token === 'number' ) {
-					return token;
-				}
-				const match = termRecords.find( ( term ) => term.name === token );
-				return match ? match.id : null;
-			} )
-			.filter( ( id ) => id !== null );
-		onChange( { taxonomy, termIds: nextIds } );
-	};
+	const taxonomyLabel = taxonomyOptions.find( ( option ) => option.value === taxonomy )?.label
+		|| __( 'Terms', 'blockive-premium-addon-for-block-pro' );
 
 	return (
 		<div className="bpafb-pro-loop-taxonomy-row">
@@ -108,11 +94,11 @@ function TaxonomyRow( { taxonomy, termIds, taxonomyOptions, onChange, onRemove }
 				onChange={ ( value ) => onChange( { taxonomy: value, termIds: [] } ) }
 			/>
 			{ taxonomy && (
-				<FormTokenField
-					label={ __( 'Terms', 'blockive-premium-addon-for-block-pro' ) }
-					value={ selectedTermTokens }
-					suggestions={ termRecords.map( ( term ) => term.name ) }
-					onChange={ handleTermsChange }
+				<TermPillPicker
+					label={ taxonomyLabel }
+					options={ termRecords.map( ( term ) => ( { id: term.id, name: term.name } ) ) }
+					selectedIds={ termIds }
+					onChange={ ( nextIds ) => onChange( { taxonomy, termIds: nextIds } ) }
 				/>
 			) }
 			{ onRemove && (
@@ -241,23 +227,6 @@ export function LoopQueryPanel( { attributes, setAttributes, countLabel } ) {
 		( select ) => select( 'core' ).getUsers( { per_page: -1, who: 'authors' } ) || [],
 		[]
 	);
-	const authorById = {};
-	authorRecords.forEach( ( author ) => {
-		authorById[ author.id ] = author.name;
-	} );
-	const selectedAuthorTokens = authorIds.map( ( id ) => authorById[ id ] || `#${ id }` );
-	const handleAuthorsChange = ( tokens ) => {
-		const nextIds = tokens
-			.map( ( token ) => {
-				if ( typeof token === 'number' ) {
-					return token;
-				}
-				const match = authorRecords.find( ( author ) => author.name === token );
-				return match ? match.id : null;
-			} )
-			.filter( ( id ) => id !== null );
-		setAttributes( { authorIds: nextIds } );
-	};
 
 	const activeTaxonomyFilterCount =
 		( taxonomy && termIds.length ? 1 : 0 ) +
@@ -288,12 +257,12 @@ export function LoopQueryPanel( { attributes, setAttributes, countLabel } ) {
 						setAttributes( { postType: value, taxonomy: '', termIds: [], additionalTaxQueries: [] } )
 					}
 				/>
-				<SelectControl
+				<SegmentedControl
 					label={ __( 'Selection', 'blockive-premium-addon-for-block-pro' ) }
 					value={ selectionMode }
 					options={ [
-						{ label: __( 'Query (rules below)', 'blockive-premium-addon-for-block-pro' ), value: 'query' },
-						{ label: __( 'Manual selection', 'blockive-premium-addon-for-block-pro' ), value: 'manual' },
+						{ label: __( 'Query', 'blockive-premium-addon-for-block-pro' ), value: 'query' },
+						{ label: __( 'Manual', 'blockive-premium-addon-for-block-pro' ), value: 'manual' },
 					] }
 					onChange={ ( value ) => setAttributes( { selectionMode: value } ) }
 				/>
@@ -302,7 +271,7 @@ export function LoopQueryPanel( { attributes, setAttributes, countLabel } ) {
 					<ManualPostPicker postType={ postType } manualPostIds={ manualPostIds } setAttributes={ setAttributes } />
 				) : (
 					<>
-						<RangeControl
+						<StepperControl
 							label={ countLabel || __( 'Items Per Page', 'blockive-premium-addon-for-block-pro' ) }
 							value={ postsPerPage }
 							onChange={ ( value ) => setAttributes( { postsPerPage: value } ) }
@@ -315,7 +284,7 @@ export function LoopQueryPanel( { attributes, setAttributes, countLabel } ) {
 							options={ ORDERBY_OPTIONS }
 							onChange={ ( value ) => setAttributes( { orderBy: value } ) }
 						/>
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Order', 'blockive-premium-addon-for-block-pro' ) }
 							value={ order }
 							options={ [
@@ -336,11 +305,11 @@ export function LoopQueryPanel( { attributes, setAttributes, countLabel } ) {
 
 			{ selectionMode === 'query' && (
 				<PanelBody title={ `${ __( 'Filter', 'blockive-premium-addon-for-block-pro' ) }${ activeTaxonomyFilterCount ? ` • ${ activeTaxonomyFilterCount }` : '' }` } initialOpen={ false }>
-					<FormTokenField
+					<TermPillPicker
 						label={ __( 'Authors', 'blockive-premium-addon-for-block-pro' ) }
-						value={ selectedAuthorTokens }
-						suggestions={ authorRecords.map( ( author ) => author.name ) }
-						onChange={ handleAuthorsChange }
+						options={ authorRecords.map( ( author ) => ( { id: author.id, name: author.name } ) ) }
+						selectedIds={ authorIds }
+						onChange={ ( nextIds ) => setAttributes( { authorIds: nextIds } ) }
 					/>
 
 					<TaxonomyRow
@@ -363,18 +332,18 @@ export function LoopQueryPanel( { attributes, setAttributes, countLabel } ) {
 						{ __( '+ Add another taxonomy filter', 'blockive-premium-addon-for-block-pro' ) }
 					</Button>
 					{ activeTaxonomyFilterCount > 1 && (
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Match', 'blockive-premium-addon-for-block-pro' ) }
 							value={ taxRelation }
 							options={ [
-								{ label: __( 'All taxonomy filters (AND)', 'blockive-premium-addon-for-block-pro' ), value: 'AND' },
-								{ label: __( 'Any taxonomy filter (OR)', 'blockive-premium-addon-for-block-pro' ), value: 'OR' },
+								{ label: __( 'All (AND)', 'blockive-premium-addon-for-block-pro' ), value: 'AND' },
+								{ label: __( 'Any (OR)', 'blockive-premium-addon-for-block-pro' ), value: 'OR' },
 							] }
 							onChange={ ( value ) => setAttributes( { taxRelation: value } ) }
 						/>
 					) }
 
-					<SelectControl
+					<SegmentedControl
 						label={ __( 'Date', 'blockive-premium-addon-for-block-pro' ) }
 						value={ dateQueryType }
 						options={ DATE_QUERY_TYPE_OPTIONS }

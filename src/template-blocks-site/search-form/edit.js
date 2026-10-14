@@ -4,7 +4,8 @@ import { useBlockProps, BlockControls, AlignmentControl } from '@wordpress/block
 import { PanelBody, SelectControl, TextControl, RangeControl, ToggleControl } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
+import SegmentedControl from '../../components/segmented-control';
+import StepperControl from '../../components/stepper-control';
 import ColorStateControls from '../../components/color-state-controls';
 import TypographyControls from '../../components/typography-controls';
 import { typoValues, typoOnChange, typoVars, cssVars, SvgIcon } from '../shared';
@@ -108,7 +109,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				general={
 					<>
 					<PanelBody title={ __( 'Search Form', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-						<SelectControl
+						<SegmentedControl
 							label={ __( 'Skin', 'blockive-premium-addon-for-block-pro' ) }
 							value={ skin }
 							options={ [
@@ -125,7 +126,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 						{ skin === 'classic' && (
 							<>
-								<SelectControl
+								<SegmentedControl
 									label={ __( 'Button', 'blockive-premium-addon-for-block-pro' ) }
 									value={ buttonType }
 									options={ [
@@ -159,8 +160,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 						{ liveResults && (
 							<>
-								<RangeControl label={ __( 'Number of Results', 'blockive-premium-addon-for-block-pro' ) } value={ liveCount } onChange={ set( 'liveCount' ) } min={ 1 } max={ 10 } />
-								<RangeControl label={ __( 'Start After (characters)', 'blockive-premium-addon-for-block-pro' ) } value={ liveMinChars } onChange={ set( 'liveMinChars' ) } min={ 1 } max={ 5 } />
+								<StepperControl label={ __( 'Number of Results', 'blockive-premium-addon-for-block-pro' ) } value={ liveCount } onChange={ set( 'liveCount' ) } min={ 1 } max={ 10 } />
+								<StepperControl label={ __( 'Start After (characters)', 'blockive-premium-addon-for-block-pro' ) } value={ liveMinChars } onChange={ set( 'liveMinChars' ) } min={ 1 } max={ 5 } />
 								<ToggleControl label={ __( 'Show Image', 'blockive-premium-addon-for-block-pro' ) } checked={ !! liveShowImage } onChange={ set( 'liveShowImage' ) } />
 								<ToggleControl label={ __( 'Show Excerpt', 'blockive-premium-addon-for-block-pro' ) } checked={ !! liveShowExcerpt } onChange={ set( 'liveShowExcerpt' ) } />
 							</>
@@ -232,7 +233,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

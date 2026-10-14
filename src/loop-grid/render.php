@@ -19,12 +19,13 @@ if (!$bpafb_template_post) {
 	return;
 }
 
-$bpafb_pagination_type = isset($attributes['paginationType']) && in_array($attributes['paginationType'], ['numbers', 'prev_next'], true)
+$bpafb_pagination_type = isset($attributes['paginationType']) && in_array($attributes['paginationType'], ['numbers', 'prev_next', 'load_more'], true)
 	? $attributes['paginationType']
 	: 'none';
 
+// Load More always starts at page 1; later pages come from the REST route.
 $bpafb_paged = 1;
-if ('none' !== $bpafb_pagination_type && isset($_GET['bpafb-page'])) {
+if (in_array($bpafb_pagination_type, ['numbers', 'prev_next'], true) && isset($_GET['bpafb-page'])) {
 	$bpafb_paged = max(1, absint(wp_unslash($_GET['bpafb-page'])));
 }
 
@@ -55,19 +56,29 @@ echo $bpafb_wrapper_attributes;
 	<?php if ($bpafb_query->have_posts()): ?>
 		<div class="bpafb-pro-loop-grid-items">
 			<?php
-			while ($bpafb_query->have_posts()):
-				$bpafb_query->the_post();
-				?>
-				<div class="bpafb-pro-loop-grid-item">
-					<?php
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from do_blocks() of a trusted, author-authored template.
-					echo do_blocks($bpafb_template_post->post_content);
-					?>
-				</div>
-			<?php endwhile; ?>
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from do_blocks() of a trusted, author-authored template.
+			echo Bpafb_Pro_Loop_Builder::render_items($bpafb_template_post, $bpafb_query);
+			?>
 		</div>
 
-		<?php if ('none' !== $bpafb_pagination_type && $bpafb_query->max_num_pages > 1):
+		<?php if ('load_more' === $bpafb_pagination_type && $bpafb_query->max_num_pages > 1):
+			$bpafb_load_more = Bpafb_Pro_Loop_Builder::load_more_payload($attributes);
+			$bpafb_load_more_text = isset($attributes['loadMoreText']) && '' !== trim((string) $attributes['loadMoreText'])
+				? $attributes['loadMoreText']
+				: __('Load More', 'blockive-premium-addon-for-block-pro');
+			?>
+			<div class="bpafb-pro-loop-grid-pagination bpafb-pro-loop-grid-load-more-wrap bpafb-pro-loop-grid-pagination--<?php echo esc_attr(isset($attributes['paginationAlign']) ? $attributes['paginationAlign'] : 'center'); ?>">
+				<button
+					type="button"
+					class="wp-element-button bpafb-pro-loop-grid-load-more"
+					data-endpoint="<?php echo esc_url(rest_url(Bpafb_Pro_Loop_Builder::REST_NAMESPACE . '/loop-items')); ?>"
+					data-attrs="<?php echo esc_attr($bpafb_load_more['attrs']); ?>"
+					data-sig="<?php echo esc_attr($bpafb_load_more['sig']); ?>"
+					data-page="1"
+					data-max-pages="<?php echo esc_attr((int) $bpafb_query->max_num_pages); ?>"
+				><?php echo esc_html($bpafb_load_more_text); ?></button>
+			</div>
+		<?php elseif ('none' !== $bpafb_pagination_type && 'load_more' !== $bpafb_pagination_type && $bpafb_query->max_num_pages > 1):
 			$bpafb_pagination_align = isset($attributes['paginationAlign']) ? $attributes['paginationAlign'] : 'center';
 			$bpafb_base_url = add_query_arg('bpafb-page', '%#%');
 			?>

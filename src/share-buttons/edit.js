@@ -10,7 +10,8 @@ import {
 } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
+import StepperControl from '../components/stepper-control';
 import ColorStateControls from '../components/color-state-controls';
 import TypographyControls from '../components/typography-controls';
 import { typoValues, typoOnChange, typoVars, cssVars } from '../template-blocks-site/shared';
@@ -115,7 +116,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							) ) }
 						</PanelBody>
 						<PanelBody title={ __( 'Settings', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'View', 'blockive-premium-addon-for-block-pro' ) }
 								value={ view }
 								options={ [
@@ -150,7 +151,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								] }
 								onChange={ set( 'alignMobile' ) }
 							/>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Desktop Alignment', 'blockive-premium-addon-for-block-pro' ) }
 								value={ align }
 								options={ [
@@ -161,7 +162,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								] }
 								onChange={ set( 'align' ) }
 							/>
-							<RangeControl
+							<StepperControl
 								label={ __( 'Columns (0 = auto)', 'blockive-premium-addon-for-block-pro' ) }
 								value={ columns }
 								onChange={ set( 'columns' ) }
@@ -174,7 +175,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				style={
 					<>
 						<PanelBody title={ __( 'Buttons', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Skin', 'blockive-premium-addon-for-block-pro' ) }
 								value={ skin }
 								options={ [
@@ -185,7 +186,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								] }
 								onChange={ set( 'skin' ) }
 							/>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Shape', 'blockive-premium-addon-for-block-pro' ) }
 								value={ shape }
 								options={ [
@@ -198,7 +199,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<RangeControl label={ __( 'Button Height (px)', 'blockive-premium-addon-for-block-pro' ) } value={ size } onChange={ set( 'size' ) } min={ 24 } max={ 80 } />
 							<RangeControl label={ __( 'Icon Size (px)', 'blockive-premium-addon-for-block-pro' ) } value={ iconSize } onChange={ set( 'iconSize' ) } min={ 8 } max={ 40 } />
 							<RangeControl label={ __( 'Spacing (px)', 'blockive-premium-addon-for-block-pro' ) } value={ gap } onChange={ set( 'gap' ) } min={ 0 } max={ 40 } />
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Colors', 'blockive-premium-addon-for-block-pro' ) }
 								value={ colorSource }
 								options={ [
@@ -227,7 +228,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

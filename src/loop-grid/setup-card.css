@@ -1,0 +1,129 @@
+/*
+ * Loop Grid setup card (canvas). The canvas can be an iframe that doesn't
+ * get assets/css/editor-shared-controls.css, so the tokens and the tile /
+ * stepper rules it uses are repeated here, scoped to the card.
+ */
+.bpafb-pro-loop-grid-setup {
+	--bpafb-primary: #3b82f6;
+	--bpafb-primary-light: #eff6ff;
+	--bpafb-slate-600: #475569;
+	--bpafb-slate-500: #64748b;
+	--bpafb-slate-300: #cbd5e1;
+	--bpafb-slate-200: #e2e8f0;
+	--bpafb-radius-md: 10px;
+	--bpafb-radius-full: 9999px;
+}
+
+.bpafb-pro-loop-grid-setup.components-placeholder {
+	border-radius: 12px;
+	box-shadow: inset 0 0 0 1px var(--bpafb-slate-200);
+}
+
+.bpafb-pro-loop-grid-setup__body {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 100%;
+	max-width: 520px;
+}
+
+.bpafb-pro-loop-grid-setup__step {
+	display: flex;
+	gap: 14px;
+	align-items: flex-start;
+}
+
+.bpafb-pro-loop-grid-setup__number {
+	flex: 0 0 26px;
+	height: 26px;
+	line-height: 26px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: 600;
+	color: #fff;
+	background: var(--bpafb-primary);
+	border-radius: var(--bpafb-radius-full);
+}
+
+.bpafb-pro-loop-grid-setup__field {
+	flex: 1;
+	min-width: 0;
+}
+
+.bpafb-pro-loop-grid-setup__hint {
+	margin: 0 0 8px;
+	color: var(--bpafb-slate-600);
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-style-tile-picker__label {
+	font-weight: 500;
+	margin: 0 0 8px;
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-style-tile-picker__grid {
+	display: grid;
+	grid-template-columns: repeat(2, 120px);
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-style-tile-picker__tile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	padding: 12px 8px;
+	background: #fff;
+	border: 1px solid var(--bpafb-slate-200);
+	border-radius: var(--bpafb-radius-md);
+	cursor: pointer;
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-style-tile-picker__tile.is-active {
+	border-color: var(--bpafb-primary);
+	box-shadow: 0 0 0 1px var(--bpafb-primary);
+	background: var(--bpafb-primary-light);
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-style-tile-picker__preview {
+	display: flex;
+	width: 100%;
+	height: 36px;
+	color: var(--bpafb-slate-300);
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-style-tile-picker__tile.is-active .bpafb-style-tile-picker__preview {
+	color: var(--bpafb-primary);
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-style-tile-picker__preview svg {
+	width: 100%;
+	height: 100%;
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-style-tile-picker__title {
+	font-size: 12px;
+	color: var(--bpafb-slate-600);
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-style-tile-picker__tile.is-active .bpafb-style-tile-picker__title {
+	color: var(--bpafb-primary);
+	font-weight: 500;
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-stepper-control {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	width: fit-content;
+	padding: 2px;
+	background: #fff;
+	border: 1px solid var(--bpafb-slate-200);
+	border-radius: var(--bpafb-radius-full);
+}
+
+.bpafb-pro-loop-grid-setup .bpafb-stepper-control__value {
+	min-width: 28px;
+	text-align: center;
+	font-weight: 500;
+}

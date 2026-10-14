@@ -4,7 +4,7 @@ import { useBlockProps, BlockControls, AlignmentControl } from '@wordpress/block
 import { PanelBody, SelectControl, ToggleControl, TextControl, RangeControl } from '@wordpress/components';
 
 import InspectorTabs from '../../components/inspector-tabs';
-import AdvancedTab from '../../components/advanced-tab';
+import SegmentedControl from '../../components/segmented-control';
 import ColorStateControls from '../../components/color-state-controls';
 import TypographyControls from '../../components/typography-controls';
 import { typoValues, typoOnChange, typoVars, cssVars } from '../shared';
@@ -123,7 +123,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				general={
 					<>
 						<PanelBody title={ __( 'Login', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Layout', 'blockive-premium-addon-for-block-pro' ) }
 								value={ layout }
 								options={ [
@@ -132,7 +132,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								] }
 								onChange={ set( 'layout' ) }
 							/>
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Preview As', 'blockive-premium-addon-for-block-pro' ) }
 								value={ previewState }
 								options={ [
@@ -226,7 +226,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>{ preview }</div>

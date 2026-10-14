@@ -10,7 +10,7 @@ import {
 } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
+import SegmentedControl from '../components/segmented-control';
 import { MenuItemsStylePanel, DropdownFrameControls } from '../pro-components/menu/editor';
 import ColorStateControls from '../components/color-state-controls';
 
@@ -113,7 +113,7 @@ export default function Edit( { attributes, setAttributes } ) {
 									onChange={ ( val ) => setAttributes( { menuId: Number( val ) } ) }
 								/>
 							) }
-							<SelectControl
+							<SegmentedControl
 								label={ __( 'Layout', 'blockive-premium-addon-for-block-pro' ) }
 								value={ layout }
 								options={ [
@@ -171,7 +171,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>

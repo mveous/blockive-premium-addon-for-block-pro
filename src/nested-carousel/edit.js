@@ -5,7 +5,6 @@ import { createBlock } from '@wordpress/blocks';
 import { PanelBody, TextControl, ToggleControl, ToolbarGroup, ToolbarButton, Button } from '@wordpress/components';
 
 import InspectorTabs from '../components/inspector-tabs';
-import AdvancedTab from '../components/advanced-tab';
 import { CarouselSettingsPanel, CarouselNavigationStylePanel, carouselVars } from '../pro-components/carousel/editor';
 
 const SLIDE = 'blockive-premium-addon-for-block/nested-carousel-slide';
@@ -81,7 +80,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						<CarouselNavigationStylePanel attributes={ attributes } setAttributes={ setAttributes } />
 					</>
 				}
-				advanced={ <AdvancedTab attributes={ attributes } setAttributes={ setAttributes } /> }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
 			/>
 
 			<div { ...blockProps }>
