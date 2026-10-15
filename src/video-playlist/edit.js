@@ -121,7 +121,14 @@ export default function Edit( { attributes, setAttributes } ) {
 							<RangeControl label={ __( 'Border Radius (px)', 'blockive-premium-addon-for-block-pro' ) } value={ borderRadius } onChange={ set( 'borderRadius' ) } min={ 0 } max={ 40 } />
 						</PanelBody>
 						<PanelBody title={ __( 'List', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'item' ) } onChange={ typoOnChange( setAttributes, 'item' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'item' ) }
+								onChange={ typoOnChange( setAttributes, 'item' ) }
+								fontSizeUnit={ attributes.itemFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { itemFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.itemLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { itemLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [
 									{ label: __( 'Background', 'blockive-premium-addon-for-block-pro' ), value: listBgColor, onChange: set( 'listBgColor' ) },

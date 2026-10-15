@@ -132,18 +132,39 @@ export default function Edit( { attributes, setAttributes } ) {
 							<RangeControl label={ __( 'Gap (px)', 'blockive-premium-addon-for-block-pro' ) } value={ imageGap } onChange={ set( 'imageGap' ) } min={ 0 } max={ 60 } />
 						</PanelBody>
 						<PanelBody title={ __( 'Title', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'title' ) } onChange={ typoOnChange( setAttributes, 'title' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'title' ) }
+								onChange={ typoOnChange( setAttributes, 'title' ) }
+								fontSizeUnit={ attributes.titleFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { titleFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.titleLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { titleLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: titleColor, onChange: set( 'titleColor' ) } ] }
 								hover={ [ { label: __( 'Link Color', 'blockive-premium-addon-for-block-pro' ), value: titleHoverColor, onChange: set( 'titleHoverColor' ) } ] }
 							/>
 						</PanelBody>
 						<PanelBody title={ __( 'Price', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'price' ) } onChange={ typoOnChange( setAttributes, 'price' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'price' ) }
+								onChange={ typoOnChange( setAttributes, 'price' ) }
+								fontSizeUnit={ attributes.priceFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { priceFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.priceLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { priceLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: priceColor, onChange: set( 'priceColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Description', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'description' ) } onChange={ typoOnChange( setAttributes, 'description' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'description' ) }
+								onChange={ typoOnChange( setAttributes, 'description' ) }
+								fontSizeUnit={ attributes.descriptionFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { descriptionFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.descriptionLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { descriptionLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: descriptionColor, onChange: set( 'descriptionColor' ) } ] } />
 						</PanelBody>
 						{ separator !== 'none' && (

@@ -93,6 +93,10 @@
 		"inputFontSize": {
 			"type": "number"
 		},
+		"inputFontSizeUnit": {
+			"type": "string",
+			"default": "px"
+		},
 		"inputFontWeight": {
 			"type": "string",
 			"default": ""
@@ -102,6 +106,10 @@
 		},
 		"inputLetterSpacing": {
 			"type": "number"
+		},
+		"inputLetterSpacingUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"inputTextTransform": {
 			"type": "string",

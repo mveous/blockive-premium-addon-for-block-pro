@@ -102,6 +102,10 @@
 		"tooltipFontSize": {
 			"type": "number"
 		},
+		"tooltipFontSizeUnit": {
+			"type": "string",
+			"default": "px"
+		},
 		"tooltipFontWeight": {
 			"type": "string",
 			"default": ""
@@ -111,6 +115,10 @@
 		},
 		"tooltipLetterSpacing": {
 			"type": "number"
+		},
+		"tooltipLetterSpacingUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"tooltipTextTransform": {
 			"type": "string",
@@ -127,6 +135,10 @@
 		"labelFontSize": {
 			"type": "number"
 		},
+		"labelFontSizeUnit": {
+			"type": "string",
+			"default": "px"
+		},
 		"labelFontWeight": {
 			"type": "string",
 			"default": ""
@@ -136,6 +148,10 @@
 		},
 		"labelLetterSpacing": {
 			"type": "number"
+		},
+		"labelLetterSpacingUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"labelTextTransform": {
 			"type": "string",
@@ -173,6 +189,10 @@
 			"default": "px"
 		},
 		"bpafbContainerMarginUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"bpafbContainerHeightUnit": {
 			"type": "string",
 			"default": "px"
 		},
@@ -219,6 +239,14 @@
 		},
 		"bpafbContainerBorderRadius": {
 			"type": "number"
+		},
+		"bpafbContainerBorderWidthUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"bpafbContainerBorderRadiusUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"bpafbContainerBorderColor": {
 			"type": "string",
@@ -299,6 +327,10 @@
 		"bpafbTransformTranslateY": {
 			"type": "number",
 			"default": 0
+		},
+		"bpafbTransformTranslateUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"bpafbHoverAnimation": {
 			"type": "string",

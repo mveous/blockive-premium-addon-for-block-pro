@@ -169,7 +169,14 @@ export function TitleStylePanel( { attributes, setAttributes } ) {
 	const { titleColor, titleHoverColor } = attributes;
 	return (
 		<PanelBody title={ __( 'Title', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-			<TypographyControls values={ typoValues( attributes, 'title' ) } onChange={ typoOnChange( setAttributes, 'title' ) } />
+			<TypographyControls
+				values={ typoValues( attributes, 'title' ) }
+				onChange={ typoOnChange( setAttributes, 'title' ) }
+				fontSizeUnit={ attributes.titleFontSizeUnit }
+				onFontSizeUnitChange={ ( val ) => setAttributes( { titleFontSizeUnit: val } ) }
+				letterSpacingUnit={ attributes.titleLetterSpacingUnit }
+				onLetterSpacingUnitChange={ ( val ) => setAttributes( { titleLetterSpacingUnit: val } ) }
+			/>
 			<ColorStateControls
 				normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: titleColor, onChange: ( val ) => setAttributes( { titleColor: val } ) } ] }
 				hover={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: titleHoverColor, onChange: ( val ) => setAttributes( { titleHoverColor: val } ) } ] }

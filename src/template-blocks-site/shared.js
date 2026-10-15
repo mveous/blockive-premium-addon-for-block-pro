@@ -23,9 +23,11 @@ export function useSiteInfo() {
 const TYPO_KEYS = [
 	'FontFamily',
 	'FontSize',
+	'FontSizeUnit',
 	'FontWeight',
 	'LineHeight',
 	'LetterSpacing',
+	'LetterSpacingUnit',
 	'TextTransform',
 	'TextDecoration',
 ];
@@ -70,10 +72,10 @@ export function typoVars( attributes, prefix, varPrefix ) {
 	const v = typoValues( attributes, prefix );
 	const out = {};
 	if ( v.fontFamily ) out[ `${ varPrefix }-font-family` ] = v.fontFamily;
-	if ( typeof v.fontSize === 'number' ) out[ `${ varPrefix }-font-size` ] = `${ v.fontSize }px`;
+	if ( typeof v.fontSize === 'number' ) out[ `${ varPrefix }-font-size` ] = `${ v.fontSize }${ v.fontSizeUnit || 'px' }`;
 	if ( v.fontWeight ) out[ `${ varPrefix }-font-weight` ] = v.fontWeight;
 	if ( typeof v.lineHeight === 'number' ) out[ `${ varPrefix }-line-height` ] = v.lineHeight;
-	if ( typeof v.letterSpacing === 'number' ) out[ `${ varPrefix }-letter-spacing` ] = `${ v.letterSpacing }px`;
+	if ( typeof v.letterSpacing === 'number' ) out[ `${ varPrefix }-letter-spacing` ] = `${ v.letterSpacing }${ v.letterSpacingUnit || 'px' }`;
 	if ( v.textTransform ) out[ `${ varPrefix }-text-transform` ] = v.textTransform;
 	if ( v.textDecoration ) out[ `${ varPrefix }-text-decoration` ] = v.textDecoration;
 	return out;

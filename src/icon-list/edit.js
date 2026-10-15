@@ -185,7 +185,14 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 						</PanelBody>
 						<PanelBody title={ __( 'Text', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'text' ) } onChange={ typoOnChange( setAttributes, 'text' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'text' ) }
+								onChange={ typoOnChange( setAttributes, 'text' ) }
+								fontSizeUnit={ attributes.textFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { textFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.textLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { textLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: textColor, onChange: set( 'textColor' ) } ] }
 								hover={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: textHoverColor, onChange: set( 'textHoverColor' ) } ] }

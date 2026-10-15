@@ -148,6 +148,10 @@
 		"titleFontSize": {
 			"type": "number"
 		},
+		"titleFontSizeUnit": {
+			"type": "string",
+			"default": "px"
+		},
 		"titleFontWeight": {
 			"type": "string",
 			"default": ""
@@ -157,6 +161,10 @@
 		},
 		"titleLetterSpacing": {
 			"type": "number"
+		},
+		"titleLetterSpacingUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"titleTextTransform": {
 			"type": "string",

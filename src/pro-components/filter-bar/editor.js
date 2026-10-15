@@ -83,7 +83,14 @@ export function FilterBarStylePanel( { attributes, setAttributes } ) {
 	const set = ( key ) => ( val ) => setAttributes( { [ key ]: val } );
 	return (
 		<PanelBody title={ __( 'Filter Buttons', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-			<TypographyControls values={ typoValues( attributes, 'filter' ) } onChange={ typoOnChange( setAttributes, 'filter' ) } />
+			<TypographyControls
+				values={ typoValues( attributes, 'filter' ) }
+				onChange={ typoOnChange( setAttributes, 'filter' ) }
+				fontSizeUnit={ attributes.filterFontSizeUnit }
+				onFontSizeUnitChange={ ( val ) => setAttributes( { filterFontSizeUnit: val } ) }
+				letterSpacingUnit={ attributes.filterLetterSpacingUnit }
+				onLetterSpacingUnitChange={ ( val ) => setAttributes( { filterLetterSpacingUnit: val } ) }
+			/>
 			<ColorStateControls
 				normal={ [
 					{ label: __( 'Text', 'blockive-premium-addon-for-block-pro' ), value: filterColor, onChange: set( 'filterColor' ) },

@@ -159,14 +159,28 @@ export default function Edit( { attributes, setAttributes } ) {
 							<ColorStateControls normal={ [ { label: __( 'Border Color', 'blockive-premium-addon-for-block-pro' ), value: avatarBorderColor, onChange: set( 'avatarBorderColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Name', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'name' ) } onChange={ typoOnChange( setAttributes, 'name' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'name' ) }
+								onChange={ typoOnChange( setAttributes, 'name' ) }
+								fontSizeUnit={ attributes.nameFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { nameFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.nameLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { nameLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: nameColor, onChange: set( 'nameColor' ) } ] }
 								hover={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: nameHoverColor, onChange: set( 'nameHoverColor' ) } ] }
 							/>
 						</PanelBody>
 						<PanelBody title={ __( 'Bio', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'bio' ) } onChange={ typoOnChange( setAttributes, 'bio' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'bio' ) }
+								onChange={ typoOnChange( setAttributes, 'bio' ) }
+								fontSizeUnit={ attributes.bioFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { bioFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.bioLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { bioLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: bioColor, onChange: set( 'bioColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Button', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>

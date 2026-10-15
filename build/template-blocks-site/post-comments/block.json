@@ -99,6 +99,10 @@
     "titleFontSize": {
       "type": "number"
     },
+    "titleFontSizeUnit": {
+      "type": "string",
+      "default": "px"
+    },
     "titleFontWeight": {
       "type": "string",
       "default": ""
@@ -108,6 +112,10 @@
     },
     "titleLetterSpacing": {
       "type": "number"
+    },
+    "titleLetterSpacingUnit": {
+      "type": "string",
+      "default": "px"
     },
     "titleTextTransform": {
       "type": "string",
@@ -136,6 +144,10 @@
     "contentFontSize": {
       "type": "number"
     },
+    "contentFontSizeUnit": {
+      "type": "string",
+      "default": "px"
+    },
     "contentFontWeight": {
       "type": "string",
       "default": ""
@@ -145,6 +157,10 @@
     },
     "contentLetterSpacing": {
       "type": "number"
+    },
+    "contentLetterSpacingUnit": {
+      "type": "string",
+      "default": "px"
     },
     "contentTextTransform": {
       "type": "string",

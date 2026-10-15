@@ -194,7 +194,14 @@ export default function Edit( { attributes, setAttributes } ) {
 							<RangeControl label={ __( 'Padding (px)', 'blockive-premium-addon-for-block-pro' ) } value={ cardPadding } onChange={ set( 'cardPadding' ) } min={ 0 } max={ 80 } />
 						</PanelBody>
 						<PanelBody title={ __( 'Content', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'content' ) } onChange={ typoOnChange( setAttributes, 'content' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'content' ) }
+								onChange={ typoOnChange( setAttributes, 'content' ) }
+								fontSizeUnit={ attributes.contentFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { contentFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.contentLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { contentLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: contentColor, onChange: set( 'contentColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Image', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
@@ -202,11 +209,25 @@ export default function Edit( { attributes, setAttributes } ) {
 							<RangeControl label={ __( 'Border Radius (%)', 'blockive-premium-addon-for-block-pro' ) } value={ imageRadius } onChange={ set( 'imageRadius' ) } min={ 0 } max={ 50 } />
 						</PanelBody>
 						<PanelBody title={ __( 'Name', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'name' ) } onChange={ typoOnChange( setAttributes, 'name' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'name' ) }
+								onChange={ typoOnChange( setAttributes, 'name' ) }
+								fontSizeUnit={ attributes.nameFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { nameFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.nameLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { nameLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: nameColor, onChange: set( 'nameColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Title', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'title' ) } onChange={ typoOnChange( setAttributes, 'title' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'title' ) }
+								onChange={ typoOnChange( setAttributes, 'title' ) }
+								fontSizeUnit={ attributes.titleFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { titleFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.titleLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { titleLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: titleColor, onChange: set( 'titleColor' ) } ] } />
 						</PanelBody>
 						<CarouselNavigationStylePanel attributes={ attributes } setAttributes={ setAttributes } />

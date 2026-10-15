@@ -350,12 +350,17 @@ class Bpafb_Pro_Site_Blocks
 		$transform = in_array($get('TextTransform'), ['none', 'uppercase', 'lowercase', 'capitalize'], true) ? $get('TextTransform') : '';
 		$decor     = in_array($get('TextDecoration'), ['none', 'underline', 'line-through', 'overline'], true) ? $get('TextDecoration') : '';
 
+		$allowed_font_size_units = ['px', 'em', 'rem', '%'];
+		$font_size_unit = in_array($get('FontSizeUnit'), $allowed_font_size_units, true) ? $get('FontSizeUnit') : 'px';
+		$allowed_letter_spacing_units = ['px', 'em', 'rem'];
+		$letter_spacing_unit = in_array($get('LetterSpacingUnit'), $allowed_letter_spacing_units, true) ? $get('LetterSpacingUnit') : 'px';
+
 		return [
 			$var_prefix . '-font-family'     => $family,
-			$var_prefix . '-font-size'       => is_numeric($get('FontSize')) ? floatval($get('FontSize')) . 'px' : '',
+			$var_prefix . '-font-size'       => is_numeric($get('FontSize')) ? floatval($get('FontSize')) . $font_size_unit : '',
 			$var_prefix . '-font-weight'     => $weight,
 			$var_prefix . '-line-height'     => is_numeric($get('LineHeight')) ? (string) floatval($get('LineHeight')) : '',
-			$var_prefix . '-letter-spacing'  => is_numeric($get('LetterSpacing')) ? floatval($get('LetterSpacing')) . 'px' : '',
+			$var_prefix . '-letter-spacing'  => is_numeric($get('LetterSpacing')) ? floatval($get('LetterSpacing')) . $letter_spacing_unit : '',
 			$var_prefix . '-text-transform'  => $transform,
 			$var_prefix . '-text-decoration' => $decor,
 		];

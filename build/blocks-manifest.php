@@ -65,6 +65,10 @@ return array(
 				'type' => 'number',
 				'default' => 0
 			),
+			'borderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'borderType' => array(
 				'type' => 'string',
 				'default' => 'none'
@@ -73,6 +77,10 @@ return array(
 				'type' => 'number',
 				'default' => 12
 			),
+			'borderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontFamily' => array(
 				'type' => 'string',
 				'default' => ''
@@ -80,6 +88,10 @@ return array(
 			'titleFontSize' => array(
 				'type' => 'number',
 				'default' => null
+			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleFontWeight' => array(
 				'type' => 'string',
@@ -92,6 +104,10 @@ return array(
 			'titleLetterSpacing' => array(
 				'type' => 'number',
 				'default' => null
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -176,6 +192,10 @@ return array(
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -219,6 +239,14 @@ return array(
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -299,6 +327,10 @@ return array(
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -480,6 +512,10 @@ return array(
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -523,6 +559,14 @@ return array(
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -603,6 +647,10 @@ return array(
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -802,6 +850,10 @@ Faster'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -811,6 +863,10 @@ Faster'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -831,6 +887,10 @@ Faster'
 			'wordFontSize' => array(
 				'type' => 'number'
 			),
+			'wordFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'wordFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -840,6 +900,10 @@ Faster'
 			),
 			'wordLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'wordLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'wordTextTransform' => array(
 				'type' => 'string',
@@ -908,6 +972,10 @@ Faster'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -951,6 +1019,14 @@ Faster'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -1031,6 +1107,10 @@ Faster'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -1206,6 +1286,10 @@ Faster'
 			'contentFontSize' => array(
 				'type' => 'number'
 			),
+			'contentFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'contentFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -1215,6 +1299,10 @@ Faster'
 			),
 			'contentLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'contentLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'contentTextTransform' => array(
 				'type' => 'string',
@@ -1235,6 +1323,10 @@ Faster'
 			'authorFontSize' => array(
 				'type' => 'number'
 			),
+			'authorFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'authorFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -1244,6 +1336,10 @@ Faster'
 			),
 			'authorLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'authorLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'authorTextTransform' => array(
 				'type' => 'string',
@@ -1335,6 +1431,10 @@ Faster'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -1378,6 +1478,14 @@ Faster'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -1458,6 +1566,10 @@ Faster'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -1691,6 +1803,10 @@ Faster'
 				'type' => 'number',
 				'default' => null
 			),
+			'dayFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'dayFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -1702,6 +1818,10 @@ Faster'
 			'dayLetterSpacing' => array(
 				'type' => 'number',
 				'default' => null
+			),
+			'dayLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'dayTextTransform' => array(
 				'type' => 'string',
@@ -1719,6 +1839,10 @@ Faster'
 				'type' => 'number',
 				'default' => null
 			),
+			'timeFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'timeFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -1730,6 +1854,10 @@ Faster'
 			'timeLetterSpacing' => array(
 				'type' => 'number',
 				'default' => null
+			),
+			'timeLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'timeTextTransform' => array(
 				'type' => 'string',
@@ -1747,9 +1875,17 @@ Faster'
 				'type' => 'number',
 				'default' => 0
 			),
+			'borderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'borderRadius' => array(
 				'type' => 'number',
 				'default' => 8
+			),
+			'borderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'borderColor' => array(
 				'type' => 'string',
@@ -1818,6 +1954,10 @@ Faster'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -1861,6 +2001,14 @@ Faster'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -1941,6 +2089,10 @@ Faster'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -2140,6 +2292,10 @@ Faster'
 				'type' => 'number',
 				'default' => null
 			),
+			'fontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'fontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -2151,6 +2307,10 @@ Faster'
 			'letterSpacing' => array(
 				'type' => 'number',
 				'default' => null
+			),
+			'letterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'textTransform' => array(
 				'type' => 'string',
@@ -2168,9 +2328,17 @@ Faster'
 				'type' => 'number',
 				'default' => 0
 			),
+			'borderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'borderRadius' => array(
 				'type' => 'number',
 				'default' => 4
+			),
+			'borderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'borderColor' => array(
 				'type' => 'string',
@@ -2243,6 +2411,10 @@ Faster'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -2286,6 +2458,14 @@ Faster'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -2366,6 +2546,10 @@ Faster'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -2630,6 +2814,10 @@ Faster'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -2639,6 +2827,10 @@ Faster'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -2659,6 +2851,10 @@ Faster'
 			'descFontSize' => array(
 				'type' => 'number'
 			),
+			'descFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'descFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -2668,6 +2864,10 @@ Faster'
 			),
 			'descLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'descLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'descTextTransform' => array(
 				'type' => 'string',
@@ -2736,6 +2936,10 @@ Faster'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -2779,6 +2983,14 @@ Faster'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -2859,6 +3071,10 @@ Faster'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -3109,6 +3325,10 @@ Faster'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -3152,6 +3372,14 @@ Faster'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -3232,6 +3460,10 @@ Faster'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -3446,6 +3678,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -3489,6 +3725,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -3569,6 +3813,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -3757,6 +4005,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -3800,6 +4052,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -3880,6 +4140,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -4077,6 +4341,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -4120,6 +4388,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -4200,6 +4476,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -4471,6 +4751,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -4514,6 +4798,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -4594,6 +4886,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -4753,6 +5049,10 @@ greet( \'World\' );'
 				'type' => 'number',
 				'default' => 50
 			),
+			'sizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'space' => array(
 				'type' => 'number',
 				'default' => 10
@@ -4788,6 +5088,10 @@ greet( \'World\' );'
 			'letterSpacing' => array(
 				'type' => 'number',
 				'default' => null
+			),
+			'letterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'textTransform' => array(
 				'type' => 'string',
@@ -4864,6 +5168,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -4907,6 +5215,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -4987,6 +5303,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -5221,6 +5541,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -5264,6 +5588,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -5344,6 +5676,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -5518,6 +5854,10 @@ greet( \'World\' );'
 				'type' => 'number',
 				'default' => 0
 			),
+			'borderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'borderType' => array(
 				'type' => 'string',
 				'default' => 'none'
@@ -5525,6 +5865,10 @@ greet( \'World\' );'
 			'borderRadius' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'borderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleColorHover' => array(
 				'type' => 'string',
@@ -5542,6 +5886,10 @@ greet( \'World\' );'
 				'type' => 'number',
 				'default' => null
 			),
+			'questionFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'questionFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -5553,6 +5901,10 @@ greet( \'World\' );'
 			'questionLetterSpacing' => array(
 				'type' => 'number',
 				'default' => null
+			),
+			'questionLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'questionTextTransform' => array(
 				'type' => 'string',
@@ -5657,6 +6009,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -5700,6 +6056,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -5780,6 +6144,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -6053,6 +6421,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -6062,6 +6434,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -6078,6 +6454,10 @@ greet( \'World\' );'
 			'descFontSize' => array(
 				'type' => 'number'
 			),
+			'descFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'descFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -6087,6 +6467,10 @@ greet( \'World\' );'
 			),
 			'descLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'descLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'descTextTransform' => array(
 				'type' => 'string',
@@ -6147,6 +6531,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -6190,6 +6578,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -6270,6 +6666,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -6509,6 +6909,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -6552,6 +6956,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -6632,6 +7044,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -6923,6 +7339,10 @@ greet( \'World\' );'
 			'labelFontSize' => array(
 				'type' => 'number'
 			),
+			'labelFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'labelFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -6932,6 +7352,10 @@ greet( \'World\' );'
 			),
 			'labelLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'labelLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'labelTextTransform' => array(
 				'type' => 'string',
@@ -6948,6 +7372,10 @@ greet( \'World\' );'
 			'fieldFontSize' => array(
 				'type' => 'number'
 			),
+			'fieldFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'fieldFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -6957,6 +7385,10 @@ greet( \'World\' );'
 			),
 			'fieldLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'fieldLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'fieldTextTransform' => array(
 				'type' => 'string',
@@ -6994,6 +7426,10 @@ greet( \'World\' );'
 				'default' => 'px'
 			),
 			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerHeightUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -7040,6 +7476,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -7120,6 +7564,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -7321,6 +7769,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -7364,6 +7816,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -7444,6 +7904,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -7651,6 +8115,10 @@ greet( \'World\' );'
 			'captionFontSize' => array(
 				'type' => 'number'
 			),
+			'captionFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'captionFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -7660,6 +8128,10 @@ greet( \'World\' );'
 			),
 			'captionLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'captionLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'captionTextTransform' => array(
 				'type' => 'string',
@@ -7696,6 +8168,10 @@ greet( \'World\' );'
 			'filterFontSize' => array(
 				'type' => 'number'
 			),
+			'filterFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'filterFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -7705,6 +8181,10 @@ greet( \'World\' );'
 			),
 			'filterLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'filterLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'filterTextTransform' => array(
 				'type' => 'string',
@@ -7765,6 +8245,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -7808,6 +8292,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -7888,6 +8380,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -8100,6 +8596,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -8143,6 +8643,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -8223,6 +8731,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -8428,6 +8940,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -8471,6 +8987,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -8551,6 +9075,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -8789,6 +9317,10 @@ greet( \'World\' );'
 			'tooltipFontSize' => array(
 				'type' => 'number'
 			),
+			'tooltipFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'tooltipFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -8798,6 +9330,10 @@ greet( \'World\' );'
 			),
 			'tooltipLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'tooltipLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'tooltipTextTransform' => array(
 				'type' => 'string',
@@ -8814,6 +9350,10 @@ greet( \'World\' );'
 			'labelFontSize' => array(
 				'type' => 'number'
 			),
+			'labelFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'labelFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -8823,6 +9363,10 @@ greet( \'World\' );'
 			),
 			'labelLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'labelLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'labelTextTransform' => array(
 				'type' => 'string',
@@ -8860,6 +9404,10 @@ greet( \'World\' );'
 				'default' => 'px'
 			),
 			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerHeightUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -8906,6 +9454,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -8986,6 +9542,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -9225,6 +9785,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -9268,6 +9832,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -9348,6 +9920,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -9571,6 +10147,10 @@ greet( \'World\' );'
 				'type' => 'number',
 				'default' => null
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -9582,6 +10162,10 @@ greet( \'World\' );'
 			'titleLetterSpacing' => array(
 				'type' => 'number',
 				'default' => null
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -9599,6 +10183,10 @@ greet( \'World\' );'
 				'type' => 'number',
 				'default' => null
 			),
+			'descFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'descFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -9610,6 +10198,10 @@ greet( \'World\' );'
 			'descLetterSpacing' => array(
 				'type' => 'number',
 				'default' => null
+			),
+			'descLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'descTextTransform' => array(
 				'type' => 'string',
@@ -9627,9 +10219,17 @@ greet( \'World\' );'
 				'type' => 'number',
 				'default' => 0
 			),
+			'borderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'borderRadius' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'borderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'borderColor' => array(
 				'type' => 'string',
@@ -9698,6 +10298,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -9741,6 +10345,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -9821,6 +10433,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -10037,6 +10653,10 @@ greet( \'World\' );'
 			'textFontSize' => array(
 				'type' => 'number'
 			),
+			'textFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'textFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -10046,6 +10666,10 @@ greet( \'World\' );'
 			),
 			'textLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'textLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'textTextTransform' => array(
 				'type' => 'string',
@@ -10094,6 +10718,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -10137,6 +10765,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -10217,6 +10853,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -10424,6 +11064,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -10467,6 +11111,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -10547,6 +11199,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -10788,6 +11444,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -10831,6 +11491,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -10911,6 +11579,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -11124,6 +11796,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -11167,6 +11843,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -11247,6 +11931,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -11531,6 +12219,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -11574,6 +12266,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -11654,6 +12354,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -11988,6 +12692,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -12031,6 +12739,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -12111,6 +12827,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -12298,6 +13018,10 @@ greet( \'World\' );'
 			'filterFontSize' => array(
 				'type' => 'number'
 			),
+			'filterFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'filterFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -12307,6 +13031,10 @@ greet( \'World\' );'
 			),
 			'filterLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'filterLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'filterTextTransform' => array(
 				'type' => 'string',
@@ -12367,6 +13095,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -12410,6 +13142,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -12490,6 +13230,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -12776,6 +13520,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -12819,6 +13567,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -12899,6 +13655,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -13082,6 +13842,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -13125,6 +13889,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -13205,6 +13977,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -13448,6 +14224,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -13491,6 +14271,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -13571,6 +14359,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -13832,6 +14624,10 @@ greet( \'World\' );'
 			'captionFontSize' => array(
 				'type' => 'number'
 			),
+			'captionFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'captionFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -13841,6 +14637,10 @@ greet( \'World\' );'
 			),
 			'captionLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'captionLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'captionTextTransform' => array(
 				'type' => 'string',
@@ -13901,6 +14701,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -13944,6 +14748,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -14024,6 +14836,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -14257,9 +15073,17 @@ greet( \'World\' );'
 				'type' => 'number',
 				'default' => 1
 			),
+			'dropdownBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'dropdownBorderRadius' => array(
 				'type' => 'number',
 				'default' => 8
+			),
+			'dropdownBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'dropdownBorderColor' => array(
 				'type' => 'string',
@@ -14320,6 +15144,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -14363,6 +15191,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -14443,6 +15279,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -14664,9 +15504,17 @@ greet( \'World\' );'
 				'type' => 'number',
 				'default' => 1
 			),
+			'dropdownBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'dropdownBorderRadius' => array(
 				'type' => 'number',
 				'default' => 8
+			),
+			'dropdownBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'dropdownBorderColor' => array(
 				'type' => 'string',
@@ -14727,6 +15575,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -14770,6 +15622,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -14850,6 +15710,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -15101,6 +15965,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -15144,6 +16012,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -15224,6 +16100,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -15573,6 +16453,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -15616,6 +16500,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -15696,6 +16588,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -15898,6 +16794,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -15941,6 +16841,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -16021,6 +16929,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -16273,6 +17185,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -16282,6 +17198,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -16306,6 +17226,10 @@ greet( \'World\' );'
 			'filterFontSize' => array(
 				'type' => 'number'
 			),
+			'filterFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'filterFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -16315,6 +17239,10 @@ greet( \'World\' );'
 			),
 			'filterLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'filterLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'filterTextTransform' => array(
 				'type' => 'string',
@@ -16375,6 +17303,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -16418,6 +17350,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -16498,6 +17438,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -16743,6 +17687,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -16786,6 +17734,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -16866,6 +17822,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -17085,6 +18045,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -17094,6 +18058,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -17118,6 +18086,10 @@ greet( \'World\' );'
 			'priceFontSize' => array(
 				'type' => 'number'
 			),
+			'priceFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'priceFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -17127,6 +18099,10 @@ greet( \'World\' );'
 			),
 			'priceLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'priceLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'priceTextTransform' => array(
 				'type' => 'string',
@@ -17147,6 +18123,10 @@ greet( \'World\' );'
 			'descriptionFontSize' => array(
 				'type' => 'number'
 			),
+			'descriptionFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'descriptionFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -17156,6 +18136,10 @@ greet( \'World\' );'
 			),
 			'descriptionLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'descriptionLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'descriptionTextTransform' => array(
 				'type' => 'string',
@@ -17197,6 +18181,10 @@ greet( \'World\' );'
 				'default' => 'px'
 			),
 			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerHeightUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -17243,6 +18231,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -17323,6 +18319,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -17603,6 +18603,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -17646,6 +18650,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -17726,6 +18738,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -17929,6 +18945,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -17972,6 +18992,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -18052,6 +19080,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -18266,6 +19298,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -18309,6 +19345,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -18389,6 +19433,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -18605,6 +19653,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -18648,6 +19700,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -18728,6 +19788,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -18950,6 +20014,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -18993,6 +20061,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -19073,6 +20149,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -19405,6 +20485,10 @@ greet( \'World\' );'
 			'nameFontSize' => array(
 				'type' => 'number'
 			),
+			'nameFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'nameFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -19414,6 +20498,10 @@ greet( \'World\' );'
 			),
 			'nameLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'nameLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'nameTextTransform' => array(
 				'type' => 'string',
@@ -19434,6 +20522,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -19443,6 +20535,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -19463,6 +20559,10 @@ greet( \'World\' );'
 			'contentFontSize' => array(
 				'type' => 'number'
 			),
+			'contentFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'contentFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -19472,6 +20572,10 @@ greet( \'World\' );'
 			),
 			'contentLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'contentLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'contentTextTransform' => array(
 				'type' => 'string',
@@ -19513,6 +20617,10 @@ greet( \'World\' );'
 				'default' => 'px'
 			),
 			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerHeightUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -19559,6 +20667,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -19639,6 +20755,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -19866,6 +20986,10 @@ greet( \'World\' );'
 			'textFontSize' => array(
 				'type' => 'number'
 			),
+			'textFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'textFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -19875,6 +20999,10 @@ greet( \'World\' );'
 			),
 			'textLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'textLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'textTextTransform' => array(
 				'type' => 'string',
@@ -19912,6 +21040,10 @@ greet( \'World\' );'
 				'default' => 'px'
 			),
 			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerHeightUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -19958,6 +21090,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -20038,6 +21178,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -20283,6 +21427,10 @@ greet( \'World\' );'
 			'headingFontSize' => array(
 				'type' => 'number'
 			),
+			'headingFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'headingFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -20292,6 +21440,10 @@ greet( \'World\' );'
 			),
 			'headingLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'headingLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'headingTextTransform' => array(
 				'type' => 'string',
@@ -20312,6 +21464,10 @@ greet( \'World\' );'
 			'descFontSize' => array(
 				'type' => 'number'
 			),
+			'descFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'descFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -20321,6 +21477,10 @@ greet( \'World\' );'
 			),
 			'descLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'descLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'descTextTransform' => array(
 				'type' => 'string',
@@ -20413,6 +21573,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -20456,6 +21620,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -20536,6 +21708,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -20757,6 +21933,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -20800,6 +21980,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -20880,6 +22068,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -21096,6 +22288,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -21105,6 +22301,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -21133,6 +22333,10 @@ greet( \'World\' );'
 			'linkFontSize' => array(
 				'type' => 'number'
 			),
+			'linkFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'linkFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -21142,6 +22346,10 @@ greet( \'World\' );'
 			),
 			'linkLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'linkLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'linkTextTransform' => array(
 				'type' => 'string',
@@ -21206,6 +22414,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -21249,6 +22461,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -21329,6 +22549,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -21536,6 +22760,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -21579,6 +22807,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -21659,6 +22895,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -21936,6 +23176,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -21979,6 +23223,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -22059,6 +23311,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -22395,6 +23651,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -22438,6 +23698,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -22518,6 +23786,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -22803,6 +24075,10 @@ greet( \'World\' );'
 			'contentFontSize' => array(
 				'type' => 'number'
 			),
+			'contentFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'contentFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -22812,6 +24088,10 @@ greet( \'World\' );'
 			),
 			'contentLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'contentLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'contentTextTransform' => array(
 				'type' => 'string',
@@ -22832,6 +24112,10 @@ greet( \'World\' );'
 			'nameFontSize' => array(
 				'type' => 'number'
 			),
+			'nameFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'nameFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -22841,6 +24125,10 @@ greet( \'World\' );'
 			),
 			'nameLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'nameLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'nameTextTransform' => array(
 				'type' => 'string',
@@ -22861,6 +24149,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -22870,6 +24162,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -22911,6 +24207,10 @@ greet( \'World\' );'
 				'default' => 'px'
 			),
 			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerHeightUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -22957,6 +24257,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -23037,6 +24345,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -23223,6 +24535,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -23266,6 +24582,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -23346,6 +24670,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -23553,6 +24881,10 @@ greet( \'World\' );'
 			'itemFontSize' => array(
 				'type' => 'number'
 			),
+			'itemFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'itemFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -23562,6 +24894,10 @@ greet( \'World\' );'
 			),
 			'itemLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'itemLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'itemTextTransform' => array(
 				'type' => 'string',
@@ -23599,6 +24935,10 @@ greet( \'World\' );'
 				'default' => 'px'
 			),
 			'bpafbContainerMarginUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerHeightUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -23645,6 +24985,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -23725,6 +25073,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -24000,6 +25352,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -24009,6 +25365,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -24467,6 +25827,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -24476,6 +25840,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -24898,6 +26266,10 @@ greet( \'World\' );'
 			'nameFontSize' => array(
 				'type' => 'number'
 			),
+			'nameFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'nameFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -24907,6 +26279,10 @@ greet( \'World\' );'
 			),
 			'nameLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'nameLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'nameTextTransform' => array(
 				'type' => 'string',
@@ -24935,6 +26311,10 @@ greet( \'World\' );'
 			'bioFontSize' => array(
 				'type' => 'number'
 			),
+			'bioFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bioFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -24944,6 +26324,10 @@ greet( \'World\' );'
 			),
 			'bioLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'bioLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bioTextTransform' => array(
 				'type' => 'string',
@@ -25702,6 +27086,10 @@ greet( \'World\' );'
 			'textFontSize' => array(
 				'type' => 'number'
 			),
+			'textFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'textFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -25711,6 +27099,10 @@ greet( \'World\' );'
 			),
 			'textLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'textLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'textTextTransform' => array(
 				'type' => 'string',
@@ -26108,6 +27500,10 @@ greet( \'World\' );'
 			'subtotalFontSize' => array(
 				'type' => 'number'
 			),
+			'subtotalFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'subtotalFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -26117,6 +27513,10 @@ greet( \'World\' );'
 			),
 			'subtotalLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'subtotalLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'subtotalTextTransform' => array(
 				'type' => 'string',
@@ -26851,6 +28251,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -26860,6 +28264,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -26888,6 +28296,10 @@ greet( \'World\' );'
 			'contentFontSize' => array(
 				'type' => 'number'
 			),
+			'contentFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'contentFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -26897,6 +28309,10 @@ greet( \'World\' );'
 			),
 			'contentLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'contentLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'contentTextTransform' => array(
 				'type' => 'string',
@@ -27258,6 +28674,10 @@ greet( \'World\' );'
 			'textFontSize' => array(
 				'type' => 'number'
 			),
+			'textFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'textFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -27267,6 +28687,10 @@ greet( \'World\' );'
 			),
 			'textLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'textLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'textTextTransform' => array(
 				'type' => 'string',
@@ -27646,6 +29070,10 @@ greet( \'World\' );'
 			'inputFontSize' => array(
 				'type' => 'number'
 			),
+			'inputFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'inputFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -27655,6 +29083,10 @@ greet( \'World\' );'
 			),
 			'inputLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'inputLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'inputTextTransform' => array(
 				'type' => 'string',
@@ -29071,6 +30503,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -29080,6 +30516,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -29100,6 +30540,10 @@ greet( \'World\' );'
 			'linkFontSize' => array(
 				'type' => 'number'
 			),
+			'linkFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'linkFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -29109,6 +30553,10 @@ greet( \'World\' );'
 			),
 			'linkLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'linkLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'linkTextTransform' => array(
 				'type' => 'string',
@@ -29464,6 +30912,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -29507,6 +30959,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -29587,6 +31047,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -29747,6 +31211,10 @@ greet( \'World\' );'
 				'type' => 'number',
 				'default' => 1
 			),
+			'borderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'borderColor' => array(
 				'type' => 'string',
 				'default' => ''
@@ -29798,6 +31266,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -29841,6 +31313,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -29921,6 +31401,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -30097,6 +31581,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -30140,6 +31628,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -30220,6 +31716,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -30408,6 +31908,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -30451,6 +31955,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -30531,6 +32043,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -30715,6 +32231,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -30758,6 +32278,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -30838,6 +32366,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -31016,6 +32548,10 @@ greet( \'World\' );'
 			'borderWidth' => array(
 				'type' => 'number'
 			),
+			'borderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'borderColor' => array(
 				'type' => 'string',
 				'default' => ''
@@ -31067,6 +32603,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -31110,6 +32650,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -31190,6 +32738,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -31339,12 +32891,20 @@ greet( \'World\' );'
 				'type' => 'number',
 				'default' => 0
 			),
+			'borderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'borderType' => array(
 				'type' => 'string',
 				'default' => 'none'
 			),
 			'borderWidth' => array(
 				'type' => 'number'
+			),
+			'borderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'borderColor' => array(
 				'type' => 'string',
@@ -31397,6 +32957,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -31440,6 +33004,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -31520,6 +33092,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -31688,6 +33264,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -31731,6 +33311,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -31811,6 +33399,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -31996,6 +33588,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -32039,6 +33635,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -32119,6 +33723,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -32351,6 +33959,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -32394,6 +34006,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -32474,6 +34094,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -32664,6 +34288,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -32707,6 +34335,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -32787,6 +34423,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -32990,6 +34630,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -33033,6 +34677,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -33113,6 +34765,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -33296,6 +34952,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -33339,6 +34999,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -33419,6 +35087,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -33606,6 +35278,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -33649,6 +35325,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -33729,6 +35413,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -33987,6 +35675,10 @@ greet( \'World\' );'
 			'titleFontSize' => array(
 				'type' => 'number'
 			),
+			'titleFontSizeUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => ''
@@ -33996,6 +35688,10 @@ greet( \'World\' );'
 			),
 			'titleLetterSpacing' => array(
 				'type' => 'number'
+			),
+			'titleLetterSpacingUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'titleTextTransform' => array(
 				'type' => 'string',
@@ -34044,6 +35740,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -34087,6 +35787,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -34167,6 +35875,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',
@@ -34340,6 +36052,10 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'px'
 			),
+			'bpafbContainerHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'bpafbContainerMinHeight' => array(
 				'type' => 'number'
 			),
@@ -34383,6 +36099,14 @@ greet( \'World\' );'
 			),
 			'bpafbContainerBorderRadius' => array(
 				'type' => 'number'
+			),
+			'bpafbContainerBorderWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'bpafbContainerBorderRadiusUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbContainerBorderColor' => array(
 				'type' => 'string',
@@ -34463,6 +36187,10 @@ greet( \'World\' );'
 			'bpafbTransformTranslateY' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'bpafbTransformTranslateUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
 			),
 			'bpafbHoverAnimation' => array(
 				'type' => 'string',

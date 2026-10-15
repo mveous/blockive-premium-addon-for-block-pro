@@ -118,11 +118,25 @@ export default function Edit( { attributes, setAttributes } ) {
 							<RangeControl label={ __( 'Padding (px)', 'blockive-premium-addon-for-block-pro' ) } value={ padding } onChange={ set( 'padding' ) } min={ 0 } max={ 100 } allowReset />
 						</PanelBody>
 						<PanelBody title={ __( 'Quote Text', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'content' ) } onChange={ typoOnChange( setAttributes, 'content' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'content' ) }
+								onChange={ typoOnChange( setAttributes, 'content' ) }
+								fontSizeUnit={ attributes.contentFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { contentFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.contentLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { contentLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: contentColor, onChange: set( 'contentColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Author', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'author' ) } onChange={ typoOnChange( setAttributes, 'author' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'author' ) }
+								onChange={ typoOnChange( setAttributes, 'author' ) }
+								fontSizeUnit={ attributes.authorFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { authorFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.authorLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { authorLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: authorColor, onChange: set( 'authorColor' ) } ] } />
 						</PanelBody>
 						{ showTweet && (

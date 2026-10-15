@@ -117,7 +117,14 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 						</PanelBody>
 						<PanelBody title={ __( 'Subtotal', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'subtotal' ) } onChange={ typoOnChange( setAttributes, 'subtotal' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'subtotal' ) }
+								onChange={ typoOnChange( setAttributes, 'subtotal' ) }
+								fontSizeUnit={ attributes.subtotalFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { subtotalFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.subtotalLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { subtotalLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: subtotalColor, onChange: set( 'subtotalColor' ) } ] }
 							/>

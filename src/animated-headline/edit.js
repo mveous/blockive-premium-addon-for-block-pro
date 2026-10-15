@@ -147,11 +147,25 @@ export default function Edit( { attributes, setAttributes } ) {
 				style={
 					<>
 						<PanelBody title={ __( 'Headline', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
-							<TypographyControls values={ typoValues( attributes, 'title' ) } onChange={ typoOnChange( setAttributes, 'title' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'title' ) }
+								onChange={ typoOnChange( setAttributes, 'title' ) }
+								fontSizeUnit={ attributes.titleFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { titleFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.titleLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { titleLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: titleColor, onChange: set( 'titleColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ rotate ? __( 'Rotating Words', 'blockive-premium-addon-for-block-pro' ) : __( 'Highlighted Text', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'word' ) } onChange={ typoOnChange( setAttributes, 'word' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'word' ) }
+								onChange={ typoOnChange( setAttributes, 'word' ) }
+								fontSizeUnit={ attributes.wordFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { wordFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.wordLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { wordLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: wordColor, onChange: set( 'wordColor' ) } ] } />
 						</PanelBody>
 						{ rotate ? (

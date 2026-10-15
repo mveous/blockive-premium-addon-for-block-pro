@@ -105,11 +105,25 @@ export default function Edit( { attributes, setAttributes } ) {
 							<RangeControl label={ __( 'Border Radius (%)', 'blockive-premium-addon-for-block-pro' ) } value={ avatarRadius } onChange={ set( 'avatarRadius' ) } min={ 0 } max={ 50 } />
 						</PanelBody>
 						<PanelBody title={ __( 'Titles', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'title' ) } onChange={ typoOnChange( setAttributes, 'title' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'title' ) }
+								onChange={ typoOnChange( setAttributes, 'title' ) }
+								fontSizeUnit={ attributes.titleFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { titleFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.titleLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { titleLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: titleColor, onChange: set( 'titleColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Text', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'content' ) } onChange={ typoOnChange( setAttributes, 'content' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'content' ) }
+								onChange={ typoOnChange( setAttributes, 'content' ) }
+								fontSizeUnit={ attributes.contentFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { contentFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.contentLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { contentLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [
 									{ label: __( 'Comment Text', 'blockive-premium-addon-for-block-pro' ), value: contentColor, onChange: set( 'contentColor' ) },

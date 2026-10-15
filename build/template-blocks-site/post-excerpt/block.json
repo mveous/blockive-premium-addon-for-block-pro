@@ -47,6 +47,10 @@
     "textFontSize": {
       "type": "number"
     },
+    "textFontSizeUnit": {
+      "type": "string",
+      "default": "px"
+    },
     "textFontWeight": {
       "type": "string",
       "default": ""
@@ -56,6 +60,10 @@
     },
     "textLetterSpacing": {
       "type": "number"
+    },
+    "textLetterSpacingUnit": {
+      "type": "string",
+      "default": "px"
     },
     "textTextTransform": {
       "type": "string",

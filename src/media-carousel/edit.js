@@ -253,7 +253,14 @@ export default function Edit( { attributes, setAttributes } ) {
 										</PanelBody>
 										{ captions !== 'none' && (
 											<PanelBody title={ __( 'Caption', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-												<TypographyControls values={ typoValues( attributes, 'caption' ) } onChange={ typoOnChange( setAttributes, 'caption' ) } />
+												<TypographyControls
+													values={ typoValues( attributes, 'caption' ) }
+													onChange={ typoOnChange( setAttributes, 'caption' ) }
+													fontSizeUnit={ attributes.captionFontSizeUnit }
+													onFontSizeUnitChange={ ( val ) => setAttributes( { captionFontSizeUnit: val } ) }
+													letterSpacingUnit={ attributes.captionLetterSpacingUnit }
+													onLetterSpacingUnitChange={ ( val ) => setAttributes( { captionLetterSpacingUnit: val } ) }
+												/>
 												<ColorStateControls
 													normal={ [
 														{ label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: captionColor, onChange: set( 'captionColor' ) },

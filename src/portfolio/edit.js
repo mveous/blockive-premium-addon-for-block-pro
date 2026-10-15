@@ -138,7 +138,14 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 						{ titlePosition !== 'none' && (
 							<PanelBody title={ __( 'Title', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-								<TypographyControls values={ typoValues( attributes, 'title' ) } onChange={ typoOnChange( setAttributes, 'title' ) } />
+								<TypographyControls
+									values={ typoValues( attributes, 'title' ) }
+									onChange={ typoOnChange( setAttributes, 'title' ) }
+									fontSizeUnit={ attributes.titleFontSizeUnit }
+									onFontSizeUnitChange={ ( val ) => setAttributes( { titleFontSizeUnit: val } ) }
+									letterSpacingUnit={ attributes.titleLetterSpacingUnit }
+									onLetterSpacingUnitChange={ ( val ) => setAttributes( { titleLetterSpacingUnit: val } ) }
+								/>
 								<ColorStateControls
 									normal={ [
 										{ label: __( 'Title', 'blockive-premium-addon-for-block-pro' ), value: titleColor, onChange: set( 'titleColor' ) },

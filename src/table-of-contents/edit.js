@@ -210,7 +210,14 @@ export default function Edit( { attributes, setAttributes } ) {
 							<RangeControl label={ __( 'Padding (px)', 'blockive-premium-addon-for-block-pro' ) } value={ padding } onChange={ set( 'padding' ) } min={ 0 } max={ 60 } />
 						</PanelBody>
 						<PanelBody title={ __( 'Title', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'title' ) } onChange={ typoOnChange( setAttributes, 'title' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'title' ) }
+								onChange={ typoOnChange( setAttributes, 'title' ) }
+								fontSizeUnit={ attributes.titleFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { titleFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.titleLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { titleLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [
 									{ label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: titleColor, onChange: set( 'titleColor' ) },
@@ -220,7 +227,14 @@ export default function Edit( { attributes, setAttributes } ) {
 							<ToggleControl label={ __( 'Separator Below Title', 'blockive-premium-addon-for-block-pro' ) } checked={ !! separator } onChange={ set( 'separator' ) } />
 						</PanelBody>
 						<PanelBody title={ __( 'List', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'link' ) } onChange={ typoOnChange( setAttributes, 'link' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'link' ) }
+								onChange={ typoOnChange( setAttributes, 'link' ) }
+								fontSizeUnit={ attributes.linkFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { linkFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.linkLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { linkLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [
 									{ label: __( 'Link', 'blockive-premium-addon-for-block-pro' ), value: linkColor, onChange: set( 'linkColor' ) },

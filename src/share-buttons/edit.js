@@ -223,7 +223,14 @@ export default function Edit( { attributes, setAttributes } ) {
 						</PanelBody>
 						{ view !== 'icon' && (
 							<PanelBody title={ __( 'Text', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-								<TypographyControls values={ typoValues( attributes, 'text' ) } onChange={ typoOnChange( setAttributes, 'text' ) } />
+								<TypographyControls
+									values={ typoValues( attributes, 'text' ) }
+									onChange={ typoOnChange( setAttributes, 'text' ) }
+									fontSizeUnit={ attributes.textFontSizeUnit }
+									onFontSizeUnitChange={ ( val ) => setAttributes( { textFontSizeUnit: val } ) }
+									letterSpacingUnit={ attributes.textLetterSpacingUnit }
+									onLetterSpacingUnitChange={ ( val ) => setAttributes( { textLetterSpacingUnit: val } ) }
+								/>
 							</PanelBody>
 						) }
 					</>

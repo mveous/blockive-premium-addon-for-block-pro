@@ -174,11 +174,25 @@ export default function Edit( { attributes, setAttributes, name } ) {
 							<RangeControl label={ __( 'Row Gap (px)', 'blockive-premium-addon-for-block-pro' ) } value={ rowGap } onChange={ set( 'rowGap' ) } min={ 0 } max={ 120 } />
 						</PanelBody>
 						<PanelBody title={ __( 'Headings', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'title' ) } onChange={ typoOnChange( setAttributes, 'title' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'title' ) }
+								onChange={ typoOnChange( setAttributes, 'title' ) }
+								fontSizeUnit={ attributes.titleFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { titleFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.titleLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { titleLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: titleColor, onChange: set( 'titleColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Links', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'link' ) } onChange={ typoOnChange( setAttributes, 'link' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'link' ) }
+								onChange={ typoOnChange( setAttributes, 'link' ) }
+								fontSizeUnit={ attributes.linkFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { linkFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.linkLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { linkLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [
 									{ label: __( 'Link Color', 'blockive-premium-addon-for-block-pro' ), value: linkColor, onChange: set( 'linkColor' ) },

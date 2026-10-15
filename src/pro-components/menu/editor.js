@@ -68,6 +68,10 @@ export function DropdownFrameControls( { attributes, setAttributes } ) {
 					borderColor: attributes.dropdownBorderColor,
 				} }
 				onChange={ ( key, val ) => setAttributes( { [ prefixed( 'dropdown', key ) ]: val } ) }
+				widthUnit={ attributes.dropdownBorderWidthUnit }
+				onWidthUnitChange={ ( val ) => setAttributes( { dropdownBorderWidthUnit: val } ) }
+				radiusUnit={ attributes.dropdownBorderRadiusUnit }
+				onRadiusUnitChange={ ( val ) => setAttributes( { dropdownBorderRadiusUnit: val } ) }
 			/>
 			<ShadowControls
 				values={ {

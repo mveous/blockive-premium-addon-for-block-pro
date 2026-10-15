@@ -151,6 +151,13 @@ class Bpafb_Pro_Shared_Assets
 			$color = Bpafb_Template_Block_Render::sanitize_css_color(isset($attributes[$key]) ? $attributes[$key] : '');
 			return '' !== $color ? $color : $default;
 		};
+		// Like $px, but respects an optional "<key>Unit" attribute (px/em/rem
+		// for width, plus % for radius) instead of always appending px.
+		$sized = function ($key, $default, $allowed_units) use ($attributes) {
+			$unit_key = $key . 'Unit';
+			$unit = isset($attributes[$unit_key]) && in_array($attributes[$unit_key], $allowed_units, true) ? $attributes[$unit_key] : 'px';
+			return (isset($attributes[$key]) ? floatval($attributes[$key]) : $default) . $unit;
+		};
 
 		$vars = [
 			$prefix . '-item-gap'             => $px('itemGap', 24),
@@ -160,10 +167,10 @@ class Bpafb_Pro_Shared_Assets
 			$prefix . '-item-hover-color'     => $value('itemHoverColor', 'inherit'),
 			$prefix . '-item-active-color'    => $value('itemActiveColor', 'inherit'),
 			$prefix . '-dropdown-bg'          => $value('dropdownBgColor', '#ffffff'),
-			$prefix . '-dropdown-border-width'  => $px('dropdownBorderWidth', 1),
+			$prefix . '-dropdown-border-width'  => $sized('dropdownBorderWidth', 1, ['px', 'em', 'rem']),
 			$prefix . '-dropdown-border-style'  => isset($attributes['dropdownBorderType']) && in_array($attributes['dropdownBorderType'], ['solid', 'dashed', 'dotted', 'double', 'none'], true) ? $attributes['dropdownBorderType'] : 'solid',
 			$prefix . '-dropdown-border-color'  => $value('dropdownBorderColor', '#e2e8f0'),
-			$prefix . '-dropdown-border-radius' => $px('dropdownBorderRadius', 8),
+			$prefix . '-dropdown-border-radius' => $sized('dropdownBorderRadius', 8, ['px', '%', 'em', 'rem']),
 			$prefix . '-toggle-color'         => $value('toggleIconColor', 'currentColor'),
 			$prefix . '-dropdown-shadow'      => 'none',
 		];

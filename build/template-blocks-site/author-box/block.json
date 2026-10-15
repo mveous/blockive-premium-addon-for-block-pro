@@ -96,6 +96,10 @@
     "nameFontSize": {
       "type": "number"
     },
+    "nameFontSizeUnit": {
+      "type": "string",
+      "default": "px"
+    },
     "nameFontWeight": {
       "type": "string",
       "default": ""
@@ -105,6 +109,10 @@
     },
     "nameLetterSpacing": {
       "type": "number"
+    },
+    "nameLetterSpacingUnit": {
+      "type": "string",
+      "default": "px"
     },
     "nameTextTransform": {
       "type": "string",
@@ -133,6 +141,10 @@
     "bioFontSize": {
       "type": "number"
     },
+    "bioFontSizeUnit": {
+      "type": "string",
+      "default": "px"
+    },
     "bioFontWeight": {
       "type": "string",
       "default": ""
@@ -142,6 +154,10 @@
     },
     "bioLetterSpacing": {
       "type": "number"
+    },
+    "bioLetterSpacingUnit": {
+      "type": "string",
+      "default": "px"
     },
     "bioTextTransform": {
       "type": "string",

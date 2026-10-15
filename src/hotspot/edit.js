@@ -148,7 +148,14 @@ export default function Edit( { attributes, setAttributes } ) {
 									{ label: __( 'Background', 'blockive-premium-addon-for-block-pro' ), value: pinBgColor, onChange: set( 'pinBgColor' ) },
 								] }
 							/>
-							<TypographyControls values={ typoValues( attributes, 'label' ) } onChange={ typoOnChange( setAttributes, 'label' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'label' ) }
+								onChange={ typoOnChange( setAttributes, 'label' ) }
+								fontSizeUnit={ attributes.labelFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { labelFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.labelLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { labelLetterSpacingUnit: val } ) }
+							/>
 						</PanelBody>
 						<PanelBody title={ __( 'Tooltip', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
 							<RangeControl label={ __( 'Max Width (px)', 'blockive-premium-addon-for-block-pro' ) } value={ tooltipWidth } onChange={ set( 'tooltipWidth' ) } min={ 100 } max={ 500 } />
@@ -159,7 +166,14 @@ export default function Edit( { attributes, setAttributes } ) {
 									{ label: __( 'Background', 'blockive-premium-addon-for-block-pro' ), value: tooltipBgColor, onChange: set( 'tooltipBgColor' ) },
 								] }
 							/>
-							<TypographyControls values={ typoValues( attributes, 'tooltip' ) } onChange={ typoOnChange( setAttributes, 'tooltip' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'tooltip' ) }
+								onChange={ typoOnChange( setAttributes, 'tooltip' ) }
+								fontSizeUnit={ attributes.tooltipFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { tooltipFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.tooltipLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { tooltipLetterSpacingUnit: val } ) }
+							/>
 						</PanelBody>
 					</>
 				}

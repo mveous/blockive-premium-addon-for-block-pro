@@ -132,6 +132,10 @@
     "titleFontSize": {
       "type": "number"
     },
+    "titleFontSizeUnit": {
+      "type": "string",
+      "default": "px"
+    },
     "titleFontWeight": {
       "type": "string",
       "default": ""
@@ -141,6 +145,10 @@
     },
     "titleLetterSpacing": {
       "type": "number"
+    },
+    "titleLetterSpacingUnit": {
+      "type": "string",
+      "default": "px"
     },
     "titleTextTransform": {
       "type": "string",
@@ -165,6 +173,10 @@
     "filterFontSize": {
       "type": "number"
     },
+    "filterFontSizeUnit": {
+      "type": "string",
+      "default": "px"
+    },
     "filterFontWeight": {
       "type": "string",
       "default": ""
@@ -174,6 +186,10 @@
     },
     "filterLetterSpacing": {
       "type": "number"
+    },
+    "filterLetterSpacingUnit": {
+      "type": "string",
+      "default": "px"
     },
     "filterTextTransform": {
       "type": "string",
@@ -234,6 +250,10 @@
       "type": "string",
       "default": "px"
     },
+    "bpafbContainerHeightUnit": {
+      "type": "string",
+      "default": "px"
+    },
     "bpafbContainerMinHeight": {
       "type": "number"
     },
@@ -277,6 +297,14 @@
     },
     "bpafbContainerBorderRadius": {
       "type": "number"
+    },
+    "bpafbContainerBorderWidthUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "bpafbContainerBorderRadiusUnit": {
+      "type": "string",
+      "default": "px"
     },
     "bpafbContainerBorderColor": {
       "type": "string",
@@ -357,6 +385,10 @@
     "bpafbTransformTranslateY": {
       "type": "number",
       "default": 0
+    },
+    "bpafbTransformTranslateUnit": {
+      "type": "string",
+      "default": "px"
     },
     "bpafbHoverAnimation": {
       "type": "string",

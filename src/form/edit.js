@@ -332,11 +332,25 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							<RangeControl label={ __( 'Row Gap (px)', 'blockive-premium-addon-for-block-pro' ) } value={ rowGap } onChange={ set( 'rowGap' ) } min={ 0 } max={ 60 } />
 						</PanelBody>
 						<PanelBody title={ __( 'Labels', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'label' ) } onChange={ typoOnChange( setAttributes, 'label' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'label' ) }
+								onChange={ typoOnChange( setAttributes, 'label' ) }
+								fontSizeUnit={ attributes.labelFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { labelFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.labelLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { labelLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: labelColor, onChange: set( 'labelColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Fields', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'field' ) } onChange={ typoOnChange( setAttributes, 'field' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'field' ) }
+								onChange={ typoOnChange( setAttributes, 'field' ) }
+								fontSizeUnit={ attributes.fieldFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { fieldFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.fieldLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { fieldLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [
 									{ label: __( 'Text', 'blockive-premium-addon-for-block-pro' ), value: fieldColor, onChange: set( 'fieldColor' ) },

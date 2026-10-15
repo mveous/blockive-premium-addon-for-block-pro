@@ -79,6 +79,10 @@
     "subtotalFontSize": {
       "type": "number"
     },
+    "subtotalFontSizeUnit": {
+      "type": "string",
+      "default": "px"
+    },
     "subtotalFontWeight": {
       "type": "string",
       "default": ""
@@ -88,6 +92,10 @@
     },
     "subtotalLetterSpacing": {
       "type": "number"
+    },
+    "subtotalLetterSpacingUnit": {
+      "type": "string",
+      "default": "px"
     },
     "subtotalTextTransform": {
       "type": "string",

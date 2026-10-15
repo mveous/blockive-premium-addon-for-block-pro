@@ -174,7 +174,14 @@ export default function Edit( { attributes, setAttributes } ) {
 						<PanelBody title={ __( 'Input', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ true }>
 							<RangeControl label={ __( 'Width (px)', 'blockive-premium-addon-for-block-pro' ) } value={ inputWidth } onChange={ set( 'inputWidth' ) } min={ 120 } max={ 1200 } allowReset />
 							<RangeControl label={ __( 'Height (px)', 'blockive-premium-addon-for-block-pro' ) } value={ height } onChange={ set( 'height' ) } min={ 24 } max={ 100 } />
-							<TypographyControls values={ typoValues( attributes, 'input' ) } onChange={ typoOnChange( setAttributes, 'input' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'input' ) }
+								onChange={ typoOnChange( setAttributes, 'input' ) }
+								fontSizeUnit={ attributes.inputFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { inputFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.inputLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { inputLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls
 								normal={ [
 									{ label: __( 'Text Color', 'blockive-premium-addon-for-block-pro' ), value: inputColor, onChange: set( 'inputColor' ) },

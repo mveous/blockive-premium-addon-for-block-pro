@@ -221,11 +221,25 @@ export default function Edit( { attributes, setAttributes } ) {
 							</PanelBody>
 						) }
 						<PanelBody title={ __( 'Title', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'title' ) } onChange={ typoOnChange( setAttributes, 'title' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'title' ) }
+								onChange={ typoOnChange( setAttributes, 'title' ) }
+								fontSizeUnit={ attributes.titleFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { titleFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.titleLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { titleLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: titleColor, onChange: set( 'titleColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Description', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
-							<TypographyControls values={ typoValues( attributes, 'desc' ) } onChange={ typoOnChange( setAttributes, 'desc' ) } />
+							<TypographyControls
+								values={ typoValues( attributes, 'desc' ) }
+								onChange={ typoOnChange( setAttributes, 'desc' ) }
+								fontSizeUnit={ attributes.descFontSizeUnit }
+								onFontSizeUnitChange={ ( val ) => setAttributes( { descFontSizeUnit: val } ) }
+								letterSpacingUnit={ attributes.descLetterSpacingUnit }
+								onLetterSpacingUnitChange={ ( val ) => setAttributes( { descLetterSpacingUnit: val } ) }
+							/>
 							<ColorStateControls normal={ [ { label: __( 'Color', 'blockive-premium-addon-for-block-pro' ), value: descColor, onChange: set( 'descColor' ) } ] } />
 						</PanelBody>
 						<PanelBody title={ __( 'Button & Ribbon', 'blockive-premium-addon-for-block-pro' ) } initialOpen={ false }>
