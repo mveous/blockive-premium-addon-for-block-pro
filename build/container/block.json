@@ -20,9 +20,52 @@
   "textdomain": "blockive-premium-addon-for-block-pro",
   "example": {},
   "attributes": {
+    "variationSelected": {
+      "type": "boolean",
+      "default": false
+    },
+    "contentWidth": {
+      "type": "string",
+      "default": "boxed"
+    },
+    "boxedWidth": {
+      "type": "number",
+      "default": 1200
+    },
+    "boxedWidthTablet": {
+      "type": "number"
+    },
+    "boxedWidthMobile": {
+      "type": "number"
+    },
+    "boxedWidthUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "minHeight": {
+      "type": "number"
+    },
+    "minHeightTablet": {
+      "type": "number"
+    },
+    "minHeightMobile": {
+      "type": "number"
+    },
+    "minHeightUnit": {
+      "type": "string",
+      "default": "px"
+    },
     "tagName": {
       "type": "string",
       "default": "div"
+    },
+    "overflow": {
+      "type": "string",
+      "default": "visible"
+    },
+    "equalHeight": {
+      "type": "boolean",
+      "default": false
     },
     "direction": {
       "type": "string",
@@ -40,13 +83,37 @@
       "type": "string",
       "default": "nowrap"
     },
+    "wrapTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "wrapMobile": {
+      "type": "string",
+      "default": ""
+    },
     "justifyContent": {
       "type": "string",
       "default": "flex-start"
     },
+    "justifyContentTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "justifyContentMobile": {
+      "type": "string",
+      "default": ""
+    },
     "alignItems": {
       "type": "string",
       "default": "stretch"
+    },
+    "alignItemsTablet": {
+      "type": "string",
+      "default": ""
+    },
+    "alignItemsMobile": {
+      "type": "string",
+      "default": ""
     },
     "gap": {
       "type": "number",
@@ -57,6 +124,47 @@
     },
     "gapMobile": {
       "type": "number"
+    },
+    "rowGap": {
+      "type": "number",
+      "default": 16
+    },
+    "rowGapTablet": {
+      "type": "number"
+    },
+    "rowGapMobile": {
+      "type": "number"
+    },
+    "columnGap": {
+      "type": "number",
+      "default": 16
+    },
+    "columnGapTablet": {
+      "type": "number"
+    },
+    "columnGapMobile": {
+      "type": "number"
+    },
+    "gapLinked": {
+      "type": "boolean",
+      "default": true
+    },
+    "gapUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "containerWidth": {
+      "type": "number"
+    },
+    "containerWidthTablet": {
+      "type": "number"
+    },
+    "containerWidthMobile": {
+      "type": "number"
+    },
+    "containerWidthUnit": {
+      "type": "string",
+      "default": "%"
     },
     "bpafbUid": {
       "type": "string",

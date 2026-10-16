@@ -1,6 +1,156 @@
-/* `.editor-styles-wrapper` only exists inside the block editor's canvas
-iframe, never on the live site - this just keeps an empty container tall
-enough to hold its own "+" appender button while editing. */
+/* Container block styles */
+.bpafb-container {
+	display: flex;
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.bpafb-container.is-boxed {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.bpafb-container.is-equal-height > .bpafb-container,
+.bpafb-container.is-equal-height > .wp-block-blockive-premium-addon-for-block-container {
+	align-self: stretch;
+}
+
+/* Empty State: Variation Layout Picker (matching ELB UX) */
+.bpafb-container-variation-picker {
+	padding: 28px 20px;
+	background: #ffffff;
+	border: 1.5px dashed #cbd5e1;
+	border-radius: 12px;
+	text-align: center;
+	width: 100%;
+	box-sizing: border-box;
+	margin: 12px 0;
+}
+
+.bpafb-container-variation-picker__title {
+	font-size: 15px;
+	font-weight: 600;
+	color: #0f172a;
+	margin: 0 0 6px 0;
+}
+
+.bpafb-container-variation-picker__desc {
+	font-size: 13px;
+	color: #64748b;
+	margin: 0 0 20px 0;
+}
+
+.bpafb-container-variation-picker__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+	gap: 12px;
+	max-width: 680px;
+	margin: 0 auto 20px auto;
+}
+
+.bpafb-container-variation-card {
+	background: #f8fafc;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	padding: 10px 8px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	transition: all 0.15s ease-in-out;
+}
+
+.bpafb-container-variation-card:hover {
+	border-color: #3b82f6;
+	background: #eff6ff;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(59, 130, 246, 0.12);
+}
+
+.bpafb-container-variation-card__visual {
+	display: flex;
+	gap: 3px;
+	width: 100%;
+	height: 34px;
+	background: #ffffff;
+	border: 1px solid #cbd5e1;
+	border-radius: 4px;
+	padding: 3px;
+	box-sizing: border-box;
+}
+
+.bpafb-container-variation-card__col {
+	background: #cbd5e1;
+	border-radius: 2px;
+	height: 100%;
+	transition: background 0.15s ease;
+}
+
+.bpafb-container-variation-card:hover .bpafb-container-variation-card__col {
+	background: #3b82f6;
+}
+
+.bpafb-container-variation-card__label {
+	font-size: 11px;
+	font-weight: 500;
+	color: #475569;
+}
+
+.bpafb-container-variation-picker__actions {
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+}
+
+.bpafb-container-skip-btn {
+	background: none;
+	border: none;
+	color: #64748b;
+	font-size: 13px;
+	cursor: pointer;
+	text-decoration: underline;
+	padding: 6px 12px;
+	transition: color 0.15s ease;
+}
+
+.bpafb-container-skip-btn:hover {
+	color: #0f172a;
+}
+
+/* Editor canvas min-height for empty container */
 .editor-styles-wrapper .bpafb-container {
-	min-height: 60px;
+	min-height: 50px;
+	display: flex !important;
+	box-sizing: border-box !important;
+}
+
+/* Ensure Gutenberg block-list layout is a flex container in editor canvas.
+   The actual flex-direction/wrap/justify/align/gap values are set per-instance
+   via an inline <style> tag in edit.js (scoped to .bpafb-uid-*), because
+   `inherit` here would read the nearest ancestor's computed value instead of
+   this block's own "Direction" setting, silently ignoring it. */
+.editor-styles-wrapper .bpafb-container.block-editor-block-list__layout,
+.editor-styles-wrapper .bpafb-container > .block-editor-block-list__layout,
+.editor-styles-wrapper .bpafb-container > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: flex !important;
+	width: 100% !important;
+	box-sizing: border-box !important;
+}
+
+/* Gutenberg block wrappers for child containers inside flex container */
+.editor-styles-wrapper .bpafb-container > [data-type="blockive-premium-addon-for-block/container"],
+.editor-styles-wrapper .bpafb-container.block-editor-block-list__layout > [data-type="blockive-premium-addon-for-block/container"],
+.editor-styles-wrapper .bpafb-container > .block-editor-block-list__layout > [data-type="blockive-premium-addon-for-block/container"] {
+	box-sizing: border-box !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	min-width: 0 !important;
+}
+
+.editor-styles-wrapper .bpafb-container.is-equal-height > [data-type="blockive-premium-addon-for-block/container"],
+.editor-styles-wrapper .bpafb-container.is-equal-height > .block-editor-block-list__layout > [data-type="blockive-premium-addon-for-block/container"] {
+	align-self: stretch !important;
+	display: flex !important;
 }

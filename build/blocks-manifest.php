@@ -4272,9 +4272,52 @@ greet( \'World\' );'
 			
 		),
 		'attributes' => array(
+			'variationSelected' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'contentWidth' => array(
+				'type' => 'string',
+				'default' => 'boxed'
+			),
+			'boxedWidth' => array(
+				'type' => 'number',
+				'default' => 1200
+			),
+			'boxedWidthTablet' => array(
+				'type' => 'number'
+			),
+			'boxedWidthMobile' => array(
+				'type' => 'number'
+			),
+			'boxedWidthUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'minHeight' => array(
+				'type' => 'number'
+			),
+			'minHeightTablet' => array(
+				'type' => 'number'
+			),
+			'minHeightMobile' => array(
+				'type' => 'number'
+			),
+			'minHeightUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
 			'tagName' => array(
 				'type' => 'string',
 				'default' => 'div'
+			),
+			'overflow' => array(
+				'type' => 'string',
+				'default' => 'visible'
+			),
+			'equalHeight' => array(
+				'type' => 'boolean',
+				'default' => false
 			),
 			'direction' => array(
 				'type' => 'string',
@@ -4292,13 +4335,37 @@ greet( \'World\' );'
 				'type' => 'string',
 				'default' => 'nowrap'
 			),
+			'wrapTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'wrapMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'justifyContent' => array(
 				'type' => 'string',
 				'default' => 'flex-start'
 			),
+			'justifyContentTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'justifyContentMobile' => array(
+				'type' => 'string',
+				'default' => ''
+			),
 			'alignItems' => array(
 				'type' => 'string',
 				'default' => 'stretch'
+			),
+			'alignItemsTablet' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'alignItemsMobile' => array(
+				'type' => 'string',
+				'default' => ''
 			),
 			'gap' => array(
 				'type' => 'number',
@@ -4309,6 +4376,47 @@ greet( \'World\' );'
 			),
 			'gapMobile' => array(
 				'type' => 'number'
+			),
+			'rowGap' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'rowGapTablet' => array(
+				'type' => 'number'
+			),
+			'rowGapMobile' => array(
+				'type' => 'number'
+			),
+			'columnGap' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'columnGapTablet' => array(
+				'type' => 'number'
+			),
+			'columnGapMobile' => array(
+				'type' => 'number'
+			),
+			'gapLinked' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'gapUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'containerWidth' => array(
+				'type' => 'number'
+			),
+			'containerWidthTablet' => array(
+				'type' => 'number'
+			),
+			'containerWidthMobile' => array(
+				'type' => 'number'
+			),
+			'containerWidthUnit' => array(
+				'type' => 'string',
+				'default' => '%'
 			),
 			'bpafbUid' => array(
 				'type' => 'string',

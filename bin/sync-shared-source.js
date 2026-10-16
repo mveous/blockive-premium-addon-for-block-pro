@@ -28,8 +28,10 @@ const freeRoot = path.resolve(
 
 // Relative-to-plugin-root paths copied verbatim. Each is a whole directory
 // tree; anything inside them in the free plugin is mirrored into Pro at the
-// same path.
-const SHARED_DIRS = ['includes', 'src', 'build', 'assets'];
+// same path. 'build' is deliberately excluded: Pro builds its own bundles and
+// blocks-manifest.php for all 92 Pro+Free blocks; copying Free's build would
+// overwrite Pro's manifest and wipe out all Pro blocks.
+const SHARED_DIRS = ['includes', 'src', 'assets'];
 
 if (!fs.existsSync(freeRoot)) {
 	console.error(`Free plugin not found at: ${freeRoot}`);
