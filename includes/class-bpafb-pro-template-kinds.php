@@ -458,10 +458,16 @@ class Bpafb_Pro_Template_Kinds
 			'version'      => BPAFB_PRO_VERSION,
 		];
 
+		// Depends on the free plugin's own 'bpafb-template-builder' script
+		// (not picked up by the dependency-extraction build step, since
+		// that only sees @wordpress/* package imports) so it always
+		// executes after it - this file's unregisterPlugin('bpafb-template-kind-picker')
+		// call only has something to remove if the free bundle's own
+		// registerPlugin() call for it has already run.
 		wp_enqueue_script(
 			'bpafb-pro-template-builder',
 			BPAFB_PRO_URL . 'build/template-builder-pro/index.js',
-			$asset['dependencies'],
+			array_unique(array_merge($asset['dependencies'], ['bpafb-template-builder'])),
 			$asset['version'],
 			true
 		);
@@ -573,7 +579,24 @@ class Bpafb_Pro_Template_Kinds
 	public static function get_condition_rules($template_id)
 	{
 		$rules = get_post_meta($template_id, self::META_CONDITION_RULES, true);
-		return is_array($rules) ? $rules : [];
+		$rules = is_array($rules) ? $rules : [];
+
+		// A Header or Footer template made in the free plugin (which has
+		// no rule picker at all - Header/Footer there always applies
+		// site-wide by kind alone) has no rules meta saved here, because
+		// that meta key doesn't exist in the free plugin. Without this,
+		// such a template would go from "shows on every page" under free
+		// to "matches nowhere" the moment Pro is activated. The one
+		// legitimate Pro-authored way to end up with an empty array here
+		// already fills it with this same "Entire Site" rule immediately
+		// on creation (see template-kind-picker-modal.js), so this only
+		// changes behavior for templates that could never have meant
+		// anything else.
+		if (empty($rules) && in_array(self::get_kind($template_id), ['header', 'footer'], true)) {
+			return [['type' => 'entire_site', 'value' => '']];
+		}
+
+		return $rules;
 	}
 
 	/**
