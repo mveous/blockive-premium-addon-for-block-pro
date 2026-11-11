@@ -355,12 +355,20 @@ class Blockive_Premium_Addon_For_Block
 		// Height/Border-width/Border-radius/Translate units, same idea as the above.
 		$allowed_height_units = ['px', '%', 'vh', 'em', 'rem'];
 		$height_unit = isset($attrs['bpafbContainerHeightUnit']) && in_array($attrs['bpafbContainerHeightUnit'], $allowed_height_units, true) ? $attrs['bpafbContainerHeightUnit'] : 'px';
+		$min_height_unit = isset($attrs['bpafbContainerMinHeightUnit']) && in_array($attrs['bpafbContainerMinHeightUnit'], $allowed_height_units, true) ? $attrs['bpafbContainerMinHeightUnit'] : $height_unit;
+		$max_height_unit = isset($attrs['bpafbContainerMaxHeightUnit']) && in_array($attrs['bpafbContainerMaxHeightUnit'], $allowed_height_units, true) ? $attrs['bpafbContainerMaxHeightUnit'] : $height_unit;
 		$allowed_border_width_units = ['px', 'em', 'rem'];
 		$border_width_unit = isset($attrs['bpafbContainerBorderWidthUnit']) && in_array($attrs['bpafbContainerBorderWidthUnit'], $allowed_border_width_units, true) ? $attrs['bpafbContainerBorderWidthUnit'] : 'px';
 		$allowed_border_radius_units = ['px', '%', 'em', 'rem'];
 		$border_radius_unit = isset($attrs['bpafbContainerBorderRadiusUnit']) && in_array($attrs['bpafbContainerBorderRadiusUnit'], $allowed_border_radius_units, true) ? $attrs['bpafbContainerBorderRadiusUnit'] : 'px';
 		$allowed_translate_units = ['px', '%', 'em', 'rem'];
 		$translate_unit = isset($attrs['bpafbTransformTranslateUnit']) && in_array($attrs['bpafbTransformTranslateUnit'], $allowed_translate_units, true) ? $attrs['bpafbTransformTranslateUnit'] : 'px';
+
+		if (isset($attrs['bpafbContainerMinWidth'])) {
+			$allowed_min_width_units = ['px', '%', 'rem', 'em', 'vw'];
+			$min_width_unit = isset($attrs['bpafbContainerMinWidthUnit']) && in_array($attrs['bpafbContainerMinWidthUnit'], $allowed_min_width_units, true) ? $attrs['bpafbContainerMinWidthUnit'] : 'px';
+			$styles[] = 'min-width: ' . floatval($attrs['bpafbContainerMinWidth']) . esc_attr($min_width_unit) . ';';
+		}
 
 		// Width and Alignment logic
 		if (isset($attrs['bpafbContainerWidth'])) {
@@ -495,12 +503,20 @@ class Blockive_Premium_Addon_For_Block
 		$allowed_positions = ['static', 'relative', 'absolute', 'fixed', 'sticky'];
 		if (!empty($attrs['bpafbPosition']) && in_array($attrs['bpafbPosition'], $allowed_positions, true)) {
 			$styles[] = 'position: ' . esc_attr($attrs['bpafbPosition']) . ';';
+			if ($attrs['bpafbPosition'] !== 'static') {
+				$pos_unit = isset($attrs['bpafbPositionUnit']) && in_array($attrs['bpafbPositionUnit'], $allowed_spacing_units, true) ? $attrs['bpafbPositionUnit'] : 'px';
+				foreach (['Top', 'Right', 'Bottom', 'Left'] as $side) {
+					if (isset($attrs['bpafbPosition' . $side]) && is_numeric($attrs['bpafbPosition' . $side])) {
+						$styles[] = strtolower($side) . ': ' . floatval($attrs['bpafbPosition' . $side]) . esc_attr($pos_unit) . ';';
+					}
+				}
+			}
 		}
 		if (isset($attrs['bpafbContainerMinHeight'])) {
-			$styles[] = 'min-height: ' . floatval($attrs['bpafbContainerMinHeight']) . esc_attr($height_unit) . ';';
+			$styles[] = 'min-height: ' . floatval($attrs['bpafbContainerMinHeight']) . esc_attr($min_height_unit) . ';';
 		}
 		if (isset($attrs['bpafbContainerMaxHeight'])) {
-			$styles[] = 'max-height: ' . floatval($attrs['bpafbContainerMaxHeight']) . esc_attr($height_unit) . ';';
+			$styles[] = 'max-height: ' . floatval($attrs['bpafbContainerMaxHeight']) . esc_attr($max_height_unit) . ';';
 		}
 		if (isset($attrs['bpafbZIndex'])) {
 			$styles[] = 'z-index: ' . intval($attrs['bpafbZIndex']) . ';';
