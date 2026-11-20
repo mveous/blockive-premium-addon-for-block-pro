@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Blockive Pro
+ * Plugin Name:       Blockive Premium Addon For Block Pro
  * Description:       The complete Blockive experience - every free block and Template Builder feature plus header/footer/archive/search/404/popup templates, WooCommerce & Events blocks, Loop Builder, and Dynamic Tags. Standalone: Blockive - Premium Addon For Block is not required.
  * Plugin URI:        https://mveous.com
  * Version:           1.0.1
@@ -137,8 +137,12 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-popup-builder.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-dynamic-tags.php';
 		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-pro-admin-bar.php';
+		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-template-page.php';
+		require_once BPAFB_PRO_PATH . 'includes/class-bpafb-manager.php';
 
 		Blockive_Premium_Addon_For_Block::get_instance();
+		$manager = Bpafb_Manager::instance();
+		BPAFB_TEMPLATE_Page::get_instance($manager);
 		Bpafb_Pro_Template_Kinds::get_instance();
 		Bpafb_Pro_Theme_Locations::get_instance();
 		Bpafb_Pro_Loop_Builder::get_instance();
@@ -190,5 +194,4 @@ final class Blockive_Premium_Addon_For_Block_Pro_Loader
 	}
 }
 
-// Bootstrap the plugin (see Blockive_Premium_Addon_For_Block_Pro_Loader::bootstrap() for why this is deferred).
 Blockive_Premium_Addon_For_Block_Pro_Loader::get_instance();
